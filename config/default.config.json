@@ -8,16 +8,8 @@
       "appPath": "app1",
       "namespace": "local-app-1"
     }, {
-      "appPath": "app1",
-      "namespace": "my-custom-domain.sx",
-      "mapToDomain": true
-    }, {
       "appPath": "app2",
       "namespace": "local-app-2"
-    }, {
-      "appPath": "app2",
-      "namespace": "another-domain.com",
-      "mapToDomain": true
     }]
   },
   "production": {
@@ -26,18 +18,14 @@
     },
     "hostedApps": [{
       "appPath": "app1",
-      "namespace": "local-app-1"
+      "namespace": "app1"
     }, {
       "appPath": "app1",
       "namespace": "my-custom-domain.sx",
       "mapToDomain": true
     }, {
       "appPath": "app2",
-      "namespace": "local-app-2"
-    }, {
-      "appPath": "app2",
-      "namespace": "another-domain.com",
-      "mapToDomain": true
+      "namespace": "app2"
     }]
   }
 }
