@@ -1,0 +1,25 @@
+body {
+    background-color: lightblue;
+}
+
+.centered {
+    text-align: center;
+}
+
+td {
+    text-align: center;
+    background-color: #CCC;
+    width: 150px;
+    height: 100px;
+    font-weight: bold;
+    font-size: 25px;
+    color: mediumblue;
+}
+
+.piece {
+    display: inline-block;
+}
+
+.piece.colorful {
+    background-color: lightcoral;
+}
