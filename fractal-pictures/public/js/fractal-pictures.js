@@ -46,11 +46,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 			nextFractal.rowsNumber = currentFractal.rowsNumber / patternRows;
 			nextFractal.correspondingRow = currentFractal.correspondingRow % nextFractal.rowsNumber;
-			previousBlockRow = Math.floor(nextFractal.correspondingRow / nextFractal.rowsNumber);
+			previousBlockRow = Math.floor(currentFractal.correspondingRow / nextFractal.rowsNumber);
 
 			nextFractal.columnsNumber = currentFractal.columnsNumber / patternColumns;
 			nextFractal.correspondingColumn = currentFractal.correspondingColumn % nextFractal.columnsNumber;
-			previousBlockColumn = Math.floor(nextFractal.correspondingColumn / nextFractal.columnsNumber);
+			previousBlockColumn = Math.floor(currentFractal.correspondingColumn / nextFractal.columnsNumber);
 
 			result = pattern[previousBlockRow][previousBlockColumn];
 			
