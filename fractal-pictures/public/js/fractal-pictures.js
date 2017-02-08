@@ -31,22 +31,29 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	function fractalPosition(currentRow, currentColumn) {
 		var previousBlockRowsNumber = fractalRows;
 		var previousBlockColumnsNumber = fractalColumns;
-		var previousBlockRow = Math.floor(currentRow / previousBlockRowsNumber);
-		var previousBlockColumn = Math.floor(currentColumn / previousBlockColumnsNumber);
 		var result = true;
-
-		while (previousBlockRowsNumber > patternRows && previousBlockColumnsNumber > patternColumns && result) {
-			if (previousBlockRowsNumber > patternRows) {
+		var previousBlockRow;
+		var previousBlockColumn;
+		
+		if (growthFactor === 0) {
+			return false;
+		}
+		
+		var iterationsNumber = growthFactor;
+		    
+		while (iterationsNumber > 0 && result) {
+			if (previousBlockRowsNumber >= patternRows) {
 				previousBlockRowsNumber /= patternRows;
 				previousBlockRow = Math.floor(currentRow / previousBlockRowsNumber);
 				currentRow = currentRow % previousBlockRowsNumber;
 			}
-			if (previousBlockColumnsNumber > patternColumns) {
+			if (previousBlockColumnsNumber >= patternColumns) {
 				previousBlockColumnsNumber /= patternColumns;
 				previousBlockColumn = Math.floor(currentColumn / previousBlockColumnsNumber);
 				currentColumn = currentColumn % previousBlockColumnsNumber;
 			}
 			result = pattern[previousBlockRow][previousBlockColumn];
+			--iterationsNumber;
 		}
 
 		return result;
