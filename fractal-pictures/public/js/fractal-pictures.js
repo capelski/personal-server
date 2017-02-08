@@ -37,16 +37,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			correspondingColumn: currentColumn
 		};
 		var nextFractal = {};		
-		var result = true;
+		var result = iterationsNumber > 0;
 
 		var previousBlockRow;
 		var previousBlockColumn;
-		
-		if (iterationsNumber === 0) {
-			return false;
-		}		
 		    
-		while (iterationsNumber > 0 && result) {
+		while (iterationsNumber > 1 && result) {
 
 			nextFractal.rowsNumber = currentFractal.rowsNumber / patternRows;
 			nextFractal.correspondingRow = currentFractal.correspondingRow % nextFractal.rowsNumber;
@@ -62,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			currentFractal = nextFractal;
 		}
 
-		return result;
+		return result && pattern[currentFractal.correspondingRow][currentFractal.correspondingColumn];
 	}
 
 	function gridDrawerHandler() {
