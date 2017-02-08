@@ -31,7 +31,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	function fractalPosition(currentRow, currentColumn) {
 		var previousFractal = {
 			rowsNumber: fractalRows,
-			columnsNumber: fractalColumns
+			columnsNumber: fractalColumns,
+			correspondingRow: currentRow,
+			correspondingColumn: currentColumn
 		};
 		var iterationsNumber = growthFactor;
 		var result = true;
@@ -47,13 +49,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		while (iterationsNumber > 0 && result) {
 			if (previousFractal.rowsNumber >= patternRows) {
 				previousFractal.rowsNumber /= patternRows;
-				previousBlockRow = Math.floor(currentRow / previousFractal.rowsNumber);
-				currentRow = currentRow % previousFractal.rowsNumber;
+				previousBlockRow = Math.floor(previousFractal.correspondingRow / previousFractal.rowsNumber);
+				previousFractal.correspondingRow = previousFractal.correspondingRow % previousFractal.rowsNumber;
 			}
 			if (previousFractal.columnsNumber >= patternColumns) {
 				previousFractal.columnsNumber /= patternColumns;
-				previousBlockColumn = Math.floor(currentColumn / previousFractal.columnsNumber);
-				currentColumn = currentColumn % previousFractal.columnsNumber;
+				previousBlockColumn = Math.floor(previousFractal.correspondingColumn / previousFractal.columnsNumber);
+				previousFractal.correspondingColumn = previousFractal.correspondingColumn % previousFractal.columnsNumber;
 			}
 			result = pattern[previousBlockRow][previousBlockColumn];
 			--iterationsNumber;
