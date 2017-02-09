@@ -36,22 +36,27 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			correspondingRow: currentRow,
 			correspondingColumn: currentColumn
 		};
+		var nextFractal = {};
 		var iterationsNumber = growthFactor;
 		var result = iterationsNumber > 0;
-		var correspondingPatternRow, correspondingPatternColumn;	
 		    
 		while (result && iterationsNumber > 0) {
 
-			currentFractal.rowsNumber /= patternRows;
-			correspondingPatternRow = Math.floor(currentFractal.correspondingRow / currentFractal.rowsNumber);
-			currentFractal.correspondingRow = currentFractal.correspondingRow % currentFractal.rowsNumber;
+			nextFractal.rowsNumber = currentFractal.rowsNumber / patternRows;
+			nextFractal.correspondingRow = currentFractal.correspondingRow % nextFractal.rowsNumber;
 
-			currentFractal.columnsNumber /= patternColumns;
-			correspondingPatternColumn = Math.floor(currentFractal.correspondingColumn / currentFractal.columnsNumber);
-			currentFractal.correspondingColumn = currentFractal.correspondingColumn % currentFractal.columnsNumber;
+			nextFractal.columnsNumber = currentFractal.columnsNumber / patternColumns;
+			nextFractal.correspondingColumn = currentFractal.correspondingColumn % nextFractal.columnsNumber;
 
+			var correspondingPatternRow = Math.floor(currentFractal.correspondingRow / nextFractal.rowsNumber);
+			var correspondingPatternColumn = Math.floor(currentFractal.correspondingColumn / nextFractal.columnsNumber);
 			result = pattern[correspondingPatternRow][correspondingPatternColumn];
+
 			--iterationsNumber;
+			currentFractal.rowsNumber = nextFractal.rowsNumber;
+			currentFractal.columnsNumber = nextFractal.columnsNumber;
+			currentFractal.correspondingRow = nextFractal.correspondingRow;
+			currentFractal.correspondingColumn = nextFractal.correspondingColumn;
 		}
 
 		return result;
