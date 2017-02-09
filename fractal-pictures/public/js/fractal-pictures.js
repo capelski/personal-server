@@ -29,36 +29,39 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 	function fractalPosition(currentRow, currentColumn) {
-		var iterationsNumber = growthFactor;
-		var currentFractal = {
+		var previousFractal = {
 			rowsNumber: fractalRows,
 			columnsNumber: fractalColumns,
 			correspondingRow: currentRow,
 			correspondingColumn: currentColumn
 		};
-		var nextFractal = {};		
-		var result = iterationsNumber > 0;
-
+		var iterationsNumber = growthFactor;
+		var result = true;
+		/*var previousBlockRowsNumber = fractalRows;
+		var previousBlockColumnsNumber = fractalColumns;*/
 		var previousBlockRow;
 		var previousBlockColumn;
+		
+		if (iterationsNumber === 0) {
+			return false;
+		}		
 		    
-		while (iterationsNumber > 1 && result) {
-
-			nextFractal.rowsNumber = currentFractal.rowsNumber / patternRows;
-			nextFractal.correspondingRow = currentFractal.correspondingRow % nextFractal.rowsNumber;
-			previousBlockRow = Math.floor(currentFractal.correspondingRow / nextFractal.rowsNumber);
-
-			nextFractal.columnsNumber = currentFractal.columnsNumber / patternColumns;
-			nextFractal.correspondingColumn = currentFractal.correspondingColumn % nextFractal.columnsNumber;
-			previousBlockColumn = Math.floor(currentFractal.correspondingColumn / nextFractal.columnsNumber);
-
+		while (iterationsNumber > 0 && result) {
+			if (previousFractal.rowsNumber >= patternRows) {
+				previousFractal.rowsNumber /= patternRows;
+				previousBlockRow = Math.floor(previousFractal.correspondingRow / previousFractal.rowsNumber);
+				previousFractal.correspondingRow = previousFractal.correspondingRow % previousFractal.rowsNumber;
+			}
+			if (previousFractal.columnsNumber >= patternColumns) {
+				previousFractal.columnsNumber /= patternColumns;
+				previousBlockColumn = Math.floor(previousFractal.correspondingColumn / previousFractal.columnsNumber);
+				previousFractal.correspondingColumn = previousFractal.correspondingColumn % previousFractal.columnsNumber;
+			}
 			result = pattern[previousBlockRow][previousBlockColumn];
-			
 			--iterationsNumber;
-			currentFractal = nextFractal;
 		}
 
-		return result && pattern[currentFractal.correspondingRow][currentFractal.correspondingColumn];
+		return result;
 	}
 
 	function gridDrawerHandler() {
