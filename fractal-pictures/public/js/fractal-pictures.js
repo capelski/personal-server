@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	function fractalDrawerHandler() {
 		updatePattern();
+		console.log(pattern)
 		growthFactor = parseInt(document.getElementById('growth-factor').value);
 
 		fractalRows = Math.pow(patternRows, growthFactor);
@@ -18,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 		var fractal = '';
 		for(var i = 0; i < fractalRows; ++i) {			
-			for(var j= 0; j < fractalRows; ++j) {
+			for(var j= 0; j < fractalColumns; ++j) {
 				var positionValue = fractalPosition(i, j);
 				fractal += '<span class="piece ' + (positionValue ? 'colorful' : '') + '" style="width: ' + pieceSize
 				 + 'px; height:' + pieceSize + 'px;"></span>';
@@ -59,8 +60,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 	function gridDrawerHandler() {
-		patternRows = document.getElementById('rows-number').value;
-		patternColumns = document.getElementById('columns-number').value;
+		patternRows = parseInt(document.getElementById('rows-number').value);
+		patternColumns = parseInt(document.getElementById('columns-number').value);
 
 		var grid = '';
 		for(var i = 0; i < patternRows; ++i) {
