@@ -29,35 +29,29 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 	function fractalPosition(currentRow, currentColumn) {
-		var previousFractal = {
+		var currentFractal = {
 			rowsNumber: fractalRows,
 			columnsNumber: fractalColumns,
 			correspondingRow: currentRow,
 			correspondingColumn: currentColumn
 		};
 		var iterationsNumber = growthFactor;
-		var result = true;
-		/*var previousBlockRowsNumber = fractalRows;
-		var previousBlockColumnsNumber = fractalColumns;*/
-		var previousBlockRow;
-		var previousBlockColumn;
-		
-		if (iterationsNumber === 0) {
-			return false;
-		}		
+		var result = iterationsNumber > 0;
+
+		var correspondingPatternRow, correspondingPatternColumn;	
 		    
-		while (iterationsNumber > 0 && result) {
-			if (previousFractal.rowsNumber >= patternRows) {
-				previousFractal.rowsNumber /= patternRows;
-				previousBlockRow = Math.floor(previousFractal.correspondingRow / previousFractal.rowsNumber);
-				previousFractal.correspondingRow = previousFractal.correspondingRow % previousFractal.rowsNumber;
+		while (result && iterationsNumber > 0) {
+			if (currentFractal.rowsNumber >= patternRows) {
+				currentFractal.rowsNumber /= patternRows;
+				correspondingPatternRow = Math.floor(currentFractal.correspondingRow / currentFractal.rowsNumber);
+				currentFractal.correspondingRow = currentFractal.correspondingRow % currentFractal.rowsNumber;
 			}
-			if (previousFractal.columnsNumber >= patternColumns) {
-				previousFractal.columnsNumber /= patternColumns;
-				previousBlockColumn = Math.floor(previousFractal.correspondingColumn / previousFractal.columnsNumber);
-				previousFractal.correspondingColumn = previousFractal.correspondingColumn % previousFractal.columnsNumber;
+			if (currentFractal.columnsNumber >= patternColumns) {
+				currentFractal.columnsNumber /= patternColumns;
+				correspondingPatternColumn = Math.floor(currentFractal.correspondingColumn / currentFractal.columnsNumber);
+				currentFractal.correspondingColumn = currentFractal.correspondingColumn % currentFractal.columnsNumber;
 			}
-			result = pattern[previousBlockRow][previousBlockColumn];
+			result = pattern[correspondingPatternRow][correspondingPatternColumn];
 			--iterationsNumber;
 		}
 
