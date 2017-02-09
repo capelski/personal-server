@@ -10,12 +10,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	function fractalDrawerHandler() {
 		updatePattern();
-		console.log(pattern)
 		growthFactor = parseInt(document.getElementById('growth-factor').value);
 
 		fractalRows = Math.pow(patternRows, growthFactor);
 		fractalColumns = Math.pow(patternColumns, growthFactor);
-		var pieceSize = Math.min(10, Math.max(1, Math.floor(window.screen.width / fractalRows)));
+		var pieceSize = Math.floor(document.getElementById('fractal-picture').clientWidth * 100 / fractalColumns) / 100;
 
 		var fractal = '';
 		for(var i = 0; i < fractalRows; ++i) {			
