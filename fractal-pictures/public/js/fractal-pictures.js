@@ -3,25 +3,28 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	var patternRows;
 	var patternColumns;
 	var pattern;
-	var growthFactor;
+	var zoomOut;
 	var fractalRows;
 	var fractalColumns;
 	var fractal;
 
 	function fractalDrawerHandler() {
 		updatePattern();
-		growthFactor = parseInt(document.getElementById('growth-factor').value);
+		
+		zoomOut = parseInt(document.getElementById('zoom-out').value);
+		fractalRows = Math.pow(patternRows, zoomOut);
+		fractalColumns = Math.pow(patternColumns, zoomOut);
 
-		fractalRows = Math.pow(patternRows, growthFactor);
-		fractalColumns = Math.pow(patternColumns, growthFactor);
-		var pieceSize = Math.floor(document.getElementById('fractal-picture').clientWidth * 100 / fractalColumns) / 100;
+		var fractalWidth = document.getElementById('fractal-picture').clientWidth;
+		var piecePixelSize = fractalWidth / fractalColumns;
+		var piecePercentageSize = Math.floor(piecePixelSize * 100 * 100 / fractalWidth) / 100;
 
 		var fractal = '';
 		for(var i = 0; i < fractalRows; ++i) {			
 			for(var j= 0; j < fractalColumns; ++j) {
 				var positionValue = fractalPosition(i, j);
-				fractal += '<span class="piece ' + (positionValue ? 'colorful' : '') + '" style="width: ' + pieceSize
-				 + 'px; height:' + pieceSize + 'px;"></span>';
+				fractal += '<span class="piece ' + (positionValue ? 'colorful' : '') + '" style="width: ' + piecePercentageSize
+				 + '%; height:' + piecePercentageSize + '%;"></span>';
 			}
 			fractal += '<br />';
 		}
@@ -36,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			correspondingColumn: currentColumn
 		};
 		var nextFractal = {};
-		var iterationsNumber = growthFactor;
+		var iterationsNumber = zoomOut;
 		var result = iterationsNumber > 0;
 		    
 		while (result && iterationsNumber > 0) {
