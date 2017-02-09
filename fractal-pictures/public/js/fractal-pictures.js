@@ -38,20 +38,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		};
 		var iterationsNumber = growthFactor;
 		var result = iterationsNumber > 0;
-
 		var correspondingPatternRow, correspondingPatternColumn;	
 		    
 		while (result && iterationsNumber > 0) {
-			if (currentFractal.rowsNumber >= patternRows) {
-				currentFractal.rowsNumber /= patternRows;
-				correspondingPatternRow = Math.floor(currentFractal.correspondingRow / currentFractal.rowsNumber);
-				currentFractal.correspondingRow = currentFractal.correspondingRow % currentFractal.rowsNumber;
-			}
-			if (currentFractal.columnsNumber >= patternColumns) {
-				currentFractal.columnsNumber /= patternColumns;
-				correspondingPatternColumn = Math.floor(currentFractal.correspondingColumn / currentFractal.columnsNumber);
-				currentFractal.correspondingColumn = currentFractal.correspondingColumn % currentFractal.columnsNumber;
-			}
+
+			currentFractal.rowsNumber /= patternRows;
+			correspondingPatternRow = Math.floor(currentFractal.correspondingRow / currentFractal.rowsNumber);
+			currentFractal.correspondingRow = currentFractal.correspondingRow % currentFractal.rowsNumber;
+
+			currentFractal.columnsNumber /= patternColumns;
+			correspondingPatternColumn = Math.floor(currentFractal.correspondingColumn / currentFractal.columnsNumber);
+			currentFractal.correspondingColumn = currentFractal.correspondingColumn % currentFractal.columnsNumber;
+
 			result = pattern[correspondingPatternRow][correspondingPatternColumn];
 			--iterationsNumber;
 		}
