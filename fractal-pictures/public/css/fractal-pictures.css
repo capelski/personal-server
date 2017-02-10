@@ -1,11 +1,18 @@
 body {
-    background-color: lightblue;
     margin: 0;
     padding: 0;
 }
 
-.centered {
-    text-align: center;
+.pattern-section {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 1px solid lightblue;
+}
+
+.pattern-section.checked {
+    border: none;
+    background-color: skyblue;
 }
 
 .fractal-viewer {

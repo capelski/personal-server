@@ -71,12 +71,25 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		var grid = '';
 		for(var i = 0; i < patternRows; ++i) {
 			for(var j= 0; j < patternColumns; ++j) {
-				grid += '<input type="checkbox" data-row="' + i + '"" data-column="' + j + '" />';
+				// grid += '<input type="checkbox" data-row="' + i + '"" data-column="' + j + '" />';
+				grid += '<span class="pattern-section" data-row="' + i + '"" data-column="' + j + '" data-checked="false"></span>';
 			}
 			grid += '<br />';
 		}
 		document.getElementById('pattern').innerHTML = grid;
-	};
+		var sections = document.getElementsByClassName('pattern-section');
+		for(var key in sections) {
+			if (sections.hasOwnProperty(key)) {
+				var section = sections[key];
+				section.addEventListener('click', patternSectionHandler);
+			}
+		}
+	}
+
+	function patternSectionHandler(event) {
+		var target = event.target;
+		target.classList.toggle('checked');
+	}
 
 	function updatePattern() {
 		pattern = [];
@@ -84,11 +97,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			pattern.push([]);
 			var currentRow = pattern[pattern.length - 1];
 			for(var j= 0; j < patternColumns; ++j) {
-				currentRow.push(document.querySelector('#pattern input[data-row="' + i + '"][data-column="' + j + '"]').checked);
+				var currentSection = document.querySelector('#pattern span[data-row="' + i + '"][data-column="' + j + '"]');
+				var sectionClasses = Array.from(currentSection.classList);
+				currentRow.push(sectionClasses.indexOf('checked') > -1);
 			}
 		}
 	}
 
-	document.getElementById('grid-drawer').addEventListener('click', gridDrawerHandler);
+	document.getElementById('rows-number').addEventListener('keyup', gridDrawerHandler);
+	document.getElementById('columns-number').addEventListener('keyup', gridDrawerHandler);
 	document.getElementById('fractal-drawer').addEventListener('click', fractalDrawerHandler);
+	gridDrawerHandler();
 });
