@@ -3,9 +3,34 @@ body {
     padding: 0;
 }
 
+.controls-toggler {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    z-index: 10;
+    background-color: transparent;
+    font-size: 20px;
+}
+
+.controls-toggler:focus {
+    box-shadow: none;
+}
+
 .fractal-controls {
     padding-top: 10px;
     padding-bottom: 10px;
+    background-color: #b7e1f3;
+    position: fixed;
+    right: 0;
+    left: 0;
+}
+
+.fractal-controls.hidden {
+    opacity: 0;
+}
+
+#pattern {
+    padding: 10px;
 }
 
 .pattern-section {
@@ -13,10 +38,7 @@ body {
     width: 30px;
     height: 30px;
     border: 1px solid lightblue;
-}
-
-#pattern {
-    padding: 10px;
+    background-color: white;
 }
 
 .pattern-section.checked {
