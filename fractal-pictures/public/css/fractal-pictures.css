@@ -3,6 +3,11 @@ body {
     padding: 0;
 }
 
+.fractal-controls {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 .pattern-section {
     display: inline-block;
     width: 30px;
@@ -10,9 +15,19 @@ body {
     border: 1px solid lightblue;
 }
 
+#pattern {
+    padding: 10px;
+}
+
 .pattern-section.checked {
     border: none;
     background-color: skyblue;
+}
+
+@media(min-width: 576px) {
+    #fractal-drawer {
+        margin-top: 32px;
+    }
 }
 
 .fractal-viewer {
