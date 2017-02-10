@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		var fractalWidth = document.getElementById('fractal-picture').clientWidth;
 		var piecePixelSize = fractalWidth / fractalColumns;
 		var piecePercentageSize = Math.floor(piecePixelSize * 100 * 100 / fractalWidth) / 100;
+		document.getElementById('fractal-controls').classList.remove('show');
 
 		var fractal = '';
 		for(var i = 0; i < fractalRows; ++i) {			
@@ -28,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			}
 			fractal += '<br />';
 		}
-		document.getElementById('fractal-picture').innerHTML = fractal;	
+		document.getElementById('fractal-picture').innerHTML = fractal;
 	}
 
 	function fractalPosition(currentRow, currentColumn) {
