@@ -9,27 +9,49 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	var fractal;
 
 	function fractalDrawerHandler() {
+		
 		updatePattern();
+
+		var fractalPicture = document.getElementById('fractal-picture');
+		fractalPicture.innerHTML = 
+		`<div class="sk-cube-grid">
+	        <div class="sk-cube sk-cube1"></div>
+	        <div class="sk-cube sk-cube2"></div>
+	        <div class="sk-cube sk-cube3"></div>
+	        <div class="sk-cube sk-cube4"></div>
+	        <div class="sk-cube sk-cube5"></div>
+	        <div class="sk-cube sk-cube6"></div>
+	        <div class="sk-cube sk-cube7"></div>
+	        <div class="sk-cube sk-cube8"></div>
+	        <div class="sk-cube sk-cube9"></div>
+      	</div>`;
+      	document.getElementById('fractal-controls').classList.remove('show');
 		
 		zoomOut = parseInt(document.getElementById('zoom-out').value);
 		fractalRows = Math.pow(patternRows, zoomOut);
 		fractalColumns = Math.pow(patternColumns, zoomOut);
 
-		var fractalWidth = document.getElementById('fractal-picture').clientWidth;
+		var fractalWidth = fractalPicture.clientWidth;
 		var piecePixelSize = fractalWidth / fractalColumns;
 		var piecePercentageSize = Math.floor(piecePixelSize * 100 * 100 / fractalWidth) / 100;
-		document.getElementById('fractal-controls').classList.remove('show');
 
-		var fractal = '';
-		for(var i = 0; i < fractalRows; ++i) {			
-			for(var j= 0; j < fractalColumns; ++j) {
-				var positionValue = fractalPosition(i, j);
-				fractal += '<span class="piece ' + (positionValue ? 'colorful' : '') + '" style="width: ' + piecePercentageSize
-				 + '%; height:' + piecePercentageSize + '%;"></span>';
+      	return new Promise((resolve, reject) => {
+			var fractal = '';
+			for(var i = 0; i < fractalRows; ++i) {			
+				for(var j= 0; j < fractalColumns; ++j) {
+					var positionValue = fractalPosition(i, j);
+					fractal += '<span class="piece ' + (positionValue ? 'colorful' : '') + '" style="width: ' + piecePercentageSize
+					 + '%; height:' + piecePercentageSize + '%;"></span>';
+				}
+				fractal += '<br />';
 			}
-			fractal += '<br />';
-		}
-		document.getElementById('fractal-picture').innerHTML = fractal;
+			resolve(fractal);
+      	})
+      	.then((fractal) => {
+      		setTimeout(() => {
+      			fractalPicture.innerHTML = fractal;
+      		}, 1000);
+      	});		
 	}
 
 	function fractalPosition(currentRow, currentColumn) {
