@@ -7,6 +7,27 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	var fractalRows;
 	var fractalColumns;
 	var fractal;
+	var prompt = {
+		body: '<p>In the near future you will be able to modify the fill color in this modal. The behaviour is not yet implemented</p>',
+		buttons: {
+			cancel: {
+				title: 'Cancel',
+				fn: basicModal.close
+			},
+			action: {
+				title: 'Select',
+				fn: function() {
+					patternSectionHandler(prompt.event);
+					basicModal.close();
+				}
+			}
+		},
+		event: null,
+		setEvent: function(event) {
+			this.event = event;
+			return this;
+		}
+	}
 
 	function fractalDrawerHandler() {
 		
@@ -94,7 +115,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		var grid = '';
 		for(var i = 0; i < patternRows; ++i) {
 			for(var j= 0; j < patternColumns; ++j) {
-				// grid += '<input type="checkbox" data-row="' + i + '"" data-column="' + j + '" />';
 				grid += '<span class="pattern-section" data-row="' + i + '"" data-column="' + j + '" data-checked="false"></span>';
 			}
 			grid += '<br />';
@@ -104,7 +124,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		for(var key in sections) {
 			if (sections.hasOwnProperty(key)) {
 				var section = sections[key];
-				section.addEventListener('click', patternSectionHandler);
+				// section.addEventListener('click', patternSectionHandler);
+				section.addEventListener('click', function(event) {
+					basicModal.show(prompt.setEvent(event));
+				});
 			}
 		}
 	}
