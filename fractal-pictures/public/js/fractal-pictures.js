@@ -1,12 +1,8 @@
-document.addEventListener("DOMContentLoaded", function(event) { 
+document.addEventListener("DOMContentLoaded", function(event) {
 
-	var patternRows;
-	var patternColumns;
-	var pattern;
-	var zoomOut;
-	var fractalRows;
-	var fractalColumns;
-	var fractal;
+	var fractalService = new FractalService();
+	var fractal = fractalService.create();
+
 	var prompt = {
 		body: '<p>In the near future you will be able to modify the fill color in this modal. The behaviour is not yet implemented</p>',
 		buttons: {
@@ -27,94 +23,68 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			this.event = event;
 			return this;
 		}
+	};
+	var loaderHtml = `<div class="sk-cube-grid">
+        <div class="sk-cube sk-cube1"></div>
+        <div class="sk-cube sk-cube2"></div>
+        <div class="sk-cube sk-cube3"></div>
+        <div class="sk-cube sk-cube4"></div>
+        <div class="sk-cube sk-cube5"></div>
+        <div class="sk-cube sk-cube6"></div>
+        <div class="sk-cube sk-cube7"></div>
+        <div class="sk-cube sk-cube8"></div>
+        <div class="sk-cube sk-cube9"></div>
+  	</div>`;
+
+	function domValueRetriever (row, column) {
+		var currentSection = document.querySelector('#pattern span[data-row="' + row + '"][data-column="' + column + '"]');
+		var sectionClasses = Array.from(currentSection.classList);
+		return sectionClasses.indexOf('checked') > -1;
 	}
 
 	function fractalDrawerHandler() {
 		
-		updatePattern();
+		fractalService.updatePattern(fractal, domValueRetriever);
 
 		var fractalPicture = document.getElementById('fractal-picture');
-		fractalPicture.innerHTML = 
-		`<div class="sk-cube-grid">
-	        <div class="sk-cube sk-cube1"></div>
-	        <div class="sk-cube sk-cube2"></div>
-	        <div class="sk-cube sk-cube3"></div>
-	        <div class="sk-cube sk-cube4"></div>
-	        <div class="sk-cube sk-cube5"></div>
-	        <div class="sk-cube sk-cube6"></div>
-	        <div class="sk-cube sk-cube7"></div>
-	        <div class="sk-cube sk-cube8"></div>
-	        <div class="sk-cube sk-cube9"></div>
-      	</div>`;
+		fractalPicture.innerHTML = loaderHtml;
+		
       	document.getElementById('fractal-controls').classList.remove('show');
 		
-		zoomOut = parseInt(document.getElementById('zoom-out').value);
-		fractalRows = Math.pow(patternRows, zoomOut);
-		fractalColumns = Math.pow(patternColumns, zoomOut);
+		fractal.zoomOut = parseInt(document.getElementById('zoom-out').value);
+		fractal.resultRows = Math.pow(fractal.patternRows, fractal.zoomOut);
+		fractal.resultColumns = Math.pow(fractal.patternColumns, fractal.zoomOut);
 
 		var fractalWidth = fractalPicture.clientWidth;
-		var piecePixelSize = fractalWidth / fractalColumns;
+		var piecePixelSize = fractalWidth / fractal.resultColumns;
 		var piecePercentageSize = Math.floor(piecePixelSize * 100 * 100 / fractalWidth) / 100;
 
       	return new Promise((resolve, reject) => {
-			var fractal = '';
-			for(var i = 0; i < fractalRows; ++i) {			
-				for(var j= 0; j < fractalColumns; ++j) {
-					var positionValue = fractalPosition(i, j);
-					fractal += '<span class="piece ' + (positionValue ? 'colorful' : '') + '" style="width: ' + piecePercentageSize
+			var fractalResult = '';
+			for(var i = 0; i < fractal.resultRows; ++i) {			
+				for(var j= 0; j < fractal.resultColumns; ++j) {
+					var positionValue = fractalService.getBoxValue(fractal, i, j);
+					fractalResult += '<span class="piece ' + (positionValue ? 'colorful' : '') + '" style="width: ' + piecePercentageSize
 					 + '%; height:' + piecePercentageSize + '%;"></span>';
 				}
-				fractal += '<br />';
+				fractalResult += '<br />';
 			}
-			resolve(fractal);
+			resolve(fractalResult);
       	})
-      	.then((fractal) => {
+      	.then((fractalResult) => {
       		setTimeout(() => {
-      			fractalPicture.innerHTML = fractal;
+      			fractalPicture.innerHTML = fractalResult;
       		}, 1000);
       	});		
 	}
 
-	function fractalPosition(currentRow, currentColumn) {
-		var currentFractal = {
-			rowsNumber: fractalRows,
-			columnsNumber: fractalColumns,
-			correspondingRow: currentRow,
-			correspondingColumn: currentColumn
-		};
-		var nextFractal = {};
-		var iterationsNumber = zoomOut;
-		var result = iterationsNumber > 0;
-		    
-		while (result && iterationsNumber > 0) {
-
-			nextFractal.rowsNumber = currentFractal.rowsNumber / patternRows;
-			nextFractal.correspondingRow = currentFractal.correspondingRow % nextFractal.rowsNumber;
-
-			nextFractal.columnsNumber = currentFractal.columnsNumber / patternColumns;
-			nextFractal.correspondingColumn = currentFractal.correspondingColumn % nextFractal.columnsNumber;
-
-			var correspondingPatternRow = Math.floor(currentFractal.correspondingRow / nextFractal.rowsNumber);
-			var correspondingPatternColumn = Math.floor(currentFractal.correspondingColumn / nextFractal.columnsNumber);
-			result = pattern[correspondingPatternRow][correspondingPatternColumn];
-
-			--iterationsNumber;
-			currentFractal.rowsNumber = nextFractal.rowsNumber;
-			currentFractal.columnsNumber = nextFractal.columnsNumber;
-			currentFractal.correspondingRow = nextFractal.correspondingRow;
-			currentFractal.correspondingColumn = nextFractal.correspondingColumn;
-		}
-
-		return result;
-	}
-
 	function gridDrawerHandler() {
-		patternRows = parseInt(document.getElementById('rows-number').value);
-		patternColumns = parseInt(document.getElementById('columns-number').value);
+		fractal.patternRows = parseInt(document.getElementById('rows-number').value);
+		fractal.patternColumns = parseInt(document.getElementById('columns-number').value);
 
 		var grid = '';
-		for(var i = 0; i < patternRows; ++i) {
-			for(var j= 0; j < patternColumns; ++j) {
+		for(var i = 0; i < fractal.patternRows; ++i) {
+			for(var j= 0; j < fractal.patternColumns; ++j) {
 				grid += '<span class="pattern-section" data-row="' + i + '"" data-column="' + j + '" data-checked="false"></span>';
 			}
 			grid += '<br />';
@@ -135,19 +105,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	function patternSectionHandler(event) {
 		var target = event.target;
 		target.classList.toggle('checked');
-	}
-
-	function updatePattern() {
-		pattern = [];
-		for(var i = 0; i < patternRows; ++i) {
-			pattern.push([]);
-			var currentRow = pattern[pattern.length - 1];
-			for(var j= 0; j < patternColumns; ++j) {
-				var currentSection = document.querySelector('#pattern span[data-row="' + i + '"][data-column="' + j + '"]');
-				var sectionClasses = Array.from(currentSection.classList);
-				currentRow.push(sectionClasses.indexOf('checked') > -1);
-			}
-		}
 	}
 
 	document.getElementById('rows-number').addEventListener('keyup', gridDrawerHandler);
