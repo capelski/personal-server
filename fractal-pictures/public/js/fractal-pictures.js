@@ -24,17 +24,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			return this;
 		}
 	};
-	var loaderHtml = `<div class="sk-cube-grid">
-        <div class="sk-cube sk-cube1"></div>
-        <div class="sk-cube sk-cube2"></div>
-        <div class="sk-cube sk-cube3"></div>
-        <div class="sk-cube sk-cube4"></div>
-        <div class="sk-cube sk-cube5"></div>
-        <div class="sk-cube sk-cube6"></div>
-        <div class="sk-cube sk-cube7"></div>
-        <div class="sk-cube sk-cube8"></div>
-        <div class="sk-cube sk-cube9"></div>
-  	</div>`;
 
 	function domValueRetriever (row, column) {
 		var currentSection = document.querySelector('#pattern span[data-row="' + row + '"][data-column="' + column + '"]');
@@ -47,9 +36,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		fractalService.updatePattern(fractal, domValueRetriever);
 
 		var fractalPicture = document.getElementById('fractal-picture');
-		fractalPicture.innerHTML = loaderHtml;
+		var fractalControls = document.getElementById('fractal-controls');
+		var loader = document.getElementById('loader');
 		
-      	document.getElementById('fractal-controls').classList.remove('show');
+      	fractalControls.classList.remove('show');
+      	loader.style.display = 'block';
 		
 		fractal.zoomOut = parseInt(document.getElementById('zoom-out').value);
 		fractal.resultRows = Math.pow(fractal.patternRows, fractal.zoomOut);
@@ -74,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       	.then((fractalResult) => {
       		setTimeout(() => {
       			fractalPicture.innerHTML = fractalResult;
+      			loader.style.display = 'none';
       		}, 1000);
       	});		
 	}

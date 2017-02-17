@@ -46,6 +46,15 @@ body {
     background-color: skyblue;
 }
 
+#loader {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+}
+
 @media(min-width: 576px) {
     #fractal-drawer {
         margin-top: 32px;
