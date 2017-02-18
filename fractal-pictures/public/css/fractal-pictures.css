@@ -72,14 +72,15 @@ body {
     background-color: skyblue;
 }
 
-.fractal-viewer {
+.max-square {
     width: 100vw;
     height: 100vw;
     margin: auto;
+    display: block;
 }
 
 @media(orientation: landscape) {
-	.fractal-viewer {
+	.max-square {
 		width: 100vh;
 		height: 100vh;
 	}
