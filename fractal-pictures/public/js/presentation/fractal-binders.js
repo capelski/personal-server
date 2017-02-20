@@ -35,12 +35,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		}
 	};
 
-	function domValueRetriever (row, column) {
-		var currentSection = document.querySelector('#pattern span[data-row="' + row + '"][data-column="' + column + '"]');
-		var sectionClasses = Array.from(currentSection.classList);
-		return sectionClasses.indexOf('checked') > -1;
-	}
-
 	function fractalDrawerHandler() {			
       	htmlNodes.fractalControls.classList.remove('show');
       	htmlNodes.loader.style.display = 'block';
@@ -54,22 +48,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		var piecePixelSize = fractalWidth / fractal.resultColumns;
 		var piecePercentageSize = Math.floor(piecePixelSize * 100 * 100 / fractalWidth) / 100;
 
-      	return new Promise((resolve, reject) => {
-			fractalService.updatePattern(fractal, domValueRetriever);
-			var fractalResult = '';
-			for (var i = 0; i < fractal.resultRows; ++i) {			
-				for (var j= 0; j < fractal.resultColumns; ++j) {
-					var positionValue = fractalService.getBoxValue(fractal, i, j);
-					fractalResult += '<span class="piece ' + (positionValue ? 'colorful' : '') + '" style="width: ' + piecePercentageSize
+      	return fractalService.computeFractal(fractal, sectionValueRetriever)
+      	.then((fractalResult) => {
+      		var fractalHtml = '';
+			for (var i = 0; i < fractalResult.length; ++i) {			
+				for (var j= 0; j < fractalResult[i].length; ++j) {
+					fractalHtml += '<span class="piece ' + (fractalResult[i][j] ? 'colorful' : '') + '" style="width: ' + piecePercentageSize
 					 + '%; height:' + piecePercentageSize + '%;"></span>';
 				}
-				fractalResult += '<br />';
+				fractalHtml += '<br />';
 			}
-			resolve(fractalResult);
-      	})
-      	.then((fractalResult) => {
       		setTimeout(() => {
-      			htmlNodes.fractalPicture.innerHTML = fractalResult;
+      			htmlNodes.fractalPicture.innerHTML = fractalHtml;
       			htmlNodes.loader.style.display = 'none';
       		}, 1000);
       	});		
@@ -102,6 +92,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	function patternSectionHandler(event) {
 		var target = event.target;
 		target.classList.toggle('checked');
+	}
+
+	function sectionValueRetriever (row, column) {
+		var currentSection = document.querySelector('#pattern span[data-row="' + row + '"][data-column="' + column + '"]');
+		var sectionClasses = Array.from(currentSection.classList);
+		return sectionClasses.indexOf('checked') > -1;
 	}
 
 	htmlNodes.rowsNumber.addEventListener('keyup', gridDrawerHandler);

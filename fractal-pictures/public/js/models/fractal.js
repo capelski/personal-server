@@ -5,4 +5,5 @@ function Fractal() {
 	this.zoomOut = 0;
 	this.resultRows = 0;
 	this.resultColumns = 0;
+	this.result = [[]];
 }

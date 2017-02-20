@@ -4,7 +4,7 @@ function FractalService() {
 		return new Fractal();
 	}
 
-	function getBoxValue(fractal, boxRow, boxColumn) {
+	function getSectionValue(fractal, boxRow, boxColumn) {
 		var currentFractal = {
 			rowsNumber: fractal.resultRows,
 			columnsNumber: fractal.resultColumns,
@@ -37,20 +37,34 @@ function FractalService() {
 		return result;
 	}
 
-	function updatePattern(fractal, domValueRetriever) {
-		fractal.pattern = [];
-		for (var i = 0; i < fractal.patternRows; ++i) {
-			fractal.pattern.push([]);
-			var currentRow = fractal.pattern[fractal.pattern.length - 1];
-			for (var j= 0; j < fractal.patternColumns; ++j) {
-				currentRow.push(domValueRetriever(i, j));
+	function computeFractal(fractal, sectionValueRetriever) {
+		return new Promise(function(resolve, reject) {
+			fractal.pattern = [];
+			for (var i = 0; i < fractal.patternRows; ++i) {
+				fractal.pattern.push([]);
+				var currentRow = fractal.pattern[fractal.pattern.length - 1];
+				for (var j = 0; j < fractal.patternColumns; ++j) {
+					currentRow.push(sectionValueRetriever(i, j));
+				}
 			}
-		}
+
+			fractal.result = [];
+			for (var i = 0; i < fractal.resultRows; ++i) {			
+				fractal.result.push([]);
+				var currentRow = fractal.result[fractal.result.length - 1];
+				for (var j = 0; j < fractal.resultColumns; ++j) {
+					currentRow.push(getSectionValue(fractal, i, j));
+				}
+			}
+
+			resolve(fractal.result);
+		});
+
+		
 	}
 
 	return {
 		create: create,
-		getBoxValue: getBoxValue,
-		updatePattern: updatePattern
+		computeFractal: computeFractal
 	};
 }
