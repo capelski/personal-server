@@ -46,15 +46,23 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 		var fractalWidth = htmlNodes.fractalPicture.clientWidth;
 		var piecePixelSize = fractalWidth / fractal.resultColumns;
+		console.log(piecePixelSize);
 		var piecePercentageSize = Math.floor(piecePixelSize * 100 * 100 / fractalWidth) / 100;
 
       	return fractalService.computeFractal(fractal, sectionValueRetriever)
       	.then((fractalResult) => {
+      		var canvasContext = document.getElementById('canvas-fractal-picture').getContext('2d');
+  			canvasContext.fillStyle = 'white';
+      		canvasContext.clearRect(0, 0, document.getElementById('canvas-fractal-picture').width, document.getElementById('canvas-fractal-picture').height);
+  			canvasContext.fillStyle = 'skyblue';
       		var fractalHtml = '';
 			for (var i = 0; i < fractalResult.length; ++i) {			
 				for (var j= 0; j < fractalResult[i].length; ++j) {
 					fractalHtml += '<span class="piece ' + (fractalResult[i][j] ? 'colorful' : '') + '" style="width: ' + piecePercentageSize
 					 + '%; height:' + piecePercentageSize + '%;"></span>';
+					if (fractalResult[i][j]) {
+						canvasContext.fillRect(j * piecePixelSize, i * piecePixelSize, piecePixelSize, piecePixelSize);
+					}
 				}
 				fractalHtml += '<br />';
 			}
