@@ -3,7 +3,7 @@ body {
     padding: 0;
 }
 
-.controls-toggler {
+.controls {
     position: absolute;
     top: 0;
     right: 10px;
@@ -12,8 +12,16 @@ body {
     font-size: 20px;
 }
 
-.controls-toggler:focus {
+.controls:focus {
     box-shadow: none;
+}
+
+.controls.toggler {
+    right: 10px;
+}
+
+.controls.color-picker {
+    right: 40px;
 }
 
 #fractal-controls {

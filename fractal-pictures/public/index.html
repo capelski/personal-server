@@ -13,8 +13,11 @@
     </head>
 
     <body>
-        <button class="btn controls-toggler" type="button" data-toggle="collapse" data-target="#fractal-controls">
+        <button class="btn controls toggler" type="button" data-toggle="collapse" data-target="#fractal-controls">
             &#9998;
+        </button>
+        <button class="btn controls color-picker" type="button" id="color-picker">
+            &#10002;
         </button>
 
         <div id="loader" class="max-square">
@@ -78,6 +81,7 @@
         <script src="plugins/tether-1.3.3/tether.min.js"></script>
         <script src="plugins/bootstrap-4.0.0/bootstrap.min.js"></script>
         <script src="plugins/basicModal/basicModal.min.js"></script>
+        <script src="plugins/jscolor/jscolor.min.js"></script>
         <script src="js/models/fractal.js"></script>
         <script src="js/services/fractal-service.js"></script>
         <script src="js/presentation/fractal-binders.js"></script>

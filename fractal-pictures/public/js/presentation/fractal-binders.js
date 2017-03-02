@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	var fractal = fractalService.create();
 	var htmlNodes = {
 		fractalPicture: document.getElementById('fractal-picture'),
+		colorPicker: document.getElementById('color-picker'),
 		fractalControls: document.getElementById('fractal-controls'),
 		rowsNumber: document.getElementById('rows-number'),
 		columnsNumber: document.getElementById('columns-number'),
@@ -16,7 +17,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	var resizeCanvasTimeout;
 
 	var prompt = {
-		body: '<p>In the near future you will be able to modify the fill color in this modal. The behaviour is not yet implemented</p>',
+		// TODO Add the color-picker HTML to the modal's body
+		body: `<p>Choose the color used to display the fractal pictures from the color picker</p>`,
 		buttons: {
 			cancel: {
 				title: 'Cancel',
@@ -25,17 +27,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			action: {
 				title: 'Select',
 				fn: function() {
-					patternSectionHandler(prompt.event);
+					console.log('Whatever');
+					// TODO Pick a color and redraw the fractal
 					basicModal.close();
 				}
 			}
-		},
-		event: null,
-		setEvent: function(event) {
-			this.event = event;
-			return this;
 		}
 	};
+
+	function colorPickerHandler() {
+		basicModal.show(prompt);
+	}
 
 	function fillCanvas(fractalResult) {
 		var piecePixelSize = htmlNodes.fractalPicture.width / fractal.resultColumns;
@@ -87,9 +89,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			if (sections.hasOwnProperty(key)) {
 				var section = sections[key];
 				section.addEventListener('click', patternSectionHandler);
-				// section.addEventListener('click', function(event) {
-				// 	basicModal.show(prompt.setEvent(event));
-				// });
 			}
 		}
 	}
@@ -119,6 +118,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		return sectionClasses.indexOf('checked') > -1;
 	}
 
+	htmlNodes.colorPicker.addEventListener('click', colorPickerHandler);
 	htmlNodes.rowsNumber.addEventListener('keyup', gridDrawerHandler);
 	htmlNodes.columnsNumber.addEventListener('keyup', gridDrawerHandler);
 	htmlNodes.fractalDrawer.addEventListener('click', fractalDrawerHandler);
