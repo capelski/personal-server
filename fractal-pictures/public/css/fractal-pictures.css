@@ -10,6 +10,7 @@ body {
     z-index: 10;
     background-color: transparent;
     font-size: 20px;
+    padding: 10px;
 }
 
 .controls:focus {
@@ -21,7 +22,7 @@ body {
 }
 
 .controls.color-picker {
-    right: 40px;
+    right: 50px;
 }
 
 #fractal-controls {
@@ -45,13 +46,13 @@ body {
     display: inline-block;
     width: 30px;
     height: 30px;
-    border: 1px solid lightblue;
+    border-top: 1px solid #aaaaaa;
+    border-left: 1px solid #aaaaaa;
     background-color: white;
 }
 
-.pattern-section.checked {
-    border: none;
-    background-color: skyblue;
+.colorizable {
+    background-color: #7EC0EE !important;
 }
 
 @media(min-width: 576px) {
@@ -76,9 +77,6 @@ body {
     position: relative;
     top: 25%;
 }
-.sk-cube-grid .sk-cube {
-    background-color: skyblue;
-}
 
 .max-square {
     width: 100vw;
@@ -100,4 +98,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.basicModal {
+    width: 100%;
+    max-width: 500px;
+    margin-left: 10px;
+    margin-right: 10px;
 }

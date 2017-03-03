@@ -14,34 +14,37 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		loader: document.getElementById('loader')
 	};
 	htmlNodes.canvasContext = htmlNodes.fractalPicture.getContext('2d');
+	var fractalColor = '#7EC0EE';
 	var resizeCanvasTimeout;
 
-	var prompt = {
-		// TODO Add the color-picker HTML to the modal's body
-		body: `<p>Choose the color used to display the fractal pictures from the color picker</p>`,
-		buttons: {
-			cancel: {
-				title: 'Cancel',
-				fn: basicModal.close
-			},
-			action: {
-				title: 'Select',
-				fn: function() {
-					console.log('Whatever');
-					// TODO Pick a color and redraw the fractal
-					basicModal.close();
+	function colorPickerHandler() {
+		// TODO Keep the color picker always visible
+		basicModal.show({
+			body: `<p>Choose the color you want the the fractal pictures to be painted in:</p>
+					<input id="jscolor" class="jscolor" value="` + fractalColor + `">
+			`,
+			buttons: {
+				cancel: {
+					title: 'Cancel',
+					fn: basicModal.close
+				},
+				action: {
+					title: 'Select',
+					fn: function() {
+						fractalColor = '#' + document.getElementById('jscolor').value;
+						updateCSSClassProperty('fractal-pictures.css', '.colorizable', 'background-color', fractalColor, true)
+						redrawCanvas();
+						basicModal.close();
+					}
 				}
 			}
-		}
-	};
-
-	function colorPickerHandler() {
-		basicModal.show(prompt);
+		});
+		jscolor.installByClassName("jscolor");
 	}
 
 	function fillCanvas(fractalResult) {
 		var piecePixelSize = htmlNodes.fractalPicture.width / fractal.resultColumns;
-  		htmlNodes.canvasContext.fillStyle = 'skyblue';
+  		htmlNodes.canvasContext.fillStyle = fractalColor;
 
 		for (var i = 0; i < fractalResult.length; ++i) {			
 			for (var j= 0; j < fractalResult[i].length; ++j) {
@@ -79,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		var grid = '';
 		for (var i = 0; i < fractal.patternRows; ++i) {
 			for (var j= 0; j < fractal.patternColumns; ++j) {
-				grid += '<span class="pattern-section" data-row="' + i + '"" data-column="' + j + '" data-checked="false"></span>';
+				grid += '<span class="pattern-section" data-row="' + i + '"" data-column="' + j + '"></span>';
 			}
 			grid += '<br />';
 		}
@@ -95,7 +98,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	function patternSectionHandler(event) {
 		var target = event.target;
-		target.classList.toggle('checked');
+		target.classList.toggle('colorizable');
+	}
+
+	function redrawCanvas() {
+		if(fractal.result && fractal.result.length > 0) {
+			fillCanvas(fractal.result);
+		}
 	}
 
 	function resizeCanvas() {
@@ -106,16 +115,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			var canvasSize = Math.min(window.innerWidth, window.innerHeight);
 			htmlNodes.fractalPicture.width = canvasSize;
 			htmlNodes.fractalPicture.height = canvasSize;
-			if(fractal.result && fractal.result.length > 0) {
-				fillCanvas(fractal.result);
-			}
+			redrawCanvas();
 		}, 400);
 	}
 
 	function sectionValueRetriever (row, column) {
 		var currentSection = document.querySelector('#pattern span[data-row="' + row + '"][data-column="' + column + '"]');
 		var sectionClasses = Array.from(currentSection.classList);
-		return sectionClasses.indexOf('checked') > -1;
+		return sectionClasses.indexOf('colorizable') > -1;
+	}
+
+	function updateCSSClassProperty(fileName, classSelector, propertyName, propertyValue, important) {
+		var styleSheet = Array.from(document.styleSheets).find(styleSheet => styleSheet.href.endsWith(fileName));
+		var rule = Array.from(styleSheet.rules).find(rule => rule.selectorText === classSelector);
+		rule.style.setProperty (propertyName, propertyValue, important ? "important" : "");
 	}
 
 	htmlNodes.colorPicker.addEventListener('click', colorPickerHandler);
