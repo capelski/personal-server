@@ -82,7 +82,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		var grid = '';
 		for (var i = 0; i < fractal.patternRows; ++i) {
 			for (var j= 0; j < fractal.patternColumns; ++j) {
-				grid += '<span class="pattern-section" data-row="' + i + '"" data-column="' + j + '"></span>';
+				var maybeColorizable = Math.round(Math.random() * 100) % 2 === 1 ? " colorizable" : "";
+				grid += '<span class="pattern-section' + maybeColorizable + '" data-row="' + i + '"" data-column="' + j + '"></span>';
 			}
 			grid += '<br />';
 		}
@@ -139,4 +140,5 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	gridDrawerHandler();
 	resizeCanvas();
+	fractalDrawerHandler();
 });
