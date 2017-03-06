@@ -75,7 +75,7 @@ body {
 @media (orientation: landscape) {
 	.max-square {
 		width: 100vh;
-		height: calc(100% - 70px);
+		height: calc(100% - 35px);
 	}
 }
 
@@ -95,7 +95,7 @@ body {
 }
 
 .aligner {
-    height: calc(100% - 70px);
+    height: calc(100% - 35px);
     width: 100vw;
     display: flex;
     align-items: center;

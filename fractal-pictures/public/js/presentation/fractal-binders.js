@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	var resizeCanvasTimeout;
 
 	function colorPickerHandler() {
-		// TODO Keep the color picker always visible
 		basicModal.show({
 			body: `<p>Choose the color you want the the fractal pictures to be painted in:</p>
 					<input id="jscolor" class="jscolor" value="` + fractalColor + `">
@@ -40,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				}
 			}
 		});
-		jscolor.installByClassName("jscolor");
+		renderColorPicker();
 	}
 
 	function fillCanvas(fractalResult) {
@@ -83,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		var grid = '';
 		for (var i = 0; i < fractal.patternRows; ++i) {
 			for (var j= 0; j < fractal.patternColumns; ++j) {
-				var maybeColorizable = Math.round(Math.random() * 100) % 2 === 1 ? " colorizable" : "";
+				var maybeColorizable = Math.round(Math.random() * 100) % 2 === 1 ? ' colorizable': '';
 				grid += '<span class="pattern-section' + maybeColorizable + '" data-row="' + i + '"" data-column="' + j + '"></span>';
 			}
 			grid += '<br />';
@@ -107,6 +106,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		if(fractal.result && fractal.result.length > 0) {
 			fillCanvas(fractal.result);
 		}
+	}
+
+	function renderColorPicker() {
+		jscolor.installByClassName('jscolor');
+		var mousedownEvent = document.createEvent('MouseEvents');
+		mousedownEvent.initEvent('mousedown', true, false);
+		document.getElementById('jscolor').dispatchEvent(mousedownEvent);
+		document.getElementById('jscolor').style.display = 'none';
+		//This is not the fanciest way to do it, but we can grab the color picker as the last element of the body:
+		var bodyNodes = Array.from(document.body.childNodes);
+		var colorPicker = bodyNodes[bodyNodes.length - 1];
+		colorPicker.style.left = 'calc(50% - 120px)';
+		colorPicker.style.top = 'calc(50% - 60px)';
+		document.getElementsByClassName('basicModal__content')[0].style.height = '300px';
 	}
 
 	function resizeCanvas() {
