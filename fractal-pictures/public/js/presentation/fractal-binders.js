@@ -3,16 +3,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	var fractalService = new FractalService();
 	var fractal = fractalService.create();
 	var htmlNodes = {
+		colorPicker: document.getElementById('color-picker'),
+		columnsLabel: document.getElementById('columns-label'),
+		columnsNumber: document.getElementById('columns-number'),
+		fractalControls: document.getElementById('fractal-controls'),
+		fractalDrawer: document.getElementById('fractal-drawer'),
 		fractalPicture: document.getElementById('fractal-picture'),
 		fractalWrapper: document.getElementById('fractal-wrapper'),
-		colorPicker: document.getElementById('color-picker'),
-		fractalControls: document.getElementById('fractal-controls'),
-		rowsNumber: document.getElementById('rows-number'),
-		columnsNumber: document.getElementById('columns-number'),
+		loader: document.getElementById('loader'),
 		pattern: document.getElementById('pattern'),
-		zoomOut: document.getElementById('zoom-out'),
-		fractalDrawer: document.getElementById('fractal-drawer'),
-		loader: document.getElementById('loader')
+		rowsLabel: document.getElementById('rows-label'),
+		rowsNumber: document.getElementById('rows-number'),
+		zoomLabel: document.getElementById('zoom-label'),
+		zoomOut: document.getElementById('zoom-out')
 	};
 	htmlNodes.canvasContext = htmlNodes.fractalPicture.getContext('2d');
 	var fractalColor = '#7EC0EE';
@@ -76,6 +79,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 	function gridDrawerHandler() {
+		htmlNodes.rowsLabel.textContent = htmlNodes.rowsNumber.value;
+		htmlNodes.columnsLabel.textContent = htmlNodes.columnsNumber.value;
 		fractal.patternRows = parseInt(htmlNodes.rowsNumber.value);
 		fractal.patternColumns = parseInt(htmlNodes.columnsNumber.value);
 
@@ -149,8 +154,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 	htmlNodes.colorPicker.addEventListener('click', colorPickerHandler);
-	htmlNodes.rowsNumber.addEventListener('keyup', gridDrawerHandler);
-	htmlNodes.columnsNumber.addEventListener('keyup', gridDrawerHandler);
+	htmlNodes.rowsNumber.addEventListener('input', gridDrawerHandler);
+	htmlNodes.columnsNumber.addEventListener('input', gridDrawerHandler);
+	console.log( htmlNodes.zoomLabel.textContent)
+	htmlNodes.zoomOut.addEventListener('input', () => htmlNodes.zoomLabel.textContent = htmlNodes.zoomOut.value);
 	htmlNodes.fractalDrawer.addEventListener('click', fractalDrawerHandler);
 	window.addEventListener('resize', resizeCanvas);
 
