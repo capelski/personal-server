@@ -23,3 +23,4 @@ The purpouse of this fractal pictures generator web page is to ilustrate many co
 
 - Use canvas for graphical representations; I'd never use it before and I wanted to try it. It turned out to be a great increase in performance
 - Use modals for confirmation messages and/or additional steps to complete an action
+- Style properties should be defined through CSS classes only instead of using id attributes. Id attributes should only be used to retrieve DOM elements through JavaScript

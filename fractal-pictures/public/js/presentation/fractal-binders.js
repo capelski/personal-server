@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	var fractal = fractalService.create();
 	var htmlNodes = {
 		fractalPicture: document.getElementById('fractal-picture'),
+		fractalWrapper: document.getElementById('fractal-wrapper'),
 		colorPicker: document.getElementById('color-picker'),
 		fractalControls: document.getElementById('fractal-controls'),
 		rowsNumber: document.getElementById('rows-number'),
@@ -113,7 +114,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			clearTimeout(resizeCanvasTimeout);
 		}
 		resizeCanvasTimeout = setTimeout(function() {
-			var canvasSize = Math.min(window.innerWidth, window.innerHeight);
+			// In mobile browsers, the window height does not include the address bar;
+			// we get the actual height through the fractalWrapper instead of the window
+			var canvasSize = Math.min(window.innerWidth, htmlNodes.fractalWrapper.clientHeight);
 			htmlNodes.fractalPicture.width = canvasSize;
 			htmlNodes.fractalPicture.height = canvasSize;
 			redrawCanvas();

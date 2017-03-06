@@ -25,7 +25,7 @@ body {
     right: 50px;
 }
 
-#fractal-controls {
+.top-menu {
     padding-top: 10px;
     padding-bottom: 10px;
     background-color: #b7e1f3;
@@ -34,11 +34,7 @@ body {
     left: 0;
 }
 
-#fractal-controls.hidden {
-    opacity: 0;
-}
-
-#pattern {
+.pad-10 {
     padding: 10px;
 }
 
@@ -55,19 +51,39 @@ body {
     background-color: #7EC0EE !important;
 }
 
-@media(min-width: 576px) {
-    #fractal-drawer {
+@media (min-width: 576px) {
+    .media-margin-top {
         margin-top: 32px;
     }
 }
 
-#loader {
+.full-screen {
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    display: none;
+}
+
+.max-square {
+    width: 100vw;
+    height: 100vw;
+    margin: auto;
+    display: block;
+}
+
+@media (orientation: landscape) {
+	.max-square {
+		width: 100vh;
+		height: calc(100% - 70px);
+	}
+}
+
+@media (orientation: landscape) and (min-width: 768px) {
+    .max-square {
+        width: 100vh;
+        height: 100vh;
+    }
 }
 
 .sk-cube-grid {
@@ -78,26 +94,18 @@ body {
     top: 25%;
 }
 
-.max-square {
-    width: 100vw;
-    height: 100vw;
-    margin: auto;
-    display: block;
-}
-
-@media(orientation: landscape) {
-	.max-square {
-		width: 100vh;
-		height: 100vh;
-	}
-}
-
 .aligner {
-    height: 100vh;
+    height: calc(100% - 70px);
     width: 100vw;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .aligner {
+        height: 100vh;
+    }
 }
 
 .basicModal {

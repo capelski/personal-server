@@ -5,6 +5,7 @@
         <meta name="description" content="Fractal picture generator">
         <meta name="author" content="Carles Capellas">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="theme-color" content="#b7e1f3" />
         <link rel="stylesheet" href="plugins/bootstrap-4.0.0/bootstrap.min.css">
         <link rel="stylesheet" href="plugins/spinkit/spinkit.css">
         <link rel="stylesheet" href="plugins/basicModal/normalize-3.0.3.min.css">
@@ -20,7 +21,7 @@
             &#10002;
         </button>
 
-        <div id="loader" class="max-square">
+        <div id="loader" class="max-square full-screen" style="display: none;">
             <div class="sk-cube-grid">
                 <div class="sk-cube sk-cube1 colorizable"></div>
                 <div class="sk-cube sk-cube2 colorizable"></div>
@@ -34,7 +35,7 @@
             </div>
         </div>
 
-        <div id="fractal-controls" class="collapse show">
+        <div id="fractal-controls" class="collapse top-menu show">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-4">
@@ -54,7 +55,7 @@
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <div id="pattern" class="text-center"></div>            
+                        <div id="pattern" class="pad-10 text-center"></div>            
                     </div>
                     <div class="col-sm-4">
                         <div class="row">
@@ -65,7 +66,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <button type="button" id="fractal-drawer" class="btn btn-primary">Draw fractal</button>
+                                <button type="button" id="fractal-drawer" class="btn btn-primary media-margin-top">Draw fractal</button>
                             </div>
                         </div>
                     </div>
@@ -73,7 +74,7 @@
             </div>
         </div>
 
-        <div class="aligner">
+        <div id="fractal-wrapper" class="aligner">
             <canvas id="fractal-picture"></canvas>
         </div>
 
