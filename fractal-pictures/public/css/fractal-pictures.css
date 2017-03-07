@@ -36,7 +36,7 @@ body {
     position: fixed;
     right: 0;
     left: 0;
-    max-height: calc(100% - 35px);
+    max-height: calc(100%);
     overflow-y: auto;
 }
 
@@ -81,7 +81,7 @@ body {
 @media (orientation: landscape) {
 	.max-square {
 		width: 100vh;
-		height: calc(100% - 35px);
+		height: calc(100%);
 	}
 }
 
@@ -101,7 +101,7 @@ body {
 }
 
 .aligner {
-    height: calc(100% - 35px);
+    height: calc(100%);
     width: 100vw;
     display: flex;
     align-items: center;
