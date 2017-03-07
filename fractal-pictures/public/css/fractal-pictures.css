@@ -25,6 +25,10 @@ body {
     right: 50px;
 }
 
+.controls.reload {
+    right: 90px;
+}
+
 .top-menu {
     padding-top: 10px;
     padding-bottom: 10px;

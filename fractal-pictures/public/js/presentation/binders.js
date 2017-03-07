@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		fractalWrapper: document.getElementById('fractal-wrapper'),
 		loader: document.getElementById('loader'),
 		pattern: document.getElementById('pattern'),
+		reloader: document.getElementById('reloader'),
 		rowsLabel: document.getElementById('rows-label'),
 		rowsNumber: document.getElementById('rows-number'),
 		zoomLabel: document.getElementById('zoom-label'),
@@ -154,9 +155,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 	htmlNodes.colorPicker.addEventListener('click', colorPickerHandler);
+	htmlNodes.reloader.addEventListener('click', () => { gridDrawerHandler(); fractalDrawerHandler(); });
 	htmlNodes.rowsNumber.addEventListener('input', gridDrawerHandler);
 	htmlNodes.columnsNumber.addEventListener('input', gridDrawerHandler);
-	console.log( htmlNodes.zoomLabel.textContent)
 	htmlNodes.zoomOut.addEventListener('input', () => htmlNodes.zoomLabel.textContent = htmlNodes.zoomOut.value);
 	htmlNodes.fractalDrawer.addEventListener('click', fractalDrawerHandler);
 	window.addEventListener('resize', resizeCanvas);
