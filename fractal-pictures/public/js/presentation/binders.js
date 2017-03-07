@@ -20,30 +20,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		zoomOut: document.getElementById('zoom-out')
 	};
 
-	function colorPickerHandler() {
-		basicModal.show({
-			body: `<p>Choose the color you want the the fractal pictures to be painted in:</p>
-					<input id="jscolor" class="jscolor" value="` + fractal.displayColor + `">
-			`,
-			buttons: {
-				cancel: {
-					title: 'Cancel',
-					fn: basicModal.close
-				},
-				action: {
-					title: 'Select',
-					fn: function() {
-						fractal.displayColor = '#' + document.getElementById('jscolor').value;
-						window.generics.updateCSSProperty('fractal-pictures.css', '.colorizable', 'background-color', fractal.displayColor, true)
-						renderCanvas(fractal.result);
-						basicModal.close();
-					}
-				}
-			}
-		});
-		renderColorPicker();
-	}
-
 	function fractalDrawerHandler() {			
       	htmlNodes.fractalControls.classList.remove('show');
       	htmlNodes.loader.style.display = 'block';
@@ -99,20 +75,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		}
 	}
 
-	function renderColorPicker() {
-		jscolor.installByClassName('jscolor');
-		var mousedownEvent = document.createEvent('MouseEvents');
-		mousedownEvent.initEvent('mousedown', true, false);
-		document.getElementById('jscolor').dispatchEvent(mousedownEvent);
-		document.getElementById('jscolor').style.display = 'none';
-		//This is not the fanciest way to do it, but we can grab the color picker as the last element of the body:
-		var bodyNodes = Array.from(document.body.childNodes);
-		var colorPicker = bodyNodes[bodyNodes.length - 1];
-		colorPicker.style.left = 'calc(50% - 120px)';
-		colorPicker.style.top = 'calc(50% - 60px)';
-		document.getElementsByClassName('basicModal__content')[0].style.height = '300px';
-	}
-
 	function sectionValueRetriever (row, column) {
 		var currentSection = document.querySelector('#pattern span[data-row="' + row + '"][data-column="' + column + '"]');
 		var sectionClasses = Array.from(currentSection.classList);
@@ -129,11 +91,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		});
 	}
 
-	htmlNodes.colorPickerIcon.addEventListener('click', colorPickerHandler);
-	htmlNodes.reloaderIcon.addEventListener('click', () => { gridDrawerHandler(); fractalDrawerHandler(); });
+	htmlNodes.colorPickerIcon.addEventListener('click', () => {
+		window.colorPickerCustom.display(fractal.displayColor, () => {
+			fractal.displayColor = '#' + document.getElementById('jscolor').value;
+			window.generics.updateCSSProperty('fractal-pictures.css', '.colorizable', 'background-color', fractal.displayColor, true);
+			renderCanvas(fractal.result);
+		});
+	});
+	htmlNodes.reloaderIcon.addEventListener('click', () => {
+		gridDrawerHandler();
+		fractalDrawerHandler();
+	});
 	htmlNodes.rowsNumber.addEventListener('input', gridDrawerHandler);
 	htmlNodes.columnsNumber.addEventListener('input', gridDrawerHandler);
-	htmlNodes.zoomOut.addEventListener('input', () => htmlNodes.zoomLabel.textContent = htmlNodes.zoomOut.value);
+	htmlNodes.zoomOut.addEventListener('input', () => {
+		htmlNodes.zoomLabel.textContent = htmlNodes.zoomOut.value
+	});
 	htmlNodes.fractalDrawer.addEventListener('click', fractalDrawerHandler);
 	window.addEventListener('resize', updateCanvasSize);
 

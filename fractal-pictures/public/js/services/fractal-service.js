@@ -67,4 +67,5 @@ function FractalService() {
 		create: create,
 		computeFractal: computeFractal
 	};
+	
 }

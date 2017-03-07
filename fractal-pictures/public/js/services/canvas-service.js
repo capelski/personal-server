@@ -41,4 +41,5 @@ function CanvasService() {
 		renderMatrix,
 		resizeCanvas
 	};
+	
 }
