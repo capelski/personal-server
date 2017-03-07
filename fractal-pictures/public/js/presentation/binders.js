@@ -1,14 +1,15 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 
 	var fractalService = new FractalService();
+	var canvasService = new CanvasService();
 	var fractal = fractalService.create();
 	var htmlNodes = {
+		canvas: document.getElementById('fractal-picture'),
 		colorPicker: document.getElementById('color-picker'),
 		columnsLabel: document.getElementById('columns-label'),
 		columnsNumber: document.getElementById('columns-number'),
 		fractalControls: document.getElementById('fractal-controls'),
 		fractalDrawer: document.getElementById('fractal-drawer'),
-		fractalPicture: document.getElementById('fractal-picture'),
 		fractalWrapper: document.getElementById('fractal-wrapper'),
 		loader: document.getElementById('loader'),
 		pattern: document.getElementById('pattern'),
@@ -18,9 +19,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		zoomLabel: document.getElementById('zoom-label'),
 		zoomOut: document.getElementById('zoom-out')
 	};
-	htmlNodes.canvasContext = htmlNodes.fractalPicture.getContext('2d');
 	var fractalColor = '#7EC0EE';
-	var resizeCanvasTimeout;
 
 	function colorPickerHandler() {
 		basicModal.show({
@@ -37,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 					fn: function() {
 						fractalColor = '#' + document.getElementById('jscolor').value;
 						updateCSSClassProperty('fractal-pictures.css', '.colorizable', 'background-color', fractalColor, true)
-						redrawCanvas();
+						renderCanvas(fractal.result);
 						basicModal.close();
 					}
 				}
@@ -46,37 +45,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		renderColorPicker();
 	}
 
-	function fillCanvas(fractalResult) {
-		var piecePixelSize = htmlNodes.fractalPicture.width / fractal.resultColumns;
-  		htmlNodes.canvasContext.fillStyle = fractalColor;
-
-		for (var i = 0; i < fractalResult.length; ++i) {			
-			for (var j= 0; j < fractalResult[i].length; ++j) {
-				if (fractalResult[i][j]) {
-					htmlNodes.canvasContext.fillRect(j * piecePixelSize, i * piecePixelSize, piecePixelSize, piecePixelSize);
-				}
-			}
-		}
-
-  		setTimeout(() => {
-			htmlNodes.fractalPicture.style.display = 'block';
-  			htmlNodes.loader.style.display = 'none';
-  		}, 1000);
-  	}
-
 	function fractalDrawerHandler() {			
       	htmlNodes.fractalControls.classList.remove('show');
       	htmlNodes.loader.style.display = 'block';
-		htmlNodes.canvasContext.fillStyle = 'white';
-  		htmlNodes.canvasContext.clearRect(0, 0, htmlNodes.fractalPicture.width, htmlNodes.fractalPicture.height);
-  		htmlNodes.fractalPicture.style.display = 'none';
+  		htmlNodes.canvas.style.display = 'none';
 		
 		fractal.zoomOut = parseInt(htmlNodes.zoomOut.value);
 		fractal.resultRows = Math.pow(fractal.patternRows, fractal.zoomOut);
 		fractal.resultColumns = Math.pow(fractal.patternColumns, fractal.zoomOut);
 
       	return fractalService.computeFractal(fractal, sectionValueRetriever)
-      	.then(fillCanvas);
+      	.then(renderCanvas);
 	}
 
 	function gridDrawerHandler() {
@@ -108,9 +87,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		target.classList.toggle('colorizable');
 	}
 
-	function redrawCanvas() {
-		if(fractal.result && fractal.result.length > 0) {
-			fillCanvas(fractal.result);
+	function renderCanvas(fractalResult) {
+		if(fractalResult && fractalResult.length > 0) {
+			var pieceSize = htmlNodes.canvas.width / fractal.resultColumns;
+			return canvasService.renderMatrix(htmlNodes.canvas, fractalResult, pieceSize, fractalColor)
+			.then(() => {
+				setTimeout(() => {
+					htmlNodes.canvas.style.display = 'block';
+		  			htmlNodes.loader.style.display = 'none';
+		  		}, 1000);
+			});
 		}
 	}
 
@@ -128,24 +114,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		document.getElementsByClassName('basicModal__content')[0].style.height = '300px';
 	}
 
-	function resizeCanvas() {
-		if(resizeCanvasTimeout) {
-			clearTimeout(resizeCanvasTimeout);
-		}
-		resizeCanvasTimeout = setTimeout(function() {
-			// In mobile browsers, the window height does not include the address bar;
-			// we get the actual height through the fractalWrapper instead of the window
-			var canvasSize = Math.min(window.innerWidth, htmlNodes.fractalWrapper.clientHeight);
-			htmlNodes.fractalPicture.width = canvasSize;
-			htmlNodes.fractalPicture.height = canvasSize;
-			redrawCanvas();
-		}, 400);
-	}
-
 	function sectionValueRetriever (row, column) {
 		var currentSection = document.querySelector('#pattern span[data-row="' + row + '"][data-column="' + column + '"]');
 		var sectionClasses = Array.from(currentSection.classList);
 		return sectionClasses.indexOf('colorizable') > -1;
+	}
+
+	function updateCanvasSize() {
+		var size = Math.min(htmlNodes.fractalWrapper.clientWidth, htmlNodes.fractalWrapper.clientHeight);
+		canvasService.resizeCanvas(htmlNodes.canvas, size, size)
+		.then(() => {
+			renderCanvas(fractal.result);
+		});
 	}
 
 	function updateCSSClassProperty(fileName, classSelector, propertyName, propertyValue, important) {
@@ -160,9 +140,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	htmlNodes.columnsNumber.addEventListener('input', gridDrawerHandler);
 	htmlNodes.zoomOut.addEventListener('input', () => htmlNodes.zoomLabel.textContent = htmlNodes.zoomOut.value);
 	htmlNodes.fractalDrawer.addEventListener('click', fractalDrawerHandler);
-	window.addEventListener('resize', resizeCanvas);
+	window.addEventListener('resize', updateCanvasSize);
 
+	updateCanvasSize();
 	gridDrawerHandler();
-	resizeCanvas();
 	fractalDrawerHandler();
 });
