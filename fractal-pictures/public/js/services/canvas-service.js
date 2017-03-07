@@ -30,8 +30,6 @@ function CanvasService() {
 			}
 
 			resizeTimeout = setTimeout(function() {
-				// In mobile browsers, the window height does not include the address bar;
-				// we get the actual height through the fractalWrapper instead of the window
 				canvas.width = width;
 				canvas.height = height;
 				resolve();

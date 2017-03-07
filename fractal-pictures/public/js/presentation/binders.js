@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 					title: 'Select',
 					fn: function() {
 						fractal.displayColor = '#' + document.getElementById('jscolor').value;
-						updateCSSClassProperty('fractal-pictures.css', '.colorizable', 'background-color', fractal.displayColor, true)
+						window.generics.updateCSSProperty('fractal-pictures.css', '.colorizable', 'background-color', fractal.displayColor, true)
 						renderCanvas(fractal.result);
 						basicModal.close();
 					}
@@ -120,17 +120,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 	function updateCanvasSize() {
+		// In mobile browsers, the window height does not include the address bar;
+		// we get the actual height through the fractalWrapper instead of the window
 		var size = Math.min(htmlNodes.fractalWrapper.clientWidth, htmlNodes.fractalWrapper.clientHeight);
 		canvasService.resizeCanvas(htmlNodes.canvas, size, size)
 		.then(() => {
 			renderCanvas(fractal.result);
 		});
-	}
-
-	function updateCSSClassProperty(fileName, classSelector, propertyName, propertyValue, important) {
-		var styleSheet = Array.from(document.styleSheets).find(styleSheet => styleSheet.href.endsWith(fileName));
-		var rule = Array.from(styleSheet.rules).find(rule => rule.selectorText === classSelector);
-		rule.style.setProperty (propertyName, propertyValue, important ? "important" : "");
 	}
 
 	htmlNodes.colorPickerIcon.addEventListener('click', colorPickerHandler);
