@@ -1,7 +1,7 @@
 function FractalService() {
 
-	function create() {
-		return new Fractal();
+	function create(displayColor) {
+		return new Fractal(displayColor);
 	}
 
 	function getSectionValue(fractal, boxRow, boxColumn) {

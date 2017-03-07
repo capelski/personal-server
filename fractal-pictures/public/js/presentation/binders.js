@@ -2,10 +2,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	var fractalService = new FractalService();
 	var canvasService = new CanvasService();
-	var fractal = fractalService.create();
+	var fractal = fractalService.create('#7EC0EE');
 	var htmlNodes = {
 		canvas: document.getElementById('fractal-picture'),
-		colorPicker: document.getElementById('color-picker'),
+		colorPickerIcon: document.getElementById('color-picker'),
 		columnsLabel: document.getElementById('columns-label'),
 		columnsNumber: document.getElementById('columns-number'),
 		fractalControls: document.getElementById('fractal-controls'),
@@ -13,18 +13,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		fractalWrapper: document.getElementById('fractal-wrapper'),
 		loader: document.getElementById('loader'),
 		pattern: document.getElementById('pattern'),
-		reloader: document.getElementById('reloader'),
+		reloaderIcon: document.getElementById('reloader'),
 		rowsLabel: document.getElementById('rows-label'),
 		rowsNumber: document.getElementById('rows-number'),
 		zoomLabel: document.getElementById('zoom-label'),
 		zoomOut: document.getElementById('zoom-out')
 	};
-	var fractalColor = '#7EC0EE';
 
 	function colorPickerHandler() {
 		basicModal.show({
 			body: `<p>Choose the color you want the the fractal pictures to be painted in:</p>
-					<input id="jscolor" class="jscolor" value="` + fractalColor + `">
+					<input id="jscolor" class="jscolor" value="` + fractal.displayColor + `">
 			`,
 			buttons: {
 				cancel: {
@@ -34,8 +33,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				action: {
 					title: 'Select',
 					fn: function() {
-						fractalColor = '#' + document.getElementById('jscolor').value;
-						updateCSSClassProperty('fractal-pictures.css', '.colorizable', 'background-color', fractalColor, true)
+						fractal.displayColor = '#' + document.getElementById('jscolor').value;
+						updateCSSClassProperty('fractal-pictures.css', '.colorizable', 'background-color', fractal.displayColor, true)
 						renderCanvas(fractal.result);
 						basicModal.close();
 					}
@@ -90,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	function renderCanvas(fractalResult) {
 		if(fractalResult && fractalResult.length > 0) {
 			var pieceSize = htmlNodes.canvas.width / fractal.resultColumns;
-			return canvasService.renderMatrix(htmlNodes.canvas, fractalResult, pieceSize, fractalColor)
+			return canvasService.renderMatrix(htmlNodes.canvas, fractalResult, pieceSize, fractal.displayColor)
 			.then(() => {
 				setTimeout(() => {
 					htmlNodes.canvas.style.display = 'block';
@@ -134,8 +133,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		rule.style.setProperty (propertyName, propertyValue, important ? "important" : "");
 	}
 
-	htmlNodes.colorPicker.addEventListener('click', colorPickerHandler);
-	htmlNodes.reloader.addEventListener('click', () => { gridDrawerHandler(); fractalDrawerHandler(); });
+	htmlNodes.colorPickerIcon.addEventListener('click', colorPickerHandler);
+	htmlNodes.reloaderIcon.addEventListener('click', () => { gridDrawerHandler(); fractalDrawerHandler(); });
 	htmlNodes.rowsNumber.addEventListener('input', gridDrawerHandler);
 	htmlNodes.columnsNumber.addEventListener('input', gridDrawerHandler);
 	htmlNodes.zoomOut.addEventListener('input', () => htmlNodes.zoomLabel.textContent = htmlNodes.zoomOut.value);
