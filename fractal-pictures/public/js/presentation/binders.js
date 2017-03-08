@@ -41,11 +41,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 		var grid = '';
 		for (var i = 0; i < fractal.patternRows; ++i) {
+			grid += '<div>';
 			for (var j= 0; j < fractal.patternColumns; ++j) {
 				var maybeColorizable = Math.round(Math.random() * 100) % 2 === 1 ? ' colorizable': '';
 				grid += '<span class="pattern-section' + maybeColorizable + '" data-row="' + i + '"" data-column="' + j + '"></span>';
 			}
-			grid += '<br />';
+			grid += '</div>';
 		}
 		htmlNodes.pattern.innerHTML = grid;
 		var sections = document.getElementsByClassName('pattern-section');
