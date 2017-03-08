@@ -5,10 +5,10 @@
     },
     "defaultPort": 3000,
     "hostedApps": [{
-      "appPath": "app1",
+      "appPath": "apps/app1",
       "namespace": "local-app-1"
     }, {
-      "appPath": "app2",
+      "appPath": "apps/app2",
       "namespace": "local-app-2"
     }]
   },
@@ -17,14 +17,14 @@
       "name": "azure-express"
     },
     "hostedApps": [{
-      "appPath": "app1",
+      "appPath": "apps/app1",
       "namespace": "app1"
     }, {
-      "appPath": "app1",
+      "appPath": "apps/app1",
       "namespace": "my-custom-domain.sx",
       "mapToDomain": true
     }, {
-      "appPath": "app2",
+      "appPath": "apps/app2",
       "namespace": "app2"
     }]
   }
