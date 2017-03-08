@@ -42,4 +42,9 @@ module.exports = function (server, apps) {
 		var appRouter = require(appPath);
 		server.use('/' + app.namespace, appRouter);
 	});
+
+	var viewsPaths = apps.reduce(function(paths, app) {
+		return paths.concat(path.join(rootPath, app.appPath, 'views'));
+	}, []);
+	server.set('views', viewsPaths);
 };
