@@ -12,7 +12,7 @@ The purpouse of this fractal pictures generator web page is to ilustrate many co
 
 	+ Presentation: Layer that contains the code required to present the information to the user; in case of a web application, the code required to access and modify the DOM. Any code related with application's functionality must be placed in a service
 
-- Any operation that may take time and freeze the screen must return a promise and run asynchronously. Until the promise finishes, the user must be informed that the application is taking time to deliver the result. In my case, I decided to use a pure CSS loader for that purpose.
+- Any operation that may take time and freeze the screen must return a promise and run asynchronously. Until the promise finishes, the user must be informed that the application is taking time to deliver the result (e.g. For this web application a pure CSS loader is used for that purpose). Also the operations involving user input to complete (e.g. the confirmation of a modal dialog) is way more elegant with promises
 - Vertically alignment of elements must be done through 'display: flex' CSS property instead of tables approach
 - Responsive CSS classes must describe the invariant and smaller screen widths properties. Successive 'min-width' media queries must be used to specify the properties for bigger screen widths
 - The global namespace must be kept as clean as possible; all the code should be run inside and IIFE and expose only the minimum necessary code (through the window, ideally). As a consequence, the event listeners must be added programatically instead of declaratively

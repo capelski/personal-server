@@ -93,9 +93,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 	htmlNodes.colorPickerIcon.addEventListener('click', () => {
-		window.colorPickerCustom.display(fractal.displayColor, () => {
-			fractal.displayColor = '#' + document.getElementById('jscolor').value;
-			window.generics.updateCSSProperty('fractal-pictures.css', '.colorizable', 'background-color', fractal.displayColor, true);
+		window.colorPickerCustom.pick(fractal.displayColor)
+		.then((selectedColor) => {
+			window.generics.updateCSSProperty('fractal-pictures.css', '.colorizable', 'background-color', selectedColor, true);
+			fractal.displayColor = selectedColor;
 			renderCanvas(fractal.result);
 		});
 	});

@@ -1,25 +1,31 @@
 window.colorPickerCustom = (function(jscolor, basicModal) {
 
-	function display(initialColor, selectionCallback) {
-		basicModal.show({
-			body: `<p>Choose the color you want the the fractal pictures to be painted in:</p>
-					<input id="jscolor" class="jscolor" value="` + initialColor + `">
-			`,
-			buttons: {
-				cancel: {
-					title: 'Cancel',
-					fn: basicModal.close
-				},
-				action: {
-					title: 'Select',
-					fn: function() {
-						selectionCallback();
-						basicModal.close();
+	function pick(initialColor) {
+		return new Promise((resolve, reject) => {
+			basicModal.show({
+				body: `<p>Choose the color you want the the fractal pictures to be painted in:</p>
+						<input id="jscolor" class="jscolor" value="` + initialColor + `">
+				`,
+				buttons: {
+					cancel: {
+						title: 'Cancel',
+						fn: () => {
+							basicModal.close();
+							resolve(initialColor);
+						}
+					},
+					action: {
+						title: 'Select',
+						fn: () => {
+							var selectedColor = '#' + document.getElementById('jscolor').value;
+							basicModal.close();
+							resolve(selectedColor);
+						}
 					}
 				}
-			}
+			});
+			renderColorPicker();
 		});
-		renderColorPicker();
 	}
 
 	function renderColorPicker() {
@@ -37,7 +43,7 @@ window.colorPickerCustom = (function(jscolor, basicModal) {
 	}
 
 	return {
-		display
+		pick
 	};
 
 })(jscolor, basicModal);
