@@ -28,7 +28,7 @@ module.exports = function (server, apps) {
 		}
 	}
 
-	function setViewsPaths() {
+	function setViewsPaths(apps) {
 		var viewsPaths = apps.reduce(function(paths, app) {
 			return paths.concat(path.join(rootPath, app.appPath, 'views'));
 		}, []);
@@ -55,7 +55,7 @@ module.exports = function (server, apps) {
 		return map.relativeUrl;
 	}
 
-	setViewsPaths();
+	setViewsPaths(apps);
 	server.use(appMapper);
 	server.use('/plugins', express.static(path.join(rootPath, 'plugins')));
 	apps.forEach(registerApp);
