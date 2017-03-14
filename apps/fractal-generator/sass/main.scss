@@ -120,88 +120,19 @@ body {
     margin-right: 10px;
 }
 
-.pattern-section:first-child:nth-last-child(1) {
-    width: 100%;
-    padding-bottom: 100%;
-}
+@for $i from 1 through 10 {
+    .pattern-section:first-child:nth-last-child(#{$i}),
+    .pattern-section:first-child:nth-last-child(#{$i}) ~ .pattern-section {
+        width: floor(100 / $i)+%;
+        padding-bottom: floor(100 / $i)+%;
+    }
 
-.pattern-section:first-child:nth-last-child(2),
-.pattern-section:first-child:nth-last-child(2) ~ .pattern-section {
-    width: 50%;
-    padding-bottom: 50%;
-}
-
-.pattern-section:first-child:nth-last-child(3),
-.pattern-section:first-child:nth-last-child(3) ~ .pattern-section {
-    width: 33.3333%;
-    padding-bottom: 33.3333%;
-}
-
-.pattern-section:first-child:nth-last-child(4),
-.pattern-section:first-child:nth-last-child(4) ~ .pattern-section {
-    width: 25%;
-    padding-bottom: 25%;
-}
-
-.pattern-section:first-child:nth-last-child(5),
-.pattern-section:first-child:nth-last-child(5) ~ .pattern-section {
-    width: 20%;
-    padding-bottom: 20%;
-}
-
-.pattern-section:first-child:nth-last-child(6),
-.pattern-section:first-child:nth-last-child(6) ~ .pattern-section {
-    width: 16.6%;
-    padding-bottom: 16.6%;
-}
-
-.pattern-section:first-child:nth-last-child(7),
-.pattern-section:first-child:nth-last-child(7) ~ .pattern-section {
-    width: 14.2%;
-    padding-bottom: 14.2%;
-}
-
-.pattern-section:first-child:nth-last-child(8),
-.pattern-section:first-child:nth-last-child(8) ~ .pattern-section {
-    width: 12.5%;
-    padding-bottom: 12.5%;
-}
-
-.pattern-section:first-child:nth-last-child(9),
-.pattern-section:first-child:nth-last-child(9) ~ .pattern-section {
-    width: 11.1%;
-    padding-bottom: 11.1%;
-}
-
-.pattern-section:first-child:nth-last-child(10),
-.pattern-section:first-child:nth-last-child(10) ~ .pattern-section {
-    width: 10%;
-    padding-bottom: 10%;
-}
-
-@media (min-width: 992px) {
-    .pattern-section:first-child:nth-last-child(1),
-    .pattern-section:first-child:nth-last-child(1) ~ .pattern-section,
-    .pattern-section:first-child:nth-last-child(2),
-    .pattern-section:first-child:nth-last-child(2) ~ .pattern-section,
-    .pattern-section:first-child:nth-last-child(3),
-    .pattern-section:first-child:nth-last-child(3) ~ .pattern-section,
-    .pattern-section:first-child:nth-last-child(4),
-    .pattern-section:first-child:nth-last-child(4) ~ .pattern-section,
-    .pattern-section:first-child:nth-last-child(5),
-    .pattern-section:first-child:nth-last-child(5) ~ .pattern-section,
-    .pattern-section:first-child:nth-last-child(6),
-    .pattern-section:first-child:nth-last-child(6) ~ .pattern-section,
-    .pattern-section:first-child:nth-last-child(7),
-    .pattern-section:first-child:nth-last-child(7) ~ .pattern-section,
-    .pattern-section:first-child:nth-last-child(8),
-    .pattern-section:first-child:nth-last-child(8) ~ .pattern-section,
-    .pattern-section:first-child:nth-last-child(9),
-    .pattern-section:first-child:nth-last-child(9) ~ .pattern-section,
-    .pattern-section:first-child:nth-last-child(10),
-    .pattern-section:first-child:nth-last-child(10) ~ .pattern-section {
-        width: 25px;
-        height: 25px;
-        padding-bottom: 0;
+    @media (min-width: 992px) {
+        .pattern-section:first-child:nth-last-child(#{$i}),
+        .pattern-section:first-child:nth-last-child(#{$i}) ~ .pattern-section {
+            width: 25px;
+            height: 25px;
+            padding-bottom: 0;
+        }
     }
 }
