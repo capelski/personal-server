@@ -1,9 +1,16 @@
 $boxes: 120;
 
+@font-face {
+  font-family: 'Baloo Bhaina';
+  src:
+    url('/pull-joke/fonts/BalooBhaina-Regular.ttf');
+}
+
 html,
 body {
   margin: 0;
   height: 100%;
+  font-family: 'Baloo Bhaina', cursive;
 }
 
 .symbol-explosion {
@@ -15,11 +22,10 @@ body {
   .symbol {
     position: absolute;
     font-size: 35px;
-    color: #04B431;
   }
 
   @for $i from 1 through $boxes {
-    $scale: 0.5+random(100)/100; 
+    $scale: 0.5+random(100)/100;
 
     @keyframes anim-#{$i} {
       0% {
