@@ -10,7 +10,7 @@ module.exports = function (apps) {
 		}
 	}
 
-	function compileSassFiles(inputFile, outputFile) {
+	function compileSassFiles(appName, inputFile, outputFile) {
 		if (fs.existsSync(inputFile)) {
 			sass.render({
 				file: inputFile
@@ -23,7 +23,7 @@ module.exports = function (apps) {
 						if (error) {
 							console.log(error);
 						} else {
-							console.log(inputFile, 'successfully compiled!');
+							console.log(appName, 'SASS successfully compiled!');
 						}
 					})
 				}
@@ -34,9 +34,11 @@ module.exports = function (apps) {
 	var rootPath = path.normalize(__dirname + '/..');
 	apps.forEach((app) => {
 		var inputFile = path.join(rootPath, app.appPath, 'sass', 'main.scss');
+
 		var outputDirectory = path.join(rootPath, app.appPath, 'public', 'css');
-		ensureDirectory(outputDirectory);
 		var outputFile = path.join(outputDirectory, 'main.css');
-		compileSassFiles(inputFile, outputFile);
+		ensureDirectory(outputDirectory);
+
+		compileSassFiles(app.namespace, inputFile, outputFile);
 	});
 };

@@ -13,9 +13,17 @@
 </head>
 
 <body>
-	<h1><%- joke %></h1>
   
-  <script src="/plugins/jquery-2.1.1/jquery-2.1.1.min.js"></script>
-  <script src="/pull-joke/js/scripts1.js"></script>
+  <div class="symbol-explosion fade-out">
+    <% var symbols = ['&#9730;', '&#9728;', '&#9743;', '&#9834;', '&#9993;'];
+    for (var i = 0; i < 120; ++i) { %>
+      <span class="symbol bg-heart-#{i++}"><%- symbols[i % symbols.length] %></span>
+    <% } %>
+  </div>
+
+  <div class="aligner">
+    <div id="joke" class="fade-in"><%- joke %></div>
+  </div>
+
 </body>
 </html>
