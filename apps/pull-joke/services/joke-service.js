@@ -186,7 +186,12 @@ function JokeService() {
 		return jokes[yearlyIndex % jokes.length];
 	}
 
+	function getRandomJoke() {
+		return jokes[Math.round(Math.random() * (jokes.length - 1))];
+	}
+
 	return {
+		getRandomJoke,
 		getTodayJoke
 	};
 }

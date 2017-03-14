@@ -10,7 +10,7 @@ html,
 body {
   margin: 0;
   height: 100%;
-  font-family: 'Baloo Bhaina', cursive;
+  font-family: 'Raleway', sans-serif;
 }
 
 .symbol-explosion {
@@ -78,9 +78,11 @@ body {
 .aligner {
   height: 100%;
   width: 100vw;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 @keyframes fade-in-animation {
