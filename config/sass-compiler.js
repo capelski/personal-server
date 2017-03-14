@@ -5,25 +5,24 @@ var sass = require('node-sass');
 module.exports = function (apps) {
 
 	function compileSassFiles(inputFile, outputFile) {
-		if (!fs.existsSync(inputFile)) {
-		    console.log('The file ' + inputFile + ' does not exist');
-		    return null;
+		if (fs.existsSync(inputFile)) {
+			sass.render({
+				file: inputFile
+			}, function(error, result) {
+				if (error) {
+					console.log(error);
+				}
+				else {
+					fs.writeFile(outputFile, result.css.toString(), error => {
+						if (error) {
+							console.log(error);
+						} else {
+							console.log(inputFile, 'successfully compiled!');
+						}
+					})
+				}
+			});
 		}
-
-		return sass.render({
-			file: inputFile
-		}, function(error, result) {
-			if (error) {
-				console.log(error);
-			}
-			else {
-				fs.writeFile(outputFile, result.css.toString(), error => {
-					if(error) {
-						console.log(error)
-					}
-				})
-			}
-		});
 	}
 
 	var rootPath = path.normalize(__dirname + '/..');
