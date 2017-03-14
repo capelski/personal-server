@@ -4,6 +4,12 @@ var sass = require('node-sass');
 
 module.exports = function (apps) {
 
+	function ensureDirectory(directoryPath) {
+		if (!fs.existsSync(directoryPath)){
+		    fs.mkdirSync(directoryPath);
+		}
+	}
+
 	function compileSassFiles(inputFile, outputFile) {
 		if (fs.existsSync(inputFile)) {
 			sass.render({
@@ -28,7 +34,9 @@ module.exports = function (apps) {
 	var rootPath = path.normalize(__dirname + '/..');
 	apps.forEach((app) => {
 		var inputFile = path.join(rootPath, app.appPath, 'sass', 'main.scss');
-		var outputFile = path.join(rootPath, app.appPath, 'public', 'css', 'main.css');
+		var outputDirectory = path.join(rootPath, app.appPath, 'public', 'css');
+		ensureDirectory(outputDirectory);
+		var outputFile = path.join(outputDirectory, 'main.css');
 		compileSassFiles(inputFile, outputFile);
 	});
 };
