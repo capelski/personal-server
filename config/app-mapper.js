@@ -1,5 +1,7 @@
 var express = require('express');
 var path = require('path');
+var assets = require('express-asset-versions');
+
 var rootPath = path.normalize(__dirname + '/..');
 
 module.exports = function (server, apps) {
@@ -19,8 +21,10 @@ module.exports = function (server, apps) {
 	function registerApp(app) {
 		var appPath = path.join(rootPath, app.appPath);
 		var appRouter = require(appPath);
+		var assetsPath = path.join(appPath, 'public');
 
-		server.use('/' + app.namespace, express.static(path.join(appPath, 'public')));		
+		server.use('/' + app.namespace, express.static(assetsPath));
+		server.use(assets('/' + app.namespace, assetsPath));
 		server.use('/' + app.namespace, appRouter);
 
 		if (app.defaultApp) {
@@ -55,8 +59,11 @@ module.exports = function (server, apps) {
 		return map.relativeUrl;
 	}
 
+	var pluginsPath = path.join(rootPath, 'plugins');
+
 	setViewsPaths(apps);
 	server.use(appMapper);
-	server.use('/plugins', express.static(path.join(rootPath, 'plugins')));
+	server.use('/plugins', express.static(pluginsPath));
+	server.use(assets('../plugins', pluginsPath));
 	apps.forEach(registerApp);
 };

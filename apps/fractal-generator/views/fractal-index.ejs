@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="/plugins/spinkit/spinkit.css">
         <link rel="stylesheet" href="/plugins/basicModal/normalize-3.0.3.min.css">
         <link rel="stylesheet" href="/plugins/basicModal/basicModal.min.css">
-        <link rel="stylesheet" href="/fractal-generator/css/main.css">
+        <link rel="stylesheet" href="<%= asset('css/main.css') %>" />
     </head>
 
     <body>
@@ -86,11 +86,11 @@
         <script src="/plugins/bootstrap-4.0.0/bootstrap.min.js"></script>
         <script src="/plugins/basicModal/basicModal.min.js"></script>
         <script src="/plugins/jscolor/jscolor.js"></script>
-        <script src="/fractal-generator/js/models/fractal.js"></script>
-        <script src="/fractal-generator/js/services/fractal-service.js"></script>
-        <script src="/fractal-generator/js/services/canvas-service.js"></script>
-        <script src="/fractal-generator/js/presentation/generics.js"></script>
-        <script src="/fractal-generator/js/presentation/color-picker-custom.js"></script>
-        <script src="/fractal-generator/js/presentation/binders.js"></script>
+        <script src="<%= asset('js/models/fractal.js') %>"></script>
+        <script src="<%= asset('js/services/fractal-service.js') %>"></script>
+        <script src="<%= asset('js/services/canvas-service.js') %>"></script>
+        <script src="<%= asset('js/presentation/generics.js') %>"></script>
+        <script src="<%= asset('js/presentation/color-picker-custom.js') %>"></script>
+        <script src="<%= asset('js/presentation/binders.js') %>"></script>
     </body>
 </html>

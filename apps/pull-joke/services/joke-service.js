@@ -180,19 +180,13 @@ var jokes = [
 
 function JokeService() {
 
-	function getTodayJoke() {
-		var today = new Date();
-		var yearlyIndex = (today.getMonth() * 31 + today.getDate());
-		return jokes[yearlyIndex % jokes.length];
-	}
-
 	function getRandomJoke() {
-		return jokes[Math.round(Math.random() * (jokes.length - 1))];
+		var randomNumber = Math.round(Math.random() * Number.MAX_SAFE_INTEGER);
+		return jokes[randomNumber % jokes.length];
 	}
 
 	return {
-		getRandomJoke,
-		getTodayJoke
+		getRandomJoke
 	};
 }
 
