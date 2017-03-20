@@ -68,13 +68,15 @@ $thresholdFrame: $framesNumber * 0.5;
     $stepValue: $distance / $framesNumber;
     $step: abs($curve) / ($framesNumber / 2);
     $yMaxValue: ($curve * $curve) / 10;
+    $offset: $curve + $step * ($framesNumber / 4);
+    $offset: ($offset * $offset) / 10;
 
     @for $i from 0 through $framesNumber {
       $percent: (100 * $i / $framesNumber)+%;
       #{$percent} {
-        $aux: $curve + $step * $i;
-        $y: ($aux * $aux) / 10;
-        transform: translate(#{$direction * $stepValue * $i}vw, #{($yMaxValue - $y) * -1}vh);
+        $aux: $curve + $step * ($i + $framesNumber / 4);
+        $y: ($aux * $aux) / 10 - $offset;
+        transform: translate(#{$direction * $stepValue * $i}vw, #{$y}vh);
         opacity: 1;
       }
     }
@@ -83,13 +85,13 @@ $thresholdFrame: $framesNumber * 0.5;
 @mixin parabola-mixin($parabolaNumber, $direction, $animationTime, $distance, $height) {
 
   @keyframes parabola-keyframe-#{$parabolaNumber} {
-    @include experiment(random(55) * $direction, 50 + random(15));
-    // @include cross-browser($direction, $animationTime, $distance, $height);
+    // @include experiment(random(55) * $direction, 50 + random(15));
+    @include cross-browser($direction, $animationTime, $distance, $height);
   }
 
   @-webkit-keyframes parabola-keyframe-#{$parabolaNumber} {
-    @include experiment(random(55) * $direction, 50 + random(15));
-    // @include cross-browser($direction, $animationTime, $distance, $height);
+    // @include experiment(random(55) * $direction, 50 + random(15));
+    @include cross-browser($direction, $animationTime, $distance, $height);
   }
 
   .parabola.trajectory-#{$parabolaNumber} {
@@ -105,5 +107,5 @@ $thresholdFrame: $framesNumber * 0.5;
     @if($i % 2 == 0) {
       $direction: -1;
     }
-    @include parabola-mixin($i, $direction, 2, random(50), random(15));
+    @include parabola-mixin($i, $direction, 3, random(70), random(10));
 }
