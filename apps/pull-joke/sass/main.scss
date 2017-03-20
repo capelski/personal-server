@@ -36,6 +36,32 @@ $framesNumber: 40;
   background-color: red;
 }
 
+$framesNumber: 20;
+$frameWeight: 100 / $framesNumber;
+$thresholdFrame: $framesNumber * 0.5;
+
+@mixin experiment($xTarget, $yTarget) {
+
+    $yPeak: min(abs($yTarget) * -0.3, $xTarget / -2);
+    $step: abs($yPeak) / ($thresholdFrame / 2);
+    $realPeak: ($yPeak * $yPeak) / 10;
+
+    @for $i from 0 through $framesNumber {
+      $percent: ($i*$frameWeight)+%;
+      #{$percent} {
+        $x: ($xTarget / $framesNumber) * $i;
+        
+        $aux: $yPeak + $step * $i;
+        $y: ($aux * $aux) / 10 - $realPeak;
+
+        @if ($i > $thresholdFrame) {
+          $y: ($yTarget / ($framesNumber - $thresholdFrame)) * ($i - $thresholdFrame);
+        }
+        transform: translate(#{$x}vw, #{$y}vh);
+      }
+    }
+}
+
 @mixin cross-browser($direction, $animationTime, $distance, $height) {
 
     $curve: -$animationTime * $height;
@@ -47,7 +73,7 @@ $framesNumber: 40;
       $percent: (100 * $i / $framesNumber)+%;
       #{$percent} {
         $aux: $curve + $step * $i;
-        $y: (($aux * $aux) / 10) * (1 + $i / 50);
+        $y: ($aux * $aux) / 10;
         transform: translate(#{$direction * $stepValue * $i}vw, #{($yMaxValue - $y) * -1}vh);
         opacity: 1;
       }
@@ -57,11 +83,13 @@ $framesNumber: 40;
 @mixin parabola-mixin($parabolaNumber, $direction, $animationTime, $distance, $height) {
 
   @keyframes parabola-keyframe-#{$parabolaNumber} {
-    @include cross-browser($direction, $animationTime, $distance, $height);
+    @include experiment(random(55) * $direction, 50 + random(15));
+    // @include cross-browser($direction, $animationTime, $distance, $height);
   }
 
   @-webkit-keyframes parabola-keyframe-#{$parabolaNumber} {
-    @include cross-browser($direction, $animationTime, $distance, $height);
+    @include experiment(random(55) * $direction, 50 + random(15));
+    // @include cross-browser($direction, $animationTime, $distance, $height);
   }
 
   .parabola.trajectory-#{$parabolaNumber} {
@@ -77,5 +105,5 @@ $framesNumber: 40;
     @if($i % 2 == 0) {
       $direction: -1;
     }
-    @include parabola-mixin($i, $direction, 2, random(50), random(10));
+    @include parabola-mixin($i, $direction, 2, random(50), random(15));
 }
