@@ -107,5 +107,5 @@ $thresholdFrame: $framesNumber * 0.5;
     @if($i % 2 == 0) {
       $direction: -1;
     }
-    @include parabola-mixin($i, $direction, 3, random(70), random(10));
+    @include parabola-mixin($i, $direction, 3, 20 + random(50), 3 + random(10));
 }
