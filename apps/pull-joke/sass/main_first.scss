@@ -1,0 +1,56 @@
+
+.left {
+  background-color: skyblue;
+}
+
+.left.parabola {
+  animation: left-parabola $animationTime+s;
+  animation-fill-mode: forwards;
+  -webkit-animation: left-parabola $animationTime+s;
+  -webkit-animation-fill-mode: forwards;
+}
+
+.right {
+  background-color: goldenrod;
+}
+
+.right.parabola {
+  animation: right-parabola $animationTime+s;
+  animation-fill-mode: forwards;
+  -webkit-animation: right-parabola $animationTime+s;
+  -webkit-animation-fill-mode: forwards;
+}
+
+@mixin animation-mixin($direction, $parabolaAngle) {
+  $curve: -$animationTime * $parabolaAngle;
+  $stepValue: 100 / $framesNumber;
+  $step: abs($curve) / ($framesNumber / 2);
+  $yMaxValue: ($curve * $curve) / 10;
+
+  @for $i from 0 through $framesNumber {
+    $percent: (100 * $i / $framesNumber)+%;
+    #{$percent} {
+      $aux: $curve + $step * $i;
+      $y: ($aux * $aux) / 10;
+      //top:  calc(50% + #{$y}px);
+      //left: calc(#{50 + $direction * $stepValue * $i}% - #{$direction * $ballSize});
+      transform: translate(#{$direction * $stepValue * $i}px, -#{$yMaxValue - $y}px);
+    }
+  }
+}
+
+@keyframes left-parabola{
+  @include animation-mixin(1, 20);
+}
+
+@keyframes right-parabola{
+  @include animation-mixin(-1, 30);
+}
+
+@-webkit-keyframes left-parabola{
+  @include animation-mixin(1, 20);
+}
+
+@-webkit-keyframes right-parabola{
+  @include animation-mixin(-1, 30);
+}

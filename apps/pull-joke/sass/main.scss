@@ -1,65 +1,81 @@
-body { 
-  margin: 0;
-  padding: 0;
+html {
+  height: 100%;
 }
 
-$ball: 15px;
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: 'Raleway', sans-serif;
+  overflow: hidden;
+}
+
+$buttonSize: 100px;
+$ballSize: 15px;
+$parabolasNumber: 50;
+$framesNumber: 40;
+
+.cover {
+  position: absolute;
+  left: calc(50% - #{$buttonSize / 2});
+  top: calc(50% - #{$buttonSize / 2});
+  z-index: 2;
+  height: $buttonSize;
+  width: $buttonSize;
+  border-radius: $buttonSize / 2;
+  outline: none;
+  border: none;
+}
 
 .ball {
-  position: fixed;
-  left: calc(50% - #{$ball / 2});
-  top: calc(50% - #{$ball / 2});
-  width: $ball;
-  height: $ball;
-  border-radius: $ball/2;
+  position: absolute;
+  left: calc(50% - #{$ballSize / 2});
+  top: calc(50% - #{$ballSize / 2});
+  width: $ballSize;
+  height: $ballSize;
+  border-radius: $ballSize/2;
+  background-color: red;
 }
 
-.left-parabola {
-  animation: left-parabola 1s;
-  animation-fill-mode: forwards;
-  -webkit-animation: left-parabola 1s;
-  -webkit-animation-fill-mode: forwards;
-  background-color: skyblue;
-}
+@mixin cross-browser($direction, $animationTime, $distance, $height) {
 
-.right-parabola {
-  animation: right-parabola 1s;
-  animation-fill-mode: forwards;
-  -webkit-animation: right-parabola 1s;
-  -webkit-animation-fill-mode: forwards;
-  background-color: goldenrod;
-}
+    $curve: -$animationTime * $height;
+    $stepValue: $distance / $framesNumber;
+    $step: abs($curve) / ($framesNumber / 2);
+    $yMaxValue: ($curve * $curve) / 10;
 
-@mixin animation-mixin($direction) {
-  $initial: -30;
-  $stepNumbers: 20;
-  $stepValue: 50 / $stepNumbers;
-  $step: abs($initial) / ($stepNumbers / 2);
-
-  @for $i from 0 through $stepNumbers {
-    $percent: (100 * $i / $stepNumbers)+%;
-    #{$percent} {
-      $aux: $initial + $step * $i;
-      $y: ($aux * $aux) / 10;
-      top:  calc(50% + #{$y}px);
-      left: calc(#{50 + $direction * $stepValue * $i}% - #{$direction * $ball});
-      // transform: translate(calc(#{50 + $direction * $stepValue * $i}% - #{$direction * $ball}), #{$y}px);
+    @for $i from 0 through $framesNumber {
+      $percent: (100 * $i / $framesNumber)+%;
+      #{$percent} {
+        $aux: $curve + $step * $i;
+        $y: (($aux * $aux) / 10) * (1 + $i / 50);
+        transform: translate(#{$direction * $stepValue * $i}vw, #{($yMaxValue - $y) * -1}vh);
+        opacity: 1;
+      }
     }
+}
+
+@mixin parabola-mixin($parabolaNumber, $direction, $animationTime, $distance, $height) {
+
+  @keyframes parabola-keyframe-#{$parabolaNumber} {
+    @include cross-browser($direction, $animationTime, $distance, $height);
+  }
+
+  @-webkit-keyframes parabola-keyframe-#{$parabolaNumber} {
+    @include cross-browser($direction, $animationTime, $distance, $height);
+  }
+
+  .parabola.trajectory-#{$parabolaNumber} {
+    animation: parabola-keyframe-#{$parabolaNumber} $animationTime+s;
+    animation-fill-mode: forwards;
+    -webkit-animation: parabola-keyframe-#{$parabolaNumber} $animationTime+s;
+    -webkit-animation-fill-mode: forwards;
   }
 }
 
-@keyframes left-parabola{
-  @include animation-mixin(1);
-}
-
-@keyframes right-parabola{
-  @include animation-mixin(-1);
-}
-
-@-webkit-keyframes left-parabola{
-  @include animation-mixin(1);
-}
-
-@-webkit-keyframes right-parabola{
-  @include animation-mixin(-1);
+@for $i from 1 through $parabolasNumber {
+    $direction: 1;
+    @if($i % 2 == 0) {
+      $direction: -1;
+    }
+    @include parabola-mixin($i, $direction, 2, random(50), random(10));
 }

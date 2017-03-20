@@ -23,8 +23,19 @@
     <div class="fade-in"><%- joke %></div>
   </div>-->
 
-  <div class="ball left-parabola"></div>
-  <div class="ball right-parabola"></div>
+  <button type="button" class="cover" onclick="startMotion();">Animate</button>
 
+    <% for (var i = 1; i <= 50; ++i) { %>
+      <div class="ball trajectory-<%= i %>"></div>
+    <% } %>
+
+  <script type="text/javascript">
+	  function startMotion() {
+	  	var balls = Array.from(document.querySelectorAll('.ball'));
+	  	balls.forEach(ball => {
+	  		ball.classList.toggle('parabola');
+	  	});
+	  }
+  </script>
 </body>
 </html>
