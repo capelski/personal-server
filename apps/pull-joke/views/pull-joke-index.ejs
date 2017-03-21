@@ -25,15 +25,18 @@
 
   <button type="button" class="cover" onclick="startMotion();">Animate</button>
 
-    <% for (var i = 1; i <= 50; ++i) { %>
-      <div class="ball trajectory-<%= i %>"></div>
+    <% var symbols = ['&#9773;', '&#9850;', '&#20803;', '&#9758;', '&#9815;', '&#9816;'];
+    for (var i = 1; i <= 50; ++i) { %>
+      <span class="symbol trajectory-<%= i %>">
+        <%- symbols[i % symbols.length] %>
+      </span>
     <% } %>
 
   <script type="text/javascript">
 	  function startMotion() {
-	  	var balls = Array.from(document.querySelectorAll('.ball'));
-	  	balls.forEach(ball => {
-	  		ball.classList.toggle('parabola');
+	  	var symbols = Array.from(document.querySelectorAll('.symbol'));
+	  	symbols.forEach(symbol => {
+	  		symbol.classList.toggle('parabola');
 	  	});
 	  }
   </script>

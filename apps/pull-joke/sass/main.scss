@@ -1,3 +1,12 @@
+$buttonSize: 100px;
+$symbolSize: 40px;
+$parabolasNumber: 50;
+$framesNumber: 40;
+
+$frameWeight: 100 / $framesNumber;
+$frameRotation: 360 / $framesNumber;
+$offsetFrames: $framesNumber / 4;
+
 html {
   height: 100%;
 }
@@ -8,11 +17,6 @@ body {
   font-family: 'Raleway', sans-serif;
   overflow: hidden;
 }
-
-$buttonSize: 100px;
-$ballSize: 15px;
-$parabolasNumber: 50;
-$framesNumber: 40;
 
 .cover {
   position: absolute;
@@ -26,72 +30,39 @@ $framesNumber: 40;
   border: none;
 }
 
-.ball {
+.symbol {
   position: absolute;
-  left: calc(50% - #{$ballSize / 2});
-  top: calc(50% - #{$ballSize / 2});
-  width: $ballSize;
-  height: $ballSize;
-  border-radius: $ballSize/2;
-  background-color: red;
+  left: calc(50% - #{$symbolSize / 2});
+  top: calc(50% - #{$symbolSize / 2});
+  font-size: $symbolSize;
 }
 
-$framesNumber: 20;
-$frameWeight: 100 / $framesNumber;
-$thresholdFrame: $framesNumber * 0.5;
+@mixin parabola-core($distance, $speed) {
 
-@mixin experiment($xTarget, $yTarget) {
+  $height: $speed * 25 / abs($distance);
+  $xFrameWeight: $distance / $framesNumber;
+  $step: abs($height) / ($framesNumber / 2);
 
-    $yPeak: min(abs($yTarget) * -0.3, $xTarget / -2);
-    $step: abs($yPeak) / ($thresholdFrame / 2);
-    $realPeak: ($yPeak * $yPeak) / 10;
+  $offset: $height + $step * $offsetFrames;
+  $offset: ($offset * $offset) / 10;
 
-    @for $i from 0 through $framesNumber {
-      $percent: ($i*$frameWeight)+%;
-      #{$percent} {
-        $x: ($xTarget / $framesNumber) * $i;
-        
-        $aux: $yPeak + $step * $i;
-        $y: ($aux * $aux) / 10 - $realPeak;
-
-        @if ($i > $thresholdFrame) {
-          $y: ($yTarget / ($framesNumber - $thresholdFrame)) * ($i - $thresholdFrame);
-        }
-        transform: translate(#{$x}vw, #{$y}vh);
-      }
+  @for $i from 0 through $framesNumber {
+    #{$i * $frameWeight}% {
+      $aux: $height + $step * ($i + $offsetFrames);
+      $y: ($aux * $aux) / 10 - $offset;
+      transform: translate(#{$xFrameWeight * $i}vw, #{$y}vh) rotate(#{$i * $frameRotation}deg);
     }
+  }
 }
 
-@mixin cross-browser($direction, $animationTime, $distance, $height) {
-
-    $curve: -$animationTime * $height;
-    $stepValue: $distance / $framesNumber;
-    $step: abs($curve) / ($framesNumber / 2);
-    $yMaxValue: ($curve * $curve) / 10;
-    $offset: $curve + $step * ($framesNumber / 4);
-    $offset: ($offset * $offset) / 10;
-
-    @for $i from 0 through $framesNumber {
-      $percent: (100 * $i / $framesNumber)+%;
-      #{$percent} {
-        $aux: $curve + $step * ($i + $framesNumber / 4);
-        $y: ($aux * $aux) / 10 - $offset;
-        transform: translate(#{$direction * $stepValue * $i}vw, #{$y}vh);
-        opacity: 1;
-      }
-    }
-}
-
-@mixin parabola-mixin($parabolaNumber, $direction, $animationTime, $distance, $height) {
+@mixin parabola-mixin($parabolaNumber, $distance, $speed, $animationTime) {
 
   @keyframes parabola-keyframe-#{$parabolaNumber} {
-    // @include experiment(random(55) * $direction, 50 + random(15));
-    @include cross-browser($direction, $animationTime, $distance, $height);
+    @include parabola-core($distance, $speed);
   }
 
   @-webkit-keyframes parabola-keyframe-#{$parabolaNumber} {
-    // @include experiment(random(55) * $direction, 50 + random(15));
-    @include cross-browser($direction, $animationTime, $distance, $height);
+    @include parabola-core($distance, $speed);
   }
 
   .parabola.trajectory-#{$parabolaNumber} {
@@ -103,9 +74,6 @@ $thresholdFrame: $framesNumber * 0.5;
 }
 
 @for $i from 1 through $parabolasNumber {
-    $direction: 1;
-    @if($i % 2 == 0) {
-      $direction: -1;
-    }
-    @include parabola-mixin($i, $direction, 3, 20 + random(50), 3 + random(10));
+    $direction: if($i % 2 == 0, -1, 1);
+    @include parabola-mixin($i, $direction * (20 + random(50)), -1 * (30 + random(10)), 1 + random(3));
 }
