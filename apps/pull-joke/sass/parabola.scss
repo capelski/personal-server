@@ -1,7 +1,7 @@
 @import 'trigonometry';
 
 $framesPerSecond: 20;
-$accelerationConstant: -9.81;
+$accelerationConstant: -9.81 * 4;
 
 @function sqrt($r) {
   $x0: 1;
@@ -15,9 +15,10 @@ $accelerationConstant: -9.81;
   @return $x1;
 }
 
-@mixin parabola-core($xSpeed, $ySpeed, $parabolaTime) {
+@mixin parabola-core($xSpeed, $ySpeed, $rotation, $parabolaTime) {
   $framesNumber: $framesPerSecond * $parabolaTime;
   $frameWeight: 100 / $framesNumber;
+  $frameRotation: $rotation / $framesNumber;
   @for $i from 0 through $framesNumber {
     $percent: $i * $frameWeight;
     $time: $percent / 100 * $parabolaTime;
@@ -25,15 +26,16 @@ $accelerationConstant: -9.81;
       $x: $xSpeed * $time;
       $y: ($ySpeed * $time) + ($accelerationConstant * $time * $time);
       $y: $y * -1; // The translate function origen of coordinates is oppostie to the conventional one
-      transform: translate(#{$x}vw, #{$y}vh);
+      transform: translate(#{$x}vw, #{$y}vh) rotate(#{$frameRotation * $i}deg);
     }
   }
 }
 
 @mixin random-parabola($parabolaId, $finalY) {
 
-  $angle: random(180);
-  $speed: 20 + random(25);
+  $angle: 60 + random(60);
+  $speed: 50 + random(25);
+  $rotation: 180 + random(540);
 
   $xSpeed: $speed * cos($angle);
   $ySpeed: $speed * sin($angle);
@@ -51,11 +53,11 @@ $accelerationConstant: -9.81;
   //@debug $a, $b, $c, $parabolaTime;
 
   @keyframes parabola-keyframe-#{$parabolaId} {
-    @include parabola-core($xSpeed, $ySpeed, $parabolaTime);
+    @include parabola-core($xSpeed, $ySpeed, $rotation, $parabolaTime);
   }
 
   @-webkit-keyframes parabola-keyframe-#{$parabolaId} {
-    @include parabola-core($xSpeed, $ySpeed, $parabolaTime);
+    @include parabola-core($xSpeed, $ySpeed, $rotation, $parabolaTime);
   }
 
   .parabola.trajectory-#{$parabolaId} {
