@@ -1,0 +1,67 @@
+@import 'trigonometry';
+
+$framesPerSecond: 20;
+$accelerationConstant: -9.81;
+
+@function sqrt($r) {
+  $x0: 1;
+  $x1: $x0;
+ 
+  @for $i from 1 through 10 {
+    $x1: $x0 - ($x0 * $x0 - abs($r)) / (2 * $x0);
+    $x0: $x1;
+  }
+ 
+  @return $x1;
+}
+
+@mixin parabola-core($xSpeed, $ySpeed, $parabolaTime) {
+  $framesNumber: $framesPerSecond * $parabolaTime;
+  $frameWeight: 100 / $framesNumber;
+  @for $i from 0 through $framesNumber {
+    $percent: $i * $frameWeight;
+    $time: $percent / 100 * $parabolaTime;
+    #{$percent}% {
+      $x: $xSpeed * $time;
+      $y: ($ySpeed * $time) + ($accelerationConstant * $time * $time);
+      $y: $y * -1; // The translate function origen of coordinates is oppostie to the conventional one
+      transform: translate(#{$x}vw, #{$y}vh);
+    }
+  }
+}
+
+@mixin random-parabola($parabolaId, $finalY) {
+
+  $angle: random(180);
+  $speed: 20 + random(25);
+
+  $xSpeed: $speed * cos($angle);
+  $ySpeed: $speed * sin($angle);
+
+  // Accelerated movement equation for the parabola:
+  // $finalY = 0 + $ySpeed * $parabolaTime + ($accelerationConstant * $parabolaTime * $parabolaTime);
+  // 0 = -$finalY + $ySpeed * $parabolaTime + ($accelerationConstant * $parabolaTime * $parabolaTime);
+  // To find the $parabolaTime necessary for the parabola to be at $finalY we need to solve the quadratic equation and take the negative result:
+  
+  $a: $accelerationConstant;
+  $b: $ySpeed;
+  $c: -$finalY;
+
+  $parabolaTime: (-$b - sqrt($b * $b - 4 * $a * $c)) / (2 * $a);
+  //@debug $a, $b, $c, $parabolaTime;
+
+  @keyframes parabola-keyframe-#{$parabolaId} {
+    @include parabola-core($xSpeed, $ySpeed, $parabolaTime);
+  }
+
+  @-webkit-keyframes parabola-keyframe-#{$parabolaId} {
+    @include parabola-core($xSpeed, $ySpeed, $parabolaTime);
+  }
+
+  .parabola.trajectory-#{$parabolaId} {
+    animation: parabola-keyframe-#{$parabolaId} $parabolaTime+s;
+    animation-fill-mode: forwards;
+    -webkit-animation: parabola-keyframe-#{$parabolaId} $parabolaTime+s;
+    -webkit-animation-fill-mode: forwards;
+  }
+}

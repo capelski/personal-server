@@ -1,11 +1,8 @@
+@import 'parabola';
+
 $buttonSize: 100px;
 $symbolSize: 40px;
 $parabolasNumber: 50;
-$framesNumber: 40;
-
-$frameWeight: 100 / $framesNumber;
-$frameRotation: 360 / $framesNumber;
-$offsetFrames: $framesNumber / 4;
 
 html {
   height: 100%;
@@ -37,43 +34,6 @@ body {
   font-size: $symbolSize;
 }
 
-@mixin parabola-core($distance, $speed) {
-
-  $height: $speed * 25 / abs($distance);
-  $xFrameWeight: $distance / $framesNumber;
-  $step: abs($height) / ($framesNumber / 2);
-
-  $offset: $height + $step * $offsetFrames;
-  $offset: ($offset * $offset) / 10;
-
-  @for $i from 0 through $framesNumber {
-    #{$i * $frameWeight}% {
-      $aux: $height + $step * ($i + $offsetFrames);
-      $y: ($aux * $aux) / 10 - $offset;
-      transform: translate(#{$xFrameWeight * $i}vw, #{$y}vh) rotate(#{$i * $frameRotation}deg);
-    }
-  }
-}
-
-@mixin parabola-mixin($parabolaNumber, $distance, $speed, $animationTime) {
-
-  @keyframes parabola-keyframe-#{$parabolaNumber} {
-    @include parabola-core($distance, $speed);
-  }
-
-  @-webkit-keyframes parabola-keyframe-#{$parabolaNumber} {
-    @include parabola-core($distance, $speed);
-  }
-
-  .parabola.trajectory-#{$parabolaNumber} {
-    animation: parabola-keyframe-#{$parabolaNumber} $animationTime+s;
-    animation-fill-mode: forwards;
-    -webkit-animation: parabola-keyframe-#{$parabolaNumber} $animationTime+s;
-    -webkit-animation-fill-mode: forwards;
-  }
-}
-
 @for $i from 1 through $parabolasNumber {
-    $direction: if($i % 2 == 0, -1, 1);
-    @include parabola-mixin($i, $direction * (20 + random(50)), -1 * (30 + random(10)), 1 + random(3));
+    @include random-parabola($i, -60);
 }
