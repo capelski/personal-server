@@ -44,7 +44,7 @@ $accelerationConstant: -9.81 * 4;
 @mixin random-parabola($parabolaId, $finalY) {
 
   $angle: 60 + random(60);
-  $speed: 50 + random(25);
+  $speed: 50 + random(50);
   $rotation: 180 + random(540);
 
   $xSpeed: $speed * cos($angle);

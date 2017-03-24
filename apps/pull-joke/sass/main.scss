@@ -1,6 +1,6 @@
 @import 'parabola';
 
-$buttonSize: 150px;
+$buttonSize: 100px;
 $symbolSize: 40px;
 $parabolasNumber: 50;
 
@@ -63,7 +63,7 @@ body {
 .cover {
   position: absolute;
   left: calc(50% - #{$buttonSize / 2});
-  top: calc(50% - #{$buttonSize / 2});
+  top: calc(100% - #{$buttonSize / 2});
   z-index: 2;
   height: $buttonSize;
   width: $buttonSize;
@@ -76,7 +76,7 @@ body {
 .symbol {
   position: absolute;
   left: calc(50% - #{$symbolSize / 2});
-  top: calc(50% - #{$symbolSize / 2});
+  top: calc(100% - #{$symbolSize / 2});
   font-size: $symbolSize;
 }
 
