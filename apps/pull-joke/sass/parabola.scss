@@ -15,19 +15,29 @@ $accelerationConstant: -9.81 * 4;
   @return $x1;
 }
 
+@function round2Decimals($number) {
+  @return round($number * 100) / 100;
+}
+
 @mixin parabola-core($xSpeed, $ySpeed, $rotation, $parabolaTime) {
   $framesNumber: $framesPerSecond * $parabolaTime;
   $frameWeight: 100 / $framesNumber;
   $frameRotation: $rotation / $framesNumber;
   @for $i from 0 through $framesNumber {
-    $percent: $i * $frameWeight;
+    $percent: round2Decimals($i * $frameWeight);
     $time: $percent / 100 * $parabolaTime;
     #{$percent}% {
-      $x: $xSpeed * $time;
+      $x: round2Decimals($xSpeed * $time);
       $y: ($ySpeed * $time) + ($accelerationConstant * $time * $time);
-      $y: $y * -1; // The translate function origen of coordinates is oppostie to the conventional one
-      transform: translate(#{$x}vw, #{$y}vh) rotate(#{$frameRotation * $i}deg);
+      $y: -1 * round2Decimals($y); // As the translate function origen of coordinates is oppostie to the conventional one, we multiply the value by -1;
+      transform: translate(#{$x}vw, #{$y}vh) rotate(#{round2Decimals($frameRotation * $i)}deg);
     }
+  }
+  100% {
+    $x: round2Decimals($xSpeed * $parabolaTime);
+    $y: ($ySpeed * $parabolaTime) + ($accelerationConstant * $parabolaTime * $parabolaTime);
+    $y: -1 * round2Decimals($y); // As the translate function origen of coordinates is oppostie to the conventional one, we multiply the value by -1;
+    transform: translate(#{$x}vw, #{$y}vh) rotate(#{$rotation}deg);
   }
 }
 

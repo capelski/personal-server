@@ -1,6 +1,6 @@
 @import 'parabola';
 
-$buttonSize: 100px;
+$buttonSize: 150px;
 $symbolSize: 40px;
 $parabolasNumber: 50;
 
@@ -15,6 +15,51 @@ body {
   overflow: hidden;
 }
 
+.pastel-blue-bg {
+  background-color: #779ECB;
+
+  .cover {
+    background-color: #476E9B;
+    color: #97BEEE;
+  }
+}
+
+.pastel-green-bg {
+  background-color: #77DD77;
+
+  .cover {
+    background-color: #47AD47;
+    color: #97FD97;
+  }
+}
+
+.pastel-orange-bg {
+  background-color: #FFB347;
+
+  .cover {
+    background-color: #CF8317;
+    color: #FFD367;
+  }
+}
+
+.pastel-pink-bg {
+  background-color: #DEA5A4;
+
+  .cover {
+    background-color: #AE7574;
+    color: #FEC5C4;
+  }
+}
+
+.pastel-red-bg {
+  background-color: #FF6961;
+
+  .cover {
+    background-color: #CF3931;
+    color: #FF8981;
+  }
+}
+
 .cover {
   position: absolute;
   left: calc(50% - #{$buttonSize / 2});
@@ -25,6 +70,7 @@ body {
   border-radius: $buttonSize / 2;
   outline: none;
   border: none;
+  font-size: 20px;
 }
 
 .symbol {
