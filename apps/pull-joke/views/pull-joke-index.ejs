@@ -26,7 +26,10 @@
 	  function startMotion() {
 	  	var symbols = Array.from(document.querySelectorAll('.symbol'));
 	  	symbols.forEach(symbol => {
-	  		symbol.classList.toggle('parabola');
+	  		symbol.classList.remove('parabola');
+        setTimeout(() => {
+          symbol.classList.add('parabola');
+        }, 10);
 	  	});
 	  }
   </script>
