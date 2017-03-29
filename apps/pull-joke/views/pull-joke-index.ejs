@@ -13,7 +13,13 @@
 <% var backgroundClasses = ['blue', 'green', 'orange', 'pink', 'red']; %>
 <body class="<%= 'pastel-' + backgroundClasses[Math.round(Math.random() * (backgroundClasses.length - 1))] + '-bg' %>">
 
-  <button type="button" class="cover" onclick="startMotion();">Animate</button>
+  <div class="joke">
+    <%- joke %>
+  </div>
+
+  <button type="button" class="jokify" onclick="startMotion();">
+    <span>Jokify</span>
+  </button>
 
     <% var symbols = ['&#9773;', '&#9850;', '&#20803;', '&#9758;', '&#9815;', '&#9816;'];
     for (var i = 1; i <= 50; ++i) { %>
@@ -31,6 +37,10 @@
           symbol.classList.add('parabola');
         }, 10);
 	  	});
+      document.querySelector('.joke').classList.remove('animate');
+      setTimeout(() => {
+        document.querySelector('.joke').classList.add('animate');
+      }, 10);
 	  }
   </script>
 </body>
