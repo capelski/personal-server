@@ -4,6 +4,12 @@ $buttonSize: 100px;
 $symbolSize: 40px;
 $parabolasNumber: 50;
 
+@font-face {
+  font-family: 'Indie Flower', cursive;
+  src:
+    url('/pull-joke/fonts/IndieFlower.ttf');
+}
+
 html {
   height: 100%;
 }
@@ -11,7 +17,7 @@ html {
 body {
   margin: 0;
   height: calc(100%);
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Indie Flower', sans-serif;
 }
 
 .fixed-viewport {
