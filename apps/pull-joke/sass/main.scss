@@ -1,4 +1,4 @@
-@import 'parabola';
+@import 'animations';
 
 $buttonSize: 100px;
 $symbolSize: 40px;
@@ -10,15 +10,20 @@ html {
 
 body {
   margin: 0;
-  min-height: 100%;
+  height: calc(100%);
   font-family: 'Raleway', sans-serif;
+}
+
+.fixed-viewport {
+  position: relative;
   overflow: hidden;
+  height: calc(100%);
 }
 
 .pastel-blue-bg {
   background-color: #779ECB;
 
-  .jokify {
+  .jokifier {
     background-color: #476E9B;
     color: #97BEEE;
   }
@@ -31,7 +36,7 @@ body {
 .pastel-green-bg {
   background-color: #77DD77;
 
-  .jokify {
+  .jokifier {
     background-color: #47AD47;
     color: #97FD97;
   }
@@ -44,7 +49,7 @@ body {
 .pastel-orange-bg {
   background-color: #FFB347;
 
-  .jokify {
+  .jokifier {
     background-color: #CF8317;
     color: #FFD367;
   }
@@ -57,7 +62,7 @@ body {
 .pastel-pink-bg {
   background-color: #DEA5A4;
 
-  .jokify {
+  .jokifier {
     background-color: #AE7574;
     color: #FEC5C4;
   }
@@ -70,7 +75,7 @@ body {
 .pastel-red-bg {
   background-color: #FF6961;
 
-  .jokify {
+  .jokifier {
     background-color: #CF3931;
     color: #FF8981;
   }
@@ -80,104 +85,26 @@ body {
   }
 }
 
-/// Working on START ////////////////////////////////
-
-$LN2:   0.6931471805599453;
-$SQRT2: 1.4142135623730951;
-
-@function ldexp ($x, $exp) {
-    $b: if($exp >= 0, 2, 1 / 2);
-    @if $exp < 0 {
-        $exp: $exp * -1;
-    }
-    @while $exp > 0 {
-        @if $exp % 2 == 1 {
-            $x: $x * $b;
-        }
-        $b: $b * $b;
-        $exp: floor($exp * 0.5);
-    }
-    @return $x;
-}
-
-@function frexp ($x) {
-    $exp: 0;
-    @if $x < 0 {
-        $x: $x * -1;
-    }
-    @if $x < 0.5 {
-        @while $x < 0.5 {
-            $x: $x * 2;
-            $exp: $exp - 1;
-        }
-    } @else if $x >= 1 {
-        @while $x >= 1 {
-            $x: $x / 2;
-            $exp: $exp + 1;
-        }
-    }
-    @return $x, $exp;
-}
-
-@function log ($x) {
-    @if $x <= 0 {
-        @return 0 / 0;
-    }
-    $k: nth(frexp($x / $SQRT2), 2);
-    $x: $x / ldexp(1, $k);
-    $x: ($x - 1) / ($x + 1);
-    $x2: $x * $x;
-    $i: 1;
-    $s: $x;
-    $sp: null;
-    @while $sp != $s {
-        $x: $x * $x2;
-        $i: $i + 2;
-        $sp: $s;
-        $s: $s + $x / $i;
-    }
-    @return $LN2 * $k + 2 * $s;
-}
-
 .joke {
-  position: absolute;
+  position: relative;
   color: white;
-  top: -50%;
+  top: -100%; // TODO Make sure it works for long jokes
+  padding: 0 15px;
 }
 
-@mixin free-falling-core($initial, $final) {
-  $framesNumber: 60;
-
-  $maxValue: log($framesNumber + 0.2);
-  $frameWeight: 100 / $framesNumber;
-  @for $i from 0 through $framesNumber {
-    #{$i * $frameWeight}% {
-      top: ((log($i + 0.2) / $maxValue) * $final)+%;
-    }
-  }
-}
-
-@keyframes free-falling {
-  @include free-falling-core(-50, 50);
-}
-
-@-webkit-keyframes free-falling {
-  @include free-falling-core(-50, 50);
-}
+@include free-falling(50);
 
 .joke.animate {
-  animation: free-falling 3s;
+  animation: free-falling 2s;
   animation-fill-mode: forwards;
-  -webkit-animation: free-falling 3s;
+  -webkit-animation: free-falling 2s;
   -webkit-animation-fill-mode: forwards;
 }
 
-/// Working on END ////////////////////////////////
-
-.jokify {
+.jokifier {
   position: absolute;
   left: calc(50% - #{$buttonSize / 2});
-  top: calc(100% - #{$buttonSize / 2});
+  bottom: -1 * $buttonSize / 2;
   z-index: 2;
   height: $buttonSize;
   width: $buttonSize;
@@ -195,7 +122,7 @@ $SQRT2: 1.4142135623730951;
 .symbol {
   position: absolute;
   left: calc(50% - #{$symbolSize / 2});
-  top: calc(100% - #{$symbolSize / 2});
+  bottom: -1 * $symbolSize / 2;
   font-size: $symbolSize;
 }
 

@@ -1,4 +1,6 @@
-@import 'trigonometry';
+@import 'math';
+
+//////////////////////////// PARABOLA /////////////////////
 
 $framesPerSecond: 20;
 $accelerationConstant: -9.81 * 4;
@@ -60,7 +62,7 @@ $accelerationConstant: -9.81 * 4;
   $c: -$finalY;
 
   $parabolaTime: (-$b - sqrt($b * $b - 4 * $a * $c)) / (2 * $a);
-  //@debug $a, $b, $c, $parabolaTime;
+  // @debug $a, $b, $c, $parabolaTime;
 
   @keyframes parabola-keyframe-#{$parabolaId} {
     @include parabola-core($xSpeed, $ySpeed, $rotation, $parabolaTime);
@@ -75,5 +77,30 @@ $accelerationConstant: -9.81 * 4;
     animation-fill-mode: forwards;
     -webkit-animation: parabola-keyframe-#{$parabolaId} $parabolaTime+s;
     -webkit-animation-fill-mode: forwards;
+  }
+}
+
+///////////////////////////// FREE FALL /////////////////////////////////
+
+@mixin free-falling-core($finalHeight) {
+  $framesNumber: 40;
+
+  $maxValue: log($framesNumber + 0.2);
+  $frameWeight: 100 / $framesNumber;
+  @for $i from 0 through $framesNumber {
+    #{$i * $frameWeight}% {
+      top: ((log($i + 0.2) / $maxValue) * $finalHeight)+vh;
+    }
+  }
+}
+
+@mixin free-falling($finalHeight) {
+
+  @keyframes free-falling {
+    @include free-falling-core($finalHeight);
+  }
+
+  @-webkit-keyframes free-falling {
+    @include free-falling-core($finalHeight);
   }
 }
