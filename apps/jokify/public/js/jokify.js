@@ -22,13 +22,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
             symbol.classList.remove('parabola');
             setTimeout(() => {
                 symbol.classList.add('parabola');
-            }, 200);
+            }, 100);
         });
 
         joke.classList.remove('animate');
         setTimeout(() => {
             joke.classList.add('animate');
-        }, 200);
+        }, 100);
 
         getNextJoke();
     }
