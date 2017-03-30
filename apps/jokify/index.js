@@ -5,7 +5,7 @@ var jokesService = require('./services/joke-service');
 
 router.get('/', function (req, res, next) {
 	var randomJoke = jokesService.getRandomJoke();
-	res.render('pull-joke-index', {
+	res.render('jokify-index', {
 		joke: randomJoke
 	});
 });

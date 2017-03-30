@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     function getNextJoke() {
         $.ajax({
             method: 'get',
-            url: '/pull-joke/random'
+            url: '/jokify/random'
         })
         .then((randomJoke) => {
             nextJoke = randomJoke;
