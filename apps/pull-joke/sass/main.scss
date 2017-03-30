@@ -5,9 +5,13 @@ $symbolSize: 40px;
 $parabolasNumber: 50;
 
 @font-face {
+  font-family: 'Gloria Hallelujah';
+  src: url('/pull-joke/fonts/GloriaHallelujah.ttf');
+}
+
+@font-face {
   font-family: 'Indie Flower', cursive;
-  src:
-    url('/pull-joke/fonts/IndieFlower.ttf');
+  src: url('/pull-joke/fonts/IndieFlower.ttf');
 }
 
 html {
@@ -17,7 +21,7 @@ html {
 body {
   margin: 0;
   height: calc(100%);
-  font-family: 'Indie Flower', sans-serif;
+  font-family: 'Gloria Hallelujah', sans-serif;
 }
 
 .fixed-viewport {
@@ -142,4 +146,40 @@ $jokeSpacing: 15px;
 
 @for $i from 1 through $parabolasNumber {
     @include random-parabola($i, -60);
+}
+
+.symbol.laugh:after {
+    content: "\1F602";
+}
+
+.symbol.poo:after {
+    content: "\1F4A9";
+}
+
+.symbol.thums-down:after {
+    content: "\1F44E\1F3FB";
+}
+
+.symbol.wink-tongue:after {
+    content: "\1F61C";
+}
+
+.symbol.bomb:after {
+    content: "\1F4A3";
+}
+
+.symbol.boom:after {
+    content: "\1F4A5";
+}
+
+.symbol.tada:after {
+    content: "\1F389";
+}
+
+.symbol.halloween:after {
+    content: "\1F383";
+}
+
+.symbol.dice:after {
+    content: "\1F3B2";
 }
