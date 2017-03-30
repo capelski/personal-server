@@ -10,4 +10,9 @@ router.get('/', function (req, res, next) {
 	});
 });
 
+router.get('/random', function (req, res, next) {
+	var randomJoke = jokesService.getRandomJoke();
+	res.json(randomJoke);
+});
+
 module.exports = router;
