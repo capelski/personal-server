@@ -85,19 +85,27 @@ body {
   }
 }
 
+$jokeSpacing: 15px;
+
 .joke {
   position: relative;
+  height: calc(100% - #{$buttonSize / 2 + $jokeSpacing * 2});
+  top: -100%;
+  overflow: auto;
   color: white;
-  top: -100%; // TODO Make sure it works for long jokes
-  padding: 0 15px;
+  padding: 0 $jokeSpacing;
+  margin: $jokeSpacing 0;
+  display: flex;
+  align-items: center;
+  font-size: 25px;
 }
 
-@include free-falling(50);
+@include logarithmic-translation(100);
 
 .joke.animate {
-  animation: free-falling 2s;
+  animation: logarithmic-translation 2s;
   animation-fill-mode: forwards;
-  -webkit-animation: free-falling 2s;
+  -webkit-animation: logarithmic-translation 2s;
   -webkit-animation-fill-mode: forwards;
 }
 
