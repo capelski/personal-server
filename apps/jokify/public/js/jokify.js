@@ -22,13 +22,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
             symbol.classList.remove('parabola');
             setTimeout(() => {
                 symbol.classList.add('parabola');
-            }, 10);
+            }, 200);
         });
 
-        document.querySelector('.joke').classList.remove('animate');
+        joke.classList.remove('animate');
         setTimeout(() => {
-            document.querySelector('.joke').classList.add('animate');
-        }, 10);
+            joke.classList.add('animate');
+        }, 200);
 
         getNextJoke();
     }
