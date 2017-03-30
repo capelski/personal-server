@@ -2,10 +2,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     var jokifier = document.getElementById('jokify');
     var joke = document.getElementById('joke');
-    var nextJoke = joke.innerHTML;
+    var nextJoke;
 
-    jokifier.addEventListener('click', function() {
+    function getNextJoke() {
+        $.ajax({
+            method: 'get',
+            url: '/pull-joke/random'
+        })
+        .then((randomJoke) => {
+            nextJoke = randomJoke;
+        });
+    }
 
+    function jokify() {
         joke.innerHTML = nextJoke;
 
         var symbols = Array.from(document.querySelectorAll('.symbol'));
@@ -21,13 +30,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.querySelector('.joke').classList.add('animate');
         }, 10);
 
-        $.ajax({
-            method: 'get',
-            url: '/pull-joke/random'
-        })
-        .then((randomJoke) => {
-            nextJoke = randomJoke;
-        });
-    });
-    
+        getNextJoke();
+    }
+
+    jokifier.addEventListener('click', jokify);
+    getNextJoke();
 });
