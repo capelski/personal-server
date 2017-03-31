@@ -1,36 +1,38 @@
 {
-  "development": {
-    "app": {
-      "name": "azure-express"
+    "development": {
+        "app": {
+            "name": "azure-express"
+        },
+        "defaultPort": 3000,
+        "hostedApps": [{
+            "appPath": "apps/app1",
+            "namespace": "local-app-1"
+        }, {
+            "appPath": "apps/app2",
+            "namespace": "local-app-2"
+        }, {
+            "appPath": "apps/app3",
+            "namespace": "app3",
+            "defaultApp": true
+        }],
+        "sessionSecret": "ssshhhhh"
     },
-    "defaultPort": 3000,
-    "hostedApps": [{
-      "appPath": "apps/app1",
-      "namespace": "local-app-1"
-    }, {
-      "appPath": "apps/app2",
-      "namespace": "local-app-2"
-    }, {
-      "appPath": "apps/app3",
-      "namespace": "app3",
-      "defaultApp": true
-    }]
-  },
-  "production": {
-    "app": {
-      "name": "azure-express"
-    },
-    "hostedApps": [{
-      "appPath": "apps/default",
-      "namespace": "default",
-      "defaultApp": true
-    }, {
-      "appPath": "apps/app1",
-      "namespace": "app1-domain.com",
-      "mapToDomain": true
-    }, {
-      "appPath": "apps/app2",
-      "namespace": "app2"
-    }]
-  }
+    "production": {
+        "app": {
+            "name": "azure-express"
+        },
+        "hostedApps": [{
+            "appPath": "apps/default",
+            "namespace": "default",
+            "defaultApp": true
+        }, {
+            "appPath": "apps/app1",
+            "namespace": "app1-domain.com",
+            "mapToDomain": true
+        }, {
+            "appPath": "apps/app2",
+            "namespace": "app2"
+        }],
+        "sessionSecret": "ssshhhhh"
+    }
 }

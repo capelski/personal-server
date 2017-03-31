@@ -180,9 +180,19 @@ var jokes = [
 
 function JokeService() {
 
-	function getRandomJoke() {
+	function getRandomJoke(excludedIndexes) {
 		var randomNumber = Math.round(Math.random() * Number.MAX_SAFE_INTEGER);
-		return jokes[randomNumber % jokes.length];
+		var index = randomNumber % jokes.length;
+		
+		if (excludedIndexes.length === jokes.length) {
+			excludedIndexes.length = 0;
+		}
+		while(excludedIndexes.indexOf(index) > -1) {
+			index = ++index % jokes.length;
+		}
+		
+		excludedIndexes.push(index);
+		return jokes[index];
 	}
 
 	return {

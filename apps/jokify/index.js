@@ -1,18 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-var jokesService = require('./services/joke-service');
+var jokesController = require('./controllers/joke-controller');
 
-router.get('/', function (req, res, next) {
-	var randomJoke = jokesService.getRandomJoke();
-	res.render('jokify-index', {
-		joke: randomJoke
-	});
-});
-
-router.get('/random', function (req, res, next) {
-	var randomJoke = jokesService.getRandomJoke();
-	res.json(randomJoke);
-});
+router.get('/', jokesController.indexView);
+router.get('/random', jokesController.randomJoke);
 
 module.exports = router;
