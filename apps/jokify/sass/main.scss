@@ -99,19 +99,15 @@ $jokeSpacing: 15px;
 
 .joke {
   position: relative;
-  height: calc(100% - #{$buttonSize / 2 + $jokeSpacing * 2});
+  height: 100%;
   top: -100%;
   color: white;
-  padding: 0 $jokeSpacing;
-  margin: $jokeSpacing 0;
   font-size: 25px;
-}
-
-.aligner {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  overflow: auto;
+  padding-top: $jokeSpacing;
+  padding-right: $jokeSpacing;
+  padding-bottom: ($buttonSize / 2 + $jokeSpacing);
+  padding-left: $jokeSpacing;
+  box-sizing: border-box;
 }
 
 @include logarithmic-translation(100);
@@ -121,6 +117,13 @@ $jokeSpacing: 15px;
   animation-fill-mode: forwards;
   -webkit-animation: logarithmic-translation 2s;
   -webkit-animation-fill-mode: forwards;
+}
+
+.joke-positioner {
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  align-items: center;
 }
 
 .jokifier {
