@@ -101,13 +101,17 @@ $jokeSpacing: 15px;
   position: relative;
   height: calc(100% - #{$buttonSize / 2 + $jokeSpacing * 2});
   top: -100%;
-  overflow: auto;
   color: white;
   padding: 0 $jokeSpacing;
   margin: $jokeSpacing 0;
+  font-size: 25px;
+}
+
+.aligner {
+  height: 100%;
   display: flex;
   align-items: center;
-  font-size: 25px;
+  overflow: auto;
 }
 
 @include logarithmic-translation(100);
