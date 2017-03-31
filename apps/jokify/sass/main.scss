@@ -108,6 +108,7 @@ $jokeSpacing: 15px;
   padding-bottom: ($buttonSize / 2 + $jokeSpacing);
   padding-left: $jokeSpacing;
   box-sizing: border-box;
+  background-color: blue;
 }
 
 @include logarithmic-translation(100);
