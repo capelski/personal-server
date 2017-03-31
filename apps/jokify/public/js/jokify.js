@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 
     var jokifier = document.getElementById('jokify');
-    var jokeWrapper = document.getElementById('joke-wrapper');
     var joke = document.getElementById('joke');
     var nextJoke;
 
@@ -26,9 +25,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
             }, 100);
         });
 
-        jokeWrapper.classList.remove('animate');
+        joke.classList.remove('animate');
         setTimeout(() => {
-            jokeWrapper.classList.add('animate');
+            joke.classList.add('animate');
         }, 100);
 
         getNextJoke();
