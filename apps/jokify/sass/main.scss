@@ -110,12 +110,12 @@ $jokeSpacing: 15px;
   font-size: 25px;
 }
 
-@include logarithmic-translation(100);
+@include fall-from-top();
 
 .joke.animate {
-  animation: logarithmic-translation 2s;
+  animation: fall-from-top 2s;
   animation-fill-mode: forwards;
-  -webkit-animation: logarithmic-translation 2s;
+  -webkit-animation: fall-from-top 2s;
   -webkit-animation-fill-mode: forwards;
 }
 

@@ -82,25 +82,26 @@ $accelerationConstant: -9.81 * 4;
 
 ///////////////////////////// FREE FALL /////////////////////////////////
 
-@mixin logarithmic-translation-core($variation) {
+@mixin fall-from-top-core() {
   $framesNumber: 40;
 
   $maxValue: log($framesNumber + 1);
   $frameWeight: 100 / $framesNumber;
+
   @for $i from 0 through $framesNumber {
     #{$i * $frameWeight}% {
-      transform: translate(0, ((log($i + 1) / $maxValue) * $variation)+vh);
+      top: (-1 * (100 - (log($i + 1) / $maxValue) * 100))+%;
     }
   }
 }
 
-@mixin logarithmic-translation($variation) {
+@mixin fall-from-top() {
 
-  @keyframes logarithmic-translation {
-    @include logarithmic-translation-core($variation);
+  @keyframes fall-from-top {
+    @include fall-from-top-core();
   }
 
-  @-webkit-keyframes logarithmic-translation {
-    @include logarithmic-translation-core($variation);
+  @-webkit-keyframes fall-from-top {
+    @include fall-from-top-core();
   }
 }
