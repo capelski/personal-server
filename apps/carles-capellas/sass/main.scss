@@ -1,0 +1,68 @@
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	min-height: 100%;
+	margin: 0;
+	box-sizing: border-box;
+	clear: both;
+	padding: 2vw 0 0 2vw;
+	/*TEMP*/
+	background-color: lightblue;
+}
+
+.box {
+	float: left;
+	margin: 0 2vw 2vw 0;
+}
+
+.big {
+	width: 96vw;
+	height: 96vw;
+}
+
+.medium {
+	width: 46vw;
+	height: 46vw;
+}
+
+.small {
+	width: 29.3vw;
+	height: 29.3vw;
+}
+
+@media(min-width: 992px) {
+	.big {
+		width: 46vw;
+		height: 46vw;
+	}
+
+	.medium {
+		width: 26vw;
+		height: 26vw;
+	}
+
+	.small {
+		width: 16vw;
+		height: 16vw;
+	}
+}
+
+.box-content {
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+
+	/*TEMP*/
+	color: darkblue;
+	background-color: skyblue;
+}
+
+.user-content {
+	margin: 10px;
+}
