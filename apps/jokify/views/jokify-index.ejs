@@ -10,9 +10,8 @@
         <link rel="stylesheet" href="<%= asset('css/main.css') %>" />
     </head>
 
-    <% var backgroundClasses = ['blue', 'green', 'orange', 'pink', 'red']; %>
     <body>
-        <div class="fixed-viewport <%= 'pastel-' + backgroundClasses[Math.round(Math.random() * (backgroundClasses.length - 1))] + '-bg' %>">
+        <div id="viewport" class="fixed-viewport">
 
         <div id="joke" class="joke animate">
             <%- joke %>
