@@ -10,11 +10,10 @@
         <link rel="stylesheet" href="<%= asset('css/main.css') %>">
     </head>
 
-    <% var backgroundClasses = ['blue', 'green', 'orange', 'pink', 'red']; %>
     <body>
-        <div class="fixed-viewport <%= 'pastel-' + backgroundClasses[Math.round(Math.random() * (backgroundClasses.length - 1))] + '-bg' %>">
+        <div id="viewport" class="fixed-viewport">
 
-        <div id="joke" class="joke animate">
+        <div id="joke" class="joke">
             <%- joke %>
         </div>
 
@@ -22,9 +21,8 @@
             <span>Jokify</span>
         </button>
 
-        <% var emojis = ['laugh', 'poo', 'wink-tongue', 'boom', 'bomb', 'tada', 'halloween', 'dice'];
-        for (var i = 1; i <= 50; ++i) { %>
-            <span class="symbol trajectory-<%= i %> <%- emojis[i % emojis.length] %> parabola"></span>
+        <% for (var i = 1; i <= 50; ++i) { %>
+            <span class="symbol trajectory-<%= i %> parabola"></span>
         <% } %>
 
         </div>
