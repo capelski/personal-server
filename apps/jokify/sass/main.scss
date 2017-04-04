@@ -5,144 +5,140 @@ $symbolSize: 40px;
 $parabolasNumber: 50;
 
 @font-face {
-  font-family: 'Gloria Hallelujah';
-  src: url('/jokify/fonts/GloriaHallelujah.ttf');
+    font-family: 'Gloria Hallelujah';
+    src: url('/jokify/fonts/GloriaHallelujah.ttf');
 }
 
 @font-face {
-  font-family: 'Indie Flower', cursive;
-  src: url('/jokify/fonts/IndieFlower.ttf');
+    font-family: 'Indie Flower', cursive;
+    src: url('/jokify/fonts/IndieFlower.ttf');
 }
 
 html {
-  height: 100%;
+    height: 100%;
 }
 
 body {
-  margin: 0;
-  height: calc(100%);
-  font-family: 'Gloria Hallelujah', sans-serif;
+    margin: 0;
+    height: calc(100%);
+    font-family: 'Gloria Hallelujah', sans-serif;
 }
 
 .fixed-viewport {
-  position: relative;
-  overflow: hidden;
-  height: calc(100%);
+    position: relative;
+    overflow: hidden;
+    height: calc(100%);
+}
+
+@mixin theme-transition() {
+    -webkit-transition: background-color 0.5s linear, color 0.5s linear;
+    -ms-transition: background-color 0.5s linear, color 0.5s linear;
+    transition: background-color 0.5s linear, color 0.5s linear;
 }
 
 .blue-theme {
-  background-color: #779ECB;
+    background-color: #779ECB;
+    @include theme-transition();
 
-  .jokifier {
-    background-color: #476E9B;
-    color: #97BEEE;
-  }
-
-  .symbol {
-    color: #476E9B;
-  }
+    .jokifier {
+        background-color: #476E9B;
+        color: #97BEEE;
+        @include theme-transition();
+    }
 }
 
 .green-theme {
-  background-color: #77DD77;
+    background-color: #77DD77;
+    @include theme-transition();
 
-  .jokifier {
-    background-color: #47AD47;
-    color: #97FD97;
-  }
-
-  .symbol {
-    color: #47AD47;
-  }
+    .jokifier {
+        background-color: #47AD47;
+        color: #97FD97;
+        @include theme-transition();
+    }
 }
 
 .orange-theme {
-  background-color: #FFB347;
+    background-color: #FFB347;
+    @include theme-transition();
 
-  .jokifier {
-    background-color: #CF8317;
-    color: #FFD367;
-  }
-
-  .symbol {
-    color: #CF8317;
-  }
+    .jokifier {
+        background-color: #CF8317;
+        color: #FFD367;
+        @include theme-transition();
+    }
 }
 
 .pink-theme {
-  background-color: #DEA5A4;
+    background-color: #DEA5A4;
+    @include theme-transition();
 
-  .jokifier {
-    background-color: #AE7574;
-    color: #FEC5C4;
-  }
-
-  .symbol {
-    color: #AE7574;
-  }
+    .jokifier {
+        background-color: #AE7574;
+        color: #FEC5C4;
+        @include theme-transition();
+    }
 }
 
 .red-theme {
-  background-color: #FF6961;
+    background-color: #FF6961;
+    @include theme-transition();
 
-  .jokifier {
-    background-color: #CF3931;
-    color: #FF8981;
-  }
-
-  .symbol {
-    color: #CF3931;
-  }
+    .jokifier {
+        background-color: #CF3931;
+        color: #FF8981;
+        @include theme-transition();
+    }
 }
 
 $jokeSpacing: 15px;
 
 .joke {
-  position: relative;
-  height: calc(100% - #{$buttonSize / 2 + $jokeSpacing * 2});
-  top: -100%;
-  overflow: auto;
-  color: white;
-  padding: 0 $jokeSpacing;
-  margin: $jokeSpacing 0;
-  display: flex;
-  align-items: center;
-  font-size: 25px;
+    position: relative;
+    height: calc(100% - #{$buttonSize / 2 + $jokeSpacing * 2});
+    top: -100%;
+    overflow: auto;
+    color: white;
+    padding: 0 $jokeSpacing;
+    margin: $jokeSpacing 0;
+    display: flex;
+    align-items: center;
+    font-size: 25px;
 }
 
 @include fall-from-top();
 
 .joke.animate {
-  animation: fall-from-top 2s;
-  animation-fill-mode: forwards;
-  -webkit-animation: fall-from-top 2s;
-  -webkit-animation-fill-mode: forwards;
+    animation: fall-from-top 2s;
+    animation-fill-mode: forwards;
+    -webkit-animation: fall-from-top 2s;
+    -webkit-animation-fill-mode: forwards;
 }
 
 .jokifier {
-  position: absolute;
-  left: calc(50% - #{$buttonSize / 2});
-  bottom: -1 * $buttonSize / 2;
-  z-index: 2;
-  height: $buttonSize;
-  width: $buttonSize;
-  border-radius: $buttonSize / 2;
-  outline: none;
-  border: none;
-  font-size: 20px;
-  font-family: 'Gloria Hallelujah', sans-serif;
+    position: absolute;
+    left: calc(50% - #{$buttonSize / 2});
+    bottom: -1 * $buttonSize / 2;
+    z-index: 2;
+    height: $buttonSize;
+    width: $buttonSize;
+    border-radius: $buttonSize / 2;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    font-family: 'Gloria Hallelujah', sans-serif;
 
-  span {
-    position: relative;
-    top: -1em;
-  }
+    span {
+        position: relative;
+        top: -1em;
+    }
 }
 
 .symbol {
-  position: absolute;
-  left: calc(50% - #{$symbolSize / 2});
-  bottom: -1 * $symbolSize / 2;
-  font-size: $symbolSize;
+    position: absolute;
+    left: calc(50% - #{$symbolSize / 2});
+    bottom: -1 * $symbolSize / 2;
+    font-size: $symbolSize;
 }
 
 @for $i from 1 through $parabolasNumber {
