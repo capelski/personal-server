@@ -1,15 +1,4 @@
-$lgBreakpoint: 992px;
-
-$xsSpacing: 3vw;
-$lgSpacing: 2vw;
-
-$xsSmallBox: 50vw;
-$xsMediumBox: 70vw;
-$xsBigBox: 100vw;
-
-$lgSmallBox: 20vw;
-$lgMediumBox: 30vw;
-$lgBigBox: 50vw;
+@import 'boxes';
 
 ::-webkit-scrollbar {
     width: 0px;
@@ -23,70 +12,6 @@ body {
 	min-height: 100%;
 	margin: 0;
 	box-sizing: border-box;
-	padding: $xsSpacing 0 0 $xsSpacing;
-}
-
-.box {
-	float: left;
-	margin: 0 $xsSpacing $xsSpacing 0;
-}
-
-.big {
-	width: $xsBigBox - $xsSpacing * 2;
-
-	.box-content {
-		min-height: $xsBigBox - $xsSpacing * 2;
-	}
-}
-
-.medium {
-	width: $xsMediumBox - $xsSpacing * 2;
-
-	.box-content {
-		min-height: $xsMediumBox - $xsSpacing * 2;
-	}
-}
-
-.small {
-	width: $xsSmallBox - $xsSpacing * 2;
-
-	.box-content {
-		min-height: $xsSmallBox - $xsSpacing * 2;
-	}
-}
-
-@media(min-width: $lgBreakpoint) {
-	body {
-		padding: $lgSpacing 0 0 $lgSpacing;
-	}
-
-	.box {
-		margin: 0 $lgSpacing $lgSpacing 0;
-	}
-
-	.big {
-		width: $lgBigBox - $lgSpacing * 2;
-
-		.box-content {
-			min-height: $lgBigBox - $lgSpacing * 2;
-		}
-	}
-
-	.medium {
-		width: $lgMediumBox - $lgSpacing * 2;
-
-		.box-content {
-			min-height: $lgMediumBox - $lgSpacing * 2;
-		}
-	}
-
-	.small {
-		width: $lgSmallBox - $lgSpacing * 2;
-
-		.box-content {
-			min-height: $lgSmallBox - $lgSpacing * 2;
-		}
-	}
 }
 
 //TEMP

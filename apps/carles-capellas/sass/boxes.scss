@@ -1,0 +1,56 @@
+$lgBreakpoint: 992px;
+
+.box {
+	float: left;
+}
+
+@mixin boxes-size($spacing, $smallSize, $mediumSize, $bigSize) {
+	$viewportWidth: 100vw - $spacing;
+	$smallSize: $smallSize * $viewportWidth - $spacing;
+	$mediumSize: $mediumSize * $viewportWidth - $spacing;
+	$bigSize: $bigSize * $viewportWidth - $spacing;
+
+	body {
+		padding: $spacing 0 0 $spacing;
+	}
+
+	.box {
+		margin: 0 $spacing $spacing 0;
+	}
+
+	.big {
+		width: $bigSize;
+
+		.box-content {
+			min-height: $bigSize;
+		}
+	}
+
+	.medium {
+		width: $mediumSize;
+
+		.box-content {
+			min-height: $mediumSize;
+		}
+	}
+
+	.small {
+		width: $smallSize;
+
+		.box-content {
+			min-height: $smallSize;
+		}
+	}
+}
+
+@mixin boxes-size-media($spacing, $smallSize, $mediumSize, $bigSize, $breakpoint) {
+	@media(min-width: $breakpoint) {
+		@include boxes-size($spacing, $smallSize, $mediumSize, $bigSize);
+	}
+}
+
+// Small devices
+@include boxes-size(3vw, 0.5, 0.7, 1);
+
+// Desktop devices
+@include boxes-size-media(2vw, 0.2, 0.3, 0.5, $lgBreakpoint);
