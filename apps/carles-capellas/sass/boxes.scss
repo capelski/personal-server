@@ -18,7 +18,7 @@ $lgBreakpoint: 992px;
 		margin: 0 $spacing $spacing 0;
 	}
 
-	.big {
+	.box.big {
 		width: $bigSize;
 
 		.box-content {
@@ -26,7 +26,7 @@ $lgBreakpoint: 992px;
 		}
 	}
 
-	.medium {
+	.box.medium {
 		width: $mediumSize;
 
 		.box-content {
@@ -34,7 +34,7 @@ $lgBreakpoint: 992px;
 		}
 	}
 
-	.small {
+	.box.small {
 		width: $smallSize;
 
 		.box-content {
@@ -54,3 +54,13 @@ $lgBreakpoint: 992px;
 
 // Desktop devices
 @include boxes-size-media(2vw, 0.2, 0.3, 0.5, $lgBreakpoint);
+
+.box-content {
+	position: relative;
+	top: 0;
+    transition: top 1s cubic-bezier(0,.9,0,.98);
+}
+
+.box-content.pushed-down {
+    top: 100vh;
+}
