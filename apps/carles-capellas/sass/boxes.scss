@@ -12,6 +12,11 @@
     top: 100vh;
 }
 
+.box-content.centered {
+    display: flex;
+    align-items: center;
+}
+
 @mixin init-boxes-container($containerSelector) {
 	#{$containerSelector} {
 		box-sizing: border-box;

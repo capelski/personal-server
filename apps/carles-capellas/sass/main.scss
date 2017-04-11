@@ -16,6 +16,10 @@ body {
 	perspective: 5000px;
 }
 
+img {
+	max-width: 100%;
+}
+
 @include init-boxes-container('.front');
 @include boxes-size('.front', 3vw, 0.5, 0.7, 1); 							// Small devices
 @include boxes-size-media('.front', 2vw, 0.2, 0.3, 0.5, $lgBreakpoint);		// Desktop devices
