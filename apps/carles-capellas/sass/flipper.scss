@@ -7,12 +7,12 @@
 }
 
 .flipper.front-side {
-	animation: flip-back 2s;
+	animation: flip-back 1.5s;
 	animation-fill-mode: forwards;
 }
 
 .flipper.back-side {
-	animation: flip 2s;
+	animation: flip 1.5s;
 	animation-fill-mode: forwards;
 }
 
