@@ -21,6 +21,11 @@
     align-items: center;
 }
 
+.box-content.centered.text {
+    flex-direction: column;
+    justify-content: center;
+}
+
 @mixin init-boxes-container($containerSelector) {
 	#{$containerSelector} {
 		box-sizing: border-box;
