@@ -14,16 +14,21 @@ $animationTime: 1.5s;
 }
 
 .flipper.front-side {
+	-webkit-animation: flip-back $animationTime;
+    -webkit-animation-fill-mode: forwards;
 	animation: flip-back $animationTime;
 	animation-fill-mode: forwards;
 }
 
 .flipper.back-side {
+	-webkit-animation: flip $animationTime;
+    -webkit-animation-fill-mode: forwards;
 	animation: flip $animationTime;
 	animation-fill-mode: forwards;
 }
 
 .flipper.front-side.block {
+	-webkit-animation: none;
 	animation: none;
 }
 
@@ -32,7 +37,8 @@ $animationTime: 1.5s;
 	width: 100%;
 	min-height: 100%;
 	position: absolute; /*To make them be at the same position*/
-	backface-visibility: hidden; /* hide back of pane during swap */
+	-webkit-backface-visibility: hidden; /* hide back of pane during swap */
+	backface-visibility: hidden;
 }
 
 .front {
@@ -46,37 +52,44 @@ $animationTime: 1.5s;
 .flipper.back-side .front {
 	height: 0;
 	overflow: hidden;
-	transition: height $animationTime;
+	-webkit-transition: height $animationTime;
 	-webkit-transition-delay: $animationTime;
+	transition: height $animationTime;
     transition-delay: $animationTime;
 }
 
-@keyframes flip {
-	0% {
+@mixin flip($revert) {
+	$phases: 0, 10, 90, 100;
+	@if($revert) {
+		$phases: 100, 90, 10, 0;
+	}
+
+	#{nth($phases, 1)}% {
 	    transform: rotateY(0deg) scale(1);
 	}
-	10% {
+	#{nth($phases, 2)}% {
 	    transform: rotateY(0deg)  scale(0.9);
 	}
-	90% {
+	#{nth($phases, 3)}% {
 	    transform: rotateY(-180deg)  scale(0.9);
 	}
-	100% {
+	#{nth($phases, 4)}% {
 	    transform: rotateY(-180deg)  scale(1);
 	}
 }
 
+@-webkit-keyframes flip {
+	@include flip(false);
+}
+
+@keyframes flip {
+	@include flip(false);
+}
+
+@-webkit-keyframes flip-back {
+	@include flip(true);
+}
+
 @keyframes flip-back {
-	100% {
-	    transform: rotateY(0deg)  scale(1);
-	}
-	90% {
-	    transform: rotateY(0deg)  scale(0.9);
-	}
-	10% {
-	    transform: rotateY(-180deg)  scale(0.9);
-	}
-	0% {
-	    transform: rotateY(-180deg)  scale(1);
-	}
+	@include flip(true);
 }
