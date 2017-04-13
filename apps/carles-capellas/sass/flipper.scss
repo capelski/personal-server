@@ -1,5 +1,7 @@
 @import 'boxes';
 
+$animationTime: 1.5s;
+
 .flipper {
 	transform-style: preserve-3d;
 	position: relative;
@@ -7,12 +9,12 @@
 }
 
 .flipper.front-side {
-	animation: flip-back 1.5s;
+	animation: flip-back $animationTime;
 	animation-fill-mode: forwards;
 }
 
 .flipper.back-side {
-	animation: flip 1.5s;
+	animation: flip $animationTime;
 	animation-fill-mode: forwards;
 }
 
@@ -34,6 +36,22 @@
 .back {
 	transform: rotateY(-180deg) scale(1);
 }
+
+/*
+.flipper.front-side .front,
+.flipper.back-side .back {
+	display: block;
+	-webkit-transition-delay: $animationTime;
+    transition-delay: $animationTime;
+}
+
+.flipper.front-side .back,
+.flipper.back-side .front {
+	display: none;
+	-webkit-transition-delay: $animationTime;
+    transition-delay: $animationTime;
+}
+*/
 
 @keyframes flip {
 	0% {

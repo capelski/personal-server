@@ -12,6 +12,10 @@
     top: 100vh;
 }
 
+.box:last-child .box-content.pushed-down {
+    top: 0;
+}
+
 .box-content.centered {
     display: flex;
     align-items: center;
@@ -30,8 +34,8 @@
 	}
 }
 
-@mixin boxes-size($containerSelector, $spacing, $smallSize, $mediumSize, $bigSize) {
-	$viewportWidth: 100vw - $spacing;
+@mixin boxes-size($containerSelector, $scrollBarWidth, $spacing, $smallSize, $mediumSize, $bigSize) {
+	$viewportWidth: 100vw - $spacing - $scrollBarWidth;
 	$smallSize: $smallSize * $viewportWidth - $spacing;
 	$mediumSize: $mediumSize * $viewportWidth - $spacing;
 	$bigSize: $bigSize * $viewportWidth - $spacing;
@@ -69,8 +73,8 @@
 	}
 }
 
-@mixin boxes-size-media($containerSelector, $spacing, $smallSize, $mediumSize, $bigSize, $breakpoint) {
+@mixin boxes-size-media($containerSelector, $scrollBarWidth, $spacing, $smallSize, $mediumSize, $bigSize, $breakpoint) {
 	@media(min-width: $breakpoint) {
-		@include boxes-size($containerSelector, $spacing, $smallSize, $mediumSize, $bigSize);
+		@include boxes-size($containerSelector, $scrollBarWidth, $spacing, $smallSize, $mediumSize, $bigSize);
 	}
 }
