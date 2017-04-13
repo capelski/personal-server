@@ -17,7 +17,7 @@ $topOffset: $hamburgerSize / 3;
 	display: flex;
 	align-items: center;
     justify-content: center;
-    border: $lineHeight solid $hamburgerColor;
+    border: $lineHeight / 2 solid $hamburgerColor;
 
 	.menu-hamburguer {
 		width: $hamburgerSize;
