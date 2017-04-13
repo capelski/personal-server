@@ -26,6 +26,12 @@ html, body {
 	margin: 0;
 }
 
+body {
+	font-family: 'Teko', sans-serif;
+	font-family: 'Amatic SC', cursive;
+	font-size: 2em;
+}
+
 img {
 	max-width: 100%;
 }
@@ -34,11 +40,6 @@ img {
 @include boxes-size('.front', $scrollBarWidth, 3vw, 0.5, 0.7, 1); 							// Small devices
 @include boxes-size-media('.front', $scrollBarWidth, 2vw, 0.2, 0.3, 0.5, $lgBreakpoint);		// Desktop devices
 
-
-//TEMP ---------------------
-
 .box-content {
 	padding: 10px;
-	color: darkblue;
-	background-color: skyblue;
 }
