@@ -1,63 +1,77 @@
-$hamburgerSize: 40px;
+$hamburgerSize: 30px;
+$hamburgerColor: black;
 $animationDuration: 0.75s;
 
-$lineHeight: $hamburgerSize / 7.5;
+$lineHeight: $hamburgerSize / 8;
 $topOffset: $hamburgerSize / 3;
 
-.menu-hamburguer {
+.hamburguer-wrapper {
 	position: fixed;
-	z-index: 10;
-	width: $hamburgerSize;
-	height: $hamburgerSize;
-	top: 15px;
+	bottom: 15px;
 	left: 15px;
-	transition-duration: $animationDuration;
+	z-index: 10;
+	border-radius: 50%;
+	background-color: white;
+	width: $hamburgerSize * 1.75;
+	height: $hamburgerSize * 1.75;
+	display: flex;
+	align-items: center;
+    justify-content: center;
+    border: $lineHeight solid $hamburgerColor;
 
-	.icon {
-		transition-duration: $animationDuration;
-		position: absolute;
-		height: $lineHeight;
+	.menu-hamburguer {
 		width: $hamburgerSize;
-		top: $hamburgerSize / 2;
-		background-color: black;
+		height: $hamburgerSize;
+		transition-duration: $animationDuration;
+    	position: relative;
 
-		&:before {
-			transition-duration: $animationDuration;
-			position: absolute;
-			width: $hamburgerSize;
-			height: $lineHeight;
-			background-color: black;
-			content: '';
-			top: -1 * $topOffset;
-		}
-
-		&:after {
-			transition-duration: $animationDuration;
-			position: absolute;
-			width: $hamburgerSize;
-			height: $lineHeight;
-			background-color: black;
-			content: '';
-			top: $topOffset;
-		}
-	}
-
-	&.open {
 		.icon {
 			transition-duration: $animationDuration;
-			transform: rotateZ(180deg);
+			position: absolute;
+			height: $lineHeight;
+			width: $hamburgerSize;
+			top: $hamburgerSize / 2;
+			background-color: $hamburgerColor;
 
 			&:before {
-				transform: rotateZ(45deg) scaleX(0.75) translate(#{$topOffset}, #{-1 * $hamburgerSize / 10});
+				transition-duration: $animationDuration;
+				position: absolute;
+				width: $hamburgerSize;
+				height: $lineHeight;
+				background-color: $hamburgerColor;
+				content: '';
+				top: -1 * $topOffset;
 			}
 
 			&:after {
-				transform: rotateZ(-45deg) scaleX(0.75) translate(#{$topOffset}, #{$hamburgerSize / 10});
+				transition-duration: $animationDuration;
+				position: absolute;
+				width: $hamburgerSize;
+				height: $lineHeight;
+				background-color: $hamburgerColor;
+				content: '';
+				top: $topOffset;
 			}
 		}
-	}
 
-	&:hover {
-		cursor: pointer;
+		&.open {
+			.icon {
+				transition-duration: $animationDuration;
+				transform: rotateZ(180deg);
+
+				&:before {
+					transform: rotateZ(45deg) scaleX(0.75) translate(#{$topOffset}, #{-1 * $hamburgerSize / 10});
+				}
+
+				&:after {
+					transform: rotateZ(-45deg) scaleX(0.75) translate(#{$topOffset}, #{$hamburgerSize / 10});
+				}
+			}
+		}
+
+		&:hover {
+			cursor: pointer;
+		}
 	}
 }
+
