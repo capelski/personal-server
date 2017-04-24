@@ -7,12 +7,15 @@
     <meta name="description" content="description" />
     <meta name="author" content="Carles Capellas" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="stylesheet" href="<%= asset('css/main.css') %>">
+    <link rel="stylesheet" href="<%= asset('css/main.css') %>" />
+    <link rel="stylesheet" href="<%= asset('css/browser-control.css') %>" />
+    <!--[if IE]><link rel="stylesheet" href="<%= asset('css/browser-control-ie.css') %>" /><![endif]-->
 
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Teko" rel="stylesheet">
 </head>
 <body>
+    <div class="ie-blocker">Please do yourself a favor and use a decent browser!</div>
 
     <div class="flipper-wrapper">
         <div id="flipper" class="flipper front-side block">
