@@ -7,17 +7,12 @@ router.get('/', function (req, res, next) {
   res.render('users-template-index');
 });
 
-// router.post('/log-in', passport.customAuthentication('users-template'));
-
-var authenticationHandler = passport.createStrategy('users-template', OWN_VALIDATION_METHOD, OWN_RETRIVING_METHOD);
-
+var authenticationHandler = passport.createStrategy('users-template', 'users-template', OWN_VALIDATION_METHOD, OWN_RETRIVING_METHOD);
 router.post('/log-in', authenticationHandler);
-
-
 
 module.exports = router;
 
-//TEMP Methods
+//TEMP Methods -> REMOVE
 
 var users = [{
 	id: 1,
@@ -30,7 +25,7 @@ var users = [{
 }];
 
 function OWN_RETRIVING_METHOD(userId) {
-	var user = users.find(user => user.id === userId);
+	var user = users.find(user => user.id === parseInt(userId));
 	return Promise.resolve(user);
 }
 
