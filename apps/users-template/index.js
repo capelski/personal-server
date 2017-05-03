@@ -7,6 +7,34 @@ router.get('/', function (req, res, next) {
   res.render('users-template-index');
 });
 
-router.post('/log-in', passport.customAuthentication('users-template'));
+// router.post('/log-in', passport.customAuthentication('users-template'));
+
+var authenticationHandler = passport.createStrategy('users-template', OWN_VALIDATION_METHOD, OWN_RETRIVING_METHOD);
+
+router.post('/log-in', authenticationHandler);
+
+
 
 module.exports = router;
+
+//TEMP Methods
+
+var users = [{
+	id: 1,
+	username: 'Cookieman',
+	password: 'unhashed'
+}, {
+	id: 2,
+	username: 'fucker.boy',
+	password: 'silly1'
+}];
+
+function OWN_RETRIVING_METHOD(userId) {
+	var user = users.find(user => user.id === userId);
+	return Promise.resolve(user);
+}
+
+function OWN_VALIDATION_METHOD(username, password) {
+	var user = users.find(user => user.username === username && user.password === password);
+	return Promise.resolve(user);
+}
