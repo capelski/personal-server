@@ -26,8 +26,7 @@ passport.createStrategy = function(strategyName, namespace, authenticator, deser
 	passport.use(strategyName, localStrategy);
 
 	strategies[namespace] = {
-		deserializer: deserializer,
-		currentUser: null
+		deserializer: deserializer
 	};
 
 	return function(req, res, next) {
@@ -36,8 +35,8 @@ passport.createStrategy = function(strategyName, namespace, authenticator, deser
 
 	        req.logIn(user, function(error) {
 	            if (error) return res.send(error);
-
-	            strategies[namespace].currentUser = user.id;
+	            
+	            req.session.authDomains[namespace] = user.id;
 	            res.json(req.user);
 	        });
 	    }
@@ -50,21 +49,19 @@ passport.serializeUser(function (user, done) {
     return done(null, user.id);
 });
 
-// TODO Remove the strategyName approach; the token is overriden, so we can't rely on it
 passport.deserializeUser(function (userToken, userAuthenticated) {
-console.log(userToken);
+	console.log('User token (inside)', userToken);
 	var decomposition = userToken.split('||');
 	var strategyNamespace = decomposition[0];
 	var userId = decomposition[1];
 	var strategy = strategies[strategyNamespace];
-
-	//TODO Instead of the strategyName, use the application path to get the strategy
 
     return strategy.deserializer(userId)
     .then(user => {
     	if (!user) return userAuthenticated({
     		message: 'Incorrect username or password'
     	}, null);
+		console.log(userToken, user);
     	return userAuthenticated(null, user);
     });
 });
@@ -80,11 +77,12 @@ module.exports = function (server) {
 		authenticatedApps.forEach(app => {
 			if (req.url.startsWith('/' + app.namespace)) {
 				matched = true;
-				// TODO Manipulate the request so the deserialize will work
-				var tenancy = strategies[app.namespace];
+
+				req.session.authDomains = req.session.authDomains || {};
 				if (req.session.passport) {
-					if(tenancy.currentUser) {
-						req.session.passport.user = app.namespace + '||' + tenancy.currentUser;
+					if(req.session.authDomains[app.namespace]) {
+						req.session.passport.user = app.namespace + '||' + req.session.authDomains[app.namespace];
+						console.log('User token', req.session.passport.user);
 					}
 					else {
 						delete req.session.passport;
