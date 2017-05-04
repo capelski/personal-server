@@ -4,7 +4,9 @@ var path = require('path');
 var passport = require('passport');
 
 router.get('/', function (req, res, next) {
-  res.render('users-template-index');
+	res.render('users-template-index', {
+		user: req.user
+	});
 });
 
 var authenticationHandler = passport.createStrategy('users-template', userAuthenticator, userRetriever);

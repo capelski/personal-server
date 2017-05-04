@@ -12,8 +12,45 @@
 
 <body>
 	<h1>Users template app</h1>
+
+	<% include partials/_menu.ejs %>
+
+	<br /><br />
+
+	<div>
+		<label>Username</label>
+		<input id="username" type="text" value="Cookieman" />
+		<label>Password</label>
+		<input id="password" type="password" value="unhashed" />
+		<button id="authentication-button" type="button">Access</button>
+	</div>
+
+	<br /><br />
+
+	<p>Logged user: <span id="logged-username"><%= (user && user.username) || '-' %></span></p>
   
     <script src="/plugins/jquery-2.1.1/jquery-2.1.1.min.js"></script>
     <script src="<%= asset('js/scripts1.js') %>"></script>
+    <script>
+    	$(function() {
+    		$('#authentication-button').on('click', function() {
+    				$.ajax({
+						method: 'POST',
+						url: 'log-in',
+						contentType: 'application/json',
+						data: JSON.stringify({
+							username: $('#username').val(),
+							password: $('#password').val()
+						})
+					})
+					.then(function(loggedUser) {
+						$('#logged-username').html(loggedUser.username);
+					})
+					.fail(function(response) {
+						$('#logged-username').html(response.responseJSON.message);
+					});
+    		});
+    	});
+    </script>
 </body>
 </html>
