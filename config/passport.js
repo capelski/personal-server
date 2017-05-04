@@ -2,13 +2,20 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var config = require('./config');
 var strategies = {};
+var userTokenSeparator = '||->';
 
 // TODO If 404 -> Error
 // TODO Securize access through namespace
-passport.createStrategy = function(strategyName, namespace, authenticator, deserializer) {
 
-	// TODO Control strategy doesn't exist
-	// TODO Control the app name doesn't contain the APP token (||)
+passport.createStrategy = function(namespace, authenticator, deserializer) {
+
+	if (namespace.indexOf(userTokenSeparator) > -1) {
+		throw 'The namespace ' + namespace + ' is not valid!';
+	}
+
+	strategies[namespace] = {
+		deserializer: deserializer
+	};
 
 	var localStrategy = new LocalStrategy({
 	    usernameField: 'username',
@@ -23,11 +30,7 @@ passport.createStrategy = function(strategyName, namespace, authenticator, deser
 	    });
 	});
 
-	passport.use(strategyName, localStrategy);
-
-	strategies[namespace] = {
-		deserializer: deserializer
-	};
+	passport.use(namespace, localStrategy);
 
 	return function(req, res, next) {
 		function userAuthenticated(error, user, info) {
@@ -35,13 +38,13 @@ passport.createStrategy = function(strategyName, namespace, authenticator, deser
 
 	        req.logIn(user, function(error) {
 	            if (error) return res.send(error);
-	            
+
 	            req.session.authDomains[namespace] = user.id;
 	            res.json(req.user);
 	        });
 	    }
 
-	    passport.authenticate(strategyName, userAuthenticated)(req, res, next);
+	    passport.authenticate(namespace, userAuthenticated)(req, res, next);
 	};
 }
 
@@ -50,8 +53,7 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (userToken, userAuthenticated) {
-	console.log('User token (inside)', userToken);
-	var decomposition = userToken.split('||');
+	var decomposition = userToken.split(userTokenSeparator);
 	var strategyNamespace = decomposition[0];
 	var userId = decomposition[1];
 	var strategy = strategies[strategyNamespace];
@@ -61,7 +63,6 @@ passport.deserializeUser(function (userToken, userAuthenticated) {
     	if (!user) return userAuthenticated({
     		message: 'Incorrect username or password'
     	}, null);
-		console.log(userToken, user);
     	return userAuthenticated(null, user);
     });
 });
@@ -81,8 +82,7 @@ module.exports = function (server) {
 				req.session.authDomains = req.session.authDomains || {};
 				if (req.session.passport) {
 					if(req.session.authDomains[app.namespace]) {
-						req.session.passport.user = app.namespace + '||' + req.session.authDomains[app.namespace];
-						console.log('User token', req.session.passport.user);
+						req.session.passport.user = app.namespace + userTokenSeparator + req.session.authDomains[app.namespace];
 					}
 					else {
 						delete req.session.passport;

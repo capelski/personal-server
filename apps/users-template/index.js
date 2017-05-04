@@ -7,12 +7,10 @@ router.get('/', function (req, res, next) {
   res.render('users-template-index');
 });
 
-var authenticationHandler = passport.createStrategy('users-template', 'users-template', OWN_VALIDATION_METHOD, OWN_RETRIVING_METHOD);
+var authenticationHandler = passport.createStrategy('users-template', userAuthenticator, userRetriever);
 router.post('/log-in', authenticationHandler);
 
 module.exports = router;
-
-//TEMP Methods -> REMOVE
 
 var users = [{
 	id: 1,
@@ -24,12 +22,12 @@ var users = [{
 	password: 'silly1'
 }];
 
-function OWN_RETRIVING_METHOD(userId) {
+function userRetriever(userId) {
 	var user = users.find(user => user.id === parseInt(userId));
 	return Promise.resolve(user);
 }
 
-function OWN_VALIDATION_METHOD(username, password) {
+function userAuthenticator(username, password) {
 	var user = users.find(user => user.username === username && user.password === password);
 	return Promise.resolve(user);
 }
