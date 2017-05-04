@@ -9,6 +9,15 @@ router.get('/', function (req, res, next) {
 	});
 });
 
+router.get('/secured', function (req, res, next) {
+	var view = req.user ?
+		'users-template-secured' : 'users-template-unauthorized';
+
+	res.render(view, {
+		user: req.user
+	});
+});
+
 var authenticationHandler = passport.createStrategy('users-template', userAuthenticator, userRetriever);
 router.post('/log-in', authenticationHandler);
 
