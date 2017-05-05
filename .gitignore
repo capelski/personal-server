@@ -3,3 +3,4 @@ config/config.json
 _offline
 apps/*/public/css
 logs.txt
+npm-debug.log

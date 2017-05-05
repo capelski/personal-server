@@ -1,9 +1,9 @@
 'use strict';
 
 let winston = require('winston');
-let config = require('../config/config');
 
-function tracer() {
+function tracer(errorsOnly) {
+
     let stackLevel = 0;
 
     function errorify(functionExpression) {
@@ -51,12 +51,12 @@ function tracer() {
         return stringifiedArguments;
     }
 
-    function logify(serviceName, functionExpression) {
+    function logify(functionExpression, additionalInfo) {
         return function() {
             try {
                 stackLevel++;
                 var stackIndentation = Array(stackLevel).join('    ');
-                winston.info(stackIndentation + serviceName + '.' + functionExpression.name + logArguments.apply(this, arguments));
+                winston.info(stackIndentation + additionalInfo + logArguments.apply(this, arguments));
                 evaluateArguments.apply(this, arguments);
                 var result = functionExpression.apply(this, arguments);
                 stackLevel--;
@@ -70,18 +70,16 @@ function tracer() {
         };
     }
 
-    function trace(serviceName, functionExpression, hideInfo) {
-        if (!hideInfo && config.logify === true) {
-            return logify(serviceName, functionExpression);
+    function trace(functionExpression, additionalInfo) {
+        if (errorsOnly) {
+            return errorify(functionExpression);
         }
         else {
-            return errorify(functionExpression);
+            return logify(functionExpression, additionalInfo);
         }
     }
 
-    return {
-        trace: trace
-    };
+    return trace;
 }
 
-module.exports = tracer();
+module.exports = tracer;

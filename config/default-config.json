@@ -19,7 +19,10 @@
         "sessionSecret": "ssshhhhh",
         "logs": {
             "file": "logs.txt",
-            "console": true
+            "console": true,
+            "tracer": {
+                "errorsOnly": false
+            }
         }
     },
 
@@ -42,7 +45,10 @@
         "sessionSecret": "ssshhhhh",
         "logs": {
             "file": "logs.txt",
-            "console": false
+            "console": false,
+            "tracer": {
+                "errorsOnly": true
+            }
         }
     }
 }
