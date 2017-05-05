@@ -16,8 +16,13 @@
             "namespace": "app3",
             "defaultApp": true
         }],
-        "sessionSecret": "ssshhhhh"
+        "sessionSecret": "ssshhhhh",
+        "logs": {
+            "file": "logs.txt",
+            "console": true
+        }
     },
+
     "production": {
         "app": {
             "name": "azure-express"
@@ -34,6 +39,10 @@
             "appPath": "apps/app2",
             "namespace": "app2"
         }],
-        "sessionSecret": "ssshhhhh"
+        "sessionSecret": "ssshhhhh",
+        "logs": {
+            "file": "logs.txt",
+            "console": false
+        }
     }
 }
