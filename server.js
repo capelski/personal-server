@@ -1,5 +1,7 @@
 var winston = require('./config/winston');
+winston.info('Hiiiiiii')
 var tracer = require('./utils/tracer')(config.logs.tracer.errorsOnly);
+winston.info('Suprise!')
 var server = require('./config/express');
 var config = require('./config/config');
 var sassCompiler = require('./config/sass-compiler');
