@@ -1,9 +1,9 @@
+var winston = require('./config/winston');
+var tracer = require('./utils/tracer')(config.logs.tracer.errorsOnly);
 var server = require('./config/express');
 var config = require('./config/config');
 var sassCompiler = require('./config/sass-compiler');
 var appMapper = require('./config/app-mapper');
-var winston = require('./config/winston');
-var tracer = require('./utils/tracer')(config.logs.tracer.errorsOnly);
 var format = require('./utils/format');
 
 var formatter = value => format.digitPrepender(value, 0, 2);
