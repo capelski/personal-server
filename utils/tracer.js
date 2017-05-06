@@ -7,13 +7,13 @@ function tracer() {
 
     let stackLevel = 0;
 
-    function errorify(functionExpression) {
+    function errorify(functionExpression, message, thisObject) {
         return function() {
             try {
-                return functionExpression.apply(this, arguments);
+                return functionExpression.apply(thisObject, arguments);
             }
             catch (error) {
-                winston.error(functionExpression.name + logArguments.apply(this, arguments));
+                winston.error(message + logArguments.apply(thisObject, arguments));
                 winston.error(error);
                 throw error;
             }
@@ -52,14 +52,14 @@ function tracer() {
         return stringifiedArguments;
     }
 
-    function logify(functionExpression, additionalInfo) {
+    function logify(functionExpression, message, thisObject) {
         return function() {
             try {
                 stackLevel++;
                 var stackIndentation = Array(stackLevel).join('    ');
-                winston.info(stackIndentation + additionalInfo + logArguments.apply(this, arguments));
-                evaluateArguments.apply(this, arguments);
-                var result = functionExpression.apply(this, arguments);
+                winston.info(stackIndentation + message + logArguments.apply(thisObject, arguments));
+                evaluateArguments.apply(thisObject, arguments);
+                var result = functionExpression.apply(thisObject, arguments);
                 stackLevel--;
                 return result;
             }
@@ -75,12 +75,13 @@ function tracer() {
         traceLevel = level;
     }
 
-    function trace(functionExpression, additionalInfo) {
+    function trace(functionExpression, message, thisObject) {
+        thisObject = thisObject || this;
         if (traceLevel === 'errors') {
-            return errorify(functionExpression);
+            return errorify(functionExpression, message, thisObject);
         }
         else if (traceLevel === 'all') {
-            return logify(functionExpression, additionalInfo);
+            return logify(functionExpression, message, thisObject);
         }
     }
 

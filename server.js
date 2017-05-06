@@ -11,7 +11,7 @@ var formatter = value => format.digitPrepender(value, 0, 2);
 tracer.trace(sassCompiler, 'sassCompiler')(config.hostedApps);
 tracer.trace(appMapper, 'appMapper')(server, config.hostedApps);
 
-tracer.trace(server.listen, 'server.listen')(config.port, function (error) {
+tracer.trace(server.listen, 'server.listen', server)(config.port, function (error) {
 	var currentDate = new Date();
 	var formattedTime =  formatter(currentDate.getHours()) + ':' + formatter(currentDate.getMinutes()) + ':' +
 	formatter(currentDate.getSeconds());
