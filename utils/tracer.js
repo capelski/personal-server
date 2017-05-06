@@ -1,8 +1,9 @@
 'use strict';
 
 let winston = require('winston');
+let traceLevel = 'all';
 
-function tracer(errorsOnly) {
+function tracer() {
 
     let stackLevel = 0;
 
@@ -70,16 +71,23 @@ function tracer(errorsOnly) {
         };
     }
 
+    function setTraceLevel(level) {
+        traceLevel = level;
+    }
+
     function trace(functionExpression, additionalInfo) {
-        if (errorsOnly) {
+        if (traceLevel === 'errors') {
             return errorify(functionExpression);
         }
-        else {
+        else if (traceLevel === 'all') {
             return logify(functionExpression, additionalInfo);
         }
     }
 
-    return trace;
+    return {
+        trace: trace,
+        setTraceLevel: setTraceLevel
+    };
 }
 
-module.exports = tracer;
+module.exports = tracer();
