@@ -41,8 +41,11 @@ module.exports = function (apps) {
 	var rootPath = path.normalize(__dirname + '/..');
 	apps.forEach((app) => {
 		var inputDirectory = path.join(rootPath, app.appPath, 'sass');
-		var outputDirectory = path.join(rootPath, app.appPath, 'public', 'css');
+		var publicDirectory = path.join(rootPath, app.appPath, 'public');
+		var outputDirectory = path.join(publicDirectory, 'css');
 
+		ensureDirectory(inputDirectory);
+		ensureDirectory(publicDirectory);
 		ensureDirectory(outputDirectory);
 
 		compileSassFiles(inputDirectory, outputDirectory);
