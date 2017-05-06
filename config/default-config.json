@@ -28,6 +28,7 @@
         "app": {
             "name": "azure-express"
         },
+        "defaultPort": 80,
         "hostedApps": [{
             "appPath": "apps/default",
             "namespace": "default",

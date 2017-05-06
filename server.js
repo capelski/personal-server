@@ -1,10 +1,10 @@
 var config = require('./config/config');
 var winston = require('./config/winston');
 var tracer = require('./config/tracer');
-var server = require('./config/express');
 var sassCompiler = require('./config/sass-compiler');
 var appMapper = require('./config/app-mapper');
 var format = require('./utils/format');
+var server = require('./config/express');
 
 var formatter = value => format.digitPrepender(value, 0, 2);
 
