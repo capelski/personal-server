@@ -61,7 +61,7 @@ module.exports = function (server) {
 
 // TODO Securize access through namespace
 
-passport.createStrategy = function (namespace, authenticator, deserializer) {
+passport.createStrategy = function (namespace, authenticator, deserializer, successfulAuthentication) {
 
 	if (namespace.indexOf(userPrefixSeparator) > -1) {
 		throw 'The namespace ' + namespace + ' is not valid!';
@@ -89,7 +89,7 @@ passport.createStrategy = function (namespace, authenticator, deserializer) {
 
 				req.session.authDomains = req.session.authDomains || {};
 	            req.session.authDomains[namespace] = user.id;
-	            res.json(req.user);
+	            successfulAuthentication(req, res, next);
 	        });
 	    }
 
