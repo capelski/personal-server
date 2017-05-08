@@ -29,26 +29,6 @@
 	<p>Logged user: <span id="logged-username"><%= (user && user.username) || '-' %></span></p>
   
     <script src="/plugins/jquery-2.1.1/jquery-2.1.1.min.js"></script>
-    <script>
-    	$(function() {
-    		$('#authentication-button').on('click', function() {
-				$.ajax({
-					method: 'POST',
-					url: 'log-in',
-					contentType: 'application/json',
-					data: JSON.stringify({
-						username: $('#username').val(),
-						password: $('#password').val()
-					})
-				})
-				.then(function(loggedUser) {
-					$('#logged-username').html(loggedUser.username);
-				})
-				.fail(function(response) {
-					$('#logged-username').html(response.responseJSON.message);
-				});
-    		});
-    	});
-    </script>
+    <script type="text/javascript" src="<%= asset('js/authentication.js') %>"></script>
 </body>
 </html>
