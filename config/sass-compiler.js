@@ -44,10 +44,10 @@ module.exports = function (apps) {
 		var publicDirectory = path.join(rootPath, app.appPath, 'public');
 		var outputDirectory = path.join(publicDirectory, 'css');
 
-		ensureDirectory(inputDirectory);
-		ensureDirectory(publicDirectory);
-		ensureDirectory(outputDirectory);
-
-		compileSassFiles(inputDirectory, outputDirectory);
+		if (fs.existsSync(inputDirectory)) {
+			ensureDirectory(publicDirectory);
+			ensureDirectory(outputDirectory);
+			compileSassFiles(inputDirectory, outputDirectory);
+		}
 	});
 };
