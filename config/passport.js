@@ -61,7 +61,7 @@ module.exports = function (server) {
 
 // TODO Securize access through namespace
 
-passport.createStrategy = function (namespace, authenticator, deserializer, successfulAuthentication) {
+passport.createStrategy = function (namespace, authenticator, deserializer, logInHandler, logOutHandler) {
 
 	if (namespace.indexOf(userPrefixSeparator) > -1) {
 		throw 'The namespace ' + namespace + ' is not valid!';
@@ -79,7 +79,7 @@ passport.createStrategy = function (namespace, authenticator, deserializer, succ
 
 	passport.use(namespace, localStrategy);
 
-	return function (req, res, next) {
+	function logIn (req, res, next) {
 
 		function userAuthenticated(error, user, info) {
 	        if (error) return res.status(401).json(error);
@@ -89,10 +89,22 @@ passport.createStrategy = function (namespace, authenticator, deserializer, succ
 
 				req.session.authDomains = req.session.authDomains || {};
 	            req.session.authDomains[namespace] = user.id;
-	            successfulAuthentication(req, res, next);
+	            logInHandler(req, res, next);
 	        });
 	    }
 
 	    passport.authenticate(namespace, userAuthenticated)(req, res, next);
+	};
+
+	function logOut (req, res, next) {
+		req.session.authDomains = req.session.authDomains || {};
+        delete req.session.authDomains[namespace];
+        delete req.session.passport;
+        return logOutHandler(req, res, next);
+	};
+
+	return {
+		logIn,
+		logOut
 	};
 }
