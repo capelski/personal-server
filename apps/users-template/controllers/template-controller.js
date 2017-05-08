@@ -1,3 +1,4 @@
+var authorization = require('../../../utils/authorization');
 
 function index (req, res, next) {
 	return res.render('users-template-index', {
@@ -6,7 +7,7 @@ function index (req, res, next) {
 }
 
 function secured (req, res, next) {
-	var view = req.user ?
+	var view = authorization.isAuthenticated(req.user) ?
 		'users-template-secured' : 'users-template-unauthorized';
 
 	return res.render(view, {
@@ -15,7 +16,7 @@ function secured (req, res, next) {
 }
 
 function restricted (req, res, next) {
-	var view = req.user && req.user.permissions.indexOf('view-restricted') > -1 ?
+	var view = authorization.hasPermission(req.user, 'view-restricted') ?
 		'users-template-restricted' : 'users-template-unauthorized';
 
 	return res.render(view, {

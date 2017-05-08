@@ -1,3 +1,5 @@
+var authorization = require('../../../utils/authorization');
+
 var samples = [{
 	id: 1,
 	name: 'Kratos'
