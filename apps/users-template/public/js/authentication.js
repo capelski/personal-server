@@ -11,7 +11,7 @@ $(function() {
 		})
 		.then(function(loggedUser) {
 			$('#logged-username').html(loggedUser.username);
-			$('#log-out').removeClass('hidden');
+			$('#user-wrapper').removeClass('hidden');
 		})
 		.fail(function(response) {
 			$('#logged-username').html(response.responseJSON.message);
@@ -25,7 +25,7 @@ $(function() {
 		})
 		.then(function(loggedUser) {
 			$('#logged-username').html('-');
-			$('#log-out').addClass('hidden');
+			$('#user-wrapper').addClass('hidden');
 		})
 		.fail(function(response) {
 			$('#logged-username').html(response.responseJSON.message);

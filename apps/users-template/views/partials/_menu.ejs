@@ -2,4 +2,8 @@
 	<a href="/users-template">Home</a>
 	<a href="/users-template/secured">Secured</a>
 	<a href="/users-template/restricted">Restricted</a>
+	<span id="user-wrapper" <% if (!user) { %>class="hidden"<% } %>>
+		User: <span id="logged-username"><%= user && user.username %></span></label>
+		<button id="log-out" type="button">Log out</button>
+	</span>
 </div>

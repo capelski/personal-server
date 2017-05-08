@@ -24,13 +24,6 @@
 		<input id="password" type="password" value="unhashed" />
 		<button id="log-in" type="button">Log in</button>
 	</div>
-
-	<br /><br />
-
-	<p>
-		Logged user: <span id="logged-username"><%= (user && user.username) || '-' %></span>
-		<button id="log-out" type="button" <% if (!user) { %>class="hidden"<% } %>>Log out</button>
-	</p>
   
     <script src="/plugins/jquery-2.1.1/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="<%= asset('js/authentication.js') %>"></script>
