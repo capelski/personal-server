@@ -2,31 +2,14 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var passport = require('passport');
+var templateController = require('./controllers/template-controller');
 var authenticationHandler = passport.createStrategy('users-template', userAuthenticator, userRetriever, successfulAuthentication);
 
-router.get('/', function (req, res, next) {
-	res.render('users-template-index', {
-		user: req.user
-	});
-});
+router.get('/', templateController.index);
 
-router.get('/secured', function (req, res, next) {
-	var view = req.user ?
-		'users-template-secured' : 'users-template-unauthorized';
+router.get('/secured', templateController.secured);
 
-	res.render(view, {
-		user: req.user
-	});
-});
-
-router.get('/restricted', function (req, res, next) {
-	var view = req.user && req.user.permissions.indexOf('view-restricted') > -1 ?
-		'users-template-restricted' : 'users-template-unauthorized';
-
-	res.render(view, {
-		user: req.user
-	});
-});
+router.get('/restricted', templateController.restricted);
 
 router.post('/log-in', authenticationHandler);
 
