@@ -13,20 +13,10 @@
 <body>
 	<% include partials/_menu.ejs %>
 
-	<br /><br />
-
-	<div>
-		<label>Username</label>
-		<input id="username" type="text" value="Cookieman" />
-		<label>Password</label>
-		<input id="password" type="password" value="unhashed" />
-		<button id="log-in" type="button">Log in</button>
-	</div>
-
 	<div id="elements-list"></div>
   
-    <script src="/plugins/jquery-2.1.1/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="<%= asset('js/authentication.js') %>"></script>
+  	<% include partials/_footer.ejs %>
+  	
     <script type="text/javascript" src="<%= asset('js/elements.js') %>"></script>
 </body>
 </html>

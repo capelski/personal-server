@@ -11,9 +11,11 @@ $(function() {
 		})
 		.then(function(loggedUser) {
 			$('#logged-username').html(loggedUser.username);
+			$('#login-form').addClass('hidden');
 			$('#user-wrapper').removeClass('hidden');
 		})
 		.fail(function(response) {
+			// TODO Toastr
 			$('#logged-username').html(response.responseJSON.message);
 		});
 	});
@@ -25,9 +27,11 @@ $(function() {
 		})
 		.then(function(loggedUser) {
 			$('#logged-username').html('-');
+			$('#login-form').removeClass('hidden');
 			$('#user-wrapper').addClass('hidden');
 		})
 		.fail(function(response) {
+			// TODO Toastr
 			$('#logged-username').html(response.responseJSON.message);
 		});
 	});

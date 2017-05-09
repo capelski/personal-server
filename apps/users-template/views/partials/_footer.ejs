@@ -1,0 +1,17 @@
+<br /><br />
+
+<div id="login-form" <% if (user) { %>class="hidden"<% } %>>
+	<label>Username</label>
+	<input id="username" type="text" value="Cookieman" />
+	<label>Password</label>
+	<input id="password" type="password" value="unhashed" />
+	<button id="log-in" type="button">Log in</button>
+</div>
+
+<span id="user-wrapper" <% if (!user) { %>class="hidden"<% } %>>
+	User: <span id="logged-username"><%= user && user.username %></span></label>
+	<button id="log-out" type="button">Log out</button>
+</span>
+
+<script src="/plugins/jquery-2.1.1/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="<%= asset('js/authentication.js') %>"></script>
