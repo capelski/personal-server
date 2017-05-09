@@ -2,12 +2,12 @@ var users = [{
 	id: 1,
 	username: 'Cookieman',
 	password: 'unhashed',
-	permissions: ['view']
+	permissions: ['view-restricted']
 }, {
 	id: 2,
 	username: 'fucker.boy',
 	password: 'silly1',
-	permissions: ['view']
+	permissions: []
 }];
 
 function logIn(req, res, next) {

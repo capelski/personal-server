@@ -2,12 +2,20 @@ var elements = [{
 	id: 1,
 	name: 'Element 1',
 	ownerId: 1,
-	public: true
+	public: true,
+	restricted: false
 }, {
 	id: 2,
 	name: 'Element 2',
 	ownerId: 1,
-	public: false
+	public: false,
+	restricted: false
+}, {
+	id: 3,
+	name: 'Element 3',
+	ownerId: 1,
+	public: true,
+	restricted: true
 }];
 
 function getAll () {

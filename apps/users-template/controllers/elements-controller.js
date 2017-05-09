@@ -8,9 +8,10 @@ function list (req, res, next) {
 }
 
 function details (req, res, next) {
+	var view = authorization.hasPermission(req.user, 'view-restricted') ? 'users-template-details' : 'users-template-unauthorized';
 	var element = elementsService.getByIdUserFiltered(parseInt(req.query.id), req.user && req.user.id);
 
-	return res.render('users-template-details', {
+	return res.render(view, {
 		user: req.user,
 		element: element
 	});
