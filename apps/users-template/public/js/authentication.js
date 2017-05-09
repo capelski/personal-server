@@ -2,7 +2,7 @@ $(function() {
 	$('#log-in').on('click', function() {
 		$.ajax({
 			method: 'POST',
-			url: 'log-in',
+			url: '/users-template/log-in',
 			contentType: 'application/json',
 			data: JSON.stringify({
 				username: $('#username').val(),
@@ -21,7 +21,7 @@ $(function() {
 	$('#log-out').on('click', function() {
 		$.ajax({
 			method: 'POST',
-			url: 'log-out'
+			url: '/users-template/log-out'
 		})
 		.then(function(loggedUser) {
 			$('#logged-username').html('-');

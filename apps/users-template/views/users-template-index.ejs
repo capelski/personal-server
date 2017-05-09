@@ -11,8 +11,6 @@
 </head>
 
 <body>
-	<h1>Users template app</h1>
-
 	<% include partials/_menu.ejs %>
 
 	<br /><br />
@@ -24,8 +22,11 @@
 		<input id="password" type="password" value="unhashed" />
 		<button id="log-in" type="button">Log in</button>
 	</div>
+
+	<div id="elements-list"></div>
   
     <script src="/plugins/jquery-2.1.1/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="<%= asset('js/authentication.js') %>"></script>
+    <script type="text/javascript" src="<%= asset('js/elements.js') %>"></script>
 </body>
 </html>
