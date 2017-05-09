@@ -1,23 +1,15 @@
+var elementsService = require('../services/elements-service');
 var authorization = require('../../../utils/authorization');
 
-function index (req, res, next) {
-	return res.render('users-template-index', {
+function list (req, res, next) {
+	return res.render('users-template-list', {
 		user: req.user
 	});
 }
 
-function secured (req, res, next) {
-	var view = authorization.isAuthenticated(req.user) ?
-		'users-template-secured' : 'users-template-unauthorized';
-
-	return res.render(view, {
-		user: req.user
-	});
-}
-
-function restricted (req, res, next) {
-	var view = authorization.hasPermission(req.user, 'view-restricted') ?
-		'users-template-restricted' : 'users-template-unauthorized';
+function details (req, res, next) {
+	var view = authorization.hasPermission(req.user, 'view-details') ?
+		'users-template-details' : 'users-template-unauthorized';
 
 	return res.render(view, {
 		user: req.user
@@ -25,7 +17,6 @@ function restricted (req, res, next) {
 }
 
 module.exports = {
-	index,
-	secured,
-	restricted
+	list,
+	details
 };

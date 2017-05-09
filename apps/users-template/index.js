@@ -9,11 +9,12 @@ var authenticationHandler = passport.createStrategy('users-template',
 	authenticationService.authenticator, authenticationService.retriever, authenticationService.logIn, authenticationService.logOut);
 
 router.get('/api/elements', elementsApi.getAll);
+router.get('/api/elements/getAll', elementsApi.getAll);
 router.get('/api/elements/getById', elementsApi.getById);
 
-router.get('/', elementsController.index);
-router.get('/secured', elementsController.secured);
-router.get('/restricted', elementsController.restricted);
+router.get('/', elementsController.list);
+router.get('/list', elementsController.list);
+router.get('/details', elementsController.details);
 
 router.post('/log-in', authenticationHandler.logIn);
 router.post('/log-out', authenticationHandler.logOut);

@@ -2,7 +2,7 @@
 
 <html lang="en">
 <head>
-    <title>Restricted</title>
+    <title>Title</title>
     <meta charset="utf-8" />
     <meta name="description" content="description" />
     <meta name="author" content="author" />
@@ -13,8 +13,12 @@
 <body>
 	<% include partials/_header.ejs %>
 
-	<h3>Restricted</h3>
+	<h3>Default elements list</h3>
 
-	<% include partials/_footer.ejs %>
+	<div id="elements-list"></div>
+  
+  	<% include partials/_footer.ejs %>
+
+    <script type="text/javascript" src="<%= asset('js/elements.js') %>"></script>
 </body>
 </html>
