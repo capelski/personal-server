@@ -11,12 +11,14 @@
 </head>
 
 <body>
-	<% include partials/_menu.ejs %>
+	<% include partials/_header.ejs %>
+
+	<h3>Public elements list</h3>
 
 	<div id="elements-list"></div>
   
   	<% include partials/_footer.ejs %>
-  	
+
     <script type="text/javascript" src="<%= asset('js/elements.js') %>"></script>
 </body>
 </html>

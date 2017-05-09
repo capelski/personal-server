@@ -2,12 +2,12 @@ var authorization = require('../../../utils/authorization');
 
 var elements = [{
 	id: 1,
-	name: 'Kratos',
+	name: 'Element 1',
 	ownerId: 1,
 	public: true
 }, {
 	id: 2,
-	name: 'Zeus',
+	name: 'Element 2',
 	ownerId: 1,
 	public: false
 }];
