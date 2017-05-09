@@ -10,9 +10,11 @@ function list (req, res, next) {
 function details (req, res, next) {
 	var view = authorization.hasPermission(req.user, 'view-details') ?
 		'users-template-details' : 'users-template-unauthorized';
+	var element = elementsService.getById(parseInt(req.query.id));
 
 	return res.render(view, {
-		user: req.user
+		user: req.user,
+		element: element
 	});
 }
 

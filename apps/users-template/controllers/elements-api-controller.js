@@ -7,8 +7,8 @@ function getAll (req, res, next) {
 }
 
 function getById (req, res, next) {
-	var sample = elementsService.getById(parseInt(req.query.id));
-	return res.json(sample);
+	var element = elementsService.getById(parseInt(req.query.id));
+	return res.json(element);
 }
 
 module.exports = {
