@@ -2,7 +2,7 @@ var users = [{
 	id: 1,
 	username: 'Cookieman',
 	password: 'unhashed',
-	permissions: ['view', 'view-details']
+	permissions: ['view']
 }, {
 	id: 2,
 	username: 'fucker.boy',

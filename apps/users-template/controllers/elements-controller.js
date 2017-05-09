@@ -1,5 +1,5 @@
 var elementsService = require('../services/elements-service');
-var authorization = require('../../../utils/authorization');
+var authorization = require('../../../utils/authorization'); // TODO Use
 
 function list (req, res, next) {
 	return res.render('users-template-list', {
@@ -8,11 +8,9 @@ function list (req, res, next) {
 }
 
 function details (req, res, next) {
-	var view = authorization.hasPermission(req.user, 'view-details') ?
-		'users-template-details' : 'users-template-unauthorized';
-	var element = elementsService.getById(parseInt(req.query.id));
+	var element = elementsService.getByIdUserFiltered(parseInt(req.query.id), req.user && req.user.id);
 
-	return res.render(view, {
+	return res.render('users-template-details', {
 		user: req.user,
 		element: element
 	});

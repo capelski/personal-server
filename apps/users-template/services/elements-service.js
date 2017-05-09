@@ -10,7 +10,11 @@ var elements = [{
 	public: false
 }];
 
-function getAll (userId) {
+function getAll () {
+	return elements;
+}
+
+function getAllUserFiltered (userId) {
 	var selectedElements = elements.filter(element => element.public || (userId && userId === element.ownerId) );
 	return selectedElements;
 }
@@ -20,7 +24,14 @@ function getById (elementId) {
 	return element;
 }
 
+function getByIdUserFiltered (elementId, userId) {
+	var element = elements.find(element => element.id === elementId && (element.public || userId && userId === element.ownerId));
+	return element;
+}
+
 module.exports = {
 	getAll,
-	getById
+	getAllUserFiltered,
+	getById,
+	getByIdUserFiltered
 };
