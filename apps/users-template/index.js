@@ -3,19 +3,20 @@ var router = express.Router();
 var path = require('path');
 var passport = require('passport');
 var authenticationService = require('./services/authentication-service');
-var templateController = require('./controllers/template-controller');
 var elementsController = require('./controllers/elements-controller');
+var elementsApi = require('./controllers/elements-api-controller');
 var authenticationHandler = passport.createStrategy('users-template',
 	authenticationService.authenticator, authenticationService.retriever, authenticationService.logIn, authenticationService.logOut);
 
-router.get('/', templateController.index);
-router.get('/secured', templateController.secured);
-router.get('/restricted', templateController.restricted);
+router.get('/api/elements', elementsApi.getAll);
+router.get('/api/elements/getById', elementsApi.getById);
+
+router.get('/', elementsController.index);
+router.get('/secured', elementsController.secured);
+router.get('/restricted', elementsController.restricted);
+
 router.post('/log-in', authenticationHandler.logIn);
 router.post('/log-out', authenticationHandler.logOut);
-
-router.get('/api/elements', elementsController.getAll);
-router.get('/api/elements/getById', elementsController.getById);
 
 router.get('/client-side', function (req, res, next) {
 	res.set('Content-Type', 'application/javascript');

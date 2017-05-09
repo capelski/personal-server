@@ -1,28 +1,31 @@
 var authorization = require('../../../utils/authorization');
 
-var elements = [{
-	id: 1,
-	name: 'Element 1',
-	ownerId: 1,
-	public: true
-}, {
-	id: 2,
-	name: 'Element 2',
-	ownerId: 1,
-	public: false
-}];
-
-function getAll (req, res, next) {
-	var selectedElements = elements.filter(sample => sample.public || (req.user && req.user.id === sample.ownerId) );
-	return res.json(selectedElements);
+function index (req, res, next) {
+	return res.render('users-template-index', {
+		user: req.user
+	});
 }
 
-function getById (req, res, next) {
-	var sample = elements.find(sample => sample.id === parseInt(req.query.id));
-	return res.json(sample);
+function secured (req, res, next) {
+	var view = authorization.isAuthenticated(req.user) ?
+		'users-template-secured' : 'users-template-unauthorized';
+
+	return res.render(view, {
+		user: req.user
+	});
+}
+
+function restricted (req, res, next) {
+	var view = authorization.hasPermission(req.user, 'view-restricted') ?
+		'users-template-restricted' : 'users-template-unauthorized';
+
+	return res.render(view, {
+		user: req.user
+	});
 }
 
 module.exports = {
-	getAll,
-	getById
+	index,
+	secured,
+	restricted
 };
