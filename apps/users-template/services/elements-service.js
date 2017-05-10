@@ -1,4 +1,4 @@
-var authorization = require('../../../utils/authorization');
+var security = require('../../../utils/security');
 
 var elements = [{
 	id: 1,
@@ -41,8 +41,8 @@ function getByIdUserFiltered (elementId, user) {
 	var element = getById(elementId);
 
 	if ((!element.public && (!user || user.id !== element.ownerId)) ||
-		(element.restricted && !authorization.hasPermission(user, 'view-restricted'))) {
-		throw 'You are not allowed to view the element!';
+		(element.restricted && !security.hasUserPermission(user, 'view-restricted'))) {
+		throw 'You are not allowed to view the element';
 	}
 
 	return element;
