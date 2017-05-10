@@ -1,4 +1,5 @@
 var elementsService = require('../services/elements-service');
+var elementsSecurity = require('./elements-security');
 
 function list (req, res, next) {
 	return res.render('users-template-list', {
@@ -7,19 +8,14 @@ function list (req, res, next) {
 }
 
 function details (req, res, next) {
-	try {
-		var element = elementsService.getByIdUserFiltered(parseInt(req.query.id), req.user);
-		console.log('element', element)
+	var element = elementsService.getById(parseInt(req.query.id));
+	return elementsSecurity.filterElementAccess(element, req, res, 'view')
+	.then(function () {
 		return res.render('users-template-details', {
 			user: req.user,
 			element: element
 		});
-	}
-	catch (exception) {
-		return res.render('users-template-unauthorized', {
-			user: req.user
-		});
-	}
+	});
 }
 
 module.exports = {

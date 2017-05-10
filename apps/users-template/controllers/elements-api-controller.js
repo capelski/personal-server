@@ -1,4 +1,5 @@
 var elementsService = require('../services/elements-service');
+var elementsSecurity = require('./elements-security');
 
 function getAll (req, res, next) {
 	var selectedElements = elementsService.getAllUserFiltered(req.user);
@@ -6,13 +7,11 @@ function getAll (req, res, next) {
 }
 
 function getById (req, res, next) {
-	try {
-		var element = elementsService.getByIdUserFiltered(parseInt(req.query.id), req.user);
+	var element = elementsService.getById(parseInt(req.query.id));
+	return elementsSecurity.filterElementAccess(element, req, res, 'api')
+	.then(function () {
 		return res.json(element);
-	}
-	catch (exception) {
-		return res.json(exception);
-	}
+	});
 }
 
 module.exports = {
