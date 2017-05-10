@@ -3,10 +3,10 @@ var security = require('../../../utils/security');
 function elementAccess (req, res, accessType, element) {
 	var allowedAccess = !elementAccessCriteria(element, req); //TODO Invert the expression
 	if (accessType === 'view') {
-		return securizeView(res, allowedAccess);
+		return securizeView(res, allowedAccess, 'users-template-unauthorized');
 	}
 	else if (accessType == 'api') {
-		return securizeApi(res, allowedAccess);
+		return securizeApi(res, allowedAccess, 'You are not allowed to view the element');
 	}
 }
 
@@ -17,23 +17,21 @@ function elementAccessCriteria(element, user) {
 	);
 }
 
-function securizeView (res, allowedAccess) {
+function securizeView (res, allowedAccess, unauthorizedView) {
 	return new Promise(function(resolve, reject) {
 		if (!allowedAccess) {
-			// TODO Allow parameter to configure
-			return res.render('users-template-unauthorized');
+			return res.render(unauthorizedView);
 		}
-		resolve();
+		return resolve();
 	});
 }
 
-function securizeApi (res, allowedAccess) {
+function securizeApi (res, allowedAccess, unauthorizedMessage) {
 	return new Promise(function(resolve, reject) {
 		if (!allowedAccess) {
-			// TODO Allow parameter to configure
-			return res.json('You are not allowed to view the element');
+			return res.json(unauthorizedMessage);
 		}
-		resolve();
+		return resolve();
 	});
 }
 
