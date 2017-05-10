@@ -9,7 +9,7 @@ function list (req, res, next) {
 
 function details (req, res, next) {
 	var element = elementsService.getById(parseInt(req.query.id));
-	return elementsSecurity.filterElementAccess(element, req, res, 'view')
+	return elementsSecurity.elementAccess(req, res, 'view', element)
 	.then(function () {
 		return res.render('users-template-details', {
 			user: req.user,

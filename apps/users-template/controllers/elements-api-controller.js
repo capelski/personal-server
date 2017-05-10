@@ -8,7 +8,7 @@ function getAll (req, res, next) {
 
 function getById (req, res, next) {
 	var element = elementsService.getById(parseInt(req.query.id));
-	return elementsSecurity.filterElementAccess(element, req, res, 'api')
+	return elementsSecurity.elementAccess(req, res, 'api', element)
 	.then(function () {
 		return res.json(element);
 	});

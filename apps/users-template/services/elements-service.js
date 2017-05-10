@@ -34,22 +34,8 @@ function getById (elementId) {
 	return element;
 }
 
-function getByIdUserFiltered (elementId, user) {
-	var element = getById(elementId);
-
-	if (element && (
-		(!element.public && (!user || user.id !== element.ownerId)) ||
-		(element.restricted && !security.hasUserPermission(user, 'view-restricted'))
-	)) {
-		throw 'You are not allowed to view the element';
-	}
-
-	return element;
-}
-
 module.exports = {
 	getAll,
 	getAllUserFiltered,
-	getById,
-	getByIdUserFiltered
+	getById
 };
