@@ -9,6 +9,7 @@ function list (req, res, next) {
 function details (req, res, next) {
 	try {
 		var element = elementsService.getByIdUserFiltered(parseInt(req.query.id), req.user);
+		console.log('element', element)
 		return res.render('users-template-details', {
 			user: req.user,
 			element: element

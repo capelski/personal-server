@@ -31,17 +31,16 @@ function getAllUserFiltered (user) {
 
 function getById (elementId) {
 	var element = elements.find(element => element.id === elementId);
-	if (!element) {
-		throw 'The element does not exist';
-	}
 	return element;
 }
 
 function getByIdUserFiltered (elementId, user) {
 	var element = getById(elementId);
 
-	if ((!element.public && (!user || user.id !== element.ownerId)) ||
-		(element.restricted && !security.hasUserPermission(user, 'view-restricted'))) {
+	if (element && (
+		(!element.public && (!user || user.id !== element.ownerId)) ||
+		(element.restricted && !security.hasUserPermission(user, 'view-restricted'))
+	)) {
 		throw 'You are not allowed to view the element';
 	}
 
