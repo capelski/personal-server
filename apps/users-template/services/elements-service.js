@@ -31,15 +31,20 @@ function getAllUserFiltered (user) {
 
 function getById (elementId) {
 	var element = elements.find(element => element.id === elementId);
+	if (!element) {
+		throw 'The element does not exist';
+	}
 	return element;
 }
 
 function getByIdUserFiltered (elementId, user) {
-	var hasPermissions = authorization.hasPermission(user, 'view-restricted');
-	if (!hasPermissions) {
-		throw 'You don\'t have permissions!';
+	var element = getById(elementId);
+
+	if ((!element.public && (!user || user.id !== element.ownerId)) ||
+		(element.restricted && !authorization.hasPermission(user, 'view-restricted'))) {
+		throw 'You are not allowed to view the element!';
 	}
-	var element = elements.find(element => element.id === elementId && (element.public || user && user.id === element.ownerId));
+
 	return element;
 }
 
