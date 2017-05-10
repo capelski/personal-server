@@ -1,7 +1,7 @@
 var security = require('../../../utils/security');
 
 function elementAccess (req, res, accessType, element) {
-	var allowedAccess = !elementAccessCriteria(element, req); //TODO Invert the expression
+	var allowedAccess = elementAccessCriteria(element, req.user);
 	if (accessType === 'view') {
 		return securizeView(res, allowedAccess, 'users-template-unauthorized');
 	}
@@ -11,9 +11,9 @@ function elementAccess (req, res, accessType, element) {
 }
 
 function elementAccessCriteria(element, user) {
-	return element && (
-		(!element.public && (!req.user || req.user.id !== element.ownerId)) ||
-		(element.restricted && (!req.user || !security.hasUserPermission(req.user, 'view-restricted')))
+	return !element || (
+		(element.public || (user && user.id === element.ownerId)) &&
+		(!element.restricted || (user && security.hasUserPermission(user, 'view-restricted')))
 	);
 }
 
