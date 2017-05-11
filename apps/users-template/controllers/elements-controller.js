@@ -7,9 +7,9 @@ function list (req, res, next) {
 	});
 }
 
-function details (req, res, next) {
+function detailsPromise (req, res, next) {
 	var element = elementsService.getById(parseInt(req.query.id));
-	return elementsSecurity.elementAccess(req, res, 'view', element)
+	return elementsSecurity.allowedElementPromise(req, res, 'view', element)
 	.then(function () {
 		return res.render('users-template-details', {
 			user: req.user,
@@ -18,7 +18,14 @@ function details (req, res, next) {
 	});
 }
 
+function detailsMiddleware (req, res, next) {
+	return res.render('users-template-details', {
+		user: req.user,
+		element: req.element
+	});
+}
+
 module.exports = {
 	list,
-	details
+	details: detailsMiddleware
 };

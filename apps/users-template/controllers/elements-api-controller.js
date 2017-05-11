@@ -6,15 +6,19 @@ function getAll (req, res, next) {
 	return res.json(selectedElements);
 }
 
-function getById (req, res, next) {
+function getByIdPromise (req, res, next) {
 	var element = elementsService.getById(parseInt(req.query.id));
-	return elementsSecurity.elementAccess(req, res, 'api', element)
+	return elementsSecurity.allowedElementPromise(req, res, 'api', element)
 	.then(function () {
 		return res.json(element);
 	});
 }
 
+function getByIdMiddleware (req, res, next) {
+	return res.json(req.element);
+}
+
 module.exports = {
 	getAll,
-	getById
+	getById: getByIdMiddleware
 };

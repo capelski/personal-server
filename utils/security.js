@@ -26,10 +26,31 @@ function security() {
 		});
 	}
 
+	function securizeMiddleware(accessCriteria, accessType, options) {
+		options = options || {};
+		options.unauthorizedMessage = options.unauthorizedMessage || 'You are not allowed to access this resource';
+		options.unauthorizedView = options.unauthorizedView || 'unauthorized';
+
+		return function(req, res, next) {
+			if (accessCriteria(req)) {
+				return next();
+			}
+			else {
+				if (accessType === 'view') {
+					return res.status(401).render(options.unauthorizedView);
+				}
+				else if (accessType === 'api') {
+					return res.status(401).json(options.unauthorizedMessage);
+				}
+			}
+		};
+	}
+
 	return {
 		hasUserPermission,
 		isUserAuthenticated,
 		securizeApi,
+		securizeMiddleware,
 		securizeView
 	};
 }
