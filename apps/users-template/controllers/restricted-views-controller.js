@@ -1,12 +1,9 @@
 function list (req, res, next) {
-	return res.render('users-template-restricted-list', {
-		user: req.user
-	});
+	return res.render('users-template-restricted-list');
 }
 
 function details (req, res, next) {
 	return res.render('users-template-restricted-details', {
-		user: req.user,
 		restrictedId: parseInt(req.query.id)
 	});
 }

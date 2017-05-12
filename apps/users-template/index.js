@@ -7,6 +7,10 @@ var authenticationHandler = passport.createStrategy('users-template',
 	authenticationService.authenticator, authenticationService.retriever, authenticationService.logIn, authenticationService.logOut);
 
 
+router.get('/', function (req,res,next) {
+	return res.render('users-template-index');
+});
+
 
 var publicController = {
 	api: require('./controllers/public-api-controller'),
@@ -17,8 +21,8 @@ var publicController = {
 router.get('/api/public', publicController.security.getAll('api') ,publicController.api.getAll);
 router.get('/api/public/getById', publicController.security.getById('api'), publicController.api.getById);
 
-router.get('/public', publicController.security.getAll('view'), publicController.views.list);
-router.get('/public/details', publicController.security.getById('view'), publicController.views.details);
+router.get('/public', publicController.views.list);
+router.get('/public/details', publicController.views.details);
 
 
 
@@ -31,8 +35,8 @@ var restrictedController = {
 router.get('/api/restricted', restrictedController.security.getAll('api'), restrictedController.api.getAll);
 router.get('/api/restricted/getById', restrictedController.security.getById('api'), restrictedController.api.getById);
 
-router.get('/restricted', restrictedController.security.getAll('view'), restrictedController.views.list);
-router.get('/restricted/details', restrictedController.security.getById('view'), restrictedController.views.details);
+router.get('/restricted', restrictedController.views.list);
+router.get('/restricted/details', restrictedController.views.details);
 
 
 
@@ -42,11 +46,17 @@ router.post('/log-out', authenticationHandler.logOut);
 
 router.get('/client-side', function (req, res, next) {
 	res.set('Content-Type', 'application/javascript');
+	
+	var user = null;
+	if (req.user) {
+		user = {
+			id: req.user.id,
+			username: req.user.username
+		};
+	}
+
 	return res.json({
-		user: {
-			id: req.user && req.user.id,
-			username: req.user && req.user.username
-		}
+		user: user
 	});
 });
 

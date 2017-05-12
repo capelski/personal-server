@@ -1,12 +1,9 @@
 function list (req, res, next) {
-	return res.render('users-template-public-list', {
-		user: req.user
-	});
+	return res.render('users-template-public-list');
 }
 
 function details (req, res, next) {
 	return res.render('users-template-public-details', {
-		user: req.user,
 		publicId: parseInt(req.query.id)
 	});
 }
