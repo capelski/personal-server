@@ -2,7 +2,7 @@
 
 <html lang="en">
 <head>
-    <title>Title</title>
+    <title>Restricted</title>
     <meta charset="utf-8" />
     <meta name="description" content="description" />
     <meta name="author" content="author" />
@@ -13,12 +13,12 @@
 <body>
 	<% include partials/_header.ejs %>
 
-	<h3>Default elements list</h3>
+	<a href="/users-template/restricted">Back to list</a>
 
-	<div id="elements-list"></div>
-  
-  	<% include partials/_footer.ejs %>
+	<div id="element-wrapper" data-element-id="<%= restrictedId %>"></div>
 
-    <script type="text/javascript" src="<%= asset('js/elements.js') %>"></script>
+	<% include partials/_footer.ejs %>
+
+    <script type="text/javascript" src="<%= asset('js/restricted-details.js') %>"></script>
 </body>
 </html>

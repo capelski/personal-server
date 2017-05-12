@@ -4,10 +4,6 @@ function security() {
 		return user;
 	}
 
-	function hasUserPermission(user, permission) {
-		return user && user.permissions.indexOf(permission) > -1;
-	}
-
 	function securizeApi (res, allowedAccess, unauthorizedMessage) {
 		return new Promise(function(resolve, reject) {
 			if (!allowedAccess) {
@@ -46,12 +42,16 @@ function security() {
 		};
 	}
 
+	function userHasPermission(user, permission) {
+		return user && user.permissions.indexOf(permission) > -1;
+	}
+
 	return {
-		hasUserPermission,
 		isUserAuthenticated,
 		securizeApi,
 		securizeMiddleware,
-		securizeView
+		securizeView,
+		userHasPermission
 	};
 }
 

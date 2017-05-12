@@ -2,7 +2,7 @@
 
 <html lang="en">
 <head>
-    <title>Restricted</title>
+    <title>Title</title>
     <meta charset="utf-8" />
     <meta name="description" content="description" />
     <meta name="author" content="author" />
@@ -13,17 +13,12 @@
 <body>
 	<% include partials/_header.ejs %>
 
-	<a href="/users-template/">Back to list</a>
+	<h3>Restricted elements list</h3>
 
-	<% if (!element) { %>
-		<h3>The requested element does not exist</h3>
-	<% } else { %>
-		<h3><%= element.name %></h3>
-		<p><label>Id:</label> <%= element.id %></p>
-		<p><label>Public:</label> <%= element.public %></p>
-		<p><label>Owner Id:</label> <%= element.ownerId %></p>
-	<% } %>
+	<div id="elements-list"></div>
+  
+  	<% include partials/_footer.ejs %>
 
-	<% include partials/_footer.ejs %>
+    <script type="text/javascript" src="<%= asset('js/restricted-list.js') %>"></script>
 </body>
 </html>
