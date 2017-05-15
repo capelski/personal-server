@@ -1,4 +1,4 @@
-var publicService = require('../services/public-service');
+var publicService = require('../../services/public-service');
 
 function getAll (req, res, next) {
 	var publics = publicService.getAll();

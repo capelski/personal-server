@@ -1,3 +1,4 @@
+- Review security.js and user-template index.js
 - Modify security structure to protect only api methods (no need to get accessType)
 - Modify users templates to 'clone' youtube
 	- Add CREATE (POST), EDIT (PUT), DELETE

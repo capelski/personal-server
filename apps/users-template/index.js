@@ -6,40 +6,21 @@ var authenticationService = require('./services/authentication-service');
 var authenticationHandler = passport.createStrategy('users-template',
 	authenticationService.authenticator, authenticationService.retriever, authenticationService.logIn, authenticationService.logOut);
 
-
 router.get('/', function (req,res,next) {
 	return res.render('users-template-index');
 });
 
+var publicControllers = require('./controllers/public');
+router.get('/api/public', publicControllers.api.getAll);
+router.get('/api/public/getById', publicControllers.api.getById);
+router.get('/public', publicControllers.views.list);
+router.get('/public/details', publicControllers.views.details);
 
-var publicController = {
-	api: require('./controllers/public-api-controller'),
-	views: require('./controllers/public-views-controller'),
-	security: require('./controllers/public-security')
-};
-
-router.get('/api/public', publicController.security.getAll('api') ,publicController.api.getAll);
-router.get('/api/public/getById', publicController.security.getById('api'), publicController.api.getById);
-
-router.get('/public', publicController.views.list);
-router.get('/public/details', publicController.views.details);
-
-
-
-var restrictedController = {
-	api: require('./controllers/restricted-api-controller'),
-	views: require('./controllers/restricted-views-controller'),
-	security: require('./controllers/restricted-security')
-};
-
-router.get('/api/restricted', restrictedController.security.getAll('api'), restrictedController.api.getAll);
-router.get('/api/restricted/getById', restrictedController.security.getById('api'), restrictedController.api.getById);
-
-router.get('/restricted', restrictedController.views.list);
-router.get('/restricted/details', restrictedController.views.details);
-
-
-
+var restrictedControllers = require('./controllers/restricted');
+router.get('/api/restricted', restrictedControllers.api.getAll);
+router.get('/api/restricted/getById', restrictedControllers.api.getById);
+router.get('/restricted', restrictedControllers.views.list);
+router.get('/restricted/details', restrictedControllers.views.details);
 
 router.post('/log-in', authenticationHandler.logIn);
 router.post('/log-out', authenticationHandler.logOut);

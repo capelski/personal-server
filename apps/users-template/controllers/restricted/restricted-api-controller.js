@@ -1,4 +1,4 @@
-var restrictedService = require('../services/restricted-service');
+var restrictedService = require('../../services/restricted-service');
 
 function getAll (req, res, next) {
 	var restricteds = restrictedService.getAll();
