@@ -18,5 +18,11 @@
 	<a href="/users-template/">Home</a>
   
   	<% include partials/_footer.ejs %>
+    
+    <script type="text/javascript">
+        $(function() {
+            window.application.authentication.pageLoad();
+        });
+    </script>
 </body>
 </html>

@@ -17,13 +17,15 @@ $(function() {
 					});
 				})
 				.fail(function(response) {
+					itemsList.html('<b>Unauthorized</b>');
 					// TODO Toaster
 					console.log('Error', response);
 				});
 			}
 			else {
-				itemsList.html('<b>Unauthorized</b>');	
+				itemsList.html('<b>Unauthorized</b>');
 			}
 		});
+		window.application.authentication.pageLoad();
 	}
 });

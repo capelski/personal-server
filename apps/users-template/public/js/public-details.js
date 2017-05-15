@@ -18,13 +18,15 @@ $(function() {
 					elementWrapper.html(element.name);
 				})
 				.fail(function(response) {
+					elementWrapper.html('<b>Unauthorized</b>');
 					// TODO Toaster
 					console.log('Error', response);
 				});
 			}
 			else {
-				elementWrapper.html('<b>Unauthorized</b>');	
+				elementWrapper.html('<b>Unauthorized</b>');
 			}
 		});
+		window.application.authentication.pageLoad();
 	}
 });

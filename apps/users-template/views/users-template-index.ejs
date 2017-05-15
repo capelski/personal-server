@@ -19,5 +19,11 @@
     <a href="/users-template/restricted">Restricted elements list</a>
   
   	<% include partials/_footer.ejs %>
+    
+    <script type="text/javascript">
+        $(function() {
+            window.application.authentication.pageLoad();
+        });
+    </script>
 </body>
 </html>

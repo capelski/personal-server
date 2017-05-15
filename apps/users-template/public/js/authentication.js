@@ -7,8 +7,7 @@ $(function() {
 			authenticationListeners.push(listener);
 		}
 	};
-
-	pageLoad();
+	window.application.authentication.pageLoad = pageLoad;
 
 	function authenticationHandler(user) {
 		if (user) {

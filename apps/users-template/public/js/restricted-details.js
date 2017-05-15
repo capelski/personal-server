@@ -18,6 +18,7 @@ $(function() {
 					elementWrapper.html(element.name);
 				})
 				.fail(function(response) {
+					elementWrapper.html('<b>Unauthorized</b>');
 					// TODO Toaster
 					console.log('Error', response);
 				});
@@ -26,5 +27,6 @@ $(function() {
 				elementWrapper.html('<b>Unauthorized</b>');	
 			}
 		});
+		window.application.authentication.pageLoad();
 	}
 });
