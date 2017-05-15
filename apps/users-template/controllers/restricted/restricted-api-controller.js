@@ -10,7 +10,14 @@ function getById (req, res, next) {
 	return res.json(restricted);
 }
 
+function update (req, res, next) {
+	var updatedRestricted = req.body;
+	var restricted = restrictedService.update(updatedRestricted);
+	return res.json(restricted);
+}
+
 module.exports = {
 	getAll,
-	getById
+	getById,
+	update
 };

@@ -1,3 +1,6 @@
+- Adding PUT methods
+- Hide links in view if no permissions
+- Auth.js: If user has no permissions -> Show unauthorized message too
 - Review security.js and user-template index.js
 - Modify security structure to protect only api methods (no need to get accessType)
 - Modify users templates to 'clone' youtube
@@ -28,3 +31,14 @@ db1sequelize.define('User', {...})
 db1sequelize.define('Group', {...})
 
 var db2sequelize = new Sequelize('db2', 'db2user','db2pass'...);
+
+
+$.ajax({
+	method: 'PUT',
+	url: '/users-template/api/restricted',
+	contentType: 'application/json',
+	data: JSON.stringify({
+		id: 1,
+		name: 'Wassaaaaa'
+	})
+})

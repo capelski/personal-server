@@ -18,7 +18,16 @@ function getById (restrictedId) {
 	return restricted;
 }
 
+function update(updatedRestricted) {
+	var restricted = restricteds.find(element => element.id === updatedRestricted.id);
+	if (restricted) {
+		restricted.name = updatedRestricted.name;
+	}
+	return restricted;
+}
+
 module.exports = {
 	getAll,
-	getById
+	getById,
+	update
 };

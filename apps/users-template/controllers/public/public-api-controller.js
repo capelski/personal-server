@@ -10,7 +10,14 @@ function getById (req, res, next) {
 	return res.json(public);
 }
 
+function update (req, res, next) {
+	var updatedPublic = req.body;
+	var public = publicService.update(updatedPublic);
+	return res.json(public);
+}
+
 module.exports = {
 	getAll,
-	getById
+	getById,
+	update
 };

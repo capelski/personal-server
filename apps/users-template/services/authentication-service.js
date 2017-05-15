@@ -1,13 +1,13 @@
 var users = [{
 	id: 1,
-	username: 'Cookieman',
-	password: 'unhashed',
-	permissions: ['public:view', 'restricted:view']
+	username: 'public',
+	password: 'public',
+	permissions: ['public:view', 'public:edit']
 }, {
 	id: 2,
-	username: 'fucker.boy',
-	password: 'silly1',
-	permissions: ['public:view']
+	username: 'restricted',
+	password: 'restricted',
+	permissions: ['restricted:view', 'restricted:edit']
 }];
 
 function logIn(req, res, next) {

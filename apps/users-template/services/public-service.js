@@ -18,7 +18,16 @@ function getById (publicId) {
 	return element;
 }
 
+function update(updatedPublic) {
+	var public = publics.find(element => element.id === updatedPublic.id);
+	if (public) {
+		public.name = updatedPublic.name;
+	}
+	return public;
+}
+
 module.exports = {
 	getAll,
-	getById
+	getById,
+	update
 };
