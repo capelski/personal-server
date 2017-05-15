@@ -8,7 +8,14 @@ function details (req, res, next) {
 	});
 }
 
+function edit (req, res, next) {
+	return res.render('users-template-restricted-edit', {
+		restrictedId: parseInt(req.query.id)
+	});
+}
+
 module.exports = {
 	list,
-	details
+	details,
+	edit
 };

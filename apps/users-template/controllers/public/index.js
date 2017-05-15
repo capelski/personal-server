@@ -32,7 +32,8 @@ var publicControllers = {
 	},
 	views: {
 		list: viewsController.list,
-		details: viewsController.details
+		details: viewsController.details,
+		edit: viewsController.edit
 	}
 };
 

@@ -1,5 +1,9 @@
-- Auth.js: If user has no permissions -> Show unauthorized message too
-- Add EDIT link in details view + Edit page
+- Add edit page
+	+ Public
+	+ Restricted
+- Edit/Details views do not updated upon Login
+- Add EDIT link in details view
+- Filter error type in JS (If 404 -> message. If unauthorized -> message)
 - Hide links in view if no permissions
 - Review security.js and user-template index.js
 - Modify security structure to protect only api methods (no need to get accessType)

@@ -16,6 +16,7 @@ router.put('/api/public', publicControllers.api.update);
 router.get('/api/public/getById', publicControllers.api.getById);
 router.get('/public', publicControllers.views.list);
 router.get('/public/details', publicControllers.views.details);
+router.get('/public/edit', publicControllers.views.edit);
 
 var restrictedControllers = require('./controllers/restricted');
 router.get('/api/restricted', restrictedControllers.api.getAll);
@@ -23,6 +24,7 @@ router.put('/api/restricted', restrictedControllers.api.update);
 router.get('/api/restricted/getById', restrictedControllers.api.getById);
 router.get('/restricted', restrictedControllers.views.list);
 router.get('/restricted/details', restrictedControllers.views.details);
+router.get('/restricted/edit', restrictedControllers.views.edit);
 
 router.post('/log-in', authenticationHandler.logIn);
 router.post('/log-out', authenticationHandler.logOut);

@@ -33,6 +33,7 @@ var restrictedControllers = {
 	views: {
 		list: viewsController.list,
 		details: viewsController.details,
+		edit: viewsController.edit
 	}
 };
 
