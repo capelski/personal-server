@@ -24,17 +24,13 @@ function edit() {
 	};
 }
 
-var publicControllers = {
-	api: {
-		getAll: [view(), apiController.getAll],
-		getById: [view(), apiController.getById],
-		update: [edit(), apiController.update]
-	},
-	views: {
-		list: viewsController.list,
-		details: viewsController.details,
-		edit: viewsController.edit
-	}
-};
+module.exports = function(router) {
+	router.get('/api/public', [view(), apiController.getAll]);
+	router.put('/api/public', [edit(), apiController.update]);
+	router.get('/api/public/getById', [view(), apiController.getById]);
+	router.get('/api/public/getForEditById', [edit(), apiController.getById]);
 
-module.exports = publicControllers
+	router.get('/public', viewsController.list);
+	router.get('/public/details', viewsController.details);
+	router.get('/public/edit', viewsController.edit);
+};

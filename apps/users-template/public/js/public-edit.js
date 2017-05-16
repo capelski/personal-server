@@ -30,7 +30,7 @@ $(function() {
 			if (user) {
 				return $.ajax({
 					method: 'GET',
-					url: '/users-template/api/public/getById',
+					url: '/users-template/api/public/getForEditById',
 					dataType: 'json',
 					data: {
 						id: elementId

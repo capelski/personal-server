@@ -1,7 +1,3 @@
-+ Edit/Details views do not update upon Login
-+ Add edit page (Public vs Restricted)
-+ Add EDIT link in details view
-
 - Hide edit links if no edit permissions
 - Page titles...
 - Hardcoded URLs in Views should come from server side
