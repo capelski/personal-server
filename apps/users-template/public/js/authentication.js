@@ -10,6 +10,7 @@ $(function() {
 	window.application.authentication.pageLoad = pageLoad;
 
 	function authenticationHandler(user) {
+		$('#error-msg').addClass('hidden');
 		if (user) {
 			$('#logged-username').html(user.username);
 			$('#login-form').addClass('hidden');
@@ -40,8 +41,8 @@ $(function() {
 			})
 			.then(authenticationHandler)
 			.fail(function(response) {
-				// TODO Toastr
-				$('#logged-username').html(response.responseJSON.message);
+				$('#error-msg').html((response.responseJSON && response.responseJSON.message) || response.responseText);
+				$('#error-msg').removeClass('hidden');
 			});
 		});
 
@@ -54,8 +55,8 @@ $(function() {
 				authenticationHandler(null);
 			})
 			.fail(function(response) {
-				// TODO Toastr
-				$('#logged-username').html(response.responseJSON.message);
+				$('#error-msg').html((response.responseJSON && response.responseJSON.message) || response.responseText);
+				$('#error-msg').removeClass('hidden');
 			});
 		});
 	}

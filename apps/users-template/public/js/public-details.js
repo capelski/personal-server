@@ -1,9 +1,11 @@
 $(function() {
+	var elementWrapper = $('#element-wrapper');
+	var unauthorizedMsg = $('#unauthorized-msg');
+	
 	pageLoad();
 
 	function pageLoad() {
 		window.application.authentication.subscribe(function(user) {
-			var elementWrapper = $('#element-wrapper');
 			if (user) {
 				return $.ajax({
 					method: 'GET',
@@ -14,17 +16,19 @@ $(function() {
 					}
 				})
 				.then(function (element) {
-					 // TODO Fill all the required HTML
+					unauthorizedMsg.addClass('hidden');
 					elementWrapper.html(element.name);
+					elementWrapper.removeClass('hidden');
 				})
 				.fail(function(response) {
-					elementWrapper.html('<b>Unauthorized</b>');
-					// TODO Toaster
-					console.log('Error', response);
+					// TODO If 401 -> Display 401; Otherwise, display error
+					elementWrapper.addClass('hidden');
+					unauthorizedMsg.removeClass('hidden');
 				});
 			}
 			else {
-				elementWrapper.html('<b>Unauthorized</b>');
+				elementWrapper.addClass('hidden');
+				unauthorizedMsg.removeClass('hidden');
 			}
 		});
 		window.application.authentication.pageLoad();

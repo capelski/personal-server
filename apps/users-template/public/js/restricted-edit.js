@@ -3,6 +3,7 @@ $(function() {
 	var elementWrapper = $('#element-wrapper');
 	var elementName = $('#element-name');
 	var elementId = elementWrapper.data('element-id');
+	var unauthorizedMsg = $('#unauthorized-msg');
 
 	function pageLoad() {
 
@@ -17,7 +18,6 @@ $(function() {
 				})
 			})
 			.then(function (element) {
-				// TODO
 				document.location.href = '/users-template/restricted/details?id=' + elementId;
 			})
 			.fail(function(response) {
@@ -37,17 +37,18 @@ $(function() {
 					}
 				})
 				.then(function (element) {
-					 // TODO Fill all the required HTML
+					unauthorizedMsg.addClass('hidden');
 					elementName.val(element.name);
+					elementWrapper.removeClass('hidden');
 				})
 				.fail(function(response) {
-					elementWrapper.html('<b>Unauthorized</b>');
-					// TODO Toaster
-					console.log('Error', response);
+					elementWrapper.addClass('hidden');
+					unauthorizedMsg.removeClass('hidden');
 				});
 			}
 			else {
-				elementWrapper.html('<b>Unauthorized</b>');
+				elementWrapper.addClass('hidden');
+				unauthorizedMsg.removeClass('hidden');
 			}
 		});
 		window.application.authentication.pageLoad();

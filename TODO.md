@@ -1,8 +1,10 @@
-- Add edit page
-	+ Public
-	+ Restricted
-- Edit/Details views do not updated upon Login
-- Add EDIT link in details view
++ Edit/Details views do not update upon Login
++ Add edit page (Public vs Restricted)
++ Add EDIT link in details view
+
+- Hide edit links if no edit permissions
+- Page titles...
+- Hardcoded URLs in Views should come from server side
 - Filter error type in JS (If 404 -> message. If unauthorized -> message)
 - Hide links in view if no permissions
 - Review security.js and user-template index.js
