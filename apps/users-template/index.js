@@ -15,17 +15,8 @@ router.post('/log-out', authenticationHandler.logOut);
 
 router.get('/client-side', function (req, res, next) {
 	res.set('Content-Type', 'application/javascript');
-	
-	var user = null;
-	if (req.user) {
-		user = {
-			id: req.user.id,
-			username: req.user.username
-		};
-	}
-
 	return res.json({
-		user: user
+		user: authenticationService.getClientSideInfo(req.user, req.query.permissions)
 	});
 });
 

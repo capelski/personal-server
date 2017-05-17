@@ -51,6 +51,6 @@ $(function() {
 				unauthorizedMsg.removeClass('hidden');
 			}
 		});
-		window.application.authentication.pageLoad();
+		window.application.authentication.pageLoad(['restricted:edit']);
 	}
 });

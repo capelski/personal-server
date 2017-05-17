@@ -1,3 +1,5 @@
+var security = require('../../../utils/security');
+
 var users = [{
 	id: 1,
 	username: 'public',
@@ -11,10 +13,7 @@ var users = [{
 }];
 
 function logIn(req, res, next) {
-	return res.json({
-		message: 'Successfully authenticated',
-		username: req.user.username
-	});
+	return res.json(getClientSideInfo(req.user, req.body.permissions));
 }
 
 function logOut(req, res, next) {
@@ -31,9 +30,32 @@ function retriever(userId) {
 	return Promise.resolve(user);
 }
 
+function getClientSideInfo(user, permissions) {
+	var parsedUser = null;
+	if (user) {
+		parsedUser = {
+			id: user.id,
+			username: user.username,
+			permissions: {}
+		};
+		permissions = permissions || [];
+		permissions.forEach(permission => {
+			if (typeof permission === "string" && security.userHasPermission(user, permission)) {
+				var splittedPermission = permission.split(':');
+				var entity = splittedPermission[0];
+				var right = splittedPermission[1];
+				parsedUser.permissions[entity] = parsedUser.permissions[entity] || {};
+				parsedUser.permissions[entity][right] = true;
+			}
+		});
+	}
+	return parsedUser;
+}
+
 module.exports = {
 	logIn,
 	logOut,
 	authenticator,
-	retriever
+	retriever,
+	getClientSideInfo
 };

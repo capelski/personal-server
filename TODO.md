@@ -22,6 +22,8 @@
 - Generic error handler: If 404 -> Error
 - Passport: Securize access through namespace
 
+- Use the permissions object in the views to prevent AJAX calls and remove 401 handling
+
 SQL naming conventions ------------------------------------------------
 
 - Tables and columns names -> Lower snake case (e.g. bank_account for class BankAccount)
