@@ -1,13 +1,17 @@
-- Hide edit links if no edit permissions
-- Page titles...
+- EDIT
+	- Hide edit links from details page if no edit permissions
+- DELETE
+	- Create DEL method with specific permissions
+	- Add a Delete link to details page if permissions
+- CREATE
+	- Create POST method with specific permissions
+	- Add a Create link to list page if permissions
+
+- Page titles
 - Hardcoded URLs in Views should come from server side
 - Filter error type in JS (If 404 -> message. If unauthorized -> message)
-- Hide links in view if no permissions
-- Review security.js and user-template index.js
-- Modify security structure to protect only api methods (no need to get accessType)
-- Modify users templates to 'clone' youtube
-	- Add CREATE (POST), EDIT (PUT), DELETE
-	- If Permissions, Add Action buttons
+- Review security.js: Delete unused methods + create a new one based in controllers/public/index usage
+
 - Transpiler: Extract sass compiler common code to Utils
 - Add toastr
 - Put tracer everywhere
