@@ -28,7 +28,7 @@ $(function() {
 		}
 	}
 
-	function bindLoginForm() {
+	function bindLoginForm(permissions) {
 		$('#log-in').on('click', function() {
 			$.ajax({
 				method: 'POST',
@@ -36,7 +36,8 @@ $(function() {
 				contentType: 'application/json',
 				data: JSON.stringify({
 					username: $('#username').val(),
-					password: $('#password').val()
+					password: $('#password').val(),
+					permissions: permissions
 				})
 			})
 			.then(authenticationHandler)
@@ -61,12 +62,16 @@ $(function() {
 		});
 	}
 
-	function pageLoad() {
-		bindLoginForm();
+	function pageLoad(permissions) {
+		permissions = permissions || [];
+		bindLoginForm(permissions);
 		return $.ajax({
 			method: 'GET',
 			url: '/users-template/client-side',
-			dataType: 'json'
+			dataType: 'json',
+			data: {
+				permissions: permissions
+			}
 		})
 		.then(function (clientData) {
 			window.application.clientData = clientData;

@@ -31,6 +31,6 @@ $(function() {
 				unauthorizedMsg.removeClass('hidden');
 			}
 		});
-		window.application.authentication.pageLoad();
+		window.application.authentication.pageLoad(['public:view', 'public:edit', 'public:delete']);
 	}
 });
