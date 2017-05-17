@@ -8,6 +8,7 @@
 	- Add a Create link to list page if permissions
 
 - Page titles
+- Loaders...
 - Hardcoded URLs in Views should come from server side
 - Filter error type in JS (If 404 -> message. If unauthorized -> message)
 - Review security.js: Delete unused methods + create a new one based in controllers/public/index usage
@@ -21,8 +22,6 @@
 	- Security: Each app can access only a corresponding database
 - Generic error handler: If 404 -> Error
 - Passport: Securize access through namespace
-
-- Use the permissions object in the views to prevent AJAX calls and remove 401 handling
 
 SQL naming conventions ------------------------------------------------
 

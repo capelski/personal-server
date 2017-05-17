@@ -36,16 +36,12 @@ function getClientSideInfo(user, permissions) {
 		parsedUser = {
 			id: user.id,
 			username: user.username,
-			permissions: {}
+			permissions: []
 		};
 		permissions = permissions || [];
 		permissions.forEach(permission => {
 			if (typeof permission === "string" && security.userHasPermission(user, permission)) {
-				var splittedPermission = permission.split(':');
-				var entity = splittedPermission[0];
-				var right = splittedPermission[1];
-				parsedUser.permissions[entity] = parsedUser.permissions[entity] || {};
-				parsedUser.permissions[entity][right] = true;
+				parsedUser.permissions.push(permission);
 			}
 		});
 	}

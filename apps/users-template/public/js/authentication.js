@@ -41,10 +41,7 @@ $(function() {
 				})
 			})
 			.then(authenticationHandler)
-			.fail(function(response) {
-				$('#error-msg').html((response.responseJSON && response.responseJSON.message) || response.responseText);
-				$('#error-msg').removeClass('hidden');
-			});
+			.fail(window.application.ajaxFailHandler);
 		});
 
 		$('#log-out').on('click', function() {
@@ -55,10 +52,7 @@ $(function() {
 			.then(function() {
 				authenticationHandler(null);
 			})
-			.fail(function(response) {
-				$('#error-msg').html((response.responseJSON && response.responseJSON.message) || response.responseText);
-				$('#error-msg').removeClass('hidden');
-			});
+			.fail(window.application.ajaxFailHandler);
 		});
 	}
 

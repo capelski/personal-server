@@ -25,12 +25,11 @@ function edit() {
 }
 
 module.exports = function(router) {
-	router.get('/api/restricted', [view(), apiController.getAll]);
-	router.put('/api/restricted', [edit(), apiController.update]);
-	router.get('/api/restricted/getById', [view(), apiController.getById]);
-	router.get('/api/restricted/getForEditById', [edit(), apiController.getById]);
-
 	router.get('/restricted', viewsController.list);
 	router.get('/restricted/details', viewsController.details);
 	router.get('/restricted/edit', viewsController.edit);
+	
+	router.get('/api/restricted', [view(), apiController.getAll]);
+	router.put('/api/restricted', [edit(), apiController.update]);
+	router.get('/api/restricted/getById', [view(), apiController.getById]);
 };

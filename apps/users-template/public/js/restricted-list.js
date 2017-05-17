@@ -6,28 +6,25 @@ $(function() {
 
 	function pageLoad() {
 		window.application.authentication.subscribe(function(user) {
-			if (user) {
+			itemsList.addClass('hidden');
+			itemsList.empty();
+			unauthorizedMsg.addClass('hidden');
+
+			if (user && window.application.userHasPermission(user, 'restricted:view')) {
 				return $.ajax({
 					method: 'GET',
 					url: '/users-template/api/restricted',
 					dataType: 'json'
 				})
 				.then(function (elements) {
-					unauthorizedMsg.addClass('hidden');
-					itemsList.empty();
 					elements.forEach(function(element) {
 						itemsList.append('<p><a href="/users-template/restricted/details?id=' + element.id + '">' + element.name + '</a></p>');
 					});
 					itemsList.removeClass('hidden');
 				})
-				.fail(function(response) {
-					// TODO If 401 -> Display 401; Otherwise, display error
-					itemsList.addClass('hidden');
-					unauthorizedMsg.removeClass('hidden');
-				});
+				.fail(window.application.ajaxFailHandler);
 			}
 			else {
-				itemsList.addClass('hidden');
 				unauthorizedMsg.removeClass('hidden');
 			}
 		});

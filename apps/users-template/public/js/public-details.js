@@ -6,7 +6,10 @@ $(function() {
 
 	function pageLoad() {
 		window.application.authentication.subscribe(function(user) {
-			if (user) {
+			elementWrapper.addClass('hidden');
+			unauthorizedMsg.addClass('hidden');
+
+			if (user && window.application.userHasPermission(user, 'public:view')) {
 				return $.ajax({
 					method: 'GET',
 					url: '/users-template/api/public/getById',
@@ -16,18 +19,12 @@ $(function() {
 					}
 				})
 				.then(function (element) {
-					unauthorizedMsg.addClass('hidden');
 					elementWrapper.html(element.name);
 					elementWrapper.removeClass('hidden');
 				})
-				.fail(function(response) {
-					// TODO If 401 -> Display 401; Otherwise, display error
-					elementWrapper.addClass('hidden');
-					unauthorizedMsg.removeClass('hidden');
-				});
+				.fail(window.application.ajaxFailHandler);
 			}
 			else {
-				elementWrapper.addClass('hidden');
 				unauthorizedMsg.removeClass('hidden');
 			}
 		});

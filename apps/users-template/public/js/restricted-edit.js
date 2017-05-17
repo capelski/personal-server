@@ -20,34 +20,29 @@ $(function() {
 			.then(function (element) {
 				document.location.href = '/users-template/restricted/details?id=' + elementId;
 			})
-			.fail(function(response) {
-				// TODO
-				console.log('Ko');
-			});
+			.fail(window.application.ajaxFailHandler);
 		});
 
 		window.application.authentication.subscribe(function(user) {
-			if (user) {
+			elementWrapper.addClass('hidden');
+			unauthorizedMsg.addClass('hidden');
+
+			if (user && window.application.userHasPermission(user, 'restricted:edit')) {
 				return $.ajax({
 					method: 'GET',
-					url: '/users-template/api/restricted/getForEditById',
+					url: '/users-template/api/restricted/getById',
 					dataType: 'json',
 					data: {
 						id: elementId
 					}
 				})
 				.then(function (element) {
-					unauthorizedMsg.addClass('hidden');
 					elementName.val(element.name);
 					elementWrapper.removeClass('hidden');
 				})
-				.fail(function(response) {
-					elementWrapper.addClass('hidden');
-					unauthorizedMsg.removeClass('hidden');
-				});
+				.fail(window.application.ajaxFailHandler);
 			}
 			else {
-				elementWrapper.addClass('hidden');
 				unauthorizedMsg.removeClass('hidden');
 			}
 		});
