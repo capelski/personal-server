@@ -4,12 +4,12 @@ var users = [{
 	id: 1,
 	username: 'public',
 	password: 'public',
-	permissions: ['public:view', 'public:edit']
+	permissions: ['public:view', 'public:edit', 'public:delete']
 }, {
 	id: 2,
 	username: 'restricted',
 	password: 'restricted',
-	permissions: ['restricted:view', 'restricted:edit']
+	permissions: ['restricted:view', 'restricted:edit', 'restricted:delete']
 }];
 
 function logIn(req, res, next) {

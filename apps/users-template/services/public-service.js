@@ -9,6 +9,14 @@ var publics = [{
 	name: 'Public element 3'
 }];
 
+function deletePublic (publicId) {
+	var public = publics.find(public => public.id === publicId);
+	if (public) {
+		publics = publics.filter(public => public.id !== publicId);
+	}
+	return public;
+}
+
 function getAll () {
 	return publics;
 }
@@ -27,6 +35,7 @@ function update(updatedPublic) {
 }
 
 module.exports = {
+	delete: deletePublic,
 	getAll,
 	getById,
 	update

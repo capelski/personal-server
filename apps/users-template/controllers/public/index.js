@@ -24,6 +24,17 @@ function edit() {
 	};
 }
 
+function deletePermissions() {
+	return function(req, res, next) {
+		if (security.userHasPermission(req.user, 'public:delete')) {
+			return next();
+		}
+		else {
+			return res.status(401).json('You are not allowed to perform the requested operation');
+		}
+	};
+}
+
 module.exports = function(router) {
 	router.get('/public', viewsController.list);
 	router.get('/public/details', viewsController.details);
@@ -31,5 +42,6 @@ module.exports = function(router) {
 	
 	router.get('/api/public', [view(), apiController.getAll]);
 	router.put('/api/public', [edit(), apiController.update]);
+	router.delete('/api/public', [deletePermissions(), apiController.delete]);
 	router.get('/api/public/getById', [view(), apiController.getById]);
 };

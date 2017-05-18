@@ -1,5 +1,10 @@
 var publicService = require('../../services/public-service');
 
+function deletePublic (req, res, next) {
+	var public = publicService.delete(parseInt(req.body.id));
+	return res.json(public);
+}
+
 function getAll (req, res, next) {
 	var publics = publicService.getAll();
 	return res.json(publics);
@@ -17,6 +22,7 @@ function update (req, res, next) {
 }
 
 module.exports = {
+	delete: deletePublic,
 	getAll,
 	getById,
 	update

@@ -1,7 +1,7 @@
 - EDIT
 	- Hide edit links from details page if no edit permissions
 - DELETE
-	- Create DEL method with specific permissions
+	+ Create DEL method with specific permissions
 	- Add a Delete link to details page if permissions
 - CREATE
 	- Create POST method with specific permissions
@@ -10,9 +10,8 @@
 - Page titles
 - Loaders...
 - Hardcoded URLs in Views should come from server side
-- Filter error type in JS (If 404 -> message. If unauthorized -> message)
 - Review security.js: Delete unused methods + create a new one based in controllers/public/index usage
-
+- Popup to avoid accidental deletes
 - Transpiler: Extract sass compiler common code to Utils
 - Add toastr
 - Put tracer everywhere

@@ -9,6 +9,14 @@ var restricteds = [{
 	name: 'Restricted element 3'
 }];
 
+function deleteRestricted (restrictedId) {
+	var restricted = restricteds.find(restricted => restricted.id === restrictedId);
+	if (restricted) {
+		restricteds = restricteds.filter(restricted => restricted.id !== restrictedId);
+	}
+	return restricted;
+}
+
 function getAll () {
 	return restricteds;
 }
@@ -27,6 +35,7 @@ function update(updatedRestricted) {
 }
 
 module.exports = {
+	delete: deleteRestricted,
 	getAll,
 	getById,
 	update

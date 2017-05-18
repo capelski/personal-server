@@ -17,7 +17,9 @@
 
 	<div id="element-wrapper" data-element-id="<%= publicId %>"></div>
 
-    <a href="/users-template/public/edit?id=<%= publicId %>">Edit</a>
+    <a href="/users-template/public/edit?id=<%= publicId %>" id="edit-element">Edit</a>
+
+    <button type="button" id="delete-element">Delete</button>
 
 	<% include partials/_footer.ejs %>
 
