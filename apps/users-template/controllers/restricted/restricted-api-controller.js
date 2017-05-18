@@ -1,5 +1,10 @@
 var restrictedService = require('../../services/restricted-service');
 
+function create (req, res, next) {
+	var restricted = restrictedService.create(req.body);
+	return res.json(restricted);
+}
+
 function deleteRestricted (req, res, next) {
 	var restricted = restrictedService.delete(parseInt(req.body.id));
 	return res.json(restricted);
@@ -22,6 +27,7 @@ function update (req, res, next) {
 }
 
 module.exports = {
+	create,
 	delete: deleteRestricted,
 	getAll,
 	getById,

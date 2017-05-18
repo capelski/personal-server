@@ -1,3 +1,4 @@
+var nextId = 4;
 var publics = [{
 	id: 1,
 	name: 'Public element 1'
@@ -8,6 +9,15 @@ var publics = [{
 	id: 3,
 	name: 'Public element 3'
 }];
+
+function create (publicData) {
+	var public = {
+		id: nextId++,
+		name: publicData.name
+	};
+	publics.push(public);
+	return public;
+}
 
 function deletePublic (publicId) {
 	var public = publics.find(public => public.id === publicId);
@@ -35,6 +45,7 @@ function update(updatedPublic) {
 }
 
 module.exports = {
+	create,
 	delete: deletePublic,
 	getAll,
 	getById,

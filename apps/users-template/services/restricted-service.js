@@ -1,3 +1,4 @@
+var nextId = 4;
 var restricteds = [{
 	id: 1,
 	name: 'Restricted element 1'
@@ -8,6 +9,15 @@ var restricteds = [{
 	id: 3,
 	name: 'Restricted element 3'
 }];
+
+function create (restrictedData) {
+	var restricted = {
+		id: nextId++,
+		name: restrictedData.name
+	};
+	restricteds.push(restricted);
+	return restricted;
+}
 
 function deleteRestricted (restrictedId) {
 	var restricted = restricteds.find(restricted => restricted.id === restrictedId);
@@ -35,6 +45,7 @@ function update(updatedRestricted) {
 }
 
 module.exports = {
+	create,
 	delete: deleteRestricted,
 	getAll,
 	getById,

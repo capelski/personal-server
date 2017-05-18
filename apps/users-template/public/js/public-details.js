@@ -30,7 +30,7 @@ $(function() {
 			deleteButton.addClass('hidden');
 			unauthorizedMsg.addClass('hidden');
 
-			if (user) {
+			if (user && window.application.userHasSomePermission(user, ['public:view', 'public:edit', 'public:delete'])) {
 				if (window.application.userHasPermission(user, 'public:view')) {
 					$.ajax({
 						method: 'GET',

@@ -2,20 +2,9 @@ var security = require('../../../../utils/security');
 var apiController = require('./public-api-controller');
 var viewsController = require('./public-views-controller');
 
-function view() {
+function create() {
 	return function(req, res, next) {
-		if (security.userHasPermission(req.user, 'public:view')) {
-			return next();
-		}
-		else {
-			return res.status(401).json('You are not allowed to perform the requested operation');
-		}
-	};
-}
-
-function edit() {
-	return function(req, res, next) {
-		if (security.userHasPermission(req.user, 'public:edit')) {
+		if (security.userHasPermission(req.user, 'public:create')) {
 			return next();
 		}
 		else {
@@ -35,12 +24,36 @@ function deletePermissions() {
 	};
 }
 
+function edit() {
+	return function(req, res, next) {
+		if (security.userHasPermission(req.user, 'public:edit')) {
+			return next();
+		}
+		else {
+			return res.status(401).json('You are not allowed to perform the requested operation');
+		}
+	};
+}
+
+function view() {
+	return function(req, res, next) {
+		if (security.userHasPermission(req.user, 'public:view')) {
+			return next();
+		}
+		else {
+			return res.status(401).json('You are not allowed to perform the requested operation');
+		}
+	};
+}
+	
 module.exports = function(router) {
 	router.get('/public', viewsController.list);
 	router.get('/public/details', viewsController.details);
 	router.get('/public/edit', viewsController.edit);
+	router.get('/public/create', viewsController.create);
 	
 	router.get('/api/public', [view(), apiController.getAll]);
+	router.post('/api/public', [create(), apiController.create]);
 	router.put('/api/public', [edit(), apiController.update]);
 	router.delete('/api/public', [deletePermissions(), apiController.delete]);
 	router.get('/api/public/getById', [view(), apiController.getById]);

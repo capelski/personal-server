@@ -1,5 +1,7 @@
-function list (req, res, next) {
-	return res.render('users-template-restricted-list');
+function create (req, res, next) {
+	return res.render('users-template-restricted-edit', {
+		restrictedId: null
+	});
 }
 
 function details (req, res, next) {
@@ -14,8 +16,13 @@ function edit (req, res, next) {
 	});
 }
 
+function list (req, res, next) {
+	return res.render('users-template-restricted-list');
+}
+
 module.exports = {
-	list,
+	create,
 	details,
-	edit
+	edit,
+	list
 };
