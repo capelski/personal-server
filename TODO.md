@@ -1,10 +1,10 @@
-- Page titles
-- Loaders...
+- Transpiler: Add .babelrc file and install presets
+- Migrate all JavaScript to React
 - Hardcoded URLs in Views should come from server side
-- Review security.js: Delete unused methods + create a new one based in controllers/public/index usage
+- Page titles
 - Popup to avoid accidental deletes
-- Transpiler: Extract sass compiler common code to Utils
-- Add toastr
+- CSS Loaders for AJAX calls
+- Add toastr to display errors
 - Put tracer everywhere
 - Adapt tracer stackLevel for multiple apps
 - JSLint + use strict

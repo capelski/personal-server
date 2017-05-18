@@ -5,7 +5,7 @@ $(function() {
 	var actionButton = $('#action-button');
 	var unauthorizedMsg = $('#unauthorized-msg');
 
-	if (elementId && elementId.length > 0) {
+	if (elementId && elementId != '') {
 		updatePageLoad();
 	}
 	else {

@@ -1,50 +1,6 @@
 var security = require('../../../../utils/security');
 var apiController = require('./public-api-controller');
 var viewsController = require('./public-views-controller');
-
-function create() {
-	return function(req, res, next) {
-		if (security.userHasPermission(req.user, 'public:create')) {
-			return next();
-		}
-		else {
-			return res.status(401).json('You are not allowed to perform the requested operation');
-		}
-	};
-}
-
-function deletePermissions() {
-	return function(req, res, next) {
-		if (security.userHasPermission(req.user, 'public:delete')) {
-			return next();
-		}
-		else {
-			return res.status(401).json('You are not allowed to perform the requested operation');
-		}
-	};
-}
-
-function edit() {
-	return function(req, res, next) {
-		if (security.userHasPermission(req.user, 'public:edit')) {
-			return next();
-		}
-		else {
-			return res.status(401).json('You are not allowed to perform the requested operation');
-		}
-	};
-}
-
-function view() {
-	return function(req, res, next) {
-		if (security.userHasPermission(req.user, 'public:view')) {
-			return next();
-		}
-		else {
-			return res.status(401).json('You are not allowed to perform the requested operation');
-		}
-	};
-}
 	
 module.exports = function(router) {
 	router.get('/public', viewsController.list);
@@ -52,9 +8,9 @@ module.exports = function(router) {
 	router.get('/public/edit', viewsController.edit);
 	router.get('/public/create', viewsController.create);
 	
-	router.get('/api/public', [view(), apiController.getAll]);
-	router.post('/api/public', [create(), apiController.create]);
-	router.put('/api/public', [edit(), apiController.update]);
-	router.delete('/api/public', [deletePermissions(), apiController.delete]);
-	router.get('/api/public/getById', [view(), apiController.getById]);
+	router.get('/api/public', [security.securizeApi('public:view'), apiController.getAll]);
+	router.post('/api/public', [security.securizeApi('public:create'), apiController.create]);
+	router.put('/api/public', [security.securizeApi('public:edit'), apiController.update]);
+	router.delete('/api/public', [security.securizeApi('public:delete'), apiController.delete]);
+	router.get('/api/public/getById', [security.securizeApi('public:view'), apiController.getById]);
 };

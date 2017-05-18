@@ -1,43 +1,15 @@
 function security() {
 
-	function isUserAuthenticated(user) {
-		return user;
-	}
-
-	function securizeApi (res, allowedAccess, unauthorizedMessage) {
-		return new Promise(function(resolve, reject) {
-			if (!allowedAccess) {
-				return res.status(401).json(unauthorizedMessage);
-			}
-			return resolve();
-		});
-	}
-
-	function securizeView (res, allowedAccess, unauthorizedView) {
-		return new Promise(function(resolve, reject) {
-			if (!allowedAccess) {
-				return res.status(401).render(unauthorizedView);
-			}
-			return resolve();
-		});
-	}
-
-	function securizeMiddleware(accessCriteria, accessType, options) {
-		options = options || {};
-		options.unauthorizedMessage = options.unauthorizedMessage || 'You are not allowed to access this resource';
-		options.unauthorizedView = options.unauthorizedView || 'unauthorized';
+	function securizeApi(requiredPermission, errorCode, errorMessage) {
+		errorCode = errorCode != undefined ? errorCode : 401;
+		errorMessage = errorMessage != undefined ? errorMessage : 'You are not allowed to perform the requested operation';
 
 		return function(req, res, next) {
-			if (accessCriteria(req)) {
+			if (userHasPermission(req.user, requiredPermission)) {
 				return next();
 			}
 			else {
-				if (accessType === 'view') {
-					return res.status(401).render(options.unauthorizedView);
-				}
-				else if (accessType === 'api') {
-					return res.status(401).json(options.unauthorizedMessage);
-				}
+				return res.status(errorCode).json(errorMessage);
 			}
 		};
 	}
@@ -47,10 +19,7 @@ function security() {
 	}
 
 	return {
-		isUserAuthenticated,
 		securizeApi,
-		securizeMiddleware,
-		securizeView,
 		userHasPermission
 	};
 }
