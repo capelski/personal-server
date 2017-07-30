@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	htmlNodes.colorPickerIcon.addEventListener('click', () => {
 		window.colorPickerCustom.pick(fractal.displayColor)
 		.then((selectedColor) => {
-			window.generics.updateCSSProperty('fractal-pictures.css', '.colorizable', 'background-color', selectedColor, true);
+			window.generics.updateCSSProperty('main.css', '.colorizable', 'background-color', selectedColor, true);
 			fractal.displayColor = selectedColor;
 			renderCanvas(fractal.result);
 		});
