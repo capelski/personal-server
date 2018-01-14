@@ -59,7 +59,12 @@ class AppMapper {
 	    );
 		
 	    if (targetedApp && targetedApp.domain != null) {
-	        updatedRelativeUrl = '/' + targetedApp.namespace + relativeUrl;
+			var requiredPrefix = '/' + targetedApp.namespace;
+			if (!relativeUrl.startsWith(requiredPrefix)) {
+				updatedRelativeUrl = relativeUrl != '/' ?
+					requiredPrefix + relativeUrl :
+					requiredPrefix;
+			}
 	    }
 
 	    return updatedRelativeUrl;
