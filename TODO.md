@@ -1,3 +1,5 @@
+- TODO: Build the apps path based on the apps namespace
+
 - Transpiler: Add .babelrc file and install presets
 - Migrate all JavaScript to React
 - Hardcoded URLs in Views should come from server side

@@ -54,11 +54,11 @@ class AppMapper {
 	    var updatedRelativeUrl = relativeUrl;
 
 	    var targetedApp = apps.find(app =>
-	        (app.mapToDomain && domain.indexOf(app.namespace) > -1) ||
-	        (!app.mapToDomain && relativeUrl.startsWith('/' + app.namespace))
+	        (app.domain != null && domain.indexOf(app.domain) > -1) ||
+	        (app.domain == null && relativeUrl.startsWith('/' + app.namespace))
 	    );
 		
-	    if (targetedApp && targetedApp.mapToDomain) {
+	    if (targetedApp && targetedApp.domain != null) {
 	        updatedRelativeUrl = '/' + targetedApp.namespace + relativeUrl;
 	    }
 
