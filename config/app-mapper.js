@@ -1,24 +1,35 @@
 var express = require('express');
 var path = require('path');
 var assets = require('express-asset-versions');
-
 var rootPath = path.normalize(__dirname + '/..');
 
-module.exports = function (server, apps) {
+class AppMapper {
 
-	function appMapper(req, res, next) {
-		var domain = req.headers.host;
-		var relativeUrl = req.url;
+	configure (server, apps) {
+		var pluginsPath = path.join(rootPath, 'plugins');
 
-		if (req.url.indexOf('plugins') > -1) {
-			return next();
-		}
-
-		req.url = updateRelativeUrl(apps, domain, relativeUrl);
-		return next();
+		this.setViewsPaths(server, apps);
+		server.use(this.urlResolver(apps).bind(this));
+		server.use('/plugins', express.static(pluginsPath));
+		server.use(assets('../plugins', pluginsPath));
+		apps.forEach(app => this.registerApp(server, app));
 	}
 
-	function registerApp(app) {
+	urlResolver (apps) {
+		return function (req, res, next) {
+			var domain = req.headers.host;
+			var relativeUrl = req.url;
+	
+			if (req.url.indexOf('plugins') > -1) {
+				return next();
+			}
+	
+			req.url = this.updateRelativeUrl(apps, domain, relativeUrl);
+			return next();
+		};
+	}
+
+	registerApp (server, app) {
 		var appPath = path.join(rootPath, app.appPath);
 		var appRouter = require(appPath);
 		var assetsPath = path.join(appPath, 'public');
@@ -32,38 +43,27 @@ module.exports = function (server, apps) {
 		}
 	}
 
-	function setViewsPaths(apps) {
+	setViewsPaths (server, apps) {
 		var viewsPaths = apps.reduce(function(paths, app) {
 			return paths.concat(path.join(rootPath, app.appPath, 'views'));
 		}, []);
 		server.set('views', viewsPaths);
 	}
 
-	function updateRelativeUrl(apps, domain, relativeUrl) {
-		var map = apps.reduce(function(map, app) {
-			if (map.matched) {
-				return map;
-			}
+	updateRelativeUrl (apps, domain, relativeUrl) {
+	    var updatedRelativeUrl = relativeUrl;
 
-			var match = (app.mapToDomain && domain.indexOf(app.namespace) > -1) || (!app.mapToDomain && relativeUrl.startsWith('/' + app.namespace));
-			var updatedUrl = app.namespace + map.relativeUrl;
-			return {
-				relativeUrl: (match && app.mapToDomain) ? updatedUrl : relativeUrl,
-				matched: match
-			}
-		}, {
-			relativeUrl: relativeUrl,
-			matched: false
-		});
+	    var targetedApp = apps.find(app =>
+	        (app.mapToDomain && domain.indexOf(app.namespace) > -1) ||
+	        (!app.mapToDomain && relativeUrl.startsWith('/' + app.namespace))
+	    );
+		
+	    if (targetedApp && targetedApp.mapToDomain) {
+	        updatedRelativeUrl = '/' + targetedApp.namespace + relativeUrl;
+	    }
 
-		return map.relativeUrl;
+	    return updatedRelativeUrl;
 	}
-
-	var pluginsPath = path.join(rootPath, 'plugins');
-
-	setViewsPaths(apps);
-	server.use(appMapper);
-	server.use('/plugins', express.static(pluginsPath));
-	server.use(assets('../plugins', pluginsPath));
-	apps.forEach(registerApp);
 };
+
+module.exports = new AppMapper();
