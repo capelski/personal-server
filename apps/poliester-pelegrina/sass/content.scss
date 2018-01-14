@@ -1,0 +1,174 @@
+
+/*Classe principal del document HTML*/
+body {
+
+	/*Fons de la pàgina*/	
+	background: url(../Images/dark.png);
+	background-repeat:repeat;
+
+	/*Eliminem l'espai dels marges per defecte del DOM*/
+	margin: 0px;
+
+	/*Tipus de lletra de tota la pàgina*/
+	font-family: 'Exo 2', sans-serif;
+
+}
+
+/************************* HEADER *************************/
+
+/*Classe que dona format al menu superior de la pàgina*/
+.Header {
+
+	/*Configurem la mida de la capçalera*/
+	width: 100%;
+	min-width: 800px;
+	height: 130px; /*El header sempre té la mateixa alçada. Ve marcada per l'alçada de l'imatge més 9px d'espai a dalt i a baix*/	
+	/*Configurem l'aparença de la capçalera*/	
+	background: url(../Images/45degree.png);
+    border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	box-shadow: 0px 0px 25px #CCCCCC;
+
+}
+
+/*Propietats de la llista del menu superior de la pagina*/
+.Header ul {
+
+	list-style-type: none; /*Amaga el punt de cada línia*/
+	/*Eliminem els marges per defecte*/
+	margin: 0px;
+	padding: 0px;
+	/*Configurem la mida i situació de la llista*/	
+	height: 40px;
+	width: 80%;
+	margin-left: 10%;
+	margin-top: 15px;
+	/*Configurem l'aparença de la llista*/	
+	background-color: #EEEEEE;
+	border-radius: 10px;
+	box-shadow: 0px 0px 5px #888888;	
+
+}
+
+/*Propietats dels elements del menu superior de la pagina*/
+.Header li {
+
+	/*Mostrem la llista en horitzontal i centrada*/
+    display: block;
+    float: left;
+	/*Configurem l'amplada de cada element; auest valor depen del nombre d'elements del menu: 100/#Elements*/
+    width: 33%;
+    /*Centrem el text dins de cada element*/
+    text-align: center;
+    /*Configurem la mida i situació dels elements*/
+    height: 20px;
+    margin-top: 5px; 
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+}
+
+.Header li:hover {
+
+	color: #FFFFFF;
+	cursor: pointer;
+
+}
+
+.LeftHeader {
+
+	/*L'amplada mínima de la pàgina és de 800 px i la mida de l'imatge son 300px; 300/800 = 37.5 -> 38%*/
+	width: 38%;
+	float: left;
+	padding-top: 13px; /*Espai superior*/
+	
+}
+
+.RightHeader {
+
+	width: 62%;
+	float: left;
+	text-align: center;
+	padding-top: 15px; /*Espai superior*/
+
+}
+
+/************************* WRAPPER *****************************/
+
+.Wrapper {
+
+	width: 80%;
+	min-width: 800px;
+	max-width: 1200px;	
+
+}
+
+.InnerWrapper {
+
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 4%;
+	padding-right: 4%;
+
+}
+
+/************************* FOOTER *****************************/
+
+/*Classe que col·loca el footer al final de la pàgina (mitjançant jQuery)*/
+.Footer {
+
+	/*Dimensions del peu de pàgina*/
+	width: 100%;
+	min-width: 800px;
+	height: 50px;
+	/*Estil del peu de pàgina*/
+	text-align: center;
+	background: url(../Images/45degree.png);
+	box-shadow: 0px 0px 25px #CCCCCC;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+
+}
+
+/************** APARENÇA IMATGES ****************/
+
+.imgBox {
+
+	box-shadow: 0px 0px 5px #000000;
+	border-radius: 7px;
+
+}
+
+/************** DESACTIVEM ELS LINKS ****************/
+
+/*Link no visitat*/
+a:link {
+
+	color:#000000;
+	text-decoration: none;
+
+}
+
+/*Link visitat*/
+a:visited {
+
+	color:#000000;
+	text-decoration: none;
+
+}
+
+/*Link quan té el ratolí a sobre*/
+a:hover {
+
+	color:#000000;
+	text-decoration: none;
+
+}
+
+/*Link seleccionat*/
+a:active {
+
+	color:#000000;
+	text-decoration: none;
+
+}
