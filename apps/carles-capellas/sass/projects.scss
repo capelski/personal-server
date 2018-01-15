@@ -1,0 +1,45 @@
+#projects {
+	background-image: url('../images/backgrounds/coding.jpg');
+}
+
+@media(min-width: 768px) and (max-width: 992px) {
+	#projects { 
+		background-image: url('../images/backgrounds/coding-sm.jpg');
+	}
+}
+
+.projects h3 {
+	margin-top: 10px;
+}
+
+.project-box {
+	margin-bottom: 15px; 
+	box-shadow: 0 1px 2px rgba(43,59,93,0.29);
+}
+
+.project-box p,
+.project-box h3 {
+	margin: 0;
+}
+
+.project-box .project-title {
+	padding: 5px 10px;
+}
+
+.project-box .project-description {
+	padding: 20px;
+}
+
+.project-box .project-description img {
+	margin-bottom: 20px;
+}
+
+@media(min-width: 768px) {
+	.project-box .project-description img {
+		margin-bottom: 0;
+	}
+}
+
+.project-box img[src*=gestor]{
+	max-width: 70%;
+}

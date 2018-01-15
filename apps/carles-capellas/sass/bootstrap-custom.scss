@@ -1,0 +1,116 @@
+.container.spaced {
+	padding-top: 70px;
+	padding-bottom: 30px;
+}
+
+.container .vertical-aligner {
+	/* WebKit */
+	height: -webkit-calc(100% - 100px);
+	/* Opera */
+	height: -o-calc(100% - 100px);
+	/* Standard */
+	height: calc(100% - 100px);
+	/* Firefox */
+	height: -moz-calc(100% - 100px);
+}
+
+.navigation-icon > .icon {
+	width: 30px;
+	height: 30px;
+	background-size: cover;
+}
+
+.navigation-icon > .icon.facebook {
+	background-image: url('../images/navbar/footer-facebook.png');
+}
+
+.navigation-icon > .icon.facebook:hover {
+	background-image: url('../images/navbar/footer-facebook-white.png');
+}
+
+.navigation-icon > .icon.linked-in {
+	background-image: url('../images/navbar/footer-linkedin.png');
+}
+
+.navigation-icon > .icon.linked-in:hover {
+	background-image: url('../images/navbar/footer-linkedin-white.png');
+}
+
+.navigation-icon > .icon.twitter {
+	background-image: url('../images/navbar/footer-twitter.png');
+}
+
+.navigation-icon > .icon.twitter:hover {
+	background-image: url('../images/navbar/footer-twitter-white.png');
+}
+
+/*Firefox fix for image responsive*/
+.img-responsive {
+	width: 100%;
+}
+
+.language-icon {
+	display: block;
+    padding: 10px 15px;
+}
+
+#header.navbar {
+	border:0;
+}
+
+/*@media(min-width: 768px) {
+	#header.navbar {
+		border:0;
+		border-bottom: 1px solid lightgrey;
+	}
+}*/
+
+.navbar .container {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.navbar-header {
+	/*border-bottom: none;*/
+	border: none;
+}
+
+/*@media(max-width: 768px) {
+	.navbar-header {
+		border-bottom: 1px solid lightgrey;
+	}
+}*/
+
+.navbar-header > li > a.icon-anchor,
+.navbar-nav > li > a.icon-anchor {
+	display: block;
+	padding: 10px 3px;
+}
+
+/*.navbar.bordered {
+	border-bottom: 1px solid lightgrey;
+}*/
+
+#header .navbar-header a.navbar-brand,
+#header .navbar-nav>li>a,
+a.language-icon,
+a.language-icon,
+.navbar-nav > li > a.icon-anchor,
+.navbar-header > li > a.icon-anchor,
+.navbar-nav > li > .dropdown-menu.palette-bg-4 {
+	color: #efefef;
+  	text-decoration: none;
+	cursor: pointer;
+}
+
+#header .navbar-header a.navbar-brand:hover,
+#header .navbar-nav>li>a:hover,
+a.language-icon:hover,
+a.language-icon:focus,
+.navbar-nav > li > a.icon-anchor:hover,
+.navbar-header > li > a.icon-anchor:hover {
+	/*background-color: #709d77;*/
+  	text-decoration: none;
+	cursor: pointer;
+	color: #efefef;
+}

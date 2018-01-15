@@ -1,0 +1,7 @@
+<div class="contact-button palette-text-1 palette-bg-4" onclick="toggleContactForm()">
+	<i class="fa fa-envelope-o"></i>
+</div>
+
+<div class="contact-container container-fluid palette-bg-1" ng-controller="ContactCtrl" style="display: none;">
+	<p class="p-right-40" ng-bind-html="contact.Text | html"></p>
+</div>

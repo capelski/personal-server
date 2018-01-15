@@ -1,0 +1,29 @@
+<div class="project">
+	<div class="col-md-4 col-sm-6" ng-if="link != undefined">
+		<div class="project-box">
+			<div class="project-description palette-bg-1">
+				<div class="row">
+					<div class="col-xs-8 col-xs-offset-2">
+						<div style="min-height: 150px; height: 150px; display: table;">
+							<div style="display: table-cell; vertical-align: middle;">
+						<a target="_blank" href="{{link}}">
+							<img class="img-responsive img-center" ng-src="{{imageUrl}}" />
+						</a>
+						</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 text-justify" ng-bind-html="project.Description | html">
+					</div>
+				</div>
+			</div>
+			<div class="project-title palette-bg-4 white-text">
+				<p><b>{{project.Name}}</b></p>
+				<p>{{project.Timespan}}</p>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix visible-sm" ng-if="(index % 2) == 1"></div>
+	<div class="clearfix visible-md visible-lg" ng-if="(index % 3) == 2"></div>
+</div>
