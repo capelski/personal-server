@@ -9,22 +9,22 @@ class AppMapper {
 		var pluginsPath = path.join(rootPath, 'plugins');
 
 		this.setViewsPaths(server, apps);
-		server.use(this.urlResolver(apps).bind(this));
+		server.use(this.domainAppsResolver(apps).bind(this));
 		server.use('/plugins', express.static(pluginsPath));
 		server.use(assets('../plugins', pluginsPath));
 		apps.forEach(app => this.registerApp(server, app));
 	}
 
-	urlResolver (apps) {
+	domainAppsResolver (apps) {
 		return function (req, res, next) {
-			var domain = req.headers.host;
-			var relativeUrl = req.url;
-	
 			if (req.url.indexOf('plugins') > -1) {
 				return next();
 			}
+
+			var domain = req.headers.host;
+			var relativeUrl = req.url;			
 	
-			req.url = this.updateRelativeUrl(apps, domain, relativeUrl);
+			req.url = this.prefixRelativeUrl(apps, domain, relativeUrl);
 			return next();
 		};
 	}
@@ -50,20 +50,22 @@ class AppMapper {
 		server.set('views', viewsPaths);
 	}
 
-	updateRelativeUrl (apps, domain, relativeUrl) {
+	prefixRelativeUrl (apps, domain, relativeUrl) {
 	    var updatedRelativeUrl = relativeUrl;
 
-	    var targetedApp = apps.find(app =>
-	        (app.domain != null && domain.indexOf(app.domain) > -1) ||
-	        (app.domain == null && relativeUrl.startsWith('/' + app.namespace))
-	    );
+	    var domainAppAccess = apps.find(app => (app.domain != null && domain.indexOf(app.domain) > -1));
 		
-	    if (targetedApp && targetedApp.domain != null) {
-			var requiredPrefix = '/' + targetedApp.namespace;
-			if (!relativeUrl.startsWith(requiredPrefix)) {
-				updatedRelativeUrl = relativeUrl != '/' ?
-					requiredPrefix + relativeUrl :
-					requiredPrefix;
+	    if (domainAppAccess) {
+			var requiredPrefix = '/' + domainAppAccess.namespace;
+			var prefixWithTrailingSlash = requiredPrefix;
+
+			if (relativeUrl == '/') {
+				prefixWithTrailingSlash += '/';
+				relativeUrl = '';
+			}
+			
+			if (!relativeUrl.startsWith(prefixWithTrailingSlash)) {
+				updatedRelativeUrl = requiredPrefix + relativeUrl;
 			}
 	    }
 
