@@ -1,7 +1,7 @@
 ContentModule
 .directive('curriculumSection', function() {
 	return {
-		templateUrl: 'templates/curriculum-section.html',
+		templateUrl: '/carles-capellas/templates/curriculum-section.html',
 		scope: {
 			section: '=',
 			imageUrl: '='
