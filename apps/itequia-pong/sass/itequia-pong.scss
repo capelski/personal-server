@@ -1,0 +1,72 @@
+body.itequia-pong {
+	margin-top: 50px;
+}
+
+.ranking-table {
+	border: 1px solid #ddd;
+    border-spacing: 0;
+}
+
+.ranking-table td,
+.ranking-table th {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.ranking-table thead tr {
+	background-color: #00ADC6;	
+	color: white;
+}
+
+.ranking-table tbody tr:nth-child(odd) {
+	background-color: #f6f6f6;
+}
+
+.ranking-table tbody tr:nth-child(even) {
+	background-color: white;
+}
+
+#ranking tbody tr td:first-child {
+	font-weight: bold;
+}
+
+#ranking tbody tr td.active {
+	color: white;
+	background-color: lightseagreen;
+	font-weight: bold;
+}
+
+.horizontal-spaced {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.vertical-spaced {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.spaced {
+	padding: 10px;
+}
+
+.sortable:hover {
+	cursor: pointer;
+}
+
+.positive,
+.negative {
+	font-weight: bold;
+}
+
+.positive {
+	color: green;
+}
+
+.negative {
+	color: red;
+}
+
+.blue {
+	color: lightseagreen;
+}

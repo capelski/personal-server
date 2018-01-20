@@ -1,0 +1,182 @@
+<!-- Page Heading -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Ranking
+        </h1>
+    </div>
+</div>
+<!-- /.row -->            
+
+<div class="row">
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-trophy fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">{{ranking[0].name}}</div>
+                        <div>Is winning!</div>
+                    </div>
+                </div>
+            </div>
+            <!--<a href="#">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>-->
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-futbol-o fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">{{matches.length}}</div>
+                        <div>Played Matches</div>
+                    </div>
+                </div>
+            </div>
+            <!--<a href="#">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>-->
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-random fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">{{scoredPoints}}</div>
+                        <div>Scored Points</div>
+                    </div>
+                </div>
+            </div>
+            <!-- <a href="#">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a> -->
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-compress fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">{{pendingClashes}} / {{totalClashes}}</div>
+                        <div>Pending Clashes</div>
+                    </div>
+                </div>
+            </div>
+            <!-- <a href="#">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a> -->
+        </div>
+    </div>
+</div>
+<!-- /.row -->
+
+Exhaustion threshold: {{exhaustionThreshold}}
+<input type="range" ng-model="exhaustionThreshold" min="0" max="150" step="10" ng-change="updateScores(players, matches);"/>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="ranking" class="table table-bordered table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th sortable-header column-name="score" display-name="Score" info="Yabadabadoo!" on-load-callback="tooltip()"></th>
+                        <th sortable-header column-name="winning" display-name="Winning" info="The number of opponents the player is winning against"></th>
+                        <th sortable-header column-name="tying" display-name="Tying" info="The number of opponents the player is tying against"></th>
+                        <th sortable-header column-name="losing" display-name="Losing" info="The number of opponents the player is losing against"></th>
+                        <th sortable-header column-name="matchesNumber" display-name="#Matches" info="The number of matches the player has played"></th>
+                        <th sortable-header column-name="pointsFor" display-name="Points for" info="The number of points the player has scored"></th>
+                        <th sortable-header column-name="pointsAgainst" display-name="Points against" info="The number of points the player has received"></th>
+                        <th sortable-header column-name="projection" display-name="Expected" info="Expected evolution of the player's rank"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="player in ranking track by $index">
+                        <td>{{$index + 1}}</td>
+                        <td>
+                            <a href="player-details/{{player.name}}">{{player.name}}</a>
+                        </td>                        
+                        <td ng-class="{active : sortedBy === 'score'}">{{player.score}}</td>
+                        <td ng-class="{active : sortedBy === 'winning'}">{{player.winning}}</td>
+                        <td ng-class="{active : sortedBy === 'tying'}">{{player.tying}}</td>
+                        <td ng-class="{active : sortedBy === 'losing'}">{{player.losing}}</td>
+                        <td ng-class="{active : sortedBy === 'matchesNumber'}">{{player.matchesNumber}}</td>
+                        <td ng-class="{active : sortedBy === 'pointsFor'}">{{player.pointsFor}}</td>
+                        <td ng-class="{active : sortedBy === 'pointsAgainst'}">{{player.pointsAgainst}}</td>
+                        <td  ng-class="{active : sortedBy === 'projection', positive: player.expectedVariation > 0, negative: player.expectedVariation < 0}">
+                            {{player.expectedVariation > 0 ? player.expectedVariation: -player.expectedVariation}}
+                            <i class="fa fa-arrow-up" ng-if="player.expectedVariation > 0"></i>
+                            <i class="fa fa-arrow-down" ng-if="player.expectedVariation < 0"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- /.row -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Recent Matches
+        </h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table id="matches" class="table table-bordered table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Player 1</th>
+                        <th>Score</th>
+                        <th>Player 2</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="match in matches | limitTo:10">
+                        <td>{{match.playerA}}</td>
+                        <td>{{match.scoreA}}</td>
+                        <td>{{match.playerB}}</td>
+                        <td>{{match.scoreB}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- /.row -->
