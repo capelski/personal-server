@@ -213,7 +213,6 @@ app.controller('MainCtrl', function($scope, $http, Matches, Ranking) {
                 var playerBOpponent = playerBData.opponents[playerAData.name];
 
                 if (playerAOpponent.winningRate === undefined) {
-                    console.log('A')
                     var matchesStats = 
                         Ranking.computeClashScore(playerAData, playerBData, playerAOpponent, playerBOpponent, $scope.childs.exhaustionThreshold);
                     $scope.pendingClashes = matchesStats.pendingClashes;
