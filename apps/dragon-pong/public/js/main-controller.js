@@ -4,7 +4,9 @@ app.controller('MainCtrl', function($scope, $http, Matches, Ranking) {
     $scope.players = [];
     $scope.matches = [];
     $scope.ranking = [];
-    $scope.exhaustionThreshold = 20;
+    $scope.childs = {
+        exhaustionThreshold: 20
+    };
 
     $scope.getOpponentsStructure = function(players, playerName) {
         var opponents = {};
@@ -211,8 +213,9 @@ app.controller('MainCtrl', function($scope, $http, Matches, Ranking) {
                 var playerBOpponent = playerBData.opponents[playerAData.name];
 
                 if (playerAOpponent.winningRate === undefined) {
+                    console.log('A')
                     var matchesStats = 
-                        Ranking.computeClashScore(playerAData, playerBData, playerAOpponent, playerBOpponent, $scope.exhaustionThreshold);
+                        Ranking.computeClashScore(playerAData, playerBData, playerAOpponent, playerBOpponent, $scope.childs.exhaustionThreshold);
                     $scope.pendingClashes = matchesStats.pendingClashes;
                     $scope.totalClashes = matchesStats.totalClashes;
                     $scope.scoredPoints += matchesStats.scoredPoints;
