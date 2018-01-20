@@ -1,0 +1,46 @@
+@media(min-width: 768px) {
+	.navigation-bar[class*=palette] {
+		background-color: transparent;
+	}
+}
+
+.navigation-bar.opened .navigation-left {
+	border-top: 1px solid #FFF;
+	padding-top: 5px;
+}
+
+.dropdown .dropdown-list {
+	min-width: 150px;
+}
+
+.dropdown .dropdown-list .dropdown-item {
+	padding-left: 20px;
+}
+
+.navigation-bar a,
+.navigation-bar a:hover,
+.navigation-bar a:focus {
+	color: white;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.navigation-bar a,
+.navigation-small #current-tab {
+	font-size: 16px;
+}
+
+.navigation-small #bars-button,
+.navigation-small #current-tab {
+	color: white;
+}
+
+.carniques-ausa .navigation-bar a,
+.carniques-ausa .navigation-bar a:hover,
+.carniques-ausa .navigation-bar a:focus {
+	color: white;
+}
+
+.carniques-ausa .navigation-bar a:hover {
+	color:#aaa;
+}

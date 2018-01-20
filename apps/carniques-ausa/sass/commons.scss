@@ -1,0 +1,127 @@
+/******************************* ANCHORS *****************************/
+
+a.black {
+	color: #000;
+	cursor: pointer;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a.black:hover {
+	color: #333;
+}
+
+a.black:focus,
+a.black:link,
+a.black:visited {
+	color: #000;
+	text-decoration: none;
+}
+
+a.white {
+	color: #fff;
+	cursor: pointer;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a.white:hover {
+	color: #fff;
+}
+
+a.white:focus,
+a.white:link,
+a.white:visited {
+	color: #fff;
+	text-decoration: none;
+}
+
+/******************************* BACKGROUNDS *****************************/
+
+.black-bg {
+	background-color: #000;
+	color: #fff;
+}
+
+
+.responsive-bg {
+	background-size: auto 100%;
+	background-position: 30%;
+}
+
+@media(min-width: 992px) {
+	.responsive-bg {
+		background-size: 100% auto;
+		background-position: 0 0;
+	}
+}
+
+.transparent-bg {
+	background-color: transparent;
+	color: initial;
+}
+
+.white-bg {
+	background-color: #fff;
+	color: #000;
+}
+
+/***************************** IMAGES ***********************************/
+
+.img-center {
+	display: block;
+	margin: 0 auto;
+}
+
+.img-responsive {
+	max-width: 100%;
+}
+
+/********************************* LAYOUTS ******************************/
+
+.absolute-full-screen {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.fixed-full-screen {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.parent-fill {
+	height: 100%;
+	width: 100%;
+}
+
+.vertical-aligned {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.vertical-aligner {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+/********************* OTHERS ***********************************/
+
+.no-margin {
+	margin: 0 !important;	
+}
+
+.no-padding {
+	padding: 0 !important;
+}
+
+.white-text,
+.form-control.white-text {
+	color: white;
+}
