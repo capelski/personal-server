@@ -1,4 +1,4 @@
-var app = angular.module('ItequiaPong');
+var app = angular.module('DragonPong');
 
 app.controller('PlayerCtrl', function($scope, $routeParams) {
     for (var index in $scope.ranking) {

@@ -1,17 +1,13 @@
-var app = angular.module('ItequiaPong', ['ngRoute']);
+var app = angular.module('DragonPong', ['ngRoute']);
 
 app.config(function($routeProvider, $locationProvider) {
     $routeProvider
-    .when("/", {
-        templateUrl : '/itequia-pong/templates/ranking.html'
+    .when('/', {
+        templateUrl : '/dragon-pong/templates/ranking.html'
     })
-    .when("/player-details/:playerName?", {
-        templateUrl : '/itequia-pong/templates/player-details.html',
+    .when('/player-details/:playerName?', {
+        templateUrl : '/dragon-pong/templates/player-details.html',
         controller: 'PlayerCtrl'
-    })
-    .when("/register-match", {
-        templateUrl : '/itequia-pong/templates/register-match.html',
-        controller: 'RegisterMatchCtrl'
     })
     .otherwise({
         redirectTo: '/'

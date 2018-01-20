@@ -1,4 +1,4 @@
-var app = angular.module('ItequiaPong');
+var app = angular.module('DragonPong');
 
 app.controller('MainCtrl', function($scope, $http, Matches, Ranking) {
     $scope.players = [];
@@ -252,7 +252,7 @@ app.controller('MainCtrl', function($scope, $http, Matches, Ranking) {
     angular.element('body').ready(function() {        
         $http({
             method: 'GET',
-            url: '/itequia-pong/matches'
+            url: '/dragon-pong/matches'
         }).then(function(response) {
             $scope.players = response.data.players;
             $scope.players.sort(function(a, b) {

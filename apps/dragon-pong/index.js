@@ -4,7 +4,7 @@ var path = require('path');
 var matchesController = require('./controllers/matches-controller');
 
 router.get('/', function (req, res, next) {
-  res.render('itequia-pong');
+  res.render('dragon-pong');
 });
 router.get('/matches', matchesController.getAll);
 

@@ -1,4 +1,4 @@
-var app = angular.module('ItequiaPong');
+var app = angular.module('DragonPong');
 
 app.service('Matches', function() {
     
