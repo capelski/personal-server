@@ -1,5 +1,8 @@
 - Build the apps path based on the apps namespace
 
+- Issolate apps session
+	(E.g. the excludedIndexes session property of jokify can be accessed from aywhere)
+
 - Protect non-existing folder app during initialization
 
 - Meta tags in all apps

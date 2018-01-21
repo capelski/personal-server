@@ -1,0 +1,106 @@
+
+.img-center {
+	display: block;
+	margin: 0 auto;
+}
+
+.img-responsive {
+	margin: auto;
+}
+
+.left-sm {
+	text-align: center;
+}
+
+@media(min-width: 768px) {
+	.left-sm {
+		text-align: left;
+	}
+}
+
+.m-bottom-15 {
+	margin-bottom: 15px;
+}
+.m-bottom-20 {
+	margin-bottom: 20px;
+}
+.m-horizontal-20 {
+	margin-top: 20px;
+	margin-bottom: 20px;	
+}
+
+.m-top-15 {
+	margin-top: 15px;
+}
+
+.m-top-30 {
+	margin-top: 30px;
+}
+
+.m-top-sm-20 {
+	margin-top: 20px;
+}
+
+@media(min-width: 992px) {
+	.m-top-sm-20 {
+		margin-top: 0px;
+	}
+}
+
+.no-margin {
+	margin: 0 !important;	
+}
+
+.no-m-top {
+	margin-top: 0 !important;
+}
+
+.no-padding {
+	padding: 0 !important;
+}
+.p-top-15 {
+	padding-top: 15px;
+}
+.right-sm {
+	text-align: center;
+}
+
+@media(min-width: 768px) {
+	.right-sm {
+		text-align: right;
+	}
+}
+
+.text-center-l-sm {
+	text-align: center;
+}
+
+@media(min-width: 992px) {
+	.text-center-l-sm {
+		text-align: left;
+	}
+}
+
+.text-30 {
+	font-size: 30px;
+}
+.transparent {
+	opacity: 0.3;
+}
+
+.transparent:hover {
+	opacity: 1.0;
+}
+
+.vertical-aligner {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.vertical-aligned {
+    display: table-cell;
+    vertical-align: middle;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}

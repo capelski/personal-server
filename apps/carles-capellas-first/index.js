@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
+var pagesController = require('./controllers/pages-controller');
 
-router.get('/', function (req, res, next) {
-  res.render('capellas-index');
-});
+router.get('/', pagesController.resolve);
 
 module.exports = router;

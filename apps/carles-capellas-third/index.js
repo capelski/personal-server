@@ -3,7 +3,7 @@ var router = express.Router();
 var path = require('path');
 
 router.get('/', function (req, res, next) {
-  res.render('carles-index');
+  res.render('capellas-third-index');
 });
 
 module.exports = router;
