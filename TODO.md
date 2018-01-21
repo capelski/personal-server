@@ -1,7 +1,12 @@
-- TODO: Build the apps path based on the apps namespace
+- Build the apps path based on the apps namespace
+
+- Protect non-existing folder app during initialization
+
+- Meta tags in all apps
+
+- favicon.ico
 
 - Transpiler: Add .babelrc file and install presets
-- Migrate all JavaScript to React
 - Hardcoded URLs in Views should come from server side
 - Page titles
 - Popup to avoid accidental deletes
