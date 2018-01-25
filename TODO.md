@@ -1,3 +1,6 @@
+- Securize apps acces:
+	- E.g. If a request is coming from /do-vic/ but access /jokify should not be allowed
+
 - Build the apps path based on the apps namespace
 
 - Issolate apps session
