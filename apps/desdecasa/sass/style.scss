@@ -1,0 +1,519 @@
+/* INDEX */
+
+.taulaindex { font-size:13px; background-color:#EFF6F8; line-height:25px; border:3px solid #CCCCCC; }
+.textindex { padding-left:5px; padding-right:5px; font-size:13px; face:Karla; line-height:20px; padding-left:10px; border:2px solid #E1E1F6;color:#444444; }
+
+/* PLANTILLA */
+
+a:hover{
+	/* Quan passes el ratolí per sobre un link */
+    text-decoration: underline;
+    color: #000000;}
+
+	*{border: 50; /* Relleu del formulari */
+	  margin: 0;}
+
+a:active {
+	/* Quan cliques un link */
+	text-decoration: none;
+	color: #000000;}
+
+a:visited {
+	/*Link ja utilitzat*/
+	text-decoration: none;
+	color: #000000;}
+
+a:link {
+	/*Propietats links*/
+	text-decoration: none;
+	color: #000000;}
+
+
+body{
+	/*Fons de la pàgina*/
+	/*color: #EFF6F8;       TRET PER EL COLOR DE FONT DELS MAPES*/
+	line-height: 20px;
+	background: #7dbfd7 url(../images/bg.jpg);
+	background-repeat:repeat-x;
+	background-position: top;
+	font-family: Karla;
+	font-size: 13px;
+}
+
+#mainbg{
+	/*Situar el header*/
+    width: 1016px;
+    margin: 0 auto;}
+
+#main{
+	/*Situar el footer*/
+    margin: 0 auto;
+    width: 1016px;
+    padding-top: 10px;}
+
+#header{
+	/* Carregar l'imatge del header */
+    background:  url(../images/header.png);
+    background-repeat: no-repeat;
+    background-position: top;
+    width: 100%;}
+
+#logo{
+	/*Posició header*/
+    width: 1016px;
+    margin: 0 auto;
+    text-align: left;
+    padding-top: 100px;
+    height: 50px;}
+
+#buttons{
+	/*Propietats dels botons*/
+    width: 1016px;
+    height: 57px;
+    margin: 0 auto;
+    padding-top: 0px;
+    background:  url(../images/menubg.png);
+    background-repeat: no-repeat;
+    background-position: bottom left;}
+	
+#buttons ul {padding-left: 0px;} /* Centrar el text dels botons*/
+
+#buttons li {display: inline;} /* Alinear text dels botons*/
+
+#buttons a {
+	/*Propietats del text dels botons*/
+    font-family: Karla;
+    font-size: 17px;
+    font-weight: normal;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    display: block;
+    float: left;
+    width: 20%;
+    height: 37px;
+    padding-top: 19px;
+    margin-top: 1px;}
+
+#buttons a:hover{
+	/*Il·luminació dels botons*/
+   background:  url(../images/menu_h.png);
+   background-repeat: no-repeat;
+   background-position: center;}	
+   
+#buttons2{
+	/*Propietats dels botons*/
+    width: 1016px;
+    height: 57px;
+    margin: 0 auto;
+    padding-top: 0px;
+    background:  url(../images/menuinf.png);
+    background-repeat: no-repeat;
+    background-position: bottom left;}
+		
+#buttons2 ul {padding-left: 0px;} /* Centrar el text dels botons*/
+
+#buttons2 li {display: inline;} /* Alinear text dels botons*/
+
+#buttons2 a {
+	/*Propietats del text dels botons*/
+    font-family: Karla;
+    font-size: 16px;
+    font-weight: normal;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    display: block;
+    float: left;
+    width: 20%;
+    height: 37px;
+    padding-top: 19px;
+    margin-top: 1px;}
+
+#buttons2 a:hover{
+	/*Il·luminació dels botons*/
+   background:  url(../images/menu_h.png);
+   background-repeat: no-repeat;
+   background-position: center;}	
+
+#footer{
+	/*Propietats del peu de pàgina*/
+    height: 40px;
+    font-size: 10px;
+    color: #ffffff;
+    padding-top: 10px;
+    text-align: center;
+    clear:both;
+    background:  url(../images/footer.png);
+    background-repeat: no-repeat;
+    background-position: top;
+    margin-top: 0px;
+    padding-bottom: 5px;}
+
+/*Classe de la taula amb ombra de l'index*/
+
+#listado_estrenos #destacado .cartel{
+	-webkit-box-shadow: 0 0 15px #999;
+	-moz-box-shadow: 0 0 15px #999;
+	box-shadow: 0 0 15px #999;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 10px;
+	background-color: #EFF6F8;
+	border:1px solid #999999;
+	padding:0px;
+	height:350px;
+	width:490px;
+	margin-right:7px;
+}
+
+#listado_estrenos #destacado .cartel2{
+	-webkit-box-shadow: 0 0 15px #999;
+	-moz-box-shadow: 0 0 15px #999;
+	box-shadow: 0 0 15px #999;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 10px;
+	background-color: #FFFFE0;
+	border:1px solid #999999;
+	padding:0px;
+	height:350px;
+	width:490px;
+	margin-right:7px;
+}
+
+/*Classe de la taula amb ombra de locals*/
+
+#listado_estrenos #destacado .cartolina{
+	-webkit-box-shadow: 0 0 15px #999;
+	-moz-box-shadow: 0 0 15px #999;
+	box-shadow: 0 0 15px #999;
+	border-radius: 5px;
+	background-color:#E8E8E8;
+	border:1px solid #999999;
+	padding:0px;
+	height:30px;
+	width:1009px;
+	margin-right:7px;
+	
+}
+
+   .labels {
+     color: red;
+     background-color: white;
+     font-family: "Lucida Grande", "Arial", sans-serif;
+     font-size: 10px;
+     font-weight: bold;
+     text-align: center;
+     width: 40px;     
+     border: 2px solid black;
+     white-space: nowrap;
+   }
+
+
+/*Classe OpenStreetMaps*/
+
+#map {
+  height: 345px;
+  width: 485px;
+  padding: 0;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 1em;
+  color: #000;
+}
+.olFramedCloudPopupContent {
+	font-size: 0.8em;
+	font-family: Verdana, sans-serif;
+}
+#descriptionToggle {
+	position: absolute;
+  	font-size: 1em;
+	z-index: 10000;
+	left: 80px;
+	height: 14px;
+	border-left: 1px solid #000040;
+	border-bottom: 1px solid #000040;
+	border-right: 1px solid #000040;
+	padding: 2px 10px;
+	margin-right: 200px;
+	background-color: #EEE;
+	font-size: 12px;
+	cursor: default;
+	opacity: 0.7;
+} 
+#descriptionToggle:hover {
+	background-color: #FFF;
+	opacity: 1;
+}
+#description {
+	position: absolute;
+	z-index: 10000;
+	left: 80px;
+	top: 18px;
+	border: 1px solid #000040;
+	padding: 10px 10px;
+	margin-right: 200px;
+	background-color: #FFF;
+	font-size: 12px;
+}
+ 
+#attribution {
+	bottom: 0;
+	left: 0;
+	padding: 5px 8px 1px 8px;
+	position: absolute;
+	font-size: 11px;
+	font-style: italic;
+	z-index: 1000;
+}
+
+#layer {
+	position: absolute;
+	top: 60px;
+	right: 10px;	
+	z-index: 10002;
+}
+
+#layer > div {
+	border: 1px solid #000;
+	background-color: #FFF;
+	padding: 4px 5px;
+	font-size: 0.7em;
+	cursor: default;
+	margin-bottom: 4px;
+
+}
+#layer div:hover {
+}
+#layer .active {
+	background-color: #EEF;
+}
+
+.hide { display: none; }
+
+
+/* TABS DIES */
+
+#menu {
+font-family: Karla;
+width:490px; 
+margin:0 0 50px 0; 
+position:relative;
+z-index:100;
+height:350px;
+}
+/* remove the bullets and set the margin and padding to zero for the unordered list */
+#menu ul {
+padding:0; 
+margin:0;
+list-style: none;
+border:0;
+}
+#menu ul table {border-collapse:collapse; margin:-1px -10px; font-size:1em;}
+
+/* float the list so that the items are in a line */
+#menu ul li {
+float:left; 
+}
+/* style the links to be 249px wide by 30px high with a top and right border 1px solid white. Set the background color and the font size. */
+#menu ul li a, #menu ul li a:visited {
+display:block; 
+text-align:center; 
+text-decoration:none; 
+width:65px; 
+height:30px; 
+color:#000; 
+border:0px solid #000;
+border-width:0px 0px 1px 0;
+background:#EFF6F8; 
+line-height:30px; 
+font-size:12px;
+}
+/* make the dropdown ul invisible */
+#menu ul ul {
+position:absolute; left:-9999px; height:0; z-index:10;
+}
+
+/* set the background and foreground color of the main menu items on hover */
+#menu ul li#selected a{
+color:#fff; 
+background:#938b59;
+}
+#menu ul li a:hover,
+#menu ul li:hover a {
+color:#fff; 
+background:#b3ab79;
+}
+/* make the sub menu ul visible and position it beneath the first list item */
+#menu ul li#selected ul {
+ 
+height:auto;
+left:0; 
+text-align:left;
+}
+#menu ul :hover ul {
+
+height:auto;
+left:0; 
+text-align:left;
+z-index:100;
+}
+/* make the sub menu ul li the full width with padding and border. Add an auto scroll bar */
+#menu ul li#selected ul li,
+#menu ul :hover ul li {
+background:#EFF6F8; 
+color:#000;
+padding:10px;
+width:437px;
+height:285px;
+overflow:auto;
+
+margin-left:185px;
+}
+#menu ul li#selected ul li {}
+
+/*float the image left with padding and no border */
+#menu ul li#selected ul li img,
+#menu ul :hover ul li img {
+float:left; 
+padding:10px 10px 10px 0; 
+border:0;
+}
+/* style the paragraph font height */
+#menu ul li#selected ul li p,
+#menu ul :hover ul li p {
+font-size:0.9em;
+line-height:1.8em;
+}
+/* style the background and foreground color of the submenu links */
+#menu ul li#selected ul li a,
+#menu ul :hover ul li a {
+display:inline;
+background:#eee;
+color:#c00;
+text-decoration:underline;
+border:0;
+line-height:1.8em;
+}
+/* style the background and forground colors of the links on hover */
+#menu ul li#selected ul li a:hover,
+#menu ul :hover ul li a:hover {
+text-decoration:none; 
+color:#000;
+
+}
+
+/*PESTANYES DELS LOCALS*/
+
+/*Pestanyes*/
+
+ul.tabs {
+	margin: 0;
+	padding: 0;
+	float: left;
+	list-style: none;
+	height: 32px;
+	border-bottom: 1px solid #FFF;
+	width: 100%;
+}
+ul.tabs li {
+	float: left;
+	margin: 0;
+	padding: 0;
+	height: 31px;
+	line-height: 31px;
+	margin-bottom: -1px;
+	overflow: hidden;
+	position: relative;
+}
+ul.tabs li a {
+	text-decoration: none;
+	color: #000;
+	display: block;
+	font-size: 1.2em;
+	padding: 0 35px;
+	outline: none;
+}
+ul.tabs li a:hover {
+	background: #ccc;
+}
+html ul.tabs li.active, html ul.tabs li.active a:hover  {
+	background: #ccc;
+	border-bottom: 1px solid #fff;
+}
+
+/*CONTINGUT DE LES PESTANYES*/
+
+.tab_container {
+	overflow: hidden;
+	clear: both;
+	float: left; width: 100%;
+}
+.tab_content {
+	padding: 20px;
+	font-size: 1.2em;
+}
+
+/*CARTELLS ALLARGATS DE L'INDEX*/
+
+
+#listado_estrenos .tiraindex{
+	-webkit-box-shadow: 0 0 15px #999;
+	-moz-box-shadow: 0 0 15px #999;
+	box-shadow: 0 0 15px #999;
+	border-radius: 5px;
+	background-color:#090;
+	padding:0px;
+	height:30px;
+	width:1009px;
+	padding-top:10px;	
+}
+
+#listado_estrenos .tiraindex2{
+	-webkit-box-shadow: 0 0 20px #99A;
+	-moz-box-shadow: 0 0 20px #99A;
+	box-shadow: 0 0 20px #99A;
+	border-radius: 5px;
+	background-color:#DAA520;
+	padding:0px;
+	height:30px;
+	width:600px;
+	padding-top:10px;	
+}
+
+
+#buttonsinf{
+	/*Propietats dels botons*/
+    width: 1016px;
+    height: 57px;
+    margin: 0 auto;
+    padding-top: 0px;
+    background:  url(../images/menuinf2.png);
+    background-repeat: no-repeat;
+    background-position: bottom left;}
+		
+#buttonsinf ul {padding-left: 0px;} /* Centrar el text dels botons*/
+
+#buttonsinf li {display: inline;} /* Alinear text dels botons*/
+
+#buttonsinf a {
+	/*Propietats del text dels botons*/
+    font-family: Karla;
+    font-size: 16px;
+    font-weight: normal;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    display: block;
+    float: left;
+    width: 20%;
+    height: 37px;
+    padding-top: 19px;
+    margin-top: 1px;}
+
+#buttonsinf a:hover{
+	/*Il·luminació dels botons*/
+   background:  url(../images/menu_h.png);
+   background-repeat: no-repeat;
+   background-position: center;}	

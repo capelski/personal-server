@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<%- include includes.ejs %>
+	
+<body><div id="mainbg">
+            
+	<%- include ../desdecasa-header.ejs %>
+ 
+	<p align="left">&nbsp;</p>
+	<p align="left"><font color="#FFFFFF" size="3">Aquest són tots els establiments que formen part de DesdeCasa, amb els seus respectius descomptes. Tots els descomptes indicats  s'aplicaran quan es mostri la targeta de soci durant el pagament del compte. Per més informació sobre l'establiment i les condicions de cada descompte, clica les pestanyes.</font></p>
+    <p align="left">&nbsp;</p>
+    <div id="listado_estrenos"><div id="destacado"><div class="cartolina">
+    <table width="100%" height="30px" ><tr><td><p align="center">
+	
+    <input type="submit" disabled="true"  name="button"  id="button" value="  Mostra per Dia  " />
+	<select onchange="selectday()" id="Opcio" name="Opcio">
+		<option id="7" value="7">- Seleccionar dia -</option>
+		<option id="1" value="1">Dilluns</option>
+		<option id="2" value="2" selected="selected">Dimarts</option>
+        <option id="3" value="3">Dimecres</option>
+		<option id="4" value="4">Dijous</option>
+        <option id="5" value="5">Divendres</option>
+		<option id="6" value="6">Dissabte</option>
+		<option id="0" value="0">Diumenge</option>
+	</select> 
+	<img src="<%= asset('images/dt.png') %>" alt="" width="328" height="17" />    
+    <input type="submit" name="button" onclick="window.location.href='/desdecasa/establishments/alphabetic'" id="button" value="Mostra'ls tots alfabèticament" />
+    <input type="submit" name="button" onclick="window.location.href='/desdecasa/establishments/discount'"  id="button" value="Mostra'ls tots per descomptes" />
+	
+    </p></td></tr></table></div></div></div>
+    
+	<p align="center">&nbsp;</p>    
+	<p align="center">&nbsp;</p>
+    
+	<ul class="tabs">
+		<li><a href="#tab1"><img src="<%= asset('images/dinar.png') %>" alt="" width="263" height="21" border="0"/></a></li>
+    	<li><a href="#tab2"><img src="<%= asset('images/sopar.png') %>" alt="" width="263" height="21" border="0" /></a></li>
+		<li><a href="#tab4"><img src="<%= asset('images/qualsevolHora.png') %>" alt="" width="261" height="21" border="0" /></a></li>
+	</ul>
+
+	<div class="tab_container">
+    
+ 		<div id="tab1" class="tab_content"><p>&nbsp; <!--Content--></p>
+            
+			<div id="CollapsiblePanel1" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/Basset1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/Basset2.html %>
+			</div></div>                
+                
+			<div id="CollapsiblePanel2" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/MagdaSubirana1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/MagdaSubirana2.html %>
+			</div></div>
+                                
+			<div id="CollapsiblePanel3" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/LesGargoles1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/LesGargoles2.html %>
+			</div></div>
+                
+			<div id="CollapsiblePanel4" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/Crinyol1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/Crinyol2.html %>
+			</div></div>       
+       
+			<div id="CollapsiblePanel5" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/OperaBarroca1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/OperaBarroca2.html %>
+			</div></div>        
+        
+			<div id="CollapsiblePanel6" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/BarStaAnna1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/BarStaAnna2.html %>
+			</div></div>
+                
+			<div id="CollapsiblePanel7" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/LOccita1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/LOccita2.html %>
+			</div></div>
+            
+            <div id="CollapsiblePanel8" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/LaTavernaGruixut1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/LaTavernaGruixut2.html %>
+			</div></div>
+            
+			<div id="CollapsiblePanel9" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/CalFuste1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/CalFuste2.html %>
+			</div></div>
+            
+			<div id="CollapsiblePanel10" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/ElCaliu1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/ElCaliu2.html %>
+			</div></div>            
+    
+		</div>
+
+		<div id="tab2" class="tab_content"><p>&nbsp; <!--Content--></p>
+            
+			<div id="CollapsiblePanel11" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/ElBohemi1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/ElBohemi2.html %>
+			</div></div>        
+                
+			<div id="CollapsiblePanel12" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/Basset1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/Basset2.html %>
+			</div></div>                         
+       
+			<div id="CollapsiblePanel13" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/OperaBarroca1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/OperaBarroca2.html %>
+			</div></div>    
+        
+			<div id="CollapsiblePanel14" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/Transilvania1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/Transilvania2.html %>
+			</div></div>           
+      
+			<div id="CollapsiblePanel15" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/BarStaAnna1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/BarStaAnna2.html %>
+			</div></div>        
+
+			<div id="CollapsiblePanel16" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/Montapa1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/Montapa2.html %>
+			</div></div>
+            
+			<div id="CollapsiblePanel17" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/ElTast1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/ElTast2.html %>
+			</div></div> 
+
+			<div id="CollapsiblePanel18" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/ElRefugi1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/ElRefugi2.html %>
+			</div></div>                          
+        
+		</div>    
+        
+		<div id="tab4" class="tab_content"><p>&nbsp; <!--Content--></p>
+      
+			<div id="CollapsiblePanel19" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/BarSolNou1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/BarSolNou2.html %>
+			</div></div>        
+      
+			<div id="CollapsiblePanel20" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/CanBernat1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/CanBernat2.html %>
+			</div></div>  
+    
+			<div id="CollapsiblePanel21" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/CafeteriaSucre1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+  			<%- include info/CafeteriaSucre2.html %>
+  			</div></div>      
+    
+			<div id="CollapsiblePanel22" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/Crinyol1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/Crinyol2.html %>
+			</div></div>  
+
+			<div id="CollapsiblePanel23" class="CollapsiblePanel">
+            <div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/LOccita1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/LOccita2.html %>
+			</div></div>     
+
+			<div id="CollapsiblePanel24" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/BarStaAnna1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/BarStaAnna2.html %>
+			</div></div> 
+            
+			<div id="CollapsiblePanel25" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/CanSileta1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/CanSileta2.html %>
+			</div></div>                                 
+       
+			<div id="CollapsiblePanel26" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/Montapa1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/Montapa2.html %>
+			</div></div> 
+            
+			<div id="CollapsiblePanel27" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/ElTast1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/ElTast2.html %>
+			</div></div>             
+
+			<div id="CollapsiblePanel28" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/LaTorrada1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/LaTorrada2.html %>
+			</div></div>                    
+            
+			<div id="CollapsiblePanel29" class="CollapsiblePanel">
+			<div class="CollapsiblePanelTab" tabindex="0">
+			<%- include info/LaCanya1.html %>
+			</div>
+			<div class="CollapsiblePanelContent">
+			<%- include info/LaCanya2.html %>
+			</div></div>             
+            
+		</div>
+        
+	</div>
+
+	<p>&nbsp;</p>
+
+	<%- include ../desdecasa-footer.ejs %>
+
+
+	<script type="text/javascript">
+		var CollapsiblePanel1 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel1", {contentIsOpen:false});
+		var CollapsiblePanel2 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel2", {contentIsOpen:false});
+		var CollapsiblePanel3 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel3", {contentIsOpen:false});
+		var CollapsiblePanel4 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel4", {contentIsOpen:false});
+		var CollapsiblePanel5 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel5", {contentIsOpen:false});
+		var CollapsiblePanel6 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel6", {contentIsOpen:false});
+		var CollapsiblePanel7 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel7", {contentIsOpen:false});
+		var CollapsiblePanel8 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel8", {contentIsOpen:false});
+		var CollapsiblePanel9 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel9", {contentIsOpen:false});
+		var CollapsiblePanel10 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel10", {contentIsOpen:false});
+		var CollapsiblePanel11 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel11", {contentIsOpen:false});
+		var CollapsiblePanel12 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel12", {contentIsOpen:false});
+		var CollapsiblePanel13 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel13", {contentIsOpen:false});
+		var CollapsiblePanel14 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel14", {contentIsOpen:false});
+		var CollapsiblePanel15 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel15", {contentIsOpen:false});
+		var CollapsiblePanel16 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel16", {contentIsOpen:false});
+		var CollapsiblePanel17 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel17", {contentIsOpen:false});
+		var CollapsiblePanel18 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel18", {contentIsOpen:false});
+		var CollapsiblePanel19 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel19", {contentIsOpen:false}); 
+		var CollapsiblePanel20 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel20", {contentIsOpen:false}); 
+		var CollapsiblePanel21 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel21", {contentIsOpen:false});
+		var CollapsiblePanel22 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel22", {contentIsOpen:false}); 
+		var CollapsiblePanel23 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel23", {contentIsOpen:false}); 
+		var CollapsiblePanel24 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel24", {contentIsOpen:false});
+		var CollapsiblePanel25 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel25", {contentIsOpen:false});
+		var CollapsiblePanel26 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel26", {contentIsOpen:false});
+		var CollapsiblePanel27 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel27", {contentIsOpen:false});
+		var CollapsiblePanel28 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel28", {contentIsOpen:false});
+		var CollapsiblePanel29 = new Spry.Widget.CollapsiblePanel("CollapsiblePanel29", {contentIsOpen:false}); 						
+	</script>
+
+</div></body>
+
+</html>
