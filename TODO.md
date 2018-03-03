@@ -1,3 +1,5 @@
+- Boot without config file
+
 - Securize apps acces:
 	- E.g. If a request is coming from /do-vic/ but access /jokify should not be allowed
 	- Enable browse apps from domain deliberatly (e.g. allow /jokify from .xyz)
