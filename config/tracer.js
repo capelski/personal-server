@@ -1,6 +1,8 @@
-var config = require('./config');
 var tracer = require('../utils/tracer');
 
-tracer.setTraceLevel(config.logs.tracerLevel);
+const configureTracer = config => {
+    tracer.setTraceLevel(config.logs.tracerLevel);
+    return tracer
+};
 
-module.exports = tracer;
+module.exports = { configureTracer };

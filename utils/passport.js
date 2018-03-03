@@ -36,7 +36,7 @@ const userRetrievedHandler = userAuthenticated => {
     };
 };
 
-const passportConfig = (server, config, apps) => {
+const configurePassport = (server, apps) => {
 	var authenticatedApps = apps.filter(app => app.enableAuthentication)
 
 	server.use(passport.initialize()); 
@@ -61,7 +61,7 @@ const passportConfig = (server, config, apps) => {
 	});
 }
 
-module.exports = passportConfig;
+module.exports = { configurePassport };
 
 // TODO Securize access through namespace
 

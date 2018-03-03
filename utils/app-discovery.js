@@ -5,7 +5,7 @@ const isDirectory = path => lstatSync(path).isDirectory();
 
 const getDirectoriesName = path => readdirSync(path).filter(name => isDirectory(join(path, name)));
 
-const discoverApps = defaultApp => {
+const discoverApps = config => {
 	var appsPath = join(__dirname, '..', 'apps');
 	var appsFolderName = getDirectoriesName(appsPath);
 	var appsConfig = appsFolderName.map(appName => {
@@ -14,7 +14,7 @@ const discoverApps = defaultApp => {
 		var appConfig = {
 			name: appName,
 			path: appPath,
-			default: defaultApp == appName
+			default: config.defaultApp == appName
 		}
 
 		var configFilePath = join(appPath, 'config.json');

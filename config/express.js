@@ -2,7 +2,7 @@ var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 
-const getConfiguredServer = (config, apps) => {
+const configureExpress = (config, apps) => {
 	var server = express();
 
 	server.use(bodyParser.json());
@@ -13,11 +13,9 @@ const getConfiguredServer = (config, apps) => {
 		saveUninitialized: true
 	}));
 
-	require('./passport')(server, config, apps);
-
 	server.set('view engine', 'ejs');
 
 	return server;
 }
 
-module.exports = getConfiguredServer;
+module.exports = { configureExpress };
