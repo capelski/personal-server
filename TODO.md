@@ -1,4 +1,7 @@
-- enableAuthentication
++ Removing hostedApps
+
+- Fix enableAuthentication
+- Make sass compilation config.json option
 
 - Boot without config file
 
@@ -15,7 +18,7 @@
 
 - Protect non-existing folder app during initialization
 
-- Meta tags in all apps
+- HTML Meta tags in all apps
 
 - favicon.ico
 

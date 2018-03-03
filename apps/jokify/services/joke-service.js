@@ -185,7 +185,7 @@ var jokes = [
 	'- Porque no me acuerdo de donde lo he dejado<br />',
 
 	'- Siento decirle que mi gato ha matado a su perro<br />' +
-	'- ¿Mi perro? ¡Pero si es un doberman!' +
+	'- ¿Mi perro? ¡Pero si es un doberman!<br />' +
 	'- Ya, y mi gato hidráulico',
 
 	'- Bienvenidos a su primera sesión matrimonial. Paco, empezemos por usted, ¿qué hace después de alcanzar el orgasmo?<br />' +

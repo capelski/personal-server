@@ -1,43 +1,45 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var config = require('./config');
 
-var authenticatedApps = config.hostedApps.filter(app => app.enableAuthentication);
+var authenticatedApps;
 var deserializers = {};
 var userPrefixSeparator = '||->';
 
-function getUserFromPrefixedUserId(prefixedUserId) {
+const getUserFromPrefixedUserId = prefixedUserId => {
 	var decomposition = prefixedUserId.split(userPrefixSeparator);
 	var namespace = decomposition[0];
 	var userId = decomposition[1];
     return deserializers[namespace](userId);
-}
+};
 
-function isStaticContent(relativeUrl) {
-	return relativeUrl.indexOf('/js/') > -1 || relativeUrl.indexOf('/css/') > -1 ;
-}
+const isStaticContent = relativeUrl => 
+	relativeUrl.indexOf('/js/') > -1 || relativeUrl.indexOf('/css/') > -1 ;
 
-function prefixUserId(currentApp, userSession) {
+const prefixUserId = (currentApp, userSession) => {
 	if (userSession.passport && userSession.authDomains[currentApp.namespace]) {
 		userSession.passport.user = currentApp.namespace + userPrefixSeparator + userSession.authDomains[currentApp.namespace];
 	}
 	else {
 		delete userSession.passport;
 	}
-}
+};
 
-function userRetrievedHandler(userAuthenticated) {
-	return function (user) {
-    	if (!user) return userAuthenticated({
-    		message: 'Incorrect username or password'
-    	}, null);
+const userRetrievedHandler = userAuthenticated => {
+	return user => {
+    	if (!user) {
+			return userAuthenticated({
+    			message: 'Incorrect username or password'
+			}, null);
+		}
 		// console.log('Retrieved user:', user);
     	return userAuthenticated(null, user);
     };
-}
+};
 
-module.exports = function (server) {
-	server.use(passport.initialize());
+const passportConfig = (server, config, apps) => {
+	var authenticatedApps = apps.filter(app => app.enableAuthentication)
+
+	server.use(passport.initialize()); 
 	server.use(function (req, res, next) {
 
 		if (isStaticContent(req.url)) return next();
@@ -57,7 +59,9 @@ module.exports = function (server) {
 	    return getUserFromPrefixedUserId(prefixedUserId)
 	    .then(userRetrievedHandler(userAuthenticated));
 	});
-};
+}
+
+module.exports = passportConfig;
 
 // TODO Securize access through namespace
 

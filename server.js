@@ -1,13 +1,16 @@
-var config = require('./config/config');
-var winston = require('./config/winston');
-var tracer = require('./config/tracer');
-var sassCompiler = require('./config/sass-compiler');
-var appMapper = require('./config/app-mapper');
-var server = require('./config/express');
+const config = require('./config/config');
 
-tracer.trace(sassCompiler, 'sassCompiler')(config.hostedApps);
-tracer.trace(appMapper.configure, 'appMapper.configure', appMapper)(server, config);
-tracer.trace(server.listen, 'server.listen', server)(config.port, function (error) {
+const apps = discoverApps(config.defaultApp);
+var winston = require('./config/winston');
+var { trace } = require('./config/tracer');
+var { discoverApps } = require('./utils/app-discovery')
+var { publishApps } = require('./utils/app-publisher');
+
+
+var server = require('./config/express')(config, apps);
+
+trace(publishApps, 'publishApps')(server, apps);
+trace(server.listen, 'server.listen', server)(config.port, function (error) {
 	if (error) {
 		winston.error(error);
 	}

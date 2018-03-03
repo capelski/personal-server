@@ -1,19 +1,23 @@
 var express = require('express');
 var session = require('express-session');
-var config = require('./config');
 var bodyParser = require('body-parser');
-var server = express();
 
-server.use(bodyParser.json());
+const getConfiguredServer = (config, apps) => {
+	var server = express();
 
-server.use(session({
-	secret: config.sessionSecret,
-	resave: false,
-	saveUninitialized: true
-}));
+	server.use(bodyParser.json());
 
-require('./passport')(server);
+	server.use(session({
+		secret: config.sessionSecret,
+		resave: false,
+		saveUninitialized: true
+	}));
 
-server.set('view engine', 'ejs');
+	require('./passport')(server, config, apps);
 
-module.exports = server;
+	server.set('view engine', 'ejs');
+
+	return server;
+}
+
+module.exports = getConfiguredServer;
