@@ -1,3 +1,5 @@
+- enableAuthentication
+
 - Boot without config file
 
 - Securize apps acces:

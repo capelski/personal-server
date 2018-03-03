@@ -23,7 +23,8 @@ class AppMapper {
 
 			var configFilePath = join(appPath, 'config.json');
 			if (existsSync(configFilePath)) {
-				appConfig.config = require(configFilePath);
+				var localConfig = require(configFilePath);
+				Object.assign(appConfig, localConfig);
 			}
 
 			var indexFilePath = join(appPath, 'index.js');
@@ -81,7 +82,9 @@ class AppMapper {
 	prefixRelativeUrl (apps, domain, relativeUrl) {
 	    var updatedRelativeUrl = relativeUrl;
 
-	    var domainAppAccess = apps.find(app => (app.domain != null && domain.indexOf(app.domain) > -1));
+		var domainAppAccess = apps.find(app =>
+			(app.publicDomains != null &&
+				app.publicDomains.find(d => domain.indexOf(d) > -1) != null));
 		
 	    if (domainAppAccess) {
 			var requiredPrefix = '/' + domainAppAccess.name;
