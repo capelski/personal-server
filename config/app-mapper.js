@@ -9,7 +9,7 @@ const getDirectoriesName = path => readdirSync(path).filter(name => isDirectory(
 
 class AppMapper {
 
-	configure (server) {
+	configure (server, config) {
 		var appsPath = join(rootPath, 'apps');
 		var appsFolderName = getDirectoriesName(appsPath);
 		var appsConfig = appsFolderName.map(appName => {
@@ -17,7 +17,8 @@ class AppMapper {
 
 			var appConfig = {
 				name: appName,
-				path: appPath
+				path: appPath,
+				default: config.defaultApp == appName
 			}
 
 			var configFilePath = join(appPath, 'config.json');
@@ -65,7 +66,7 @@ class AppMapper {
 		server.use(assets('/' + appConfig.name, assetsPath));
 		server.use('/' + appConfig.name, appRouter);
 
-		if (appConfig.defaultApp) {
+		if (appConfig.default) {
 			server.use('/', appRouter);
 		}
 	}

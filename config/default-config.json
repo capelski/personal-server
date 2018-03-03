@@ -4,6 +4,7 @@
             "name": "azure-express"
         },
         "defaultPort": 3000,
+        "defaultApp": "app1",
         "hostedApps": [{
             "appPath": "apps/app1",
             "namespace": "local-app-1",
@@ -13,8 +14,7 @@
             "namespace": "local-app-2"
         }, {
             "appPath": "apps/app3",
-            "namespace": "app3",
-            "defaultApp": true
+            "namespace": "app3"
         }],
         "sessionSecret": "ssshhhhh",
         "logs": {
@@ -29,10 +29,10 @@
             "name": "azure-express"
         },
         "defaultPort": 80,
+        "defaultApp": "app1",
         "hostedApps": [{
             "appPath": "apps/default",
-            "namespace": "default",
-            "defaultApp": true
+            "namespace": "default"
         }, {
             "appPath": "apps/app1",
             "namespace": "app1-domain.com",
