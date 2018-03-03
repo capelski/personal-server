@@ -6,7 +6,7 @@ var appMapper = require('./config/app-mapper');
 var server = require('./config/express');
 
 tracer.trace(sassCompiler, 'sassCompiler')(config.hostedApps);
-tracer.trace(appMapper.configure, 'appMapper.configure', appMapper)(server, config.hostedApps);
+tracer.trace(appMapper.configure, 'appMapper.configure', appMapper)(server);
 tracer.trace(server.listen, 'server.listen', server)(config.port, function (error) {
 	if (error) {
 		winston.error(error);

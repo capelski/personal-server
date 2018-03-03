@@ -1,18 +1,46 @@
-var express = require('express');
-var path = require('path');
-var assets = require('express-asset-versions');
-var rootPath = path.normalize(__dirname + '/..');
+const express = require('express');
+const { lstatSync, readdirSync, existsSync } = require('fs');
+const { join, normalize } = require('path');
+const assets = require('express-asset-versions');
+const rootPath = normalize(__dirname + '/..');
+
+const isDirectory = path => lstatSync(path).isDirectory();
+const getDirectoriesName = path => readdirSync(path).filter(name => isDirectory(join(path, name)));
 
 class AppMapper {
 
-	configure (server, apps) {
-		var pluginsPath = path.join(rootPath, 'plugins');
+	configure (server) {
+		var appsPath = join(rootPath, 'apps');
+		var appsFolderName = getDirectoriesName(appsPath);
+		var appsConfig = appsFolderName.map(appName => {
+			var appPath = join(appsPath, appName);
 
-		this.setViewsPaths(server, apps);
-		server.use(this.domainAppsResolver(apps).bind(this));
+			var appConfig = {
+				name: appName,
+				path: appPath
+			}
+
+			var configFilePath = join(appPath, 'config.json');
+			if (existsSync(configFilePath)) {
+				appConfig.config = require(configFilePath);
+			}
+
+			var indexFilePath = join(appPath, 'index.js');
+			if (existsSync(indexFilePath)) {
+				appConfig.indexFilePath = indexFilePath;
+			}
+
+			return appConfig;
+		})
+		.filter(app => app.indexFilePath != null);
+
+		var pluginsPath = join(rootPath, 'plugins');
+
+		this.setViewsPaths(server, appsConfig);
+		server.use(this.domainAppsResolver(appsConfig).bind(this));
 		server.use('/plugins', express.static(pluginsPath));
 		server.use(assets('../plugins', pluginsPath));
-		apps.forEach(app => this.registerApp(server, app));
+		appsConfig.forEach(app => this.registerApp(server, app));
 	}
 
 	domainAppsResolver (apps) {
@@ -29,23 +57,22 @@ class AppMapper {
 		};
 	}
 
-	registerApp (server, app) {
-		var appPath = path.join(rootPath, app.appPath);
-		var appRouter = require(appPath);
-		var assetsPath = path.join(appPath, 'public');
+	registerApp (server, appConfig) {
+		var appRouter = require(appConfig.indexFilePath);
+		var assetsPath = join(appConfig.path, 'public');
 
-		server.use('/' + app.namespace, express.static(assetsPath));
-		server.use(assets('/' + app.namespace, assetsPath));
-		server.use('/' + app.namespace, appRouter);
+		server.use('/' + appConfig.name, express.static(assetsPath));
+		server.use(assets('/' + appConfig.name, assetsPath));
+		server.use('/' + appConfig.name, appRouter);
 
-		if (app.defaultApp) {
+		if (appConfig.defaultApp) {
 			server.use('/', appRouter);
 		}
 	}
 
 	setViewsPaths (server, apps) {
-		var viewsPaths = apps.reduce(function(paths, app) {
-			return paths.concat(path.join(rootPath, app.appPath, 'views'));
+		var viewsPaths = apps.reduce(function(paths, appConfig) {
+			return paths.concat(join(appConfig.path, 'views'));
 		}, []);
 		server.set('views', viewsPaths);
 	}
@@ -56,7 +83,7 @@ class AppMapper {
 	    var domainAppAccess = apps.find(app => (app.domain != null && domain.indexOf(app.domain) > -1));
 		
 	    if (domainAppAccess) {
-			var requiredPrefix = '/' + domainAppAccess.namespace;
+			var requiredPrefix = '/' + domainAppAccess.name;
 			var prefixWithTrailingSlash = requiredPrefix;
 
 			if (relativeUrl == '/') {
