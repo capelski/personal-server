@@ -1,11 +1,20 @@
 'use strict';
 
 let winston = require('winston');
+var format = require('./format');
 let traceLevel = 'all';
 
 function tracer() {
 
     let stackLevel = 0;
+    var formatter = value => format.digitPrepender(value, 0, 2);
+
+    function getTimestamp() {
+        var currentDate = new Date();
+        var formattedTime =  formatter(currentDate.getHours()) + ':' + formatter(currentDate.getMinutes()) + ':' +
+        formatter(currentDate.getSeconds());
+        return formattedTime;
+    }
 
     function errorify(functionExpression, message, thisObject) {
         return function() {
@@ -57,7 +66,8 @@ function tracer() {
             try {
                 stackLevel++;
                 var stackIndentation = Array(stackLevel).join('    ');
-                winston.info(stackIndentation + message + logArguments.apply(thisObject, arguments));
+                var timestamp = getTimestamp();
+                winston.info(stackIndentation + timestamp + ' ' + message + logArguments.apply(thisObject, arguments));
                 evaluateArguments.apply(thisObject, arguments);
                 var result = functionExpression.apply(thisObject, arguments);
                 stackLevel--;
