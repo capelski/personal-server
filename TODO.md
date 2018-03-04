@@ -3,8 +3,6 @@
 
 - Ignore apps folder
 
-- Boot without config file
-
 - Securize apps acces:
 	- E.g. If a request is coming from /do-vic/ but access /jokify should not be allowed
 	- Enable browse apps from domain deliberatly (e.g. allow /jokify from .xyz)
@@ -16,8 +14,6 @@
 
 - Issolate apps session
 	(E.g. the excludedIndexes session property of jokify can be accessed from aywhere)
-
-- Protect non-existing folder app during initialization
 
 - HTML Meta tags in all apps
 
