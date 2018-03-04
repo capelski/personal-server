@@ -61,8 +61,6 @@ const configurePassport = (server, apps) => {
 	});
 }
 
-module.exports = { configurePassport };
-
 // TODO Securize access through namespace
 
 passport.createStrategy = function (namespace, authenticator, deserializer, logInHandler, logOutHandler) {
@@ -112,3 +110,5 @@ passport.createStrategy = function (namespace, authenticator, deserializer, logI
 		logOut
 	};
 }
+
+module.exports = { configurePassport };

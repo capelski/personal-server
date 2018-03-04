@@ -16,9 +16,9 @@ const { configurePassport } = require('./utils/passport');
 configurePassport(server, apps);
 
 const { publishApps } = require('./utils/app-publisher');
-trace(publishApps, 'publishApps')(server, apps);
+trace(publishApps)(server, apps);
 
-trace(server.listen, 'server.listen', server)(config.port, function (error) {
+trace('listen', server)(config.port, function (error) {
 	if (error) {
 		winston.error(error);
 	}

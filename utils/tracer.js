@@ -1,74 +1,74 @@
-'use strict';
+const winston = require('winston');
+const { digitPrepender } = require('./format');
 
-let winston = require('winston');
-var format = require('./format');
-let traceLevel = 'all';
+let traceLevel = 'log';
+let stackLevel = 0;
 
-function tracer() {
+const formatter = value => digitPrepender(value, 0, 2);
 
-    let stackLevel = 0;
-    var formatter = value => format.digitPrepender(value, 0, 2);
-
-    function getTimestamp() {
-        var currentDate = new Date();
-        var formattedTime =  formatter(currentDate.getHours()) + ':' + formatter(currentDate.getMinutes()) + ':' +
+const getTimestamp = () => {
+    var currentDate = new Date();
+    var timestamp = formatter(
+        currentDate.getHours()) + ':' + formatter(currentDate.getMinutes()) + ':' +
         formatter(currentDate.getSeconds());
-        return formattedTime;
-    }
+    return timestamp;
+};
 
-    function errorify(functionExpression, message, thisObject) {
+const evaluateArguments = (suppliedArguments) => {
+    for (var index in suppliedArguments) {
+        var argument = suppliedArguments[index];
+        if (typeof argument === "undefined" || argument == null) {
+            winston.info('Parameter ' + index + ' is null or undefined...');
+        }
+    }
+};
+
+const logArguments = (suppliedArguments) => {
+    var stringifiedArguments = '(';
+    var keysNumber = Object.keys(suppliedArguments).length;
+    for (var index in suppliedArguments) {
+        var argument = suppliedArguments[index];
+        if (typeof argument === 'object') {
+            stringifiedArguments += '{}';
+        }
+        else if (typeof argument === 'function') {
+            stringifiedArguments += argument.name + '()';
+        }
+        else {
+            stringifiedArguments += argument;
+        }
+        keysNumber--;
+        if (keysNumber > 0) {
+            stringifiedArguments += ', ';
+        }
+    }
+    stringifiedArguments += ')';
+    return stringifiedArguments;
+};
+
+const setTraceLevel = level => traceLevel = level;
+
+const tracers = {
+    error: (functionExpression, thisObject) => {
         return function() {
             try {
                 return functionExpression.apply(thisObject, arguments);
             }
             catch (error) {
-                winston.error(message + logArguments.apply(thisObject, arguments));
+                winston.error(functionExpression.name + logArguments(arguments));
                 winston.error(error);
                 throw error;
             }
         };
-    }
-
-    function evaluateArguments() {
-        for (var index in arguments) {
-            var argument = arguments[index];
-            if (typeof argument === "undefined" || argument == null) {
-                winston.info('Parameter ' + index + ' is null or undefined...');
-            }
-        }
-    }
-
-    function logArguments() {
-        var stringifiedArguments = '(';
-        var keysNumber = Object.keys(arguments).length;
-        for (var index in arguments) {
-            var argument = arguments[index];
-            if (typeof argument === 'object') {
-                stringifiedArguments += '{}';
-            }
-            else if (typeof argument === 'function') {
-                stringifiedArguments += argument.name + '()';
-            }
-            else {
-                stringifiedArguments += argument;
-            }
-            keysNumber--;
-            if (keysNumber > 0) {
-                stringifiedArguments += ', ';
-            }
-        }
-        stringifiedArguments += ')';
-        return stringifiedArguments;
-    }
-
-    function logify(functionExpression, message, thisObject) {
+    },
+    log: (functionExpression, thisObject) => {
         return function() {
             try {
                 stackLevel++;
                 var stackIndentation = Array(stackLevel).join('    ');
                 var timestamp = getTimestamp();
-                winston.info(stackIndentation + timestamp + ' ' + message + logArguments.apply(thisObject, arguments));
-                evaluateArguments.apply(thisObject, arguments);
+                winston.info(stackIndentation + timestamp + ' ' + functionExpression.name + logArguments(arguments));
+                evaluateArguments(arguments);
                 var result = functionExpression.apply(thisObject, arguments);
                 stackLevel--;
                 return result;
@@ -80,25 +80,19 @@ function tracer() {
             }
         };
     }
+};
 
-    function setTraceLevel(level) {
-        traceLevel = level;
+const trace = (functionExpression, thisObject) => {
+    var tracedFunction;
+
+    if (thisObject == null) {
+        tracedFunction = tracers[traceLevel](functionExpression, null);
+    }
+    else {
+        tracedFunction = tracers[traceLevel](thisObject[functionExpression], thisObject);
     }
 
-    function trace(functionExpression, message, thisObject) {
-        thisObject = thisObject || this;
-        if (traceLevel === 'errors') {
-            return errorify(functionExpression, message, thisObject);
-        }
-        else if (traceLevel === 'all') {
-            return logify(functionExpression, message, thisObject);
-        }
-    }
-
-    return {
-        trace: trace,
-        setTraceLevel: setTraceLevel
-    };
+    return tracedFunction;
 }
 
-module.exports = tracer();
+module.exports = { trace, setTraceLevel };

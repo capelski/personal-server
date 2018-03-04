@@ -9,7 +9,7 @@
         "logs": {
             "file": "logs.txt",
             "console": true,
-            "tracerLevel": "all"
+            "tracerLevel": "log"
         }
     },
 
@@ -23,7 +23,7 @@
         "logs": {
             "file": "logs.txt",
             "console": false,
-            "tracerLevel": "errors"
+            "tracerLevel": "error"
         }
     }
 }
