@@ -1,7 +1,7 @@
-+ Removing hostedApps
-
 - Fix enableAuthentication
 - Make sass compilation config.json option
+
+- Ignore apps folder
 
 - Boot without config file
 
@@ -10,6 +10,7 @@
 	- Enable browse apps from domain deliberatly (e.g. allow /jokify from .xyz)
 
 - Isolate views
+	- Make every view be included in a folder with a unique name + global function to require views that transparently adds the folder name to the path, making every view path unique
 
 - Build the apps path based on the apps namespace
 
