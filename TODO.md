@@ -1,6 +1,5 @@
-- Fix enableAuthentication
 - Make sass compilation config.json option
-
+- Extract each app into a new repository
 - Ignore apps folder
 
 - Securize apps acces:
@@ -14,6 +13,7 @@
 
 - Issolate apps session
 	(E.g. the excludedIndexes session property of jokify can be accessed from aywhere)
+	Same for passport?
 
 - HTML Meta tags in all apps
 

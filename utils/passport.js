@@ -1,9 +1,8 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-var authenticatedApps;
+const userPrefixSeparator = '||->';
 var deserializers = {};
-var userPrefixSeparator = '||->';
 
 const getUserFromPrefixedUserId = prefixedUserId => {
 	var decomposition = prefixedUserId.split(userPrefixSeparator);
@@ -15,50 +14,55 @@ const getUserFromPrefixedUserId = prefixedUserId => {
 const isStaticContent = relativeUrl => 
 	relativeUrl.indexOf('/js/') > -1 || relativeUrl.indexOf('/css/') > -1 ;
 
-const prefixUserId = (currentApp, userSession) => {
-	if (userSession.passport && userSession.authDomains[currentApp.namespace]) {
-		userSession.passport.user = currentApp.namespace + userPrefixSeparator + userSession.authDomains[currentApp.namespace];
+const prefixUserId = (appNamespace, userSession) => {
+	if (userSession.passport && userSession.authDomains[appNamespace]) {
+		userSession.passport.user = appNamespace +
+			userPrefixSeparator + userSession.authDomains[appNamespace];
 	}
 	else {
 		delete userSession.passport;
 	}
 };
 
-const userRetrievedHandler = userAuthenticated => {
-	return user => {
-    	if (!user) {
-			return userAuthenticated({
-    			message: 'Incorrect username or password'
-			}, null);
-		}
-		// console.log('Retrieved user:', user);
-    	return userAuthenticated(null, user);
-    };
-};
-
-const configurePassport = (server, apps) => {
-	var authenticatedApps = apps.filter(app => app.enableAuthentication)
-
-	server.use(passport.initialize()); 
-	server.use(function (req, res, next) {
+const getPassportMiddleware = authenticatedApps => {
+	return function (req, res, next) {
 
 		if (isStaticContent(req.url)) return next();
 
-		var currentApp = authenticatedApps.find(app => req.url.startsWith('/' + app.namespace));
+		var currentApp = authenticatedApps.find(app => req.url.startsWith('/' + app.name));
 		if (!currentApp) return next();
-
-		prefixUserId(currentApp, req.session);
+		
+		prefixUserId(currentApp.name, req.session);
+		// The following middleware deserializes the user
 		return passport.session()(req, res, next);
-	});
+	}
+};
 
-	passport.serializeUser(function (user, done) {
-    	return done(null, user.id);
-	});
+const userResolver = doneCallback => {
+	return user => {
+    	if (!user) {
+			var error = {
+    			message: 'Incorrect username or password'
+			};
+			return doneCallback(error, null);
+		}
+    	return doneCallback(null, user);
+    };
+};
 
-	passport.deserializeUser(function (prefixedUserId, userAuthenticated) {
-	    return getUserFromPrefixedUserId(prefixedUserId)
-	    .then(userRetrievedHandler(userAuthenticated));
-	});
+const userSerializer = (user, doneCallback) => doneCallback(null, user.id);
+
+const userDeserializer = (prefixedUserId, doneCallback) =>
+	getUserFromPrefixedUserId(prefixedUserId).then(userResolver(doneCallback));
+
+const configurePassport = (server, apps) => {
+	const authenticatedApps = apps.filter(app => app.enableAuthentication);
+
+	server.use(passport.initialize()); 
+	server.use(getPassportMiddleware(authenticatedApps));
+
+	passport.serializeUser(userSerializer);
+	passport.deserializeUser(userDeserializer);
 }
 
 // TODO Securize access through namespace
@@ -76,7 +80,7 @@ passport.createStrategy = function (namespace, authenticator, deserializer, logI
 	    passwordField: 'password'
 	}, function (username, password, userAuthenticated) {
 	    return authenticator(username, password)
-	    .then(userRetrievedHandler(userAuthenticated));
+	    .then(userResolver(userAuthenticated));
 	});
 
 	passport.use(namespace, localStrategy);
@@ -90,7 +94,8 @@ passport.createStrategy = function (namespace, authenticator, deserializer, logI
 	            if (error) return res.send(error);
 
 				req.session.authDomains = req.session.authDomains || {};
-	            req.session.authDomains[namespace] = user.id;
+				req.session.authDomains[namespace] = user.id;
+				
 	            logInHandler(req, res, next);
 	        });
 	    }
