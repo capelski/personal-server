@@ -14,8 +14,9 @@ const discoverApps = config => {
 		var appConfig = {
 			name: appName,
 			path: appPath,
-			default: config.defaultApp == appName
-		}
+			default: config.defaultApp == appName,
+			assetsFolder: 'public'
+		};
 
 		var configFilePath = join(appPath, 'config.json');
 		if (existsSync(configFilePath)) {

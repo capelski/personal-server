@@ -48,7 +48,7 @@ const domainAppsResolver = apps =>
 
 const registerApp = (server, appConfig) => {
 	var appRouter = require(appConfig.indexFilePath);
-	var assetsPath = join(appConfig.path, 'public');
+	var assetsPath = join(appConfig.path, appConfig.assetsFolder);
 
 	server.use('/' + appConfig.name, express.static(assetsPath));
 	server.use(assets('/' + appConfig.name, assetsPath));

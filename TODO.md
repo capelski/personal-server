@@ -1,6 +1,7 @@
 - Make sass compilation config.json option
 - Extract each app into a new repository
 - Ignore apps folder
+- Allow Vue building from apps folder?
 
 - Securize apps acces:
 	- E.g. If a request is coming from /do-vic/ but access /jokify should not be allowed
