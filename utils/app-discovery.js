@@ -18,7 +18,7 @@ const discoverApps = config => {
 			assetsFolder: 'public'
 		};
 
-		var configFilePath = join(appPath, 'config.json');
+		var configFilePath = join(appPath, 'app-config.json');
 		if (existsSync(configFilePath)) {
 			var localConfig = require(configFilePath);
 			Object.assign(appConfig, localConfig);
