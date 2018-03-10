@@ -13,9 +13,6 @@ const express = require('express');
 const server = express();
 server.set('view engine', 'ejs');
 
-// var bodyParser = require('body-parser');
-// server.use(bodyParser.json());
-
 const { configurePassport } = require('./utils/passport');
 configurePassport(server);
 

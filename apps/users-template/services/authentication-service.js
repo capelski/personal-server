@@ -20,12 +20,12 @@ function logOut(req, res, next) {
 	return res.send('Successfully logged out');
 }
 
-function authenticator(username, password) {
+function userAuthenticator(username, password) {
 	var user = users.find(user => user.username === username && user.password === password);
 	return Promise.resolve(user);
 }
 
-function retriever(userId) {
+function userDeserializer(userId) {
 	var user = users.find(user => user.id === parseInt(userId));
 	return Promise.resolve(user);
 }
@@ -51,7 +51,13 @@ function getClientSideInfo(user, permissions) {
 module.exports = {
 	logIn,
 	logOut,
-	authenticator,
-	retriever,
-	getClientSideInfo
+	userAuthenticator,
+	userDeserializer,
+	getClientSideInfo,
+	handlers: {
+		userAuthenticator,
+		userDeserializer,
+		logIn,
+		logOut
+	}
 };

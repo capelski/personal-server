@@ -45,19 +45,19 @@ const configurePassport = (server) => {
 	passport.deserializeUser(userDeserializer);
 }
 
-const createStrategy = function (namespace, authenticator, deserializer, logInHandler, logOutHandler) {
-
+// TODO retrieve the namespace automatically
+const createStrategy = (namespace, handlers) => {
 	if (namespace.indexOf(userPrefixSeparator) > -1) {
 		throw 'The namespace ' + namespace + ' is not valid!';
 	}
 
-	deserializers[namespace] = deserializer;
+	deserializers[namespace] = handlers.userDeserializer;
 
 	var localStrategy = new LocalStrategy({
 	    usernameField: 'username',
 	    passwordField: 'password'
 	}, function (username, password, userAuthenticated) {
-	    return authenticator(username, password)
+	    return handlers.userAuthenticator(username, password)
 	    .then(userResolver(userAuthenticated));
 	});
 
@@ -74,7 +74,7 @@ const createStrategy = function (namespace, authenticator, deserializer, logInHa
 				req.session.authDomains = req.session.authDomains || {};
 				req.session.authDomains[namespace] = user.id;
 				
-	            logInHandler(req, res, next);
+	            handlers.logIn(req, res, next);
 	        });
 	    }
 
@@ -85,7 +85,7 @@ const createStrategy = function (namespace, authenticator, deserializer, logInHa
 		req.session.authDomains = req.session.authDomains || {};
         delete req.session.authDomains[namespace];
         delete req.session.passport;
-        return logOutHandler(req, res, next);
+        return handlers.logOut(req, res, next);
 	};
 
 	return {
