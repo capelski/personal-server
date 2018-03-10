@@ -5,6 +5,7 @@ var sassCompiler = require('./sass-compiler');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var passport = require('passport');
+var { getUserManagementUtils } = require('./passport');
 
 const setViewsPaths = (server, apps) => {
 	var viewsPaths =
@@ -61,6 +62,8 @@ const registerApp = (server, config, appConfig) => {
 		saveUninitialized: true,
 		name: appConfig.name
 	});
+
+	// TODO Provide only on enable authentiaction
 	const passportInitialize = passport.initialize();
 	const passportSession = passport.session();
 	const appMiddleware = {
@@ -69,8 +72,10 @@ const registerApp = (server, config, appConfig) => {
 		passport: [sessionMiddleware, jsonMiddleware, passportInitialize, passportSession]
 	};
 
+	const userManagementUtils = getUserManagementUtils(appConfig.name);
+
 	var { configureRouter } = require(appConfig.indexFilePath);
-	var appRouter = configureRouter(appMiddleware);
+	var appRouter = configureRouter(appMiddleware, { userManagementUtils });
 	server.use('/' + appConfig.name, appRouter);
 
 	if (appConfig.default) {

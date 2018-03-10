@@ -2,18 +2,19 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var authenticationService = require('./services/authentication-service');
-var { createStrategy, logInMiddleware, logOutMiddleware } = require('../../utils/passport');
-createStrategy('users-template', authenticationService.handlers);
 
-const configureRouter = (middleware) => {
+const configureRouter = (middleware, { userManagementUtils }) => {
+
+	userManagementUtils.createStrategy(authenticationService.handlers);
+
 	router.get('/', middleware.passport, function (req, res, next) {
 		return res.render('users-template-index');
 	});
 
-	router.post('/log-in', middleware.passport, logInMiddleware('users-template'), (req, res, next) => {
+	router.post('/log-in', middleware.passport, userManagementUtils.logInMiddleware, (req, res, next) => {
 		return res.json(authenticationService.getClientSideInfo(req.user, req.body.permissions));
 	});
-	router.post('/log-out', middleware.passport, logOutMiddleware, (req, res, next) => {
+	router.post('/log-out', middleware.passport, userManagementUtils.logOutMiddleware, (req, res, next) => {
 		return res.send('Successfully logged out');
 	});
 

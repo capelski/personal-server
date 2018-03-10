@@ -1,3 +1,5 @@
+- Test that multiple authentication works
+
 - Make sass compilation config.json option
 - Extract each app into a new repository
 	- Include changes in index.js

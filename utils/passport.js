@@ -2,21 +2,21 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 const userPrefixSeparator = '||->';
-var deserializers = {};
+let deserializers = {};
 
 const configurePassport = (server) => {
 
 	const userSerializer = (user, doneCallback) => {
-		var namespace = user._namespace;
+		const namespace = user._namespace;
 		delete user._namespace;
-		var serializedUserId = namespace + userPrefixSeparator + user.id;
+		const serializedUserId = namespace + userPrefixSeparator + user.id;
 		return doneCallback(null, serializedUserId);
 	};
 	
 	const userDeserializer = (serializedUserId, doneCallback) => {
-		var parts = serializedUserId.split(userPrefixSeparator);
-		var namespace = parts[0];
-		var userId = parts[1];
+		const parts = serializedUserId.split(userPrefixSeparator);
+		const namespace = parts[0];
+		const userId = parts[1];
 		return deserializers[namespace](userId)
 		.then(user => {
 			if (!user) {
@@ -33,37 +33,38 @@ const configurePassport = (server) => {
 	passport.deserializeUser(userDeserializer);
 }
 
-// TODO retrieve the namespace automatically
-const createStrategy = (namespace, handlers) => {
+const getStrategyCreator = (namespace) => {
 	if (namespace.indexOf(userPrefixSeparator) > -1) {
 		// todo winston error instead
 		throw 'The namespace ' + namespace + ' is not valid!';
 	}
+	
+	return (handlers) => {
+		deserializers[namespace] = handlers.userDeserializer;
 
-	deserializers[namespace] = handlers.userDeserializer;
-
-	var localStrategy = new LocalStrategy({
-	    usernameField: 'username',
-	    passwordField: 'password'
-	}, function (username, password, doneCallback) {
-	    return handlers.userAuthenticator(username, password)
-	    .then(user => {
-			if (!user) {
-				var error = {
-					message: 'Incorrect username or password'
-				};
-				return doneCallback(error, null);
-			}
-			
-			user._namespace = namespace;
-			return doneCallback(null, user);
+		const localStrategy = new LocalStrategy({
+			usernameField: 'username',
+			passwordField: 'password'
+		}, function (username, password, doneCallback) {
+			return handlers.userAuthenticator(username, password)
+			.then(user => {
+				if (!user) {
+					const error = {
+						message: 'Incorrect username or password'
+					};
+					return doneCallback(error, null);
+				}
+				
+				user._namespace = namespace;
+				return doneCallback(null, user);
+			});
 		});
-	});
 
-	passport.use(namespace, localStrategy);
+		passport.use(namespace, localStrategy);
+	};
 };
 
-const logInMiddleware = (namespace) => (req, res, next) => {
+const getLogInMiddleware = (namespace) => (req, res, next) => {
 
 	function doneCallback(error, user, info) {
 		if (error) {
@@ -86,4 +87,13 @@ const logOutMiddleware = (req, res, next) => {
 	return next();
 };
 
-module.exports = { configurePassport, createStrategy, logInMiddleware, logOutMiddleware };
+const getUserManagementUtils = namespace => {
+	const userManagementUtils = {
+		createStrategy: getStrategyCreator(namespace),
+		logInMiddleware: getLogInMiddleware(namespace),
+		logOutMiddleware
+	};
+	return userManagementUtils;
+};
+
+module.exports = { configurePassport, getUserManagementUtils };
