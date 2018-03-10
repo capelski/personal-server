@@ -12,14 +12,6 @@ var users = [{
 	permissions: ['restricted:view', 'restricted:create', 'restricted:edit', 'restricted:delete']
 }];
 
-function logIn(req, res, next) {
-	return res.json(getClientSideInfo(req.user, req.body.permissions));
-}
-
-function logOut(req, res, next) {
-	return res.send('Successfully logged out');
-}
-
 function userAuthenticator(username, password) {
 	var user = users.find(user => user.username === username && user.password === password);
 	return Promise.resolve(user);
@@ -49,15 +41,9 @@ function getClientSideInfo(user, permissions) {
 }
 
 module.exports = {
-	logIn,
-	logOut,
-	userAuthenticator,
-	userDeserializer,
 	getClientSideInfo,
 	handlers: {
 		userAuthenticator,
-		userDeserializer,
-		logIn,
-		logOut
+		userDeserializer
 	}
 };

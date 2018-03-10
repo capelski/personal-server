@@ -5,7 +5,6 @@ var sassCompiler = require('./sass-compiler');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var passport = require('passport');
-var { userPrefixerMiddleware } = require('./passport');
 
 const setViewsPaths = (server, apps) => {
 	var viewsPaths =
@@ -63,12 +62,11 @@ const registerApp = (server, config, appConfig) => {
 		name: appConfig.name
 	});
 	const passportInitialize = passport.initialize();
-	const prefixerMiddleware = userPrefixerMiddleware(appConfig.name);
 	const passportSession = passport.session();
 	const appMiddleware = {
 		bodyParser: jsonMiddleware,
 		session: sessionMiddleware,
-		passport: [sessionMiddleware, jsonMiddleware, passportInitialize, prefixerMiddleware, passportSession]
+		passport: [sessionMiddleware, jsonMiddleware, passportInitialize, passportSession]
 	};
 
 	var { configureRouter } = require(appConfig.indexFilePath);
