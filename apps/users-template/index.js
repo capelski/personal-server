@@ -6,21 +6,24 @@ var authenticationService = require('./services/authentication-service');
 var authenticationHandler = passport.createStrategy('users-template',
 	authenticationService.authenticator, authenticationService.retriever, authenticationService.logIn, authenticationService.logOut);
 
-router.get('/', function (req,res,next) {
-	return res.render('users-template-index');
-});
-
-router.post('/log-in', authenticationHandler.logIn);
-router.post('/log-out', authenticationHandler.logOut);
-
-router.get('/client-side', function (req, res, next) {
-	res.set('Content-Type', 'application/javascript');
-	return res.json({
-		user: authenticationService.getClientSideInfo(req.user, req.query.permissions)
+const configureRouter = (middleware) => {
+	router.get('/', middleware.passport, function (req, res, next) {
+		return res.render('users-template-index');
 	});
-});
 
-var publicControllers = require('./controllers/public')(router);
-var restrictedControllers = require('./controllers/restricted')(router);
+	router.post('/log-in', middleware.passport, authenticationHandler.logIn);
+	router.post('/log-out', middleware.passport, authenticationHandler.logOut);
 
-module.exports = router;
+	router.get('/client-side', middleware.passport, function (req, res, next) {
+		res.set('Content-Type', 'application/javascript');
+		return res.json({
+			user: authenticationService.getClientSideInfo(req.user, req.query.permissions)
+		});
+	});
+
+	var publicControllers = require('./controllers/public')(router, middleware);
+	var restrictedControllers = require('./controllers/restricted')(router, middleware);
+	return router;
+}
+
+module.exports = { configureRouter };

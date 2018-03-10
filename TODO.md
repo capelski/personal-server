@@ -1,7 +1,13 @@
 - Make sass compilation config.json option
 - Extract each app into a new repository
+	- Include changes in index.js
 - Ignore apps folder
 - Allow Vue building from apps folder?
+
+- Move code from config/express.js to server
+
+- If Vue routing app as default, knocks the rest...
+	- Use hashbangs routing instead
 
 - Securize apps acces:
 	- E.g. If a request is coming from /do-vic/ but access /jokify should not be allowed

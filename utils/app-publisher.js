@@ -2,6 +2,10 @@ const { join } = require('path');
 const express = require('express');
 const assets = require('express-asset-versions');
 var sassCompiler = require('./sass-compiler');
+var session = require('express-session');
+var bodyParser = require('body-parser');
+var passport = require('passport');
+var { userPrefixerMiddleware } = require('./passport');
 
 const setViewsPaths = (server, apps) => {
 	var viewsPaths =
@@ -46,12 +50,28 @@ const domainAppsResolver = apps =>
 		return next();
 	};
 
-const registerApp = (server, appConfig) => {
-	var appRouter = require(appConfig.indexFilePath);
+const registerApp = (server, config, appConfig) => {
 	var assetsPath = join(appConfig.path, appConfig.assetsFolder);
-
 	server.use('/' + appConfig.name, express.static(assetsPath));
 	server.use(assets('/' + appConfig.name, assetsPath));
+
+	const jsonMiddleware = bodyParser.json();
+	const sessionMiddleware = session({
+		secret: config.sessionSecret,
+		resave: false,
+		saveUninitialized: true
+	});
+	const passportInitialize = passport.initialize();
+	const prefixerMiddleware = userPrefixerMiddleware(appConfig.name);
+	const passportSession = passport.session();
+	const appMiddleware = {
+		bodyParser: jsonMiddleware,
+		session: sessionMiddleware,
+		passport: [sessionMiddleware, jsonMiddleware, passportInitialize, prefixerMiddleware, passportSession]
+	};
+
+	var { configureRouter } = require(appConfig.indexFilePath);
+	var appRouter = configureRouter(appMiddleware);
 	server.use('/' + appConfig.name, appRouter);
 
 	if (appConfig.default) {
@@ -59,7 +79,7 @@ const registerApp = (server, appConfig) => {
 	}
 };
 
-const publishApps = (server, appsConfig) => {
+const publishApps = (server, config, appsConfig) => {
 	var pluginsPath = join(__dirname, '..', 'plugins');
 	sassCompiler(appsConfig);
 
@@ -67,7 +87,7 @@ const publishApps = (server, appsConfig) => {
 	server.use(domainAppsResolver(appsConfig));
 	server.use('/plugins', express.static(pluginsPath));
 	server.use(assets('../plugins', pluginsPath));
-	appsConfig.forEach(app => registerApp(server, app));
+	appsConfig.forEach(app => registerApp(server, config, app));
 };
 
 

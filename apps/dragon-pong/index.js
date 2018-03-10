@@ -3,9 +3,12 @@ var router = express.Router();
 var path = require('path');
 var matchesController = require('./controllers/matches-controller');
 
-router.get('/', function (req, res, next) {
-  res.render('dragon-pong');
-});
-router.get('/matches', matchesController.getAll);
+const configureRouter = (middleware) => {
+	router.get('/', function (req, res, next) {
+	  res.render('dragon-pong');
+	});
+	router.get('/matches', matchesController.getAll);
+	return router;
+}
 
-module.exports = router;
+module.exports = { configureRouter };

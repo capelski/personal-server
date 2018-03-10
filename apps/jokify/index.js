@@ -3,7 +3,10 @@ var router = express.Router();
 var path = require('path');
 var jokesController = require('./controllers/joke-controller');
 
-router.get('/', jokesController.indexView);
-router.get('/random', jokesController.randomJoke);
+const configureRouter = (middleware) => {
+	router.get('/', middleware.session, jokesController.indexView);
+	router.get('/random', middleware.session, jokesController.randomJoke);
+	return router;
+}
 
-module.exports = router;
+module.exports = { configureRouter };

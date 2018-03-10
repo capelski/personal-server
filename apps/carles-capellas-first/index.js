@@ -3,6 +3,9 @@ var router = express.Router();
 var path = require('path');
 var pagesController = require('./controllers/pages-controller');
 
-router.get('/', pagesController.resolve);
+const configureRouter = (middleware) => {
+	router.get('/', middleware.session, pagesController.resolve);
+	return router;
+}
 
-module.exports = router;
+module.exports = { configureRouter };

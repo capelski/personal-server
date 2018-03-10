@@ -11,32 +11,17 @@ const getUserFromPrefixedUserId = prefixedUserId => {
     return deserializers[namespace](userId);
 };
 
-const isStaticContent = relativeUrl => 
-	relativeUrl.indexOf('/js/') > -1 || relativeUrl.indexOf('/css/') > -1 ;
-
-const prefixUserId = (appNamespace, userSession) => {
-	if (userSession.passport && userSession.authDomains[appNamespace]) {
-		userSession.passport.user = appNamespace +
-			userPrefixSeparator + userSession.authDomains[appNamespace];
-	}
-	else {
-		delete userSession.passport;
-	}
-};
-
-const getPassportMiddleware = authenticatedApps => {
-	return function (req, res, next) {
-
-		if (isStaticContent(req.url)) return next();
-
-		var currentApp = authenticatedApps.find(app => req.url.startsWith('/' + app.name));
-		if (!currentApp) return next();
-		
-		prefixUserId(currentApp.name, req.session);
-		// The following middleware deserializes the user
-		return passport.session()(req, res, next);
-	}
-};
+const userPrefixerMiddleware = (appNamespace) =>
+	(req, res, next) => {
+		if (req.session.passport && req.session.authDomains[appNamespace]) {
+			req.session.passport.user = appNamespace +
+				userPrefixSeparator + req.session.authDomains[appNamespace];
+		}
+		else {
+			delete req.session.passport;
+		}
+		return next();
+	};
 
 const userResolver = doneCallback => {
 	return user => {
@@ -55,12 +40,7 @@ const userSerializer = (user, doneCallback) => doneCallback(null, user.id);
 const userDeserializer = (prefixedUserId, doneCallback) =>
 	getUserFromPrefixedUserId(prefixedUserId).then(userResolver(doneCallback));
 
-const configurePassport = (server, apps) => {
-	const authenticatedApps = apps.filter(app => app.enableAuthentication);
-
-	server.use(passport.initialize()); 
-	server.use(getPassportMiddleware(authenticatedApps));
-
+const configurePassport = (server) => {
 	passport.serializeUser(userSerializer);
 	passport.deserializeUser(userDeserializer);
 }
@@ -116,4 +96,4 @@ passport.createStrategy = function (namespace, authenticator, deserializer, logI
 	};
 }
 
-module.exports = { configurePassport };
+module.exports = { configurePassport, userPrefixerMiddleware };

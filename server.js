@@ -9,14 +9,18 @@ const { trace } = configureTracer(config);
 const { discoverApps } = require('./utils/app-discovery')
 const apps = discoverApps(config);
 
-const { configureExpress } = require('./config/express');
-const server = configureExpress(config, apps);
+const express = require('express');
+const server = express();
+server.set('view engine', 'ejs');
+
+// var bodyParser = require('body-parser');
+// server.use(bodyParser.json());
 
 const { configurePassport } = require('./utils/passport');
-configurePassport(server, apps);
+configurePassport(server);
 
 const { publishApps } = require('./utils/app-publisher');
-trace(publishApps)(server, apps);
+trace(publishApps)(server, config, apps);
 
 trace('listen', server)(config.port, function (error) {
 	if (error) {
