@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-var passport = require('passport');
+var { createStrategy } = require('../../utils/passport');
 var authenticationService = require('./services/authentication-service');
-var authenticationHandler = passport.createStrategy('users-template',
+var authenticationHandler = createStrategy('users-template',
 	authenticationService.authenticator, authenticationService.retriever, authenticationService.logIn, authenticationService.logOut);
 
 const configureRouter = (middleware) => {

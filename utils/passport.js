@@ -45,9 +45,7 @@ const configurePassport = (server) => {
 	passport.deserializeUser(userDeserializer);
 }
 
-// TODO Securize access through namespace
-
-passport.createStrategy = function (namespace, authenticator, deserializer, logInHandler, logOutHandler) {
+const createStrategy = function (namespace, authenticator, deserializer, logInHandler, logOutHandler) {
 
 	if (namespace.indexOf(userPrefixSeparator) > -1) {
 		throw 'The namespace ' + namespace + ' is not valid!';
@@ -94,6 +92,6 @@ passport.createStrategy = function (namespace, authenticator, deserializer, logI
 		logIn,
 		logOut
 	};
-}
+};
 
-module.exports = { configurePassport, userPrefixerMiddleware };
+module.exports = { configurePassport, userPrefixerMiddleware, createStrategy };
