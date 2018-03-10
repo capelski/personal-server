@@ -59,7 +59,8 @@ const registerApp = (server, config, appConfig) => {
 	const sessionMiddleware = session({
 		secret: config.sessionSecret,
 		resave: false,
-		saveUninitialized: true
+		saveUninitialized: true,
+		name: appConfig.name
 	});
 	const passportInitialize = passport.initialize();
 	const prefixerMiddleware = userPrefixerMiddleware(appConfig.name);

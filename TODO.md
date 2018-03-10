@@ -18,10 +18,6 @@
 
 - Build the apps path based on the apps namespace
 
-- Issolate apps session
-	(E.g. the excludedIndexes session property of jokify can be accessed from aywhere)
-	Same for passport?
-
 - HTML Meta tags in all apps
 
 - favicon.ico
