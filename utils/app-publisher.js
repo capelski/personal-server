@@ -7,37 +7,46 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var { getUserManagementUtils } = require('./passport');
 
-const setViewsPaths = (server, apps) => {
-	var viewsPaths =
-		apps.reduce((paths, appConfig) => paths.concat(join(appConfig.path, 'views')), []);
-	server.set('views', viewsPaths);
-};
+const namespaceRelativeUrl = (namespace, relativeUrl) => {
+	var requiredPrefix = '/' + namespace;
+	var prefixWithTrailingSlash = requiredPrefix;
 
-const prefixRelativeUrl = (apps, domain, relativeUrl) => {
-	var updatedRelativeUrl = relativeUrl;
-
-	var domainAppAccess = apps.find(app =>
-		(app.publicDomains != null &&
-			app.publicDomains.find(d => domain.indexOf(d) > -1) != null));
+	if (relativeUrl == '/') {
+		prefixWithTrailingSlash += '/';
+		relativeUrl = '';
+	}
 	
-	if (domainAppAccess) {
-		var requiredPrefix = '/' + domainAppAccess.name;
-		var prefixWithTrailingSlash = requiredPrefix;
-
-		if (relativeUrl == '/') {
-			prefixWithTrailingSlash += '/';
-			relativeUrl = '';
-		}
-		
-		if (!relativeUrl.startsWith(prefixWithTrailingSlash)) {
-			updatedRelativeUrl = requiredPrefix + relativeUrl;
-		}
+	if (!relativeUrl.startsWith(prefixWithTrailingSlash)) {
+		relativeUrl = requiredPrefix + relativeUrl;
 	}
 
-	return updatedRelativeUrl;
+	return relativeUrl;
 };
 
-const domainAppsUrlPrefixer = apps => 
+const getNamespacedRelativeUrl = (apps, domain, relativeUrl) => {
+	var domainAppAccess = apps.find(app =>
+		(app.publicDomains != null &&
+		app.publicDomains.find(d => domain.indexOf(d) > -1) != null));
+	
+	if (domainAppAccess) {
+		relativeUrl = namespaceRelativeUrl(domainAppAccess.name, relativeUrl);
+	}
+
+	return relativeUrl;
+};
+
+const setToDefaultNamespace = (config, apps, relativeUrl) => {
+	var accessedApp = apps.find(app =>
+		relativeUrl.startsWith(app.name) || relativeUrl.startsWith('/' + app.name));
+		
+	if (!accessedApp) {
+		relativeUrl = namespaceRelativeUrl(config.defaultApp, relativeUrl);
+	}
+
+	return relativeUrl;
+};
+
+const appResolver = (config, apps) => 
 	(req, res, next) => {
 		if (req.url.indexOf('plugins') > -1) {
 			return next();
@@ -46,7 +55,8 @@ const domainAppsUrlPrefixer = apps =>
 		var domain = req.headers.host;
 		var relativeUrl = req.url;			
 
-		req.url = prefixRelativeUrl(apps, domain, relativeUrl);
+		req.url = getNamespacedRelativeUrl(apps, domain, relativeUrl);
+		req.url = setToDefaultNamespace(config, apps, relativeUrl);
 		return next();
 	};
 
@@ -77,10 +87,12 @@ const registerApp = (server, config, appConfig) => {
 	var { configureRouter } = require(appConfig.indexFilePath);
 	var appRouter = configureRouter(appMiddleware, { userManagementUtils });
 	server.use('/' + appConfig.name, appRouter);
+};
 
-	if (appConfig.default) {
-		server.use('/', appRouter);
-	}
+const setViewsPaths = (server, apps) => {
+	var viewsPaths =
+		apps.reduce((paths, appConfig) => paths.concat(join(appConfig.path, 'views')), []);
+	server.set('views', viewsPaths);
 };
 
 const publishApps = (server, config, appsConfig) => {
@@ -88,11 +100,10 @@ const publishApps = (server, config, appsConfig) => {
 	sassCompiler(appsConfig);
 
 	setViewsPaths(server, appsConfig);
-	server.use(domainAppsUrlPrefixer(appsConfig));
+	server.use(appResolver(config, appsConfig));
 	server.use('/plugins', express.static(pluginsPath));
 	server.use(assets('../plugins', pluginsPath));
 	appsConfig.forEach(app => registerApp(server, config, app));
 };
 
-
-module.exports = { publishApps, prefixRelativeUrl };
+module.exports = { publishApps, getNamespacedRelativeUrl };

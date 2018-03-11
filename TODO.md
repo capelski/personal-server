@@ -1,12 +1,8 @@
-- Test that multiple authentication works
-
 - Make sass compilation config.json option
 - Extract each app into a new repository
 	- Include changes in index.js
 - Ignore apps folder
 - Allow Vue building from apps folder?
-
-- Move code from config/express.js to server
 
 - If Vue routing app as default, knocks the rest...
 	- Use hashbangs routing instead

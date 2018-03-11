@@ -14,7 +14,6 @@ const discoverApps = config => {
 		var appConfig = {
 			name: appName,
 			path: appPath,
-			default: config.defaultApp == appName,
 			assetsFolder: 'public'
 		};
 
