@@ -4,7 +4,7 @@ var path = require('path');
 
 const configureRouter = (middleware) => {
 	router.get('/', function (req, res, next) {
-	  res.render('capellas-second-index');
+	  res.render('index');
 	});
 	return router;
 }
