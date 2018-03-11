@@ -35,15 +35,17 @@ const getNamespacedRelativeUrl = (apps, domain, relativeUrl) => {
 	return relativeUrl;
 };
 
-const setToDefaultNamespace = (config, apps, relativeUrl) => {
+const setNamespace = (config, apps, req) => {
 	var accessedApp = apps.find(app =>
-		relativeUrl.startsWith(app.name) || relativeUrl.startsWith('/' + app.name));
+		req.url.startsWith('/' + app.name + '/') || req.url == '/' + app.name);
 		
 	if (!accessedApp) {
-		relativeUrl = namespaceRelativeUrl(config.defaultApp, relativeUrl);
+		req.url = namespaceRelativeUrl(config.defaultApp, req.url);
+		req._namespace = config.defaultApp;
 	}
-
-	return relativeUrl;
+	else {
+		req._namespace = accessedApp.name;
+	}
 };
 
 const appResolver = (config, apps) => 
@@ -56,7 +58,7 @@ const appResolver = (config, apps) =>
 		var relativeUrl = req.url;			
 
 		req.url = getNamespacedRelativeUrl(apps, domain, relativeUrl);
-		req.url = setToDefaultNamespace(config, apps, relativeUrl);
+		setNamespace(config, apps, req);
 		return next();
 	};
 
