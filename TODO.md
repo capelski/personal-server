@@ -7,12 +7,12 @@
 - If Vue routing app as default, knocks the rest...
 	- Use hashbangs routing instead
 
+http://localhost:3000/carles-capellas-first?page=cv
+	- If missing the final '/', urls don't work
+
 - Securize apps acces:
 	- E.g. If a request is coming from /do-vic/ but access /jokify should not be allowed
 	- Enable browse apps from domain deliberatly (e.g. allow /jokify from .xyz)
-
-- Isolate views
-	- Make every view be included in a folder with a unique name + global function to require views that transparently adds the folder name to the path, making every view path unique
 
 - HTML Meta tags in all apps
 

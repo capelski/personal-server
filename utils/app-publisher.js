@@ -48,6 +48,14 @@ const setNamespace = (config, apps, req) => {
 	}
 };
 
+const isolateViewsAccess = (req, res) => {
+	res._render = res.render;
+	res.render = function(viewName, parameters) {
+		var isolateView = req._namespace + '\\views\\' + viewName;
+		this._render(isolateView, parameters);
+	};
+};
+
 const appResolver = (config, apps) => 
 	(req, res, next) => {
 		if (req.url.indexOf('plugins') > -1) {
@@ -59,6 +67,7 @@ const appResolver = (config, apps) =>
 
 		req.url = getNamespacedRelativeUrl(apps, domain, relativeUrl);
 		setNamespace(config, apps, req);
+		isolateViewsAccess(req, res);
 		return next();
 	};
 
@@ -91,20 +100,19 @@ const registerApp = (server, config, appConfig) => {
 	server.use('/' + appConfig.name, appRouter);
 };
 
-const setViewsPaths = (server, apps) => {
-	var viewsPaths =
-		apps.reduce((paths, appConfig) => paths.concat(join(appConfig.path, 'views')), []);
-	server.set('views', viewsPaths);
-};
-
 const publishApps = (server, config, appsConfig) => {
-	var pluginsPath = join(__dirname, '..', 'plugins');
+	// TODO make optional
 	sassCompiler(appsConfig);
 
-	setViewsPaths(server, appsConfig);
-	server.use(appResolver(config, appsConfig));
+	var appsFolder = join(__dirname, '..', 'apps');
+	server.set('views', appsFolder);
+
+	const pluginsPath = join(__dirname, '..', 'plugins');	
 	server.use('/plugins', express.static(pluginsPath));
 	server.use(assets('../plugins', pluginsPath));
+
+	server.use(appResolver(config, appsConfig));
+
 	appsConfig.forEach(app => registerApp(server, config, app));
 };
 

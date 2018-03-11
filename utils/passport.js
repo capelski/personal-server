@@ -35,7 +35,7 @@ const configurePassport = (server) => {
 
 const getStrategyCreator = (namespace) => {
 	if (namespace.indexOf(userPrefixSeparator) > -1) {
-		// todo winston error instead
+		// TODO winston error instead
 		throw 'The namespace ' + namespace + ' is not valid!';
 	}
 	
