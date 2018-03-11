@@ -1,23 +1,23 @@
 function create (req, res, next) {
-	return res.render('users-template-public-edit', {
+	return res.render('public-edit', {
 		publicId: null
 	});
 }
 
 function details (req, res, next) {
-	return res.render('users-template-public-details', {
+	return res.render('public-details', {
 		publicId: parseInt(req.query.id)
 	});
 }
 
 function edit (req, res, next) {
-	return res.render('users-template-public-edit', {
+	return res.render('public-edit', {
 		publicId: parseInt(req.query.id)
 	});
 }
 
 function list (req, res, next) {
-	return res.render('users-template-public-list');
+	return res.render('public-list');
 }
 
 module.exports = {
