@@ -37,7 +37,7 @@ const prefixRelativeUrl = (apps, domain, relativeUrl) => {
 	return updatedRelativeUrl;
 };
 
-const domainAppsResolver = apps => 
+const domainAppsUrlPrefixer = apps => 
 	(req, res, next) => {
 		if (req.url.indexOf('plugins') > -1) {
 			return next();
@@ -88,11 +88,11 @@ const publishApps = (server, config, appsConfig) => {
 	sassCompiler(appsConfig);
 
 	setViewsPaths(server, appsConfig);
-	server.use(domainAppsResolver(appsConfig));
+	server.use(domainAppsUrlPrefixer(appsConfig));
 	server.use('/plugins', express.static(pluginsPath));
 	server.use(assets('../plugins', pluginsPath));
 	appsConfig.forEach(app => registerApp(server, config, app));
 };
 
 
-module.exports = { publishApps };
+module.exports = { publishApps, prefixRelativeUrl };
