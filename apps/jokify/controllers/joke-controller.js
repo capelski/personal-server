@@ -5,7 +5,7 @@ function JokeController() {
 	function indexView(req, res, next) {
 		req.session.excludedIndexes = req.session.excludedIndexes || [];
 		var randomJoke = jokesService.getRandomJoke(req.session.excludedIndexes);
-		res.render('jokify-index', {
+		res.render('index', {
 			joke: randomJoke
 		});
 	}
