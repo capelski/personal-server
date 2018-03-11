@@ -5,7 +5,7 @@ var path = require('path');
 const configureRouter = (middleware) => {
 
   router.get('/', function (req, res, next) {
-    res.render('desdecasa-index');
+    res.render('index');
   });
 
   router.get('/establishments', function (req, res, next) {
@@ -47,31 +47,31 @@ const configureRouter = (middleware) => {
   });
 
   router.get('/sales', function (req, res, next) {
-    res.render('desdecasa-sales');
+    res.render('sales');
   });
 
   router.get('/sign-up', function (req, res, next) {
-    res.render('desdecasa-sign-up');
+    res.render('sign-up');
   });
 
   router.get('/gift', function (req, res, next) {
-    res.render('desdecasa-gift');
+    res.render('gift');
   });
 
   router.get('/faq', function (req, res, next) {
-    res.render('desdecasa-faq');
+    res.render('faq');
   });
 
   router.get('/legal', function (req, res, next) {
-    res.render('desdecasa-legal');
+    res.render('legal');
   });
 
   router.get('/advertise', function (req, res, next) {
-    res.render('desdecasa-advertise');
+    res.render('advertise');
   });
 
   router.get('/contact', function (req, res, next) {
-    res.render('desdecasa-contact');
+    res.render('contact');
   });
   
   return router;
