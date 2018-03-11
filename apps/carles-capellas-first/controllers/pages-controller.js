@@ -305,13 +305,13 @@ function PagesController() {
 		navigation.language = req.query.language || navigation.language || 'ca';
 		navigation.page = req.query.page || 'main';
 
-		var filePath = path.resolve(__dirname, '..', 'views', 'capellas-first-' + navigation.page + '.ejs')
+		var filePath = path.resolve(__dirname, '..', 'views', navigation.page + '.ejs')
 		if (!fs.existsSync(filePath)) {
 			navigation.page = 'not-found';
 		}
 
-		res.render('capellas-first-index', {
-			page: 'capellas-first-' + navigation.page,
+		res.render('index', {
+			page: navigation.page,
 			rawPage: navigation.page,
 			title: titles[navigation.language][navigation.page],
 			content: content[navigation.page][navigation.language],
