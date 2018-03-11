@@ -4,31 +4,31 @@ var path = require('path');
 
 const configureRouter = (middleware) => {
 	router.get('/', function (req, res, next) {
-	  res.render('do-vic-index');
+	  res.render('index');
 	});
 
 	router.get('/inici', function (req, res, next) {
-	  res.render('do-vic-index');
+	  res.render('index');
 	});
 
 	router.get('/cates', function (req, res, next) {
-	  res.render('do-vic-cates');
+	  res.render('cates');
 	});
 
 	router.get('/contacte', function (req, res, next) {
-	  res.render('do-vic-contacte');
+	  res.render('contacte');
 	});
 
 	router.get('/cuina', function (req, res, next) {
-	  res.render('do-vic-cuina');
+	  res.render('cuina');
 	});
 
 	router.get('/descobreix', function (req, res, next) {
-	  res.render('do-vic-descobreix');
+	  res.render('descobreix');
 	});
 
 	router.get('/reservar', function (req, res, next) {
-	  res.render('do-vic-reservar');
+	  res.render('reservar');
 	});
 	
 	return router;
