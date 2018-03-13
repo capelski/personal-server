@@ -1,3 +1,4 @@
+const tracer = require('./tracer');
 const { lstatSync, readdirSync, existsSync } = require('fs');
 const { join, normalize } = require('path');
 
@@ -7,7 +8,7 @@ const getDirectoriesName = path => readdirSync(path).filter(name => isDirectory(
 
 const discoverApps = config => {
 	var appsPath = join(__dirname, '..', 'apps');
-	var appsFolderName = getDirectoriesName(appsPath);
+	var appsFolderName = tracer.trace(getDirectoriesName)(appsPath);
 	var appsConfig = appsFolderName.map(appName => {
 		var appPath = join(appsPath, appName);
 

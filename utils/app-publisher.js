@@ -5,6 +5,7 @@ var sassCompiler = require('./sass-compiler');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var passport = require('passport');
+var tracer = require('./tracer');
 var { getUserManagementUtils } = require('./passport');
 
 const namespaceRelativeUrl = (namespace, relativeUrl) => {
@@ -46,6 +47,8 @@ const setNamespace = (config, apps, req) => {
 	else {
 		req._namespace = accessedApp.name;
 	}
+
+	tracer.info('Accessed app: ' + req._namespace);
 };
 
 const isolateViewsAccess = (req, res) => {
@@ -57,7 +60,9 @@ const isolateViewsAccess = (req, res) => {
 };
 
 const appResolver = (config, apps) => 
-	(req, res, next) => {
+	function resolvingApp(req, res, next) {
+		tracer.info('Relative url:' + req.url);
+
 		if (req.url.indexOf('plugins') > -1) {
 			return next();
 		}
@@ -96,7 +101,7 @@ const registerApp = (server, config, appConfig) => {
 	const userManagementUtils = getUserManagementUtils(appConfig.name);
 
 	var { configureRouter } = require(appConfig.indexFilePath);
-	var appRouter = configureRouter(appMiddleware, { userManagementUtils });
+	var appRouter = tracer.trace(configureRouter)(appMiddleware, { userManagementUtils });
 	server.use('/' + appConfig.name, appRouter);
 };
 
@@ -111,9 +116,9 @@ const publishApps = (server, config, appsConfig) => {
 	server.use('/plugins', express.static(pluginsPath));
 	server.use(assets('../plugins', pluginsPath));
 
-	server.use(appResolver(config, appsConfig));
+	server.use(tracer.trace(appResolver(config, appsConfig)));
 
-	appsConfig.forEach(app => registerApp(server, config, app));
+	appsConfig.forEach(app => tracer.trace(registerApp)(server, config, app));
 };
 
 module.exports = { publishApps, getNamespacedRelativeUrl };

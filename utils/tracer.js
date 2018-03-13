@@ -46,9 +46,9 @@ const logArguments = (suppliedArguments) => {
     return stringifiedArguments;
 };
 
-const getStackIndentation = (stackLevel) => Array(stackLevel).join('    ');
+const getStackIndentation = (stackLevel) => Array(stackLevel).join('  ');
 
-const getLogHeader = (stackLevel) => getStackIndentation() + getTimestamp() + ' ';
+const getLogHeader = (stackLevel) => getTimestamp() + getStackIndentation(stackLevel) + ' ';
 
 const tracers = {
     error: (functionExpression, thisObject) => {
@@ -67,7 +67,7 @@ const tracers = {
         return function() {
             try {
                 stackLevel++;
-                winston.info(getLogHeader() + functionExpression.name + logArguments(arguments));
+                winston.info(getLogHeader(stackLevel) + functionExpression.name + logArguments(arguments));
                 evaluateArguments(arguments);
                 var result = functionExpression.apply(thisObject, arguments);
                 stackLevel--;
@@ -98,11 +98,11 @@ const trace = (functionExpression, thisObject) => {
 const setTraceLevel = level => traceLevel = level;
 
 const info = (message) => {
-    winston.info(getLogHeader() + message);
+    winston.info(getLogHeader(stackLevel + 1) + message);
 };
 
 const error = (message) => {
-    winston.error(getLogHeader() + message);
+    winston.error(getLogHeader(stackLevel + 1) + message);
 };
 
 module.exports = {
