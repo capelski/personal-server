@@ -1,19 +1,20 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const tracer = require('./tracer');
 
 const userPrefixSeparator = '||->';
 let deserializers = {};
 
 const configurePassport = (server) => {
 
-	const userSerializer = (user, doneCallback) => {
+	const userSerializer = function userSerializer(user, doneCallback) {
 		const namespace = user._namespace;
 		delete user._namespace;
 		const serializedUserId = namespace + userPrefixSeparator + user.id;
 		return doneCallback(null, serializedUserId);
 	};
 	
-	const userDeserializer = (serializedUserId, doneCallback) => {
+	const userDeserializer = function userDeserializer(serializedUserId, doneCallback) {
 		const parts = serializedUserId.split(userPrefixSeparator);
 		const namespace = parts[0];
 		const userId = parts[1];
@@ -29,8 +30,8 @@ const configurePassport = (server) => {
 		});
 	}
 
-	passport.serializeUser(userSerializer);
-	passport.deserializeUser(userDeserializer);
+	passport.serializeUser(tracer.trace(userSerializer));
+	passport.deserializeUser(tracer.trace(userDeserializer));
 }
 
 const getStrategyCreator = (namespace) => {
@@ -39,7 +40,7 @@ const getStrategyCreator = (namespace) => {
 		throw 'The namespace ' + namespace + ' is not valid!';
 	}
 	
-	return (handlers) => {
+	return function createAuthenticationStrategy(handlers) {
 		deserializers[namespace] = handlers.userDeserializer;
 
 		const localStrategy = new LocalStrategy({
@@ -64,34 +65,36 @@ const getStrategyCreator = (namespace) => {
 	};
 };
 
-const getLogInMiddleware = (namespace) => (req, res, next) => {
+const getLogInMiddleware = (namespace) => {
+	return function logInMiddleware(req, res, next) {
 
-	function doneCallback(error, user, info) {
-		if (error) {
-			return res.status(401).json(error);
+		function doneCallback(error, user, info) {
+			if (error) {
+				return res.status(401).json(error);
+			}
+
+			req.logIn(user, function (error) {
+				if (error) {
+					return res.send(error);
+				}
+				return next();
+			});
 		}
 
-		req.logIn(user, function (error) {
-			if (error) {
-				return res.send(error);
-			}
-			return next();
-		});
-	}
+		passport.authenticate(namespace, doneCallback)(req, res, next);
+	};
+}
 
-	passport.authenticate(namespace, doneCallback)(req, res, next);
-};
-
-const logOutMiddleware = (req, res, next) => {
+const logOutMiddleware = function logOutMiddleware(req, res, next) {
 	delete req.session.passport;
 	return next();
 };
 
 const getUserManagementUtils = namespace => {
 	const userManagementUtils = {
-		createStrategy: getStrategyCreator(namespace),
-		logInMiddleware: getLogInMiddleware(namespace),
-		logOutMiddleware
+		createStrategy: tracer.trace(getStrategyCreator(namespace)),
+		logInMiddleware: tracer.trace(getLogInMiddleware(namespace)),
+		logOutMiddleware: tracer.trace(logOutMiddleware)
 	};
 	return userManagementUtils;
 };
