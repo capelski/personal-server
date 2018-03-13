@@ -7,14 +7,14 @@ const tracer = require('./utils/tracer');
 tracer.setTraceLevel(config.logs.tracerLevel);
 
 const { discoverApps } = require('./utils/app-discovery')
-const apps = discoverApps(config);
+const apps = tracer.trace(discoverApps)(config);
 
 const express = require('express');
 const server = express();
 server.set('view engine', 'ejs');
 
 const { configurePassport } = require('./utils/passport');
-configurePassport(server);
+tracer.trace(configurePassport)(server);
 
 const { publishApps } = require('./utils/app-publisher');
 tracer.trace(publishApps)(server, config, apps);
