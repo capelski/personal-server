@@ -10,8 +10,6 @@ const configureWinston = config => {
 			filename: config.logs.file
 		});
 	}
-
-	return winston;
 };
 
 module.exports = { configureWinston };
