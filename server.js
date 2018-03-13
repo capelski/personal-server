@@ -1,9 +1,8 @@
 const config = require('./config/config');
 
-const { configureWinston } = require('./config/winston');
+const { configureWinston } = require('./utils/winston-config');
 const winston = configureWinston(config);
 
-const { configureTracer } = require('./config/tracer');
 const { trace, setTraceLevel } = require('./utils/tracer');
 setTraceLevel(config.logs.tracerLevel);
 
