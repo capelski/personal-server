@@ -1,3 +1,5 @@
+- Prior to push, ftp!
+
 - Make sass compilation config.json option
 - Extract each app into a new repository
 	- Include changes in index.js

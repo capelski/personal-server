@@ -4,7 +4,8 @@ const { configureWinston } = require('./config/winston');
 const winston = configureWinston(config);
 
 const { configureTracer } = require('./config/tracer');
-const { trace } = configureTracer(config);
+const { trace, setTraceLevel } = require('./utils/tracer');
+setTraceLevel(config.logs.tracerLevel);
 
 const { discoverApps } = require('./utils/app-discovery')
 const apps = discoverApps(config);
