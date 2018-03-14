@@ -1,9 +1,11 @@
 - Prior to push, ftp!
 
+- favicon.ico
+	- Done in jokify, fractal
+
 - Make sass compilation config.json option
 - Extract each app into a new repository
-	- Include changes in index.js
-- Ignore apps folder
+- Remove apps folder from Git
 - Allow Vue building from apps folder?
 
 - If Vue routing app as default, knocks the rest...
@@ -12,13 +14,10 @@
 http://localhost:3000/carles-capellas-first?page=cv
 	- If missing the final '/', urls don't work
 
-- Securize apps acces:
-	- E.g. If a request is coming from /do-vic/ but access /jokify should not be allowed
-	- Enable browse apps from domain deliberatly (e.g. allow /jokify from .xyz)
+- Enable browse apps from domain deliberatly (e.g. allow /jokify from .xyz)
+	- Set which apps are allowed in config.json
 
 - HTML Meta tags in all apps
-
-- favicon.ico
 
 - Transpiler: Add .babelrc file and install presets
 - Hardcoded URLs in Views should come from server side
