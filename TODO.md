@@ -1,18 +1,23 @@
 - Prior to push, ftp!
 
+- Modify assets name after repositories renamings
+
+- Rename responsive-do-vic to do-vic-responsive
+
+- What with plugins?
+
 - favicon.ico
 	- Done in jokify, fractal
 
 - Make sass compilation config.json option
-- Extract each app into a new repository
-- Remove apps folder from Git
 - Allow Vue building from apps folder?
 
-- If Vue routing app as default, knocks the rest...
+- If Vue routing app as default, knocks the rest?
 	- Use hashbangs routing instead
 
 http://localhost:3000/carles-capellas-first?page=cv
 	- If missing the final '/', urls don't work
+	- Use RegExp to find the app name
 
 - Enable browse apps from domain deliberatly (e.g. allow /jokify from .xyz)
 	- Set which apps are allowed in config.json

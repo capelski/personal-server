@@ -9,19 +9,20 @@ var tracer = require('./tracer');
 var { getUserManagementUtils } = require('./passport');
 
 const namespaceRelativeUrl = (namespace, relativeUrl) => {
-	var requiredPrefix = '/' + namespace;
-	var prefixWithTrailingSlash = requiredPrefix;
+	var namespacePrefix = '/' + namespace;
+	var namespacedUrl = relativeUrl;
 
-	if (relativeUrl == '/') {
-		prefixWithTrailingSlash += '/';
-		relativeUrl = '';
+	if (relativeUrl == null || relativeUrl == '') {
+		namespacedUrl = namespacePrefix;
+	}
+	else if (relativeUrl == '/') {
+		namespacedUrl = namespacePrefix + '/';
+	}
+	else if (!relativeUrl.startsWith(namespacePrefix)) {
+		namespacedUrl = namespacePrefix + relativeUrl;
 	}
 	
-	if (!relativeUrl.startsWith(prefixWithTrailingSlash)) {
-		relativeUrl = requiredPrefix + relativeUrl;
-	}
-
-	return relativeUrl;
+	return namespacedUrl;
 };
 
 const getNamespacedRelativeUrl = (apps, domain, relativeUrl) => {
@@ -37,8 +38,11 @@ const getNamespacedRelativeUrl = (apps, domain, relativeUrl) => {
 };
 
 const setNamespace = (config, apps, req) => {
-	var accessedApp = apps.find(app =>
-		req.url.startsWith('/' + app.name + '/') || req.url == '/' + app.name);
+	var accessedApp = apps.find(app => {
+		var regexBase = "\\/" + app.name + "(\\/|\\?|$)"
+		var regex = new RegExp(regexBase, "g");
+		return req.url.match(regex);
+	});
 		
 	if (!accessedApp) {
 		req.url = namespaceRelativeUrl(config.defaultApp, req.url);
@@ -121,4 +125,4 @@ const publishApps = (server, config, appsConfig) => {
 	appsConfig.forEach(app => tracer.trace(registerApp)(server, config, app));
 };
 
-module.exports = { publishApps, getNamespacedRelativeUrl };
+module.exports = { publishApps, getNamespacedRelativeUrl, setNamespace };
