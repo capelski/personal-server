@@ -1,5 +1,7 @@
 - Prior to push, ftp!
 
+- Rename project
+- Explain everything
 - Modify assets name after repositories renamings
 
 - Rename responsive-do-vic to do-vic-responsive
@@ -11,31 +13,15 @@
 	- Done in jokify, fractal
 
 - Make sass compilation config.json option
-- Allow Vue building from apps folder?
 
 - If Vue routing app as default, knocks the rest?
 	- Use hashbangs routing instead
 
-http://localhost:3000/carles-capellas-first?page=cv
-	- If missing the final '/', urls don't work
-	- Use RegExp to find the app name
-
 - Enable browse apps from domain deliberatly (e.g. allow /jokify from .xyz)
 	- Set which apps are allowed in config.json
 
-- Transpiler: Add .babelrc file and install presets
-- Hardcoded URLs in Views should come from server side
-- Page titles
-- Popup to avoid accidental deletes
-- CSS Loaders for AJAX calls
-- Add toastr to display errors
-- Put tracer everywhere
-- Adapt tracer stackLevel for multiple apps
-- JSLint + use strict
 - Setup SEQUELIZE structure to access multiple dbs from apps
 	- Security: Each app can access only a corresponding database
-- Generic error handler: If 404 -> Error
-- Passport: Securize access through namespace
 
 SQL naming conventions ------------------------------------------------
 

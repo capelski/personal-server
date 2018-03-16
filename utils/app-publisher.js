@@ -130,6 +130,8 @@ const publishApps = (server, config, appsConfig) => {
 	server.use(tracer.trace(appResolver(config, appsConfig)));
 
 	appsConfig.forEach(app => tracer.trace(registerApp)(server, config, app));
+
+	server.use('*', (req, res, next) => res._render('error-page'));
 };
 
 module.exports = { publishApps, getNamespacedRelativeUrl, setNamespace };
