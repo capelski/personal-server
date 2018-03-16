@@ -104,9 +104,16 @@ const registerApp = (server, config, appConfig) => {
 
 	const userManagementUtils = getUserManagementUtils(appConfig.name);
 
-	var { configureRouter } = require(appConfig.indexFilePath);
-	var appRouter = tracer.trace(configureRouter)(appMiddleware, { userManagementUtils });
-	server.use('/' + appConfig.name, appRouter);
+	try
+	{
+		var { configureRouter } = require(appConfig.indexFilePath);
+		var appRouter = tracer.trace(configureRouter)(appMiddleware, { userManagementUtils });
+		server.use('/' + appConfig.name, appRouter);
+	}
+	catch(exception)
+	{
+		tracer.error('An error occurred when trying to publish ' + appConfig.name);
+	}
 };
 
 const publishApps = (server, config, appsConfig) => {

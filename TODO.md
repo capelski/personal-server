@@ -6,6 +6,7 @@
 
 - What with plugins?
 
+- HTML Meta tags in all apps
 - favicon.ico
 	- Done in jokify, fractal
 
@@ -21,8 +22,6 @@ http://localhost:3000/carles-capellas-first?page=cv
 
 - Enable browse apps from domain deliberatly (e.g. allow /jokify from .xyz)
 	- Set which apps are allowed in config.json
-
-- HTML Meta tags in all apps
 
 - Transpiler: Add .babelrc file and install presets
 - Hardcoded URLs in Views should come from server side
