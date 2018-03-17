@@ -81,6 +81,8 @@ const appResolver = (config, apps) =>
 	};
 
 const registerApp = (server, config, appConfig) => {
+	tracer.info('App name: ' + appConfig.name);
+
 	var assetsPath = join(appConfig.path, appConfig.assetsFolder);
 	server.use('/' + appConfig.name, express.static(assetsPath));
 	server.use(assets('/' + appConfig.name, assetsPath));

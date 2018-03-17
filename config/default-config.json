@@ -12,7 +12,6 @@
             "tracerLevel": "log"
         }
     },
-
     "production": {
         "app": {
             "name": "azure-express"
