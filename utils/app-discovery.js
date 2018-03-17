@@ -9,6 +9,7 @@ const getDirectoriesName = path => readdirSync(path).filter(name => isDirectory(
 const discoverApps = config => {
 	var appsPath = join(__dirname, '..', 'apps');
 	var appsFolderName = tracer.trace(getDirectoriesName)(appsPath);
+	tracer.info('Discovered ' + appsFolderName.length + ' apps');
 	var appsConfig = appsFolderName.map(appName => {
 		var appPath = join(appsPath, appName);
 

@@ -1,7 +1,9 @@
 - Prior to push, ftp!
 
-- Rename project
-- Explain everything
+- Icon for the projects?
+
+- Rename project to Modena
+- Explain everything (readme.md)
 - Modify assets name after repositories renamings
 
 - Rename responsive-do-vic to do-vic-responsive
@@ -16,6 +18,22 @@
 
 - If Vue routing app as default, knocks the rest?
 	- Use hashbangs routing instead
+	- CHeck whether Vue routing works in a public domain
+
+- Public domains not working?
+
+- Projects
+	Express-server (modena) + template apps
+	skills-matrix
+
+- How to deploy with Build Definitions in Azure?
+
+- Add favicon everywhere
+
+- Afegir adreça de github
+
+- Prerendering
+- Afegir <nav> per tal que sortint els apartats a Google
 
 - Enable browse apps from domain deliberatly (e.g. allow /jokify from .xyz)
 	- Set which apps are allowed in config.json
