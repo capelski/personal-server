@@ -1,4 +1,7 @@
 - Prior to push, ftp!
+	- Master
+
+- Https for maps
 
 - Icon for the projects?
 
@@ -7,6 +10,12 @@
 - Modify assets name after repositories renamings
 
 - Rename responsive-do-vic to do-vic-responsive
+- Rename carles-capellas to vue-personal-page
+- Rename carles-capellas-first to php-personal-page
+- Rename carles-capellas-second to angularjs-personal-page
+
+- Github link to projects
+- Add missing URLs for projects
 
 - What with plugins?
 
@@ -19,6 +28,7 @@
 - If Vue routing app as default, knocks the rest?
 	- Use hashbangs routing instead
 	- CHeck whether Vue routing works in a public domain
+	- Carles Capellas vue => How to delete the app name from the routing?
 
 - Public domains not working?
 
