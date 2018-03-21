@@ -1,21 +1,12 @@
-- Prior to push, ftp!
-	- Master
-
-- Https for maps
+Vue-personal-page
+	- Github link to projects
+	- Add missing URLs for projects + fix the renamed repos
+	- Without application traversal, the vue app name is selected, an the /** route captures everything
+	- Vue template app?
 
 - Icon for the projects?
-
 - Rename project to Modena
 - Explain everything (readme.md)
-- Modify assets name after repositories renamings
-
-- Rename responsive-do-vic to do-vic-responsive
-- Rename carles-capellas to vue-personal-page
-- Rename carles-capellas-first to php-personal-page
-- Rename carles-capellas-second to angularjs-personal-page
-
-- Github link to projects
-- Add missing URLs for projects
 
 - What with plugins?
 
@@ -30,15 +21,12 @@
 	- CHeck whether Vue routing works in a public domain
 	- Carles Capellas vue => How to delete the app name from the routing?
 
-- Public domains not working?
-
 - Projects
 	Express-server (modena) + template apps
 	skills-matrix
 
 - How to deploy with Build Definitions in Azure?
-
-- Add favicon everywhere
+	Check Travis-CI / Jenkins
 
 - Afegir adreça de github
 
