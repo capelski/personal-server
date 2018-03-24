@@ -63,7 +63,6 @@ const setNamespace = (config, apps, req) => {
 };
 
 const isolateViewsAccess = (namespace, res) => {
-	res._render = res.render;
 	res.render = function(viewName, parameters) {
 		var isolateView = namespace + '\\views\\' + viewName;
 		this._render(isolateView, parameters);
@@ -74,6 +73,7 @@ const appResolver = (config, apps) =>
 	function resolvingApp(req, res, next) {
 		tracer.info('Relative url:' + req.url);
 
+		res._render = res.render;
 		req.url = namespaceUrlByQueryParameters(req.url, req.query);
 
 		if (req.url.startsWith('/plugins')) {
@@ -138,11 +138,18 @@ const publishApps = (server, config, appsConfig) => {
 
 	appsConfig.forEach(app => tracer.trace(registerApp)(server, config, app));
 
-	server.use('*', (req, res, next) => {
-		if (typeof res._render == "function") {
-			return res._render('error-page');
-		}
-		return res.render('error-page');
+	server.use((req, res, next) => {
+		return res.status(404)._render('error-page', {
+			statusCode: 404,
+			message: "The url you are looking for does not exist"
+		});
+	});
+
+	server.use((err, req, res, next) => {
+		return res.status(500)._render('error-page', {
+			statusCode: 500,
+			message: "Internal server error"
+		});
 	});
 };
 
