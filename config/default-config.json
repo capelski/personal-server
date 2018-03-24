@@ -7,7 +7,7 @@
         "defaultApp": "app1",
         "sessionSecret": "ssshhhhh",
         "logs": {
-            "file": "logs.txt",
+            "file": "development.log",
             "console": true,
             "tracerLevel": "log"
         }
@@ -20,7 +20,7 @@
         "defaultApp": "app1",
         "sessionSecret": "ssshhhhh",
         "logs": {
-            "file": "logs.txt",
+            "file": "production.log",
             "console": false,
             "tracerLevel": "error"
         }
