@@ -140,6 +140,7 @@ const publishApps = (server, config, appsConfig) => {
 
 	server.use((req, res, next) => {
 		return res.status(404)._render('error-page', {
+			title: "Not found",
 			statusCode: 404,
 			message: "The url you are looking for does not exist"
 		});
@@ -147,8 +148,9 @@ const publishApps = (server, config, appsConfig) => {
 
 	server.use((err, req, res, next) => {
 		return res.status(500)._render('error-page', {
+			title: "Error",
 			statusCode: 500,
-			message: "Internal server error"
+			message: "There is some error in the code :/"
 		});
 	});
 };
