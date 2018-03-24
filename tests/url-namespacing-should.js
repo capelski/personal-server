@@ -1,4 +1,4 @@
-const { getNamespacedRelativeUrl, setNamespace } = require('../utils/app-publisher');
+const { namespaceUrlByDomain, setNamespace } = require('../utils/app-publisher');
 
 const absoluteDomain = "absolute-domain.com";
 const localDomain = "localhost:3000";
@@ -16,63 +16,63 @@ const apps = [ localApp, absoluteApp ];
 
 (function prepend_namespace_to_public_domain_app_base_url_without_trailing_slash() {
     const baseUrl = '';
-    const resolvedUrl = getNamespacedRelativeUrl(apps, absoluteDomain, baseUrl);
+    const resolvedUrl = namespaceUrlByDomain(apps, absoluteDomain, baseUrl);
     if (resolvedUrl != '/absolute-app')
         throw 'Expected "/absolute-app" but got "' + resolvedUrl + '" instead';
 })();
 
 (function prepend_namespace_to_public_domain_app_base_url_with_trailing_slash() {
     const baseUrl = '/';
-    const resolvedUrl = getNamespacedRelativeUrl(apps, absoluteDomain, baseUrl);
+    const resolvedUrl = namespaceUrlByDomain(apps, absoluteDomain, baseUrl);
     if (resolvedUrl != '/absolute-app/')
         throw 'Expected "/absolute-app/" but got "' + resolvedUrl + '" instead';
 })();
 
 (function prepend_namespace_to_public_domain_app_relative_url() {
     const relativeUrl = '/relative-path';
-    const resolvedUrl = getNamespacedRelativeUrl(apps, absoluteDomain, relativeUrl);
+    const resolvedUrl = namespaceUrlByDomain(apps, absoluteDomain, relativeUrl);
     if (resolvedUrl != '/absolute-app/relative-path')
         throw 'Expected "/absolute-app/relative-path" but got "' + resolvedUrl + '" instead';
 })();
 
 (function prepend_namespace_to_public_domain_app_asset_url() {
     const assetUrl = '/css/style.css';
-    const resolvedUrl = getNamespacedRelativeUrl(apps, absoluteDomain, assetUrl);
+    const resolvedUrl = namespaceUrlByDomain(apps, absoluteDomain, assetUrl);
     if (resolvedUrl != '/absolute-app/css/style.css')
         throw 'Expected "/absolute-app/css/style.css" but got "' + resolvedUrl + '" instead';
 })();
 
 (function maintain_namespace_to_local_app_base_url_without_trailing_slash() {
     const baseUrl = '/local-app';
-    const resolvedUrl = getNamespacedRelativeUrl(apps, localDomain, baseUrl);
+    const resolvedUrl = namespaceUrlByDomain(apps, localDomain, baseUrl);
     if (resolvedUrl != '/local-app')
         throw 'Expected "/local-app" but got "' + resolvedUrl + '" instead';
 })();
 
 (function maintain_namespace_to_local_app_base_url_with_trailing_slash() {
     const baseUrl = '/local-app/';
-    const resolvedUrl = getNamespacedRelativeUrl(apps, localDomain, baseUrl);
+    const resolvedUrl = namespaceUrlByDomain(apps, localDomain, baseUrl);
     if (resolvedUrl != '/local-app/')
         throw 'Expected "/local-app/" but got "' + resolvedUrl + '" instead';
 })();
 
 (function maintain_namespace_to_local_app_relative_url_without_trailing_slash() {
     const relativeUrl = '/local-app/relative-path';
-    const resolvedUrl = getNamespacedRelativeUrl(apps, localDomain, relativeUrl);
+    const resolvedUrl = namespaceUrlByDomain(apps, localDomain, relativeUrl);
     if (resolvedUrl != '/local-app/relative-path')
         throw 'Expected "/local-app/relative-path" but got "' + resolvedUrl + '" instead';
 })();
 
 (function maintain_namespace_to_local_app_relative_url_with_trailing_slash() {
     const relativeUrl = '/local-app/relative-path/';
-    const resolvedUrl = getNamespacedRelativeUrl(apps, localDomain, relativeUrl);
+    const resolvedUrl = namespaceUrlByDomain(apps, localDomain, relativeUrl);
     if (resolvedUrl != '/local-app/relative-path/')
         throw 'Expected "/local-app/relative-path/" but got "' + resolvedUrl + '" instead';
 })();
 
 (function maintain_namespace_to_local_app_asset_url() {
     const assetUrl = '/local-app/css/style.css';
-    const resolvedUrl = getNamespacedRelativeUrl(apps, localDomain, assetUrl);
+    const resolvedUrl = namespaceUrlByDomain(apps, localDomain, assetUrl);
     if (resolvedUrl != '/local-app/css/style.css')
         throw 'Expected "/local-app/css/style.css" but got "' + resolvedUrl + '" instead';
 })();

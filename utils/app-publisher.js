@@ -25,7 +25,14 @@ const namespaceRelativeUrl = (namespace, relativeUrl) => {
 	return namespacedUrl;
 };
 
-const getNamespacedRelativeUrl = (apps, domain, relativeUrl) => {
+const namespaceUrlByQueryParameters = (relativeUrl, queryString) => {
+	if (queryString.namespace) {
+		relativeUrl = namespaceRelativeUrl(queryString.namespace, relativeUrl)
+	}
+	return relativeUrl;
+};
+
+const namespaceUrlByDomain = (apps, domain, relativeUrl) => {
 	var domainAppAccess = apps.find(app =>
 		(app.publicDomains != null &&
 		app.publicDomains.find(d => domain.indexOf(d) > -1) != null));
@@ -43,7 +50,7 @@ const setNamespace = (config, apps, req) => {
 		var regex = new RegExp(regexBase, "g");
 		return req.url.match(regex);
 	});
-		
+
 	if (!accessedApp) {
 		req.url = namespaceRelativeUrl(config.defaultApp, req.url);
 		req._namespace = config.defaultApp;
@@ -55,10 +62,10 @@ const setNamespace = (config, apps, req) => {
 	tracer.info('Accessed app: ' + req._namespace);
 };
 
-const isolateViewsAccess = (req, res) => {
+const isolateViewsAccess = (namespace, res) => {
 	res._render = res.render;
 	res.render = function(viewName, parameters) {
-		var isolateView = req._namespace + '\\views\\' + viewName;
+		var isolateView = namespace + '\\views\\' + viewName;
 		this._render(isolateView, parameters);
 	};
 };
@@ -67,16 +74,15 @@ const appResolver = (config, apps) =>
 	function resolvingApp(req, res, next) {
 		tracer.info('Relative url:' + req.url);
 
-		if (req.url.indexOf('plugins') > -1) {
+		req.url = namespaceUrlByQueryParameters(req.url, req.query);
+
+		if (req.url.startsWith('/plugins')) {
 			return next();
 		}
+		req.url = namespaceUrlByDomain(apps, req.headers.host, req.url);
 
-		var domain = req.headers.host;
-		var relativeUrl = req.url;			
-
-		req.url = getNamespacedRelativeUrl(apps, domain, relativeUrl);
 		setNamespace(config, apps, req);
-		isolateViewsAccess(req, res);
+		isolateViewsAccess(req._namespace, res);
 		return next();
 	};
 
@@ -127,13 +133,17 @@ const publishApps = (server, config, appsConfig) => {
 
 	const pluginsPath = join(__dirname, '..', 'plugins');	
 	server.use('/plugins', express.static(pluginsPath));
-	server.use(assets('../plugins', pluginsPath));
 
 	server.use(tracer.trace(appResolver(config, appsConfig)));
 
 	appsConfig.forEach(app => tracer.trace(registerApp)(server, config, app));
 
-	server.use('*', (req, res, next) => res._render('error-page'));
+	server.use('*', (req, res, next) => {
+		if (typeof res._render == "function") {
+			return res._render('error-page');
+		}
+		return res.render('error-page');
+	});
 };
 
-module.exports = { publishApps, getNamespacedRelativeUrl, setNamespace };
+module.exports = { publishApps, namespaceUrlByDomain, setNamespace };

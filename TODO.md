@@ -1,37 +1,29 @@
 Vue-personal-page
+	- Prerendering
+		- Afegir <nav> per tal que sortint els apartats a Google
 	- Github link to projects
 	- Add missing URLs for projects + fix the renamed repos
 	- Without application traversal, the vue app name is selected, an the /** route captures everything
-	- Vue template app?
+	- Modena-vue-app?
+	- Afegir adreça de github
 
 - Icon for the projects?
-- Rename project to Modena
 - Explain everything (readme.md)
-
 - What with plugins?
 
 - HTML Meta tags in all apps
-- favicon.ico
-	- Done in jokify, fractal
 
 - Make sass compilation config.json option
 
 - If Vue routing app as default, knocks the rest?
 	- Use hashbangs routing instead
 	- CHeck whether Vue routing works in a public domain
-	- Carles Capellas vue => How to delete the app name from the routing?
 
 - Projects
-	Express-server (modena) + template apps
 	skills-matrix
 
 - How to deploy with Build Definitions in Azure?
 	Check Travis-CI / Jenkins
-
-- Afegir adreça de github
-
-- Prerendering
-- Afegir <nav> per tal que sortint els apartats a Google
 
 - Enable browse apps from domain deliberatly (e.g. allow /jokify from .xyz)
 	- Set which apps are allowed in config.json
