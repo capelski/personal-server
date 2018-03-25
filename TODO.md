@@ -1,26 +1,13 @@
 Vue-personal-page
-	- Prerendering
-		- Afegir <nav> per tal que sortint els apartats a Google
 	- Github link to projects
-	- Add missing URLs for projects + fix the renamed repos
-	- Without application traversal, the vue app name is selected, an the /** route captures everything
-	- Modena-vue-app?
-	- Afegir adreça de github
 
-- Icon for the projects?
 - Explain everything (readme.md)
 - What with plugins?
 
-- HTML Meta tags in all apps
-
 - Make sass compilation config.json option
 
-- If Vue routing app as default, knocks the rest?
-	- Use hashbangs routing instead
-	- CHeck whether Vue routing works in a public domain
-
 - Projects
-	skills-matrix
+	skills-matrix, videocall
 
 - How to deploy with Build Definitions in Azure?
 	Check Travis-CI / Jenkins

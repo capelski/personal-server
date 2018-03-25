@@ -37,19 +37,26 @@ const namespaceUrlByDomain = (apps, domain, relativeUrl) => {
 		(app.publicDomains != null &&
 		app.publicDomains.find(d => domain.indexOf(d) > -1) != null));
 	
-	if (domainAppAccess) {
-		relativeUrl = namespaceRelativeUrl(domainAppAccess.name, relativeUrl);
+	if (domainAppAccess &&
+		(!domainAppAccess.allowNamespaceTraversal ||
+			getAppByNamespaceMatch(apps, relativeUrl) == null)) {
+				relativeUrl = namespaceRelativeUrl(domainAppAccess.name, relativeUrl);
 	}
 
 	return relativeUrl;
 };
 
-const setNamespace = (config, apps, req) => {
-	var accessedApp = apps.find(app => {
+const getAppByNamespaceMatch = (apps, relativeUrl) => {
+	var matchingApp = apps.find(app => {
 		var regexBase = "\\/" + app.name + "(\\/|\\?|$)"
 		var regex = new RegExp(regexBase, "g");
-		return req.url.match(regex);
+		return relativeUrl.match(regex);
 	});
+	return matchingApp;
+};
+
+const setNamespace = (config, apps, req) => {
+	var accessedApp = getAppByNamespaceMatch(apps, req.url);
 
 	if (!accessedApp) {
 		req.url = namespaceRelativeUrl(config.defaultApp, req.url);

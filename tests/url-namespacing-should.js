@@ -128,3 +128,16 @@ const apps = [ localApp, absoluteApp ];
     if (req._namespace != 'absolute-app')
         throw 'Expected _namespace to be "absolute-app" but got "' + req._namespace + '" instead';
 })();
+
+(function maintain_namespace_to_local_app_base_url_when_accessing_through_traversal_domain_app() {
+    const traversalApp = {
+        name: "traversal-app",
+        publicDomains: [ absoluteDomain ],
+        allowNamespaceTraversal: true
+    };
+    const apps = [ traversalApp, localApp ];
+    const baseUrl = '/local-app';
+    const resolvedUrl = namespaceUrlByDomain(apps, absoluteDomain, baseUrl);
+    if (resolvedUrl != '/local-app')
+        throw 'Expected "/local-app" but got "' + resolvedUrl + '" instead';
+})();
