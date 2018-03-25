@@ -39,8 +39,8 @@ const compileSassFiles = (inputDirectory, outputDirectory) => {
 };
 
 const compileAppSass = appConfig => {
-	var inputDirectory = join(__dirname, '..', appConfig.path, 'sass');
-	var assetsDirectory = join(__dirname, '..', appConfig.path, appConfig.assetsFolder);
+	var inputDirectory = join(appConfig.path, 'sass');
+	var assetsDirectory = join(appConfig.path, appConfig.assetsFolder);
 	var outputDirectory = join(assetsDirectory, 'css');
 
 	if (existsSync(inputDirectory)) {

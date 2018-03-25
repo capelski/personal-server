@@ -133,7 +133,7 @@ const registerApp = (server, config, appConfig) => {
 	}
 	catch(exception)
 	{
-		tracer.error('An error occurred when trying to publish ' + appConfig.name);
+		tracer.error('An error occurred when trying to register ' + appConfig.name);
 	}
 };
 
