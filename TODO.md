@@ -1,31 +1,18 @@
-Vue-personal-page
-	- Transitions
-
-- Extract code from app publisher
-
-- Erasmus cities...
-
+- Extract code from app-publisher (e.g. appResolver)
 - Explain everything (readme.md)
-- What with plugins?
-
-- Update express?
-
+	- Copy project description into readme + some modena reference
+- Add page transitions to vue-personal-page
+- Add missing Erasmus cities to vue-personal-page
 - Projects
 	skills-matrix, videocall
-
+- What with plugins?
+- Update express?
 - How to deploy with Build Definitions in Azure?
 	Check Travis-CI / Jenkins
-
 - Skills-Matrix
 	- Setup SEQUELIZE structure to access multiple dbs from apps
 
-SQL naming conventions ------------------------------------------------
-
-- Tables and columns names -> Lower snake case (e.g. bank_account for class BankAccount)
-- Singular names for tables (e.g. project instead of projects for class Project)
-- Suffix many-to-many relations table with _map (e.g. user_permission_map for association between classes User and Permission)
-
-Sequelize stuff ------------------------------------------------
+Sequelize stuff (namespace by app) ------------------------------
 
 var db1sequelize = new Sequelize('db1', 'db1user','db1pass'...);
 
