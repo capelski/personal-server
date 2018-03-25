@@ -10,8 +10,6 @@ Vue-personal-page
 
 - Update express?
 
-- Make sass compilation config.json option
-
 - Projects
 	skills-matrix, videocall
 

@@ -96,14 +96,6 @@ const appResolver = (config, apps) =>
 const registerApp = (server, config, appConfig) => {
 	tracer.info('App name: ' + appConfig.name);
 
-	if (appConfig.enableSassCompilation) {
-		tracer.trace(compileAppSass)(appConfig);
-	}
-
-	var assetsPath = join(appConfig.path, appConfig.assetsFolder);
-	server.use('/' + appConfig.name, express.static(assetsPath));
-	server.use(assets('/' + appConfig.name, assetsPath));
-
 	const jsonMiddleware = bodyParser.json();
 	const sessionMiddleware = session({
 		secret: config.sessionSecret,
@@ -112,21 +104,31 @@ const registerApp = (server, config, appConfig) => {
 		name: appConfig.name
 	});
 
-	// TODO Provide only on enable authentiaction
-	const passportInitialize = passport.initialize();
-	const passportSession = passport.session();
-	const appMiddleware = {
+	let appMiddleware = {
 		bodyParser: jsonMiddleware,
 		session: sessionMiddleware,
-		passport: [sessionMiddleware, jsonMiddleware, passportInitialize, passportSession]
 	};
+	let appUtils = {};
 
-	const userManagementUtils = getUserManagementUtils(appConfig.name);
+	if (appConfig.enableAuthentication) {
+		const passportInitialize = passport.initialize();
+		const passportSession = passport.session();
+		appMiddleware.passport = [sessionMiddleware, jsonMiddleware, passportInitialize, passportSession];
+		appUtils.userManagementUtils = tracer.trace(getUserManagementUtils)(appConfig.name);
+	}
+
+	if (appConfig.enableSassCompilation) {
+		tracer.trace(compileAppSass)(appConfig);
+	}
 
 	try
 	{
+		var assetsPath = join(appConfig.path, appConfig.assetsFolder);
+		server.use('/' + appConfig.name, express.static(assetsPath));
+		server.use(assets('/' + appConfig.name, assetsPath));
+
 		var { configureRouter } = require(appConfig.indexFilePath);
-		var appRouter = tracer.trace(configureRouter)(appMiddleware, { userManagementUtils });
+		var appRouter = tracer.trace(configureRouter)(appMiddleware, appUtils);
 		server.use('/' + appConfig.name, appRouter);
 	}
 	catch(exception)
