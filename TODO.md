@@ -1,6 +1,8 @@
 Vue-personal-page
 	- Transitions
 
+- Extract code from app publisher
+
 - Erasmus cities...
 
 - Explain everything (readme.md)

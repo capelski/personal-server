@@ -96,8 +96,9 @@ const appResolver = (config, apps) =>
 const registerApp = (server, config, appConfig) => {
 	tracer.info('App name: ' + appConfig.name);
 
-	// TODO If compileSass == true
-	tracer.trace(compileAppSass)(appConfig);
+	if (appConfig.enableSassCompilation) {
+		tracer.trace(compileAppSass)(appConfig);
+	}
 
 	var assetsPath = join(appConfig.path, appConfig.assetsFolder);
 	server.use('/' + appConfig.name, express.static(assetsPath));

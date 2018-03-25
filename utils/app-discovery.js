@@ -27,13 +27,9 @@ const discoverApps = config => {
 			var localConfig = require(configFilePath);
 			Object.assign(appConfig, localConfig);
 		}
-		else {
-			tracer.info(appName + ': No additional configuration found');
-		}
 
 		var indexFilePath = join(appPath, 'index.js');
 		if (existsSync(indexFilePath)) {
-			tracer.info(appName + ': Loading router configuration');
 			appConfig.indexFilePath = indexFilePath;
 		}
 		else {
