@@ -38,18 +38,16 @@ const compileSassFiles = (inputDirectory, outputDirectory) => {
 	});
 };
 
-const compileSassApps = apps => {
-	apps.forEach((app) => {
-		var inputDirectory = join(__dirname, '..', app.path, 'sass');
-		var publicDirectory = join(__dirname, '..', app.path, 'public');
-		var outputDirectory = join(publicDirectory, 'css');
+const compileAppSass = appConfig => {
+	var inputDirectory = join(__dirname, '..', appConfig.path, 'sass');
+	var assetsDirectory = join(__dirname, '..', appConfig.path, appConfig.assetsFolder);
+	var outputDirectory = join(assetsDirectory, 'css');
 
-		if (existsSync(inputDirectory)) {
-			ensureDirectory(publicDirectory);
-			ensureDirectory(outputDirectory);
-			compileSassFiles(inputDirectory, outputDirectory);
-		}
-	});
+	if (existsSync(inputDirectory)) {
+		ensureDirectory(assetsDirectory);
+		ensureDirectory(outputDirectory);
+		compileSassFiles(inputDirectory, outputDirectory);
+	}
 };
 
-module.exports = compileSassApps;
+module.exports = { compileAppSass };

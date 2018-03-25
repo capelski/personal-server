@@ -1,7 +1,7 @@
 const { join } = require('path');
 const express = require('express');
 const assets = require('express-asset-versions');
-var sassCompiler = require('./sass-compiler');
+var { compileAppSass } = require('./sass-compiler');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var passport = require('passport');
@@ -96,6 +96,9 @@ const appResolver = (config, apps) =>
 const registerApp = (server, config, appConfig) => {
 	tracer.info('App name: ' + appConfig.name);
 
+	// TODO If compileSass == true
+	tracer.trace(compileAppSass)(appConfig);
+
 	var assetsPath = join(appConfig.path, appConfig.assetsFolder);
 	server.use('/' + appConfig.name, express.static(assetsPath));
 	server.use(assets('/' + appConfig.name, assetsPath));
@@ -132,9 +135,6 @@ const registerApp = (server, config, appConfig) => {
 };
 
 const publishApps = (server, config, appsConfig) => {
-	// TODO make optional
-	sassCompiler(appsConfig);
-
 	var appsFolder = join(__dirname, '..', 'apps');
 	server.set('views', appsFolder);
 
