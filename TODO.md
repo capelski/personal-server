@@ -1,8 +1,12 @@
 Vue-personal-page
-	- Github link to projects
+	- Transitions
+
+- Erasmus cities...
 
 - Explain everything (readme.md)
 - What with plugins?
+
+- Update express?
 
 - Make sass compilation config.json option
 
@@ -12,11 +16,8 @@ Vue-personal-page
 - How to deploy with Build Definitions in Azure?
 	Check Travis-CI / Jenkins
 
-- Enable browse apps from domain deliberatly (e.g. allow /jokify from .xyz)
-	- Set which apps are allowed in config.json
-
-- Setup SEQUELIZE structure to access multiple dbs from apps
-	- Security: Each app can access only a corresponding database
+- Skills-Matrix
+	- Setup SEQUELIZE structure to access multiple dbs from apps
 
 SQL naming conventions ------------------------------------------------
 

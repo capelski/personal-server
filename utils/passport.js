@@ -36,8 +36,8 @@ const configurePassport = (server) => {
 
 const getStrategyCreator = (namespace) => {
 	if (namespace.indexOf(userPrefixSeparator) > -1) {
-		// TODO winston error instead
-		throw 'The namespace ' + namespace + ' is not valid!';
+		tracer.error('Namespaces containing ' + userPrefixSeparator + ' are not valid');
+		return;
 	}
 	
 	return function createAuthenticationStrategy(handlers) {
