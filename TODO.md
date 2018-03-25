@@ -1,4 +1,3 @@
-- Extract code from app-publisher (e.g. appResolver)
 - Explain everything (readme.md)
 	- Copy project description into readme + some modena reference
 - Add page transitions to vue-personal-page

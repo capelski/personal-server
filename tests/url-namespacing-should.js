@@ -1,4 +1,4 @@
-const { namespaceUrlByDomain, setNamespace } = require('../utils/app-publisher');
+const { namespaceUrlByDomain, setNamespace } = require('../utils/app-resolver');
 
 const absoluteDomain = "absolute-domain.com";
 const localDomain = "localhost:3000";
