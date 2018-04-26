@@ -59,6 +59,8 @@ const registerApps = (server, config, appsConfig) => {
 	appsConfig.forEach(app => tracer.trace(registerApp)(server, config, app));
 
 	server.use((req, res, next) => {
+		tracer.info('Url ' + req.url + ' was not found');
+
 		return res.status(404)._render('error-page', {
 			title: "Not found",
 			statusCode: 404,
@@ -67,6 +69,9 @@ const registerApps = (server, config, appsConfig) => {
 	});
 
 	server.use((err, req, res, next) => {
+		tracer.error('Unhandled exception was raised');
+		tracer.error(err);
+
 		return res.status(500)._render('error-page', {
 			title: "Error",
 			statusCode: 500,
