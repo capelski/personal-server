@@ -1,13 +1,15 @@
 language: node_js
 node_js:
   - "7"
+install:
+  - git clone https://github.com/L3bowski/$TRAVIS_REPO_SLUG
+  - cd $TRAVIS_REPO_SLUG
+  - git checkout -qf $TRAVIS_COMMIT
+  - cd apps
+  - git clone https://github.com/L3bowski/jokify
 deploy:
   provider: heroku
   app:
     development: modena
   api_key:
     secure: $heroku_api_key
-  run:
-    - "cd apps"
-    - "git clone https://github.com/L3bowski/jokify"
-    - restart
