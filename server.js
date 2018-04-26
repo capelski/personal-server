@@ -11,7 +11,7 @@ const server = express();
 server.set('view engine', 'ejs');
 const { join } = require('path');
 var appsFolder = join(__dirname, 'apps');
-server.set('views', appsFolder);
+server.set('views', './apps');
 
 const { configurePassport } = require('./utils/passport');
 tracer.trace(configurePassport)(server);
