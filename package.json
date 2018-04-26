@@ -4,7 +4,8 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "node tests/url-namespacing-should.js"
   },
   "engines": {
     "node": "6.9.1"
