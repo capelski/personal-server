@@ -7,6 +7,18 @@ install:
   - git checkout -qf $TRAVIS_COMMIT
   - npm install
   - git clone https://github.com/L3bowski/jokify apps/jokify
+  - git clone https://github.com/L3bowski/vrokil apps/vrokil
+  - git clone https://github.com/L3bowski/responsive-do-vic apps/responsive-do-vic
+  - git clone https://github.com/L3bowski/poliester-pelegrina apps/poliester-pelegrina
+  - git clone https://github.com/L3bowski/php-personal-page apps/php-personal-page
+  - git clone https://github.com/L3bowski/modena-simple-app apps/modena-simple-app
+  - git clone https://github.com/L3bowski/modena-authenticated-app apps/modena-authenticated-app
+  - git clone https://github.com/L3bowski/fractal-generator apps/fractal-generator
+  - git clone https://github.com/L3bowski/dragon-pong apps/dragon-pong
+  - git clone https://github.com/L3bowski/do-vic apps/do-vic
+  - git clone https://github.com/L3bowski/desdecasa apps/desdecasa
+  - git clone https://github.com/L3bowski/carniques-ausa apps/carniques-ausa
+  - git clone https://github.com/L3bowski/angularjs-personal-page apps/angularjs-personal-page
 deploy:
   provider: heroku
   app:
