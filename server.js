@@ -10,8 +10,7 @@ const express = require('express');
 const server = express();
 server.set('view engine', 'ejs');
 const { join } = require('path');
-var appsFolder = join(__dirname, 'apps/');
-tracer.info('Setting views folder to ' + appsFolder);
+var appsFolder = join(__dirname, 'apps');
 server.set('views', appsFolder);
 
 const { configurePassport } = require('./utils/passport');

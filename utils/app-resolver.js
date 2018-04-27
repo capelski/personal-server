@@ -1,4 +1,5 @@
 var tracer = require('./tracer');
+var { join } = require('path');
 
 const getAppByNamespaceMatch = (apps, relativeUrl) => {
 	var matchingApp = apps.find(app => {
@@ -11,7 +12,7 @@ const getAppByNamespaceMatch = (apps, relativeUrl) => {
 
 const isolateViewsAccess = (namespace, res) => {
 	res.render = function(viewName, parameters) {
-		var isolateView = namespace + '\\views\\' + viewName;
+		var isolateView = join(namespace, 'views', viewName);
 		this._render(isolateView, parameters);
 	};
 };
