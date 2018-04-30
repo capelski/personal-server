@@ -1,4 +1,6 @@
 const config = require('./config/config');
+console.log('Starting server with the following configuration:');
+console.log(config);
 
 const { configureWinston } = require('./utils/winston-config');
 configureWinston(config);
