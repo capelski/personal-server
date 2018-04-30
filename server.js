@@ -4,7 +4,7 @@ const { configureWinston } = require('./utils/winston-config');
 configureWinston(config);
 
 const tracer = require('./utils/tracer');
-tracer.setTraceLevel(config.logs.tracerLevel);
+tracer.setTraceLevel(config.tracerLevel);
 
 const express = require('express');
 const server = express();

@@ -3,26 +3,22 @@
         "app": {
             "name": "azure-express"
         },
-        "defaultPort": 3000,
+        "port": "3000",
         "defaultApp": "app1",
         "sessionSecret": "ssshhhhh",
-        "logs": {
-            "file": "development.log",
-            "console": true,
-            "tracerLevel": "log"
-        }
+        "enableConsoleLogs": "true",
+        "logFilename": "development.log",
+        "tracerLevel": "log"
     },
     "production": {
         "app": {
             "name": "azure-express"
         },
-        "defaultPort": 80,
+        "port": "80",
         "defaultApp": "app1",
         "sessionSecret": "ssshhhhh",
-        "logs": {
-            "file": "production.log",
-            "console": true,
-            "tracerLevel": "error"
-        }
+        "enableConsoleLogs": "false",
+        "logFilename": "production.log",
+        "tracerLevel": "error"
     }
 }

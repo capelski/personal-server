@@ -1,15 +1,18 @@
-var path = require('path');
-var fs = require('fs');
+var { join } = require('path');
+var { existsSync } = require('fs');
 var env = process.env.NODE_ENV || 'development';
 
-var config = require('./default-config.json');
-if (fs.existsSync(path.join(__dirname, 'config.json'))) {
-    config = require('./config.json');
+var configFile = require('./default-config.json');
+if (existsSync(join(__dirname, 'config.json'))) {
+    configFile = require('./config.json');
 }
 
-var selectedConfig = config[env];
-
-selectedConfig.root = path.join(__dirname, '..');
-selectedConfig.port = process.env.PORT || selectedConfig.defaultPort;
+var selectedConfig = configFile[env];
+var configProperties = Object.keys(selectedConfig);
+var overridenPropeties = Object.keys(process.env).filter(p => configProperties.includes(p));
+selectedConfig = overridenPropeties.reduce((config, p) => {
+    config[p] = process.env[p];
+    return config;
+}, selectedConfig);
 
 module.exports = selectedConfig;

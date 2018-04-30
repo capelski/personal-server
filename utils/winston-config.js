@@ -1,13 +1,13 @@
 var winston = require('winston');
 
 const configureWinston = config => {
-	if (!config.logs.console) {
+	if (config.enableConsoleLogs == "false") {
 		winston.remove(winston.transports.Console);	
 	}
 	
-	if (config.logs.file && config.logs.file.length && config.logs.file.length > 0) {
+	if (config.logFilename && config.logFilename.length > 0) {
 		winston.add(winston.transports.File, {
-			filename: config.logs.file
+			filename: config.logFilename
 		});
 	}
 };

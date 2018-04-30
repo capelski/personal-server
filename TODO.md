@@ -1,6 +1,7 @@
 - modena-vue-app
 - Explain everything (readme.md)
 	- Copy project description into readme + some modena reference
+	- Decribe how process.env overrides config.json; No objects; Only strings
 - Add page transitions to vue-personal-page
 - Add missing Erasmus cities to vue-personal-page
 - Projects
