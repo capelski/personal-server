@@ -27,11 +27,11 @@ server.use(tracer.trace(getAppResolverMiddleware(config, appsConfig)));
 const { registerApps } = require('./utils/app-register');
 tracer.trace(registerApps)(server, config, appsConfig);
 
-tracer.trace('listen', server)(config.port, function (error) {
+tracer.trace('listen', server)(config.PORT, function (error) {
 	if (error) {
 		tracer.error(error);
 	}
 	else {
-		tracer.info('Express server listening on port ' + config.port);
+		tracer.info('Express server listening on port ' + config.PORT);
 	}
 });

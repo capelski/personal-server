@@ -3,7 +3,7 @@
         "app": {
             "name": "azure-express"
         },
-        "port": "3000",
+        "PORT": "3000",
         "defaultApp": "app1",
         "sessionSecret": "ssshhhhh",
         "enableConsoleLogs": "true",
@@ -14,7 +14,7 @@
         "app": {
             "name": "azure-express"
         },
-        "port": "80",
+        "PORT": "80",
         "defaultApp": "app1",
         "sessionSecret": "ssshhhhh",
         "enableConsoleLogs": "false",
