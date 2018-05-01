@@ -1,4 +1,3 @@
-- Webjack + Webjack-UI description in GitHub
 - modena-vue-app
 - Explain everything (readme.md)
 	- Decribe how process.env overrides config.json; No objects; Only strings

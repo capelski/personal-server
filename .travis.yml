@@ -23,7 +23,17 @@ install:
   - cd apps/vue-personal-page
   - npm install
   - npm run build
+  - rm -rf node_modules
   - cd ../..
+  - git clone https://github.com/L3bowski/webjack apps/webjack
+  - cd apps/webjack
+  - git clone https://github.com/L3bowski/webjack-ui
+  - cd webjack-ui
+  - npm install
+  - npm run build
+  - cd ..
+  - mv webjack-ui/dist public
+  - rm -rf webjack-ui
 deploy:
   provider: heroku
   app:
