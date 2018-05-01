@@ -5,7 +5,7 @@
 - Add page transitions to vue-personal-page
 - Add missing Erasmus cities to vue-personal-page
 - Projects
-	skills-matrix, videocall
+	skills-matrix, videocall, webjack
 - What with plugins?
 - Update express?
 - How to deploy with Build Definitions in Azure?
