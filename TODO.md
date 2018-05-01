@@ -1,15 +1,13 @@
+- Webjack + Webjack-UI description in GitHub
 - modena-vue-app
 - Explain everything (readme.md)
-	- Copy project description into readme + some modena reference
 	- Decribe how process.env overrides config.json; No objects; Only strings
 - Add page transitions to vue-personal-page
 - Add missing Erasmus cities to vue-personal-page
 - Projects
-	skills-matrix, videocall, webjack
+	skills-matrix, videocall
 - What with plugins?
 - Update express?
-- How to deploy with Build Definitions in Azure?
-	Check Travis-CI / Jenkins
 - Skills-Matrix
 	- Setup SEQUELIZE structure to access multiple dbs from apps
 

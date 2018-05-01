@@ -19,6 +19,11 @@ install:
   - git clone https://github.com/L3bowski/desdecasa apps/desdecasa
   - git clone https://github.com/L3bowski/carniques-ausa apps/carniques-ausa
   - git clone https://github.com/L3bowski/angularjs-personal-page apps/angularjs-personal-page
+  - git clone https://github.com/L3bowski/vue-personal-page apps/vue-personal-page
+  - cd apps/vue-personal-page
+  - npm install
+  - npm run build
+  - cd ../..
 deploy:
   provider: heroku
   app:
