@@ -1,10 +1,13 @@
-- modena-vue-app
+- Adapt skills-matrix to modena
+	- Redux
+	- Webpack
+	- Vue
+	- Typescript
+- Redeploy Fractal-Generator
+
+- Modify .travis to deploy in Azure
 - Explain everything (readme.md)
 	- Decribe how process.env overrides config.json; No objects; Only strings
-- Add page transitions to vue-personal-page
-- Add missing Erasmus cities to vue-personal-page
-- Projects
-	skills-matrix, videocall
 - What with plugins?
 - Update express?
 - Skills-Matrix
