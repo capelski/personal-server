@@ -1,11 +1,7 @@
-- Adapt skills-matrix to modena
-	- Redux
-	- Webpack
-	- Vue
-	- Typescript
-- Redeploy Fractal-Generator
-
-- Modify .travis to deploy in Azure
+Heroku
+	- Set .cat to be production
+	- Set .xyz to be development
+	
 - Explain everything (readme.md)
 	- Decribe how process.env overrides config.json; No objects; Only strings
 - What with plugins?
