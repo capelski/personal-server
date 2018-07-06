@@ -1,7 +1,12 @@
 Heroku
 	- Set .cat to be production
 	- Set .xyz to be development
+	- rename modena to l3bowski
+
+Travis Azure
 	
+Some projects don't work on heroku
+
 - Explain everything (readme.md)
 	- Decribe how process.env overrides config.json; No objects; Only strings
 - What with plugins?
