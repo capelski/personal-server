@@ -18,13 +18,25 @@ install:
   - git clone https://github.com/L3bowski/php-personal-page apps/php-personal-page
   - git clone https://github.com/L3bowski/poliester-pelegrina apps/poliester-pelegrina
   - git clone https://github.com/L3bowski/responsive-do-vic apps/responsive-do-vic
+  # Skills matrix START
+  - git clone https://github.com/L3bowski/skills-matrix-api-node apps/skills-matrix-api-node
+  - cd apps/skills-matrix-api-node
+  - git clone https://github.com/L3bowski/skills-matrix-client-jquery
+  - rm -rf public/
+  - mv skills-matrix-client-jquery/app public
+  - rm -rf skills-matrix-client-jquery
+  - cd ../..
+  # Skills matrix END
   - git clone https://github.com/L3bowski/vrokil apps/vrokil
+  # Vue personal page START
   - git clone https://github.com/L3bowski/vue-personal-page apps/vue-personal-page
   - cd apps/vue-personal-page
   - npm install
   - npm run build
   - rm -rf node_modules
   - cd ../..
+  # Vue personal page END
+  # Webjack START
   - git clone https://github.com/L3bowski/webjack apps/webjack
   - cd apps/webjack
   - git clone https://github.com/L3bowski/webjack-ui
@@ -35,6 +47,7 @@ install:
   - mv webjack-ui/dist public
   - rm -rf webjack-ui
   - cd ../..
+  # Webjack END
 deploy:
   provider: heroku
   app:
