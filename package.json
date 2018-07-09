@@ -4,14 +4,15 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "test": "node tests/url-namespacing-should.js"
+    "start": "node server.js"
   },
   "engines": {
     "node": "6.9.1"
   },
   "dependencies": {
     "modena": "^1.0.0-rc1",
+    "mysql2": "^1.5.3",
+    "sequelize": "^4.38.0",
     "uuid": "^3.2.1"
   }
 }
