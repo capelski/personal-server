@@ -51,6 +51,6 @@ install:
 deploy:
   provider: heroku
   app:
-    development: modena
+    development: l3bowski
   api_key:
     secure: $heroku_api_key
