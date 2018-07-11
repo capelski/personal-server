@@ -58,3 +58,5 @@ deploy:
     username: $azure_deployment_user
     password: $azure_deployment_password
     site: $azure_deployment_site
+    on:
+      branch: development
