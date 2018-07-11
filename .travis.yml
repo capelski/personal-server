@@ -49,8 +49,8 @@ install:
   - cd ../..
   # Webjack END
 deploy:
+  skip_cleanup: true
   - provider: heroku
-    skip_cleanup: true
     app:
       development: $heroku_app_name
     api_key:
@@ -59,6 +59,5 @@ deploy:
     username: $azure_deployment_user
     password: $azure_deployment_password
     site: $azure_deployment_site
-    skip_cleanup: true
     on:
       branch: development
