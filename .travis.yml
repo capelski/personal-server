@@ -49,7 +49,6 @@ install:
   - cd ../..
   # Webjack END
 deploy:
-  skip_cleanup: true
   - provider: heroku
     app:
       development: $heroku_app_name
