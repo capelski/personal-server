@@ -1,7 +1,8 @@
 Heroku
 	- Set .cat to be production
 	- Set .xyz to be development
-	- rename modena to l3bowski
+
+How to define multiple environment variables sets
 
 Travis Azure
 	
