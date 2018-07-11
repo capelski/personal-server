@@ -1,6 +1,4 @@
 node_modules/
 config/config.json
-apps/*
-!apps/error-page.ejs
 *.log
 npm-debug.log
