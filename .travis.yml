@@ -50,11 +50,11 @@ install:
   # Webjack END
 deploy:
   - provider: heroku
-  app:
-    development: $heroku_app_name
-  api_key:
-  secure: $heroku_api_key
+    app:
+      development: $heroku_app_name
+    api_key:
+      secure: $heroku_api_key
   - provider: azure_web_apps
-  username: $azure_deployment_user
-  password: $azure_deployment_password
-  site: $azure_deployment_site
+    username: $azure_deployment_user
+    password: $azure_deployment_password
+    site: $azure_deployment_site
