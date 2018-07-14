@@ -13,3 +13,6 @@
 [submodule "apps/do-vic"]
 	path = apps/do-vic
 	url = https://github.com/L3bowski/do-vic
+[submodule "apps/dragon-pong"]
+	path = apps/dragon-pong
+	url = https://github.com/L3bowski/dragon-pong
