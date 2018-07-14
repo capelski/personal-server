@@ -31,3 +31,6 @@
 [submodule "apps/php-personal-page"]
 	path = apps/php-personal-page
 	url = https://github.com/L3bowski/php-personal-page
+[submodule "apps/poliester-pelegrina"]
+	path = apps/poliester-pelegrina
+	url = https://github.com/L3bowski/poliester-pelegrina
