@@ -40,3 +40,6 @@
 [submodule "apps/vrokil"]
 	path = apps/vrokil
 	url = https://github.com/L3bowski/vrokil
+[submodule "apps/vue-personal-page"]
+	path = apps/vue-personal-page
+	url = https://github.com/L3bowski/vue-personal-page
