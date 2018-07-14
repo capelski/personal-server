@@ -2,9 +2,8 @@ Heroku
 	- Set .cat to be production
 	- Set .xyz to be development
 
-How to define multiple environment variables sets
-
-Travis Azure
+How to define multiple environment variables sets in Travis
+Define env variables in Azure app
 	
 Some projects don't work on heroku
 
