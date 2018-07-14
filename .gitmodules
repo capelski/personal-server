@@ -7,3 +7,6 @@
 [submodule "apps/carniques-ausa"]
 	path = apps/carniques-ausa
 	url = https://github.com/L3bowski/carniques-ausa
+[submodule "apps/desdecasa"]
+	path = apps/desdecasa
+	url = https://github.com/L3bowski/desdecasa
