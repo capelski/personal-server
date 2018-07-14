@@ -4,3 +4,6 @@
 [submodule "apps/angularjs-personal-page"]
 	path = apps/angularjs-personal-page
 	url = https://github.com/L3bowski/angularjs-personal-page
+[submodule "apps/carniques-ausa"]
+	path = apps/carniques-ausa
+	url = https://github.com/L3bowski/carniques-ausa
