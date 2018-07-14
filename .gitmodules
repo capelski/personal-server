@@ -10,3 +10,6 @@
 [submodule "apps/desdecasa"]
 	path = apps/desdecasa
 	url = https://github.com/L3bowski/desdecasa
+[submodule "apps/do-vic"]
+	path = apps/do-vic
+	url = https://github.com/L3bowski/do-vic
