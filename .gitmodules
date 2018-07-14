@@ -25,3 +25,6 @@
 [submodule "apps/modena-authenticated-app"]
 	path = apps/modena-authenticated-app
 	url = https://github.com/L3bowski/modena-authenticated-app
+[submodule "apps/modena-simple-app"]
+	path = apps/modena-simple-app
+	url = https://github.com/L3bowski/modena-simple-app
