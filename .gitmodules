@@ -34,3 +34,6 @@
 [submodule "apps/poliester-pelegrina"]
 	path = apps/poliester-pelegrina
 	url = https://github.com/L3bowski/poliester-pelegrina
+[submodule "apps/responsive-do-vic"]
+	path = apps/responsive-do-vic
+	url = https://github.com/L3bowski/responsive-do-vic
