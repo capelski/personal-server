@@ -22,3 +22,6 @@
 [submodule "apps/jokify"]
 	path = apps/jokify
 	url = https://github.com/L3bowski/jokify
+[submodule "apps/modena-authenticated-app"]
+	path = apps/modena-authenticated-app
+	url = https://github.com/L3bowski/modena-authenticated-app
