@@ -37,3 +37,6 @@
 [submodule "apps/responsive-do-vic"]
 	path = apps/responsive-do-vic
 	url = https://github.com/L3bowski/responsive-do-vic
+[submodule "apps/vrokil"]
+	path = apps/vrokil
+	url = https://github.com/L3bowski/vrokil
