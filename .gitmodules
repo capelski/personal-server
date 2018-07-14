@@ -16,3 +16,6 @@
 [submodule "apps/dragon-pong"]
 	path = apps/dragon-pong
 	url = https://github.com/L3bowski/dragon-pong
+[submodule "apps/fractal-generator"]
+	path = apps/fractal-generator
+	url = https://github.com/L3bowski/fractal-generator
