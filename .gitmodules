@@ -28,3 +28,6 @@
 [submodule "apps/modena-simple-app"]
 	path = apps/modena-simple-app
 	url = https://github.com/L3bowski/modena-simple-app
+[submodule "apps/php-personal-page"]
+	path = apps/php-personal-page
+	url = https://github.com/L3bowski/php-personal-page
