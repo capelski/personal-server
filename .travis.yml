@@ -2,10 +2,12 @@ language: node_js
 node_js:
   - "7"
 install:
-  - git clone --recurse-submodules https://github.com/$TRAVIS_REPO_SLUG.git $TRAVIS_REPO_SLUG
+  - git clone https://github.com/$TRAVIS_REPO_SLUG.git $TRAVIS_REPO_SLUG
   - cd $TRAVIS_REPO_SLUG
   - git checkout -qf $TRAVIS_COMMIT
   - npm install
+  - git submodule init
+  - git submodule update
   # Skills matrix START
   - cd apps/skills-matrix-api-node
   - git clone https://github.com/L3bowski/skills-matrix-client-jquery
