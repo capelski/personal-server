@@ -2,24 +2,11 @@ language: node_js
 node_js:
   - "7"
 install:
-  - git clone https://github.com/$TRAVIS_REPO_SLUG.git $TRAVIS_REPO_SLUG
+  - git clone --recurse-submodules https://github.com/$TRAVIS_REPO_SLUG.git $TRAVIS_REPO_SLUG
   - cd $TRAVIS_REPO_SLUG
   - git checkout -qf $TRAVIS_COMMIT
   - npm install
-  - git clone https://github.com/L3bowski/angularjs-personal-page apps/angularjs-personal-page
-  - git clone https://github.com/L3bowski/carniques-ausa apps/carniques-ausa
-  - git clone https://github.com/L3bowski/desdecasa apps/desdecasa
-  - git clone https://github.com/L3bowski/do-vic apps/do-vic
-  - git clone https://github.com/L3bowski/dragon-pong apps/dragon-pong
-  - git clone https://github.com/L3bowski/fractal-generator apps/fractal-generator
-  - git clone https://github.com/L3bowski/jokify apps/jokify
-  - git clone https://github.com/L3bowski/modena-authenticated-app apps/modena-authenticated-app
-  - git clone https://github.com/L3bowski/modena-simple-app apps/modena-simple-app
-  - git clone https://github.com/L3bowski/php-personal-page apps/php-personal-page
-  - git clone https://github.com/L3bowski/poliester-pelegrina apps/poliester-pelegrina
-  - git clone https://github.com/L3bowski/responsive-do-vic apps/responsive-do-vic
   # Skills matrix START
-  - git clone https://github.com/L3bowski/skills-matrix-api-node apps/skills-matrix-api-node
   - cd apps/skills-matrix-api-node
   - git clone https://github.com/L3bowski/skills-matrix-client-jquery
   - rm -rf public/
@@ -27,9 +14,7 @@ install:
   - rm -rf skills-matrix-client-jquery
   - cd ../..
   # Skills matrix END
-  - git clone https://github.com/L3bowski/vrokil apps/vrokil
   # Vue personal page START
-  - git clone https://github.com/L3bowski/vue-personal-page apps/vue-personal-page
   - cd apps/vue-personal-page
   - npm install
   - npm run build
@@ -37,7 +22,6 @@ install:
   - cd ../..
   # Vue personal page END
   # Webjack START
-  - git clone https://github.com/L3bowski/webjack apps/webjack
   - cd apps/webjack
   - git clone https://github.com/L3bowski/webjack-ui
   - cd webjack-ui
