@@ -8,14 +8,6 @@ install:
   - npm install
   - git submodule init
   - git submodule update
-  # Skills matrix START
-  - cd apps/skills-matrix-api-node
-  - git clone https://github.com/L3bowski/skills-matrix-client-jquery
-  - rm -rf public/
-  - mv skills-matrix-client-jquery/app public
-  - rm -rf skills-matrix-client-jquery
-  - cd ../..
-  # Skills matrix END
   # Vue personal page START
   - cd apps/vue-personal-page
   - npm install
