@@ -65,3 +65,4 @@
 [submodule "apps/skills-matrix-client-jquery"]
 	path = apps/skills-matrix-client-jquery
 	url = https://github.com/L3bowski/skills-matrix-client-jquery
+	branch = master
