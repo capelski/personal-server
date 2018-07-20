@@ -12,9 +12,9 @@
     "docker-build": "docker build -t l3bowski/personal-server:develop .",
     "docker-start": "docker run -d --name personal-server -p 3000:3000 l3bowski/personal-server:develop",
     "docker-stop": "docker stop personal-server && docker rm personal-server",
-    "docker-pull": "docker push l3bowski/personal-server:develop",
+    "docker-push": "docker push l3bowski/personal-server:develop",
     "docker-build-latest": "docker build -t l3bowski/personal-server:latest .",
-    "docker-pull-latest": "docker push l3bowski/personal-server:latest"
+    "docker-push-latest": "docker push l3bowski/personal-server:latest"
   },
   "engines": {
     "node": "8.9"
