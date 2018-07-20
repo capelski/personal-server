@@ -1,10 +1,20 @@
 {
-  "name": "azure-express",
-  "version": "0.0.1",
-  "private": true,
+  "name": "personal-server",
+  "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "prepare": "npm install && git submodule update --init",
+    "start": "node server.js",
+    "vue-personal-page": "cd apps/vue-personal-page && npm install && npm install puppeteer && npm run build && rm -rf node_modules && cd ../..",
+    "webjack": "cd apps/webjack && rm -rf webjack-ui && git clone https://github.com/L3bowski/webjack-ui && cd webjack-ui && npm install && npm run build && cd .. && rm -rf public && mv webjack-ui/dist public && rm -rf webjack-ui && cd ../..",
+    "build-apps": "npm run vue-personal-page && npm run webjack",
+    "docker-prepare": "npm run prepare && npm run build-apps",
+    "docker-build": "docker build -t l3bowski/personal-server:develop .",
+    "docker-start": "docker run -d --name personal-server -p 3000:3000 l3bowski/personal-server:develop",
+    "docker-stop": "docker stop personal-server && docker rm personal-server",
+    "docker-pull": "docker push l3bowski/personal-server:develop",
+    "docker-build-latest": "docker build -t l3bowski/personal-server:latest .",
+    "docker-pull-latest": "docker push l3bowski/personal-server:latest",
   },
   "engines": {
     "node": "8.9"
