@@ -1,8 +1,6 @@
 {
     "development": {
-        "app": {
-            "name": "azure-express"
-        },
+        "_README_": "Keep updated the default-config.json along with the config.json and the environment variables",
         "PORT": "3000",
         "defaultApp": "app1",
         "sessionSecret": "ssshhhhh",
@@ -11,9 +9,6 @@
         "tracerLevel": "log"
     },
     "production": {
-        "app": {
-            "name": "azure-express"
-        },
         "PORT": "80",
         "defaultApp": "app1",
         "sessionSecret": "ssshhhhh",
