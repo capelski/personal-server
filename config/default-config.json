@@ -1,7 +1,6 @@
 {
+    "_README_": "Keep updated the default-config.json along with the config.json and the environment variables",
     "development": {
-        "_README_": "Keep updated the default-config.json along with the config.json and the environment variables",
-        "PORT": "80",
         "defaultApp": "app1",
         "sessionSecret": "ssshhhhh",
         "enableConsoleLogs": "true",
@@ -9,7 +8,6 @@
         "tracerLevel": "log"
     },
     "production": {
-        "PORT": "80",
         "defaultApp": "app1",
         "sessionSecret": "ssshhhhh",
         "enableConsoleLogs": "false",
