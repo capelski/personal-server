@@ -30,14 +30,6 @@
 	path = apps/jokify
 	url = https://github.com/L3bowski/jokify
 	branch = master
-[submodule "apps/modena-authenticated-app"]
-	path = apps/modena-authenticated-app
-	url = https://github.com/L3bowski/modena-authenticated-app
-	branch = master
-[submodule "apps/modena-simple-app"]
-	path = apps/modena-simple-app
-	url = https://github.com/L3bowski/modena-simple-app
-	branch = master
 [submodule "apps/php-personal-page"]
 	path = apps/php-personal-page
 	url = https://github.com/L3bowski/php-personal-page
