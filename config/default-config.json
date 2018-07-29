@@ -1,8 +1,11 @@
 {
     "_README_": "Keep updated the default-config.json along with the config.json and the environment variables",
-    "defaultApp": "app1",
+    
+    "defaultApp": "app-name",
     "sessionSecret": "ssshhhhh",
     "enableConsoleLogs": "true",
     "logFilename": "development.log",
-    "tracerLevel": "log"
+    "tracerLevel": "log",
+    
+    "app-name_property": "property_value"
 }

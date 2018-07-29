@@ -1,6 +1,6 @@
 const { join } = require('path');
 const { runServer, express } = require('modena');
-const config = require('./config/config');
+const config = require('./config');
 
 config.PORT = 80;
 
@@ -14,9 +14,9 @@ config.afterRegisteringApps = (server, tracer, modenaConfig, appsConfig) => {
 		tracer.info('Url ' + req.url + ' was not found');
 	
 		return res.status(404)._render('error-page', {
-			title: "Not found",
+			title: 'Not found',
 			statusCode: 404,
-			message: "The url you are looking for does not exist"
+			message: 'The url you are looking for does not exist'
 		});
 	});
 	
@@ -25,9 +25,9 @@ config.afterRegisteringApps = (server, tracer, modenaConfig, appsConfig) => {
 		tracer.error(err);
 	
 		return res.status(500)._render('error-page', {
-			title: "Error",
+			title: 'Error',
 			statusCode: 500,
-			message: "There is some error in the code :/"
+			message: 'There is some error in the code :/'
 		});
 	});
 };
