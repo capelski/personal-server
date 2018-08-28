@@ -9,8 +9,8 @@
     "webjack": "cd apps/webjack && rm -rf public && rm -rf webjack-ui && git clone https://github.com/L3bowski/webjack-ui && cd webjack-ui && npm install && npm run build && cd .. && mv webjack-ui/dist public && rm -rf webjack-ui && cd ../..",
     "build-apps": "npm run vue-personal-page && npm run webjack",
     "docker-prepare": "npm run prepare-env && npm run build-apps",
-    "docker-build": "npm run docker-prepare && docker build -t l3bowski/personal-server:develop .",
-    "docker-start": "docker run -d --name personal-server -p 80:80 l3bowski/personal-server:develop",
+    "docker-build": "docker build -t l3bowski/personal-server:develop .",
+    "docker-start": "docker run -d --name personal-server -p 80:80 -e defaultApp='vue-personal-page' l3bowski/personal-server:develop",
     "docker-stop": "docker stop personal-server && docker rm personal-server",
     "docker-push": "docker push l3bowski/personal-server:develop",
     "docker-build-latest": "npm run docker-prepare && docker build -t l3bowski/personal-server:latest .",
@@ -20,7 +20,7 @@
     "node": "8.9"
   },
   "dependencies": {
-    "modena": "1.0.0",
+    "modena": "1.0.1",
     "mysql2": "^1.5.3",
     "sequelize": "^4.38.0",
     "uuid": "^3.2.1"

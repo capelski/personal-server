@@ -32,7 +32,4 @@ config.afterRegisteringApps = (server, tracer, modenaConfig, appsConfig) => {
 	});
 };
 
-console.log('Starting server with the following configuration:');
-console.log(config);
-
 runServer(config);
