@@ -20,7 +20,7 @@
     "node": "8.9"
   },
   "dependencies": {
-    "modena": "^1.0.8",
+    "modena": "^1.0.9",
     "mysql2": "^1.5.3",
     "sequelize": "^4.38.0",
     "uuid": "^3.2.1"
