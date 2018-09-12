@@ -5,7 +5,6 @@
     "SESSION_SECRET": "ssshhhhh",
     "ENABLE_CONSOLE_LOGS": "true",
     "LOG_FILENAME": "development.log",
-    "TRACER_LEVEL": "log",
     
-    "app-name_property": "property_value"
+    "APP_NAME__PROPERTY_NAME": "property_value"
 }
