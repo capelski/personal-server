@@ -1,8 +1,6 @@
 const { join } = require('path');
-const { runServer, express } = require('modena');
-const config = require('./config');
-
-config.PORT = 80;
+const { runServer, express, readConfigFile } = require('modena');
+const config = readConfigFile(join(__dirname, 'config.json'));
 
 config.beforeRegisteringApps = (server, tracer, modenaConfig, appsConfig) => {
 	const pluginsPath = join(__dirname, 'plugins');

@@ -1,0 +1,11 @@
+{   
+    "DEFAULT_APP": "app-name",
+    "SESSION_SECRET": "ssshhhhh",
+    "ENABLE_CONSOLE_LOGS": "true",
+    "LOG_FILENAME": "development.log",
+    "PORT": "80",
+    
+    "APP_NAME__PROPERTY_NAME": "property_value",
+
+    "_README_": "Keep updated the default-config.json along with the config.json and the environment variables"
+}
