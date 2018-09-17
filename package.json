@@ -6,7 +6,7 @@
     "prepare-env": "npm install && git submodule update --init",
     "start": "node server.js",
     "vue-personal-page": "cd apps/vue-personal-page && npm install && npm run build && rm -rf node_modules && cd ../..",
-    "webjack": "cd apps/webjack && rm -rf public && rm -rf webjack-ui && git clone https://github.com/L3bowski/webjack-ui && cd webjack-ui && npm install && npm run build && cd .. && mv webjack-ui/dist public && rm -rf webjack-ui && cd ../..",
+    "webjack": "cd apps/webjack && git submodule update --init && cd webjack-ui && npm install && npm run build && cd ../..",
     "build-apps": "npm run vue-personal-page && npm run webjack",
     "docker-prepare": "npm run prepare-env && npm run build-apps",
     "docker-build": "docker build -t l3bowski/personal-server:develop .",
