@@ -1,7 +1,7 @@
 {   
     "DEFAULT_APP": "app-name",
     "SESSION_SECRET": "ssshhhhh",
-    "ENABLE_CONSOLE_LOGS": "true",
+    "DISABLE_CONSOLE_LOGS": "false",
     "LOG_FILENAME": "development.log",
     "PORT": "80",
     
