@@ -13,7 +13,7 @@
     "docker-start": "docker run -d --name personal-server -p 80:80 -e DEFAULT_APP=vue-personal-page -e SESSION_SECRET=ssshhhhh -e ENABLE_CONSOLE_LOGS=true -e LOG_FILENAME=development.log -e TRACER_LEVEL=log l3bowski/personal-server:develop",
     "docker-stop": "docker stop personal-server && docker rm personal-server",
     "docker-push": "docker push l3bowski/personal-server:develop",
-    "docker-build-latest": "npm run docker-prepare && docker build -t l3bowski/personal-server:latest .",
+    "docker-build-latest": "docker build -t l3bowski/personal-server:latest .",
     "docker-push-latest": "docker push l3bowski/personal-server:latest"
   },
   "engines": {
