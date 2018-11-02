@@ -9,18 +9,16 @@
     "webjack": "cd apps/webjack && git submodule update --init && cd webjack-ui && npm install && npm run build && cd ../..",
     "build-apps": "npm run vue-personal-page && npm run webjack",
     "docker-prepare": "npm run prepare-env && npm run build-apps",
-    "docker-build": "docker build -t l3bowski/personal-server:develop .",
-    "docker-start": "docker run -d --name personal-server -p 80:80 -e DEFAULT_APP=vue-personal-page -e SESSION_SECRET=ssshhhhh -e LOG_FILENAME=development.log -e TRACER_LEVEL=log l3bowski/personal-server:develop",
+    "docker-build": "docker build -t l3bowski/personal-server:latest .",
+    "docker-start": "docker run -d --name personal-server -p 80:80 -p 443:443 -e DEFAULT_APP=vue-personal-page -e SESSION_SECRET=ssshhhhh -e LOG_FILENAME=development.log -e TRACER_LEVEL=log -e ENABLE_HTTPS=true -e HTTPS_KEY_PATH=\"./test-certificate.key\" -e HTTPS_CERT_PATH=\"./test-certificate.cer\" -e HTTPS_PASSPHRASE=\"test-certificate\" l3bowski/personal-server:latest",
     "docker-stop": "docker stop personal-server && docker rm personal-server",
-    "docker-push": "docker push l3bowski/personal-server:develop",
-    "docker-build-latest": "docker build -t l3bowski/personal-server:latest .",
-    "docker-push-latest": "docker push l3bowski/personal-server:latest"
+    "docker-push": "docker push l3bowski/personal-server:latest"
   },
   "engines": {
     "node": "8.9"
   },
   "dependencies": {
-    "modena": "^1.1.5",
+    "modena": "^1.2.0",
     "mysql2": "^1.5.3",
     "sequelize": "^4.38.0",
     "uuid": "^3.2.1"
