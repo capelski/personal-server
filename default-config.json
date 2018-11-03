@@ -6,8 +6,8 @@
     "PORT": "80",
 
     "ENABLE_HTTPS": false,
-    "HTTPS_KEY_PATH": "./key/path/file.key",
-    "HTTPS_CERT_PATH": "./certificate/path/file.cer",
+    "HTTPS_KEY_PATH": "/key/path/file.key",
+    "HTTPS_CERT_PATH": "/certificate/path/file.cer",
     "HTTPS_PASSPHRASE": "certificate-passphrase",
     
     "APP_NAME__PROPERTY_NAME": "property_value",
