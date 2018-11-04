@@ -2,9 +2,9 @@ const { join } = require('path');
 const { runServer, express, readConfigFile } = require('modena');
 const config = readConfigFile(join(__dirname, 'config.json'));
 
-config.beforeRegisteringApps = (server, tracer, modenaConfig, appsConfig) => {
-	const pluginsPath = join(__dirname, 'plugins');
-	server.use('/plugins', express.static(pluginsPath));
+config.beforeRegisteringApps = server => {
+	const staticFolder = join(__dirname, 'static');
+	server.use(express.static(staticFolder, { dotfiles: 'allow' }));
 };
 
 config.afterRegisteringApps = (server, tracer, modenaConfig, appsConfig) => {
