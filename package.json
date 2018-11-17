@@ -7,7 +7,7 @@
     "start": "node server.js",
     "build-apps": "npm run vue-personal-page && npm run webjack",
     "vue-personal-page": "cd apps/vue-personal-page && npm install && npm run build && rm -rf node_modules && cd ../..",
-    "webjack": "cd apps/webjack && git submodule update --init && cd webjack-ui && npm install && npm run build && cd ../..",
+    "webjack": "cd apps/webjack && (tsc || true) && git submodule update --init && cd webjack-ui && npm install && npm run build && cd ../..",
     "d-prepare": "npm run prepare-env && npm run build-apps",
     "d-build": "docker build -t l3bowski/personal-server:latest .",
     "d-start": "docker run -d --name personal-server -p 80:80 -p 443:443 -v \"/c/Users/capel/docker:/mnt/shared\" -e DEFAULT_APP=vue-personal-page -e SESSION_SECRET=ssshhhhh -e LOG_FILENAME=development.log -e TRACER_LEVEL=log -e ENABLE_HTTPS=true -e HTTPS_KEY_PATH=\"/mnt/shared/test-certificate.key\" -e HTTPS_CERT_PATH=\"/mnt/shared/test-certificate.cer\" -e HTTPS_PASSPHRASE=\"test-certificate\" l3bowski/personal-server:latest",
