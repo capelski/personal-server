@@ -50,10 +50,6 @@
 	path = apps/vue-personal-page
 	url = https://github.com/L3bowski/vue-personal-page
 	branch = master
-[submodule "apps/webjack"]
-	path = apps/webjack
-	url = https://github.com/L3bowski/webjack
-	branch = master
 [submodule "apps/skills-matrix-client-jquery"]
 	path = apps/skills-matrix-client-jquery
 	url = https://github.com/L3bowski/skills-matrix-client-jquery
