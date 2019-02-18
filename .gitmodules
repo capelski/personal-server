@@ -60,3 +60,6 @@
 [submodule "apps/webjack-web-api"]
 	path = apps/webjack-web-api
 	url = https://github.com/L3bowski/webjack-web-api
+[submodule "apps/webjack"]
+	path = apps/webjack
+	url = https://github.com/L3bowski/webjack-ui
