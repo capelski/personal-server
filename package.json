@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "prepare-env": "npm install && git submodule update --init",
+    "prepare-env": "npm install && git submodule update --init && build-apps",
     "start": "node server.js",
     "build-apps": "npm run vue-personal-page && npm run webjack",
     "vue-personal-page": "cd apps/vue-personal-page && npm install && npm run build && rm -rf node_modules && cd ../..",
