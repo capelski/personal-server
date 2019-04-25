@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "esModuleInterop": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noImplicitAny": true,
+        "outDir": "./dist",
+        "skipLibCheck": true,
+        "strict": true,
+        "target": "es2017"
+    },
+    "include": [
+        "src/index.ts"
+    ]
+}
