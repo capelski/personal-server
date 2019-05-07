@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "rm -rf dist && tsc",
-    "setup": "npm install && npm run build && git checkout . && rm -rf node_modules"
+    "setup": "npm install && npm run build && git checkout ."
   },
   "author": "Carles Capellas <capellas.carles@gmail.com>",
   "license": "MIT",
