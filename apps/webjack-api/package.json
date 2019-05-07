@@ -4,7 +4,8 @@
   "description": "Black jack HTTP Api",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf dist && tsc"
+    "build": "rm -rf dist && tsc",
+    "setup": "npm install && npm run build && git checkout . && rm -rf node_modules"
   },
   "author": "Carles Capellas <capellas.carles@gmail.com>",
   "license": "MIT",
