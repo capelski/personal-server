@@ -57,6 +57,3 @@
 [submodule "apps/michael"]
 	path = apps/michael
 	url = https://github.com/L3bowski/michael
-[submodule "apps/webjack"]
-	path = apps/webjack
-	url = https://github.com/L3bowski/webjack-ui
