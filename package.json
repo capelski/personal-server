@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node index.js",
     "vue-personal-page": "cd apps/vue-personal-page && npm run setup && cd ../..",
     "webjack-api": "cd apps/webjack-api && npm run setup && cd ../..",
     "webjack": "cd apps/webjack && npm run setup && cd ../..",
     "setup-apps": "npm run vue-personal-page && npm run webjack && npm run webjack-api",
     "setup": "npm i && git submodule update -i && npm run setup-apps && git checkout .",
     "d-build": "docker build -t l3bowski/personal-server:latest .",
-    "d-start": "docker run -d --name personal-server -p 80:80 -e DEFAULT_APP=vue-personal-page -e SESSION_SECRET=ssshhhhh -e LOG_FILENAME=development.log -e TRACER_LEVEL=log l3bowski/personal-server:latest",
+    "d-start": "docker run -d --name personal-server -p 80:80 l3bowski/personal-server:latest",
     "d-stop": "docker stop personal-server && docker rm personal-server",
     "d-push": "docker push l3bowski/personal-server:latest"
   },
@@ -18,9 +18,18 @@
     "node": "8.9"
   },
   "dependencies": {
-    "modena": "^1.3.0",
-    "mysql2": "^1.5.3",
-    "sequelize": "^4.38.0",
-    "uuid": "^3.2.1"
+    "dotenv": "^8.0.0",
+    "ejs": "^2.6.1",
+    "express": "^4.17.0",
+    "modena": "^2.4.1"
+  },
+  "devDependencies": {
+    "body-parser": "^1.19.0",
+    "express-session": "^1.16.1",
+    "mysql2": "^1.6.5",
+    "node-sass": "^4.12.0",
+    "sequelize": "^5.8.6",
+    "webjack-core": "0.0.5",
+    "webjack-web-api": "0.0.5"
   }
 }
