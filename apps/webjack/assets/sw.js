@@ -38,7 +38,7 @@ self.addEventListener('install', function (event) {
 
 self.addEventListener('fetch', (event) => {
     const requestCopy = event.request.clone();
-    if (event.request.method === 'GET') {
+    if (event.request.method === 'GET' && event.request.url.indexOf('webjack-api') < 0) {
         handleStaticResourceRequests(requestCopy, event);
     } else {
         event.respondWith(fetch(event.request));

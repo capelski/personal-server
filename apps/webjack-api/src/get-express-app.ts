@@ -35,7 +35,9 @@ export const getExpressApp = (environmentConfig: any = {}) => {
     const developmentCardSetPath = join(__dirname, '..', 'development-card-set.json');
 	if (existsSync(developmentCardSetPath)) {
         const developmentCardSet = require(developmentCardSetPath);
-        useDevelopmentCardSet(developmentCardSet);
+        if (developmentCardSet.enabled) {
+            useDevelopmentCardSet(developmentCardSet.cards);
+        }
 	}
 
 	return app;
