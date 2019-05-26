@@ -5,9 +5,8 @@
   "scripts": {
     "start": "node index.js",
     "vue-personal-page": "cd apps/vue-personal-page && npm run setup && cd ../..",
-    "webjack-api": "cd apps/webjack-api && npm run setup && cd ../..",
-    "webjack": "cd apps/webjack && npm run setup && cd ../..",
-    "setup-apps": "npm run vue-personal-page && npm run webjack && npm run webjack-api",
+    "webjack": "cd apps/webjack && npm i && npm run build && git checkout . && cd ../..",
+    "setup-apps": "npm run vue-personal-page && npm run webjack",
     "setup": "npm i && git submodule update -i && npm run setup-apps && git checkout .",
     "d-build": "docker build -t l3bowski/personal-server:latest .",
     "d-start": "docker run -d --name personal-server -e PORT=80 -p 80:80 l3bowski/personal-server:latest",
