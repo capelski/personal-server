@@ -13,7 +13,6 @@ if (configuration.HTTPS_ENABLE && configuration.HTTPS_REDIRECTION) {
     mainApp.use(httpsRedirectMiddleware);
 }
 
-// TODO Remove the static from personal-server and put it on each project that needs it
 const staticFolder = join(__dirname, 'static');
 mainApp.use(express.static(staticFolder, { dotfiles: 'allow' }));
 
