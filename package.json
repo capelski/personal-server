@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
+    "build": "lerna run build",
+    "clean": "(lerna clean -y || rm -rf apps/*/node_modules) && rm -rf node_modules",
+    "prepare": "git submodule update -i && lerna bootstrap",
     "start": "node index.js",
-    "vue-personal-page": "cd apps/vue-personal-page && npm run setup && cd ../..",
-    "webjack": "cd apps/webjack && npm i && npm run build && git checkout . && cd ../..",
-    "setup-apps": "npm run vue-personal-page && npm run webjack",
-    "setup": "npm i && git submodule update -i && npm run setup-apps && git checkout .",
     "d-build": "docker build -t l3bowski/personal-server:latest .",
     "d-start": "docker run -d --name personal-server -e PORT=80 -p 80:80 l3bowski/personal-server:latest",
     "d-stop": "docker stop personal-server && docker rm personal-server",
@@ -19,18 +18,11 @@
   "dependencies": {
     "dotenv": "^8.0.0",
     "ejs": "^2.6.1",
-    "express": "^4.17.0",
+    "express": "^4.17.1",
     "modena": "^2.4.1"
   },
   "devDependencies": {
     "@types/express": "^4.16.1",
-    "@types/express-session": "^1.15.12",
-    "body-parser": "^1.19.0",
-    "express-session": "^1.16.1",
-    "mysql2": "^1.5.3",
-    "node-sass": "^4.12.0",
-    "sequelize": "^4.38.0",
-    "webjack-core": "0.0.5",
-    "webjack-web-api": "0.0.5"
+    "lerna": "^3.15.0"
   }
 }
