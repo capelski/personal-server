@@ -10,7 +10,7 @@ const defaultConfig = {
     HTTPS_KEY: undefined,
     HTTPS_PASSPHRASE: undefined,
     HTTPS_REDIRECTION: false,
-    PORT: 3000
+    PORT: 80
 };
 
 const importResult = dotenv.config();

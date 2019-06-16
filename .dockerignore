@@ -1,4 +1,6 @@
-**/.git
-node_modules
+.git/
+node_modules/
+apps/*/.git
+apps/*/node_modules
 *.log
 .env
