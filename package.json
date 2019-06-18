@@ -5,12 +5,13 @@
   "scripts": {
     "build": "lerna run build",
     "clean": "(lerna clean -y || rm -rf apps/*/node_modules) && rm -rf node_modules",
-    "prepare": "lerna bootstrap",
-    "start": "node index.js",
     "d-build": "npm run build && docker build -t l3bowski/personal-server:latest .",
+    "d-push": "docker push l3bowski/personal-server:latest",
     "d-start": "docker run -d --name personal-server -e PORT=80 -p 80:80 l3bowski/personal-server:latest",
     "d-stop": "docker stop personal-server && docker rm personal-server",
-    "d-push": "docker push l3bowski/personal-server:latest"
+    "prepare": "lerna bootstrap",
+    "prepare:prod": "lerna bootstrap -- --production",
+    "start": "node index.js"
   },
   "engines": {
     "node": "8.9"
