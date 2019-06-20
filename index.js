@@ -49,7 +49,8 @@ exposeHostedApps(mainApp, {
 				disableHttp: configuration.HTTPS_DISABLE_HTTP,
 				enableHttps: configuration.HTTPS_ENABLE,
 				keyPath: configuration.HTTPS_KEY,
-				passphrase: configuration.HTTPS_PASSPHRASE
+				passphrase: configuration.HTTPS_PASSPHRASE,
+				port: configuration.HTTPS_PORT
 			}
 		};
 

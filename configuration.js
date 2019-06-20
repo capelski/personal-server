@@ -9,6 +9,7 @@ const defaultConfig = {
     HTTPS_ENABLE: false,
     HTTPS_KEY: undefined,
     HTTPS_PASSPHRASE: undefined,
+    HTTPS_PORT: 443,
     HTTPS_REDIRECTION: false,
     PORT: 80
 };
@@ -28,6 +29,7 @@ const environmentConfig = {
     HTTPS_ENABLE: process.env.HTTPS_ENABLE !== undefined ? JSON.parse(process.env.HTTPS_ENABLE) : defaultConfig.HTTPS_ENABLE,
     HTTPS_KEY: process.env.HTTPS_KEY !== undefined ? process.env.HTTPS_KEY : defaultConfig.HTTPS_KEY,
     HTTPS_PASSPHRASE: process.env.HTTPS_PASSPHRASE !== undefined ? process.env.HTTPS_PASSPHRASE : defaultConfig.HTTPS_PASSPHRASE,
+    HTTPS_PORT: process.env.HTTPS_PORT !== undefined ? process.env.HTTPS_PORT : defaultConfig.HTTPS_PORT,
     HTTPS_REDIRECTION: process.env.HTTPS_REDIRECTION !== undefined ? JSON.parse(process.env.HTTPS_REDIRECTION) : defaultConfig.HTTPS_REDIRECTION,
     PORT: process.env.PORT !== undefined ? process.env.PORT : defaultConfig.PORT
 };
