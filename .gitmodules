@@ -60,6 +60,3 @@
 [submodule "apps/webjack"]
 	path = apps/webjack
 	url = https://github.com/L3bowski/webjack
-[submodule "apps/dishwish"]
-	path = apps/dishwish
-	url = https://github.com/L3bowski/dishwish
