@@ -60,3 +60,6 @@
 [submodule "apps/webjack"]
 	path = apps/webjack
 	url = https://github.com/L3bowski/webjack
+[submodule "apps/exquiseaty"]
+	path = apps/exquiseaty
+	url = https://github.com/L3bowski/exquiseaty
