@@ -66,3 +66,6 @@
 [submodule "apps/skills-matrix-client-redux"]
 	path = apps/skills-matrix-client-redux
 	url = https://github.com/L3bowski/skills-matrix-client-redux
+[submodule "apps/skills-matrix-client-webpack"]
+	path = apps/skills-matrix-client-webpack
+	url = https://github.com/L3bowski/skills-matrix-client-webpack
