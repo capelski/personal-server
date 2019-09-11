@@ -63,3 +63,6 @@
 [submodule "apps/exquiseaty"]
 	path = apps/exquiseaty
 	url = https://github.com/L3bowski/exquiseaty
+[submodule "apps/skills-matrix-client-redux"]
+	path = apps/skills-matrix-client-redux
+	url = https://github.com/L3bowski/skills-matrix-client-redux
