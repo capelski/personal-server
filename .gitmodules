@@ -69,3 +69,6 @@
 [submodule "apps/skills-matrix-client-webpack"]
 	path = apps/skills-matrix-client-webpack
 	url = https://github.com/L3bowski/skills-matrix-client-webpack
+[submodule "apps/skills-matrix-client-vue"]
+	path = apps/skills-matrix-client-vue
+	url = https://github.com/L3bowski/skills-matrix-client-vue
