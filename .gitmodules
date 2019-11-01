@@ -75,3 +75,6 @@
 [submodule "apps/skills-matrix-client-typescript"]
 	path = apps/skills-matrix-client-typescript
 	url = https://github.com/L3bowski/skills-matrix-client-typescript
+[submodule "apps/skills-matrix-api-graphql"]
+	path = apps/skills-matrix-api-graphql
+	url = https://github.com/L3bowski/skills-matrix-api-graphql
