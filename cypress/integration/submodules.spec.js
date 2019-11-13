@@ -1,0 +1,58 @@
+context('Submodule apps are working fine', () => {
+    describe('the app main page is rendering correctly', () => {
+        const apps = [
+            { name: 'angularjs-personal-page', title: 'Carles Capellas' },
+            { name: 'carniques-ausa', title: 'Càrniques Ausa' },
+            { name: 'desdecasa', title: 'Inici - Des de Casa' },
+            { name: 'do-vic', title: 'D.O. Vic | Inici' },
+            { name: 'dragon-pong', title: 'Dragon Pong' },
+            { name: 'exquiseaty', title: 'Home | exquiseaty' },
+            { name: 'fractal-generator', title: 'Fractal generator' },
+            { name: 'jokify', title: 'Jokify. Random jokes' },
+            { name: 'michael', title: 'Michael Page' },
+            { name: 'php-personal-page', title: 'Inici' },
+            { name: 'poliester-pelegrina', title: 'Poliester Germans Pelegrina' },
+            { name: 'responsive-do-vic', title: 'D.O. Vic' },
+            { name: 'skills-matrix-client-jquery', title: 'Skills Matrix' },
+            { name: 'skills-matrix-client-redux', title: 'Skills Matrix' },
+            { name: 'skills-matrix-client-typescript', title: 'Skills Matrix' },
+            { name: 'skills-matrix-client-vue', title: 'Skills Matrix' },
+            { name: 'skills-matrix-client-webpack', title: 'Skills Matrix' },
+            { name: 'vrokil', title: 'vrokil' },
+            { name: 'vue-personal-page', title: 'Home | Carles Capellas' },
+            { name: 'vue-personal-page (default app)', url: '', title: 'Home | Carles Capellas' },
+            { name: 'webjack', title: 'Webjack' },
+        ];
+
+        apps.forEach(app => {
+            it(app.name, () => {
+                cy.request(`http://localhost/${app.url !== undefined ? app.url : app.name}`)
+                    .then(response => expect(response.body).to.contain(`<title>${app.title}</title>`));
+            });
+        });
+
+        it('skills-matrix-api-graphql', () => {
+            cy.request({
+                method: 'POST',
+                url: 'http://localhost/skills-matrix-api-graphql',
+                body: {
+                    query: `{
+                        employee {
+                            totalCount
+                        }
+                    }`
+                }
+            }).then(response => {
+                expect(response.body).to.have.property('data');
+                expect(response.body.data).to.have.property('employee');
+                expect(response.body.data.employee).to.have.property('totalCount');
+            });
+        });
+
+        it('skills-matrix-api-node', () => {
+            cy.request('http://localhost/skills-matrix-api-node/api/skill').then(response => {
+                expect(response.body).to.have.property('CurrentPage', 0);
+            });
+        });
+    });
+});
