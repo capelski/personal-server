@@ -15,6 +15,7 @@ if (configuration.HTTPS_ENABLE && configuration.HTTPS_REDIRECTION) {
 
 const staticFolder = join(__dirname, 'static');
 mainApp.use(express.static(staticFolder, { dotfiles: 'allow' }));
+const defaultFavicon = join(__dirname, 'static', 'favicon.png');
 
 exposeHostedApps(mainApp, {
 	appsPath: configuration.APPS_PATH,
@@ -22,6 +23,10 @@ exposeHostedApps(mainApp, {
 })
     .then(_ => {
 		mainApp.use((req, res, next) => {
+			if (req.url.indexOf('favicon.ico') > -1) {
+				return res.sendFile(defaultFavicon);
+			}
+
 			console.info('Url ' + req.url + ' was not found');
 		
 			return res.status(404).render('error-page', {
