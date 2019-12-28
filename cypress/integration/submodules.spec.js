@@ -2,6 +2,7 @@ context('Submodule apps are working fine', () => {
     describe('the app main page is rendering correctly', () => {
         const apps = [
             { name: 'angularjs-personal-page', title: 'Carles Capellas' },
+            { name: 'bachata-science', title: 'Bachata Science' },
             { name: 'carniques-ausa', title: 'Càrniques Ausa' },
             { name: 'desdecasa', title: 'Inici - Des de Casa' },
             { name: 'do-vic', title: 'D.O. Vic | Inici' },

@@ -9,11 +9,11 @@
     "d-push": "docker push l3bowski/personal-server:latest",
     "d-start": "docker run -d --name personal-server -e PORT=80 -p 80:80 l3bowski/personal-server:latest",
     "d-stop": "docker stop personal-server && docker rm personal-server",
+    "d-test": "npm run d-start && npm run test:cypress && npm run d-stop && npm run d-push",
     "prepare": "lerna bootstrap",
     "prepare:prod": "lerna bootstrap -- --production",
     "start": "node index.js",
-    "test:cypress": "cypress run",
-    "test:docker": "npm run d-start && npm run test:cypress && npm run d-stop && npm run d-push"
+    "test:cypress": "cypress run"
   },
   "engines": {
     "node": "8.9"
