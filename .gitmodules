@@ -81,3 +81,6 @@
 [submodule "apps/bachata-science"]
 	path = apps/bachata-science
 	url = https://github.com/L3bowski/bachata-science
+[submodule "apps/jokify-api"]
+	path = apps/jokify-api
+	url = https://github.com/L3bowski/jokify-api
