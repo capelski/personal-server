@@ -32,6 +32,13 @@ context('Submodule apps are working fine', () => {
             });
         });
 
+        it('jokify-api', () => {
+            cy.request('http://localhost/jokify-api/random').then(response => {
+                // Any random joke string will have at least 15 characters
+                expect(response.body.length).to.be.greaterThan(15);
+            });
+        });
+
         it('skills-matrix-api-graphql', () => {
             cy.request({
                 method: 'POST',
