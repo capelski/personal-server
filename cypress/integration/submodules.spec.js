@@ -33,9 +33,9 @@ context('Submodule apps are working fine', () => {
         });
 
         it('jokify-api', () => {
-            cy.request('http://localhost/jokify-api/random').then(response => {
+            cy.request('http://localhost/jokify-api/joke').then(response => {
                 // Any random joke string will have at least 15 characters
-                expect(response.body.length).to.be.greaterThan(15);
+                expect(response.body.text.length).to.be.greaterThan(15);
             });
         });
 
@@ -65,11 +65,6 @@ context('Submodule apps are working fine', () => {
     });
 
     describe('interactions', () => {
-        it('jokify app displays a joke', () => {
-            cy.request('http://localhost/jokify')
-                .then(response => expect(response.body).to.contain('<div id="joke" class="joke">'));
-        });
-
         it('webjack app has Play Online button', () => {
             cy.visit('http://localhost/webjack', { timeout: 1000 });
             cy.get('button.btn.btn-success').contains('Play online');
