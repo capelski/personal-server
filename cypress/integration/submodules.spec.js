@@ -9,7 +9,7 @@ context('Submodule apps are working fine', () => {
             { name: 'dragon-pong', title: 'Dragon Pong' },
             { name: 'exquiseaty', title: 'Home | exquiseaty' },
             { name: 'fractal-generator', title: 'Fractal generator' },
-            { name: 'jokify', title: 'Jokify. Random jokes' },
+            { name: 'jokify', title: 'Jokify. Chistes random' },
             { name: 'michael', title: 'Michael Page' },
             { name: 'php-personal-page', title: 'Inici' },
             { name: 'poliester-pelegrina', title: 'Poliester Germans Pelegrina' },
