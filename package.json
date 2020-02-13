@@ -9,7 +9,7 @@
     "d-push": "docker push l3bowski/personal-server:latest",
     "d-start": "docker run -d --name personal-server -e PORT=80 -p 80:80 l3bowski/personal-server:latest",
     "d-stop": "docker stop personal-server && docker rm personal-server",
-    "d-test": "npm run d-start && npm run test:cypress && npm run d-stop && npm run d-push",
+    "d-test": "npm run d-start && (npm run test:cypress && npm run d-push || true) && npm run d-stop",
     "prepare": "lerna bootstrap",
     "prepare:prod": "lerna bootstrap -- --production",
     "start": "node index.js",
