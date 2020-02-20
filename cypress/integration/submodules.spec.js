@@ -40,9 +40,8 @@ context('Submodule apps are working fine', () => {
         });
 
         it('jokify deep linking', () => {
-            // Just to make sure no error is thrown during server rendering
-            cy.request('http://localhost/jokify/joke/3').then(response => {
-                expect(response.body).to.contain(`<div id="app-placeholder"></div>`);
+            cy.request('http://localhost/jokify/0').then(response => {
+                expect(response.body).to.contain(`<p class="joke-paragraph">¿Cómo maldice un pollo a otro pollo? ¡Caldito seas!</p>`);
             });
         });
 
