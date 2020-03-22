@@ -72,7 +72,7 @@ context('Submodule apps are working fine', () => {
 
     describe('interactions', () => {
         it('webjack app has Play Online button', () => {
-            cy.visit('http://localhost/webjack', { timeout: 1000 });
+            cy.visit('http://localhost/webjack', { timeout: 2000 });
             cy.get('button.btn.btn-success').contains('Play online');
         });
 
