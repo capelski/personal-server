@@ -84,3 +84,6 @@
 [submodule "apps/jokify-api"]
 	path = apps/jokify-api
 	url = https://github.com/L3bowski/jokify-api
+[submodule "apps/sudoku-generator"]
+	path = apps/sudoku-generator
+	url = https://github.com/L3bowski/sudoku-generator

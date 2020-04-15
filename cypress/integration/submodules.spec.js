@@ -10,15 +10,19 @@ context('Submodule apps are working fine', () => {
             { name: 'exquiseaty', title: 'Home | exquiseaty' },
             { name: 'fractal-generator', title: 'Fractal generator' },
             { name: 'jokify', title: 'Jokify. Chistes random' },
+            // jokify-api is tested separatedly
             { name: 'michael', title: 'Michael Page' },
             { name: 'php-personal-page', title: 'Inici' },
             { name: 'poliester-pelegrina', title: 'Poliester Germans Pelegrina' },
             { name: 'responsive-do-vic', title: 'D.O. Vic' },
+            // skills-matrix-api-graphql is tested separately
+            // skills-matrix-api-node is tested separately
             { name: 'skills-matrix-client-jquery', title: 'Skills Matrix' },
             { name: 'skills-matrix-client-redux', title: 'Skills Matrix' },
             { name: 'skills-matrix-client-typescript', title: 'Skills Matrix' },
             { name: 'skills-matrix-client-vue', title: 'Skills Matrix' },
             { name: 'skills-matrix-client-webpack', title: 'Skills Matrix' },
+            { name: 'sudoku-generator', title: 'Sudoku viewer' },
             { name: 'vrokil', title: 'vrokil' },
             { name: 'vue-personal-page', title: 'Home | Carles Capellas' },
             { name: 'vue-personal-page (default app)', url: '', title: 'Home | Carles Capellas' },
