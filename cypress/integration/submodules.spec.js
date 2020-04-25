@@ -37,7 +37,7 @@ context('Submodule apps are working fine', () => {
         });
 
         it('jokify-api', () => {
-            cy.request('http://localhost/jokify-api/joke').then(response => {
+            cy.request('http://localhost/jokify-api/joke/random').then(response => {
                 // Any random joke string will have at least 15 characters
                 expect(response.body.text.length).to.be.greaterThan(0);
             });
