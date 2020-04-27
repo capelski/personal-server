@@ -44,7 +44,7 @@ context('Submodule apps are working fine', () => {
         });
 
         it('jokify deep linking', () => {
-            cy.request('http://localhost/jokify/0').then(response => {
+            cy.request('http://localhost/jokify/1').then(response => {
                 expect(response.body).to.contain(`<p class="joke-paragraph">¿Cómo maldice un pollo a otro pollo? ¡Caldito seas!</p>`);
             });
         });
