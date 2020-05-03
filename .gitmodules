@@ -1,89 +1,89 @@
 [submodule "apps/skills-matrix-api-node"]
 	path = apps/skills-matrix-api-node
-	url = https://github.com/L3bowski/skills-matrix-api-node
+	url = https://github.com/capelski/skills-matrix-api-node
 	branch = master
 [submodule "apps/angularjs-personal-page"]
 	path = apps/angularjs-personal-page
-	url = https://github.com/L3bowski/angularjs-personal-page
+	url = https://github.com/capelski/angularjs-personal-page
 	branch = master
 [submodule "apps/carniques-ausa"]
 	path = apps/carniques-ausa
-	url = https://github.com/L3bowski/carniques-ausa
+	url = https://github.com/capelski/carniques-ausa
 	branch = master
 [submodule "apps/desdecasa"]
 	path = apps/desdecasa
-	url = https://github.com/L3bowski/desdecasa
+	url = https://github.com/capelski/desdecasa
 	branch = master
 [submodule "apps/do-vic"]
 	path = apps/do-vic
-	url = https://github.com/L3bowski/do-vic
+	url = https://github.com/capelski/do-vic
 	branch = master
 [submodule "apps/dragon-pong"]
 	path = apps/dragon-pong
-	url = https://github.com/L3bowski/dragon-pong
+	url = https://github.com/capelski/dragon-pong
 	branch = master
 [submodule "apps/fractal-generator"]
 	path = apps/fractal-generator
-	url = https://github.com/L3bowski/fractal-generator
+	url = https://github.com/capelski/fractal-generator
 	branch = master
 [submodule "apps/jokify"]
 	path = apps/jokify
-	url = https://github.com/L3bowski/jokify
+	url = https://github.com/capelski/jokify
 	branch = master
 [submodule "apps/php-personal-page"]
 	path = apps/php-personal-page
-	url = https://github.com/L3bowski/php-personal-page
+	url = https://github.com/capelski/php-personal-page
 	branch = master
 [submodule "apps/poliester-pelegrina"]
 	path = apps/poliester-pelegrina
-	url = https://github.com/L3bowski/poliester-pelegrina
+	url = https://github.com/capelski/poliester-pelegrina
 	branch = master
 [submodule "apps/responsive-do-vic"]
 	path = apps/responsive-do-vic
-	url = https://github.com/L3bowski/responsive-do-vic
+	url = https://github.com/capelski/responsive-do-vic
 	branch = master
 [submodule "apps/vrokil"]
 	path = apps/vrokil
-	url = https://github.com/L3bowski/vrokil
+	url = https://github.com/capelski/vrokil
 	branch = master
 [submodule "apps/vue-personal-page"]
 	path = apps/vue-personal-page
-	url = https://github.com/L3bowski/vue-personal-page
+	url = https://github.com/capelski/vue-personal-page
 	branch = master
 [submodule "apps/skills-matrix-client-jquery"]
 	path = apps/skills-matrix-client-jquery
-	url = https://github.com/L3bowski/skills-matrix-client-jquery
+	url = https://github.com/capelski/skills-matrix-client-jquery
 	branch = master
 [submodule "apps/michael"]
 	path = apps/michael
-	url = https://github.com/L3bowski/michael
+	url = https://github.com/capelski/michael
 [submodule "apps/webjack"]
 	path = apps/webjack
-	url = https://github.com/L3bowski/webjack
+	url = https://github.com/capelski/webjack
 [submodule "apps/exquiseaty"]
 	path = apps/exquiseaty
-	url = https://github.com/L3bowski/exquiseaty
+	url = https://github.com/capelski/exquiseaty
 [submodule "apps/skills-matrix-client-redux"]
 	path = apps/skills-matrix-client-redux
-	url = https://github.com/L3bowski/skills-matrix-client-redux
+	url = https://github.com/capelski/skills-matrix-client-redux
 [submodule "apps/skills-matrix-client-webpack"]
 	path = apps/skills-matrix-client-webpack
-	url = https://github.com/L3bowski/skills-matrix-client-webpack
+	url = https://github.com/capelski/skills-matrix-client-webpack
 [submodule "apps/skills-matrix-client-vue"]
 	path = apps/skills-matrix-client-vue
-	url = https://github.com/L3bowski/skills-matrix-client-vue
+	url = https://github.com/capelski/skills-matrix-client-vue
 [submodule "apps/skills-matrix-client-typescript"]
 	path = apps/skills-matrix-client-typescript
-	url = https://github.com/L3bowski/skills-matrix-client-typescript
+	url = https://github.com/capelski/skills-matrix-client-typescript
 [submodule "apps/skills-matrix-api-graphql"]
 	path = apps/skills-matrix-api-graphql
-	url = https://github.com/L3bowski/skills-matrix-api-graphql
+	url = https://github.com/capelski/skills-matrix-api-graphql
 [submodule "apps/bachata-science"]
 	path = apps/bachata-science
-	url = https://github.com/L3bowski/bachata-science
+	url = https://github.com/capelski/bachata-science
 [submodule "apps/jokify-api"]
 	path = apps/jokify-api
-	url = https://github.com/L3bowski/jokify-api
+	url = https://github.com/capelski/jokify-api
 [submodule "apps/sudoku-generator"]
 	path = apps/sudoku-generator
-	url = https://github.com/L3bowski/sudoku-generator
+	url = https://github.com/capelski/sudoku-generator
