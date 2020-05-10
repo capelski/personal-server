@@ -22,7 +22,7 @@ context('Submodule apps are working fine', () => {
             { name: 'skills-matrix-client-typescript', title: 'Skills Matrix' },
             { name: 'skills-matrix-client-vue', title: 'Skills Matrix' },
             { name: 'skills-matrix-client-webpack', title: 'Skills Matrix' },
-            { name: 'sudoku-generator', title: 'Sudoku viewer' },
+            { name: 'sudoku-generator', title: 'Sudoku generator' },
             { name: 'vrokil', title: 'vrokil' },
             { name: 'vue-personal-page', title: 'Home | Carles Capellas' },
             { name: 'vue-personal-page (default app)', url: '', title: 'Home | Carles Capellas' },
