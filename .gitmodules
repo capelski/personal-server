@@ -87,3 +87,6 @@
 [submodule "apps/sudoku-generator"]
 	path = apps/sudoku-generator
 	url = https://github.com/capelski/sudoku-generator
+[submodule "apps/react-personal-page"]
+	path = apps/react-personal-page
+	url = https://github.com/capelski/react-personal-page
