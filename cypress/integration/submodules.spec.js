@@ -14,6 +14,7 @@ context('Submodule apps are working fine', () => {
             { name: 'michael', title: 'Michael Page' },
             { name: 'php-personal-page', title: 'Inici' },
             { name: 'poliester-pelegrina', title: 'Poliester Germans Pelegrina' },
+            { name: 'react-personal-page', title: 'Carles Capellas' },
             { name: 'responsive-do-vic', title: 'D.O. Vic' },
             // skills-matrix-api-graphql is tested separately
             // skills-matrix-api-node is tested separately
