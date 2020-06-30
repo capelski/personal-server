@@ -81,9 +81,14 @@ context('Submodule apps are working fine', () => {
             cy.get('button.btn.btn-success').contains('Play online');
         });
 
-        it('vue-personal-page app has blog link', () => {
+        it('vue-personal-page is being prerendered', () => {
             cy.request('http://localhost/')
                 .then(response => expect(response.body).to.contain('<a href="/blog" class="nav-link">Blog</a>'));
+        });
+
+        it('react-personal-page is being rendered on the server side', () => {
+            cy.request('http://localhost/react-personal-page')
+                .then(response => expect(response.body).to.contain('<div class="section-content home-content">'));
         });
     });
 });
