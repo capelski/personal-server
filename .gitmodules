@@ -18,10 +18,6 @@
 	path = apps/do-vic
 	url = https://github.com/capelski/do-vic
 	branch = master
-[submodule "apps/dragon-pong"]
-	path = apps/dragon-pong
-	url = https://github.com/capelski/dragon-pong
-	branch = master
 [submodule "apps/fractal-generator"]
 	path = apps/fractal-generator
 	url = https://github.com/capelski/fractal-generator
@@ -37,10 +33,6 @@
 [submodule "apps/poliester-pelegrina"]
 	path = apps/poliester-pelegrina
 	url = https://github.com/capelski/poliester-pelegrina
-	branch = master
-[submodule "apps/vrokil"]
-	path = apps/vrokil
-	url = https://github.com/capelski/vrokil
 	branch = master
 [submodule "apps/vue-personal-page"]
 	path = apps/vue-personal-page
