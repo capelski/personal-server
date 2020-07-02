@@ -38,10 +38,6 @@
 	path = apps/poliester-pelegrina
 	url = https://github.com/capelski/poliester-pelegrina
 	branch = master
-[submodule "apps/responsive-do-vic"]
-	path = apps/responsive-do-vic
-	url = https://github.com/capelski/responsive-do-vic
-	branch = master
 [submodule "apps/vrokil"]
 	path = apps/vrokil
 	url = https://github.com/capelski/vrokil
