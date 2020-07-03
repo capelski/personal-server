@@ -22,11 +22,11 @@
     "dotenv": "8.0.0",
     "ejs": "2.6.1",
     "express": "4.17.1",
+    "lerna": "3.15.0",
     "modena": "2.6.0"
   },
   "devDependencies": {
     "@types/express": "4.16.1",
-    "cypress": "3.6.1",
-    "lerna": "3.15.0"
+    "cypress": "3.6.1"
   }
 }
