@@ -81,7 +81,7 @@ context('Submodule apps are working fine', () => {
 
         it('react-personal-page is being rendered on the server side', () => {
             cy.request('http://localhost/react-personal-page')
-                .then(response => expect(response.body).to.contain('<div class="section-content home-content">'));
+                .then(response => expect(response.body).to.contain('<div class="home-header">'));
         });
     });
 });
