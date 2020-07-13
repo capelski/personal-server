@@ -19,8 +19,10 @@ context('Submodule apps are working fine', () => {
             { name: 'skills-matrix-client-jquery', title: 'Skills Matrix' },
             { name: 'sudoku-generator', title: 'Sudoku generator' },
             { name: 'vue-personal-page', title: 'Home | Carles Capellas' },
-            { name: 'vue-personal-page (default app)', url: '', title: 'Home | Carles Capellas' },
             { name: 'webjack', title: 'Webjack' },
+
+            // Default app
+            { name: 'default app (react-personal-page)', url: '', title: 'Carles Capellas' },
         ];
 
         apps.forEach(app => {
@@ -75,7 +77,7 @@ context('Submodule apps are working fine', () => {
         });
 
         it('vue-personal-page is being prerendered', () => {
-            cy.request('http://localhost/')
+            cy.request('http://localhost/vue-personal-page')
                 .then(response => expect(response.body).to.contain('<a href="/blog" class="nav-link">Blog</a>'));
         });
 

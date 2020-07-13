@@ -3,7 +3,7 @@ const { join } = require('path');
 
 const defaultConfig = {
     APPS_PATH: join(__dirname, 'apps'),
-    DEFAULT_APP: 'vue-personal-page',
+    DEFAULT_APP: 'react-personal-page',
     HTTPS_CER: undefined,
     HTTPS_DISABLE_HTTP: false,
     HTTPS_ENABLE: false,
