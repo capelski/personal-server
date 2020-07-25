@@ -18,7 +18,7 @@ context('Submodule apps are working fine', () => {
             // skills-matrix-api-node is tested separately
             { name: 'skills-matrix-client-jquery', title: 'Skills Matrix' },
             { name: 'sudoku-generator', title: 'Sudoku generator' },
-            { name: 'vue-personal-page', title: 'Home | Carles Capellas' },
+            { name: 'vue-personal-page', title: 'Carles Capellas' },
             { name: 'webjack', title: 'Webjack' },
 
             // Default app
@@ -74,11 +74,6 @@ context('Submodule apps are working fine', () => {
         it('webjack app has Play Online button', () => {
             cy.visit('http://localhost/webjack', { timeout: 5000 });
             cy.get('button.btn.btn-success').contains('Play online');
-        });
-
-        it('vue-personal-page is being prerendered', () => {
-            cy.request('http://localhost/vue-personal-page')
-                .then(response => expect(response.body).to.contain('<a href="/blog" class="nav-link">Blog</a>'));
         });
 
         it('react-personal-page is being rendered on the server side', () => {
