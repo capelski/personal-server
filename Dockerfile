@@ -1,4 +1,4 @@
-FROM node:8.11.3-alpine
+FROM node:12.18-alpine
 RUN mkdir -p /var/www/app
 RUN mkdir /mnt/shared
 WORKDIR /var/www/app
