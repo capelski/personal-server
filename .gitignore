@@ -1,6 +1,7 @@
 node_modules/
 *.log
 .env
+package-lock.json
 cypress/plugins
 cypress/screenshots
 cypress/videos
