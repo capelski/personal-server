@@ -28,7 +28,7 @@ context('Submodule apps are working fine', () => {
         apps.forEach(app => {
             it(app.name, () => {
                 cy.request(`http://localhost/${app.url !== undefined ? app.url : app.name}`)
-                    .then(response => expect(response.body).to.contain(`<title>${app.title}</title>`));
+                    .then(response => expect(response.body).to.contain(`${app.title}</title>`));
             });
         });
 
